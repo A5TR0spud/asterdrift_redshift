@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm7727ch8vbsr"]
+
+[ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
+
+[node name="Hangar" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_top = -0.5
+offset_right = -0.5
+offset_bottom = -0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_xd6br")
+metadata/_edit_use_anchors_ = true
+
+[node name="run" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -77.0
+offset_right = -30.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "run"
+
+[node name="main menu" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -71.0
+offset_right = 158.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "main menu"
+
+[connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

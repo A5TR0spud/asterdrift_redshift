@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scenes/Garage/ShipData.gd" id="1_stmoa"]
+
+[resource]
+script = ExtResource("1_stmoa")
+hull_color = Color(1, 1, 1, 1)
+hull_int = 2
+cockpit_color = Color(0.129412, 0.145098, 0.196078, 1)
+cockpit_int = 1
+accent_color = Color(0.58344, 0.2886, 0.78, 1)
+accent_color_int = 5
+accent_type = 1
+accent_type_int = 1
+blinker_on = Color(0, 0, 1, 1)
+blinker_on_int = 4
+blinker_off = Color(0, 0, 0, 1)
+blinker_off_int = 7
+blinker_interval = 1.0
+blinker_interp = false
+inline = Color(0.129412, 0.145098, 0.196078, 0)
+inline_int = 1
+outline = Color(0.00392157, 0, 0.121569, 1)
+outline_int = 2

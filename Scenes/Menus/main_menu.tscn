@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://dloxvgj0o0aas"]
+
+[ext_resource type="Texture2D" uid="uid://r52su7o4wo3q" path="res://icon.svg" id="1_jxv01"]
+[ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
+[ext_resource type="Texture2D" uid="uid://ccgxfu1vo0nw5" path="res://Assets/UI/Icons/Play.png" id="2_i8p1f"]
+[ext_resource type="Texture2D" uid="uid://c77dhg0rwkgb1" path="res://Assets/UI/Icons/Garage.png" id="3_i2niw"]
+[ext_resource type="Texture2D" uid="uid://dtvfmeith420a" path="res://Assets/UI/Icons/Settings.png" id="4_ino3e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhixk"]
+bg_color = Color(0.215363, 0.438873, 0.370143, 1)
+border_width_bottom = 5
+border_color = Color(0.0914273, 0.181074, 0.284209, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="Theme" id="Theme_pgi4j"]
+Button/constants/h_separation = 25
+Button/font_sizes/font_size = 30
+Button/styles/normal = SubResource("StyleBoxFlat_hhixk")
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mr2mu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -243.0
+offset_right = 376.0
+offset_bottom = -28.0
+grow_vertical = 0
+alignment = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = SubResource("Theme_pgi4j")
+text = "Play"
+icon = ExtResource("2_i8p1f")
+alignment = 0
+
+[node name="Garage" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+text = "Garage"
+icon = ExtResource("3_i2niw")
+alignment = 0
+
+[node name="Options" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+text = "Options
+"
+icon = ExtResource("4_ino3e")
+alignment = 0
+
+[node name="Quit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Quit"
+
+[node name="Icon" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(681, 349)
+texture = ExtResource("1_jxv01")
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Play" to="CanvasLayer/Control" method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Garage" to="CanvasLayer/Control" method="_on_garage_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Options" to="CanvasLayer/Control" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Quit" to="CanvasLayer/Control" method="_on_quit_pressed"]

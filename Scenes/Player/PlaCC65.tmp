@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkounxxjgekmy"]
+
+[ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="1_jw0wv"]
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
+[ext_resource type="Texture2D" uid="uid://dw82sd22ri00l" path="res://Assets/Ships/Hauler/Cockpit.png" id="2_60yk6"]
+[ext_resource type="Texture2D" uid="uid://dk656xiv50lwl" path="res://Assets/Ships/Hauler/Accents.png" id="2_kig3a"]
+[ext_resource type="Texture2D" uid="uid://qetf1yww2knv" path="res://Assets/Ships/Hauler/Blinkers.png" id="3_hwt1k"]
+[ext_resource type="Texture2D" uid="uid://c4acnpm70m6on" path="res://Assets/Ships/Hauler/Outline.png" id="4_rcxk4"]
+[ext_resource type="Script" path="res://Scenes/Player/blinkers.gd" id="4_tpib4"]
+[ext_resource type="Texture2D" uid="uid://b7vm7s17jsbpc" path="res://Assets/Ships/Hauler/Inline.png" id="6_ixnte"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_wd8h7")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Ship" type="Node2D" parent="."]
+
+[node name="Hull" type="Sprite2D" parent="Ship"]
+self_modulate = Color(0.231, 0.28545, 0.33, 1)
+texture = ExtResource("1_jw0wv")
+
+[node name="Accents" type="Sprite2D" parent="Ship"]
+self_modulate = Color(0.341, 0.62, 0.5828, 1)
+texture = ExtResource("2_kig3a")
+
+[node name="Cockpit" type="Sprite2D" parent="Ship"]
+self_modulate = Color(0.00199997, 0, 0.12, 1)
+texture = ExtResource("2_60yk6")
+
+[node name="Blinkers" type="Sprite2D" parent="Ship"]
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("3_hwt1k")
+script = ExtResource("4_tpib4")
+COLOR = Color(1, 0, 0, 1)
+
+[node name="Inline" type="Sprite2D" parent="Ship"]
+self_modulate = Color(0.4032, 0.4816, 0.56, 1)
+texture = ExtResource("6_ixnte")
+
+[node name="Outline" type="Sprite2D" parent="Ship"]
+self_modulate = Color(0.2, 0.546667, 1, 1)
+texture = ExtResource("4_rcxk4")

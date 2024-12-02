@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3 uid="uid://dkounxxjgekmy"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
+[ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
+[ext_resource type="Script" path="res://Scenes/Player/ShipVisuals.gd" id="3_qew4i"]
+[ext_resource type="Texture2D" uid="uid://dw82sd22ri00l" path="res://Assets/Ships/Hauler/Cockpit.png" id="4_bpyr2"]
+[ext_resource type="Script" path="res://Scenes/Player/blinkers.gd" id="4_tpib4"]
+[ext_resource type="Texture2D" uid="uid://x2hbovos4tgm" path="res://Assets/Ships/Hauler/Accents/Standard.png" id="6_uxtss"]
+[ext_resource type="Script" path="res://Scenes/Player/accents.gd" id="7_m5e4n"]
+[ext_resource type="Texture2D" uid="uid://ciu15uyjp0d4t" path="res://Assets/Ships/Hauler/Accents/Hornet.png" id="7_oxlck"]
+[ext_resource type="Texture2D" uid="uid://x0boqyafibic" path="res://Assets/Ships/Hauler/Accents/Greeble.png" id="8_a3clv"]
+[ext_resource type="Texture2D" uid="uid://qetf1yww2knv" path="res://Assets/Ships/Hauler/Blinkers.png" id="9_mirtk"]
+[ext_resource type="Texture2D" uid="uid://b7vm7s17jsbpc" path="res://Assets/Ships/Hauler/Inline.png" id="11_vsl33"]
+[ext_resource type="Texture2D" uid="uid://c4acnpm70m6on" path="res://Assets/Ships/Hauler/Outline.png" id="12_m2iy2"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_wd8h7")
+
+[node name="ShipVisuals" type="Node2D" parent="."]
+script = ExtResource("3_qew4i")
+
+[node name="Hull" type="Sprite2D" parent="ShipVisuals"]
+modulate = Color(0.211765, 0.239216, 0.321569, 1)
+texture = ExtResource("3_nyebr")
+
+[node name="Cockpit" type="Sprite2D" parent="ShipVisuals"]
+modulate = Color(0.00392157, 0, 0.121569, 1)
+z_index = 1
+texture = ExtResource("4_bpyr2")
+
+[node name="Accents" type="Node2D" parent="ShipVisuals"]
+modulate = Color(0.278431, 0.54902, 0.74902, 1)
+script = ExtResource("7_m5e4n")
+
+[node name="Standard" type="Sprite2D" parent="ShipVisuals/Accents"]
+z_index = 3
+texture = ExtResource("6_uxtss")
+
+[node name="Hornet" type="Sprite2D" parent="ShipVisuals/Accents"]
+visible = false
+z_index = 3
+texture = ExtResource("7_oxlck")
+
+[node name="Greeble" type="Sprite2D" parent="ShipVisuals/Accents"]
+visible = false
+z_index = 3
+texture = ExtResource("8_a3clv")
+
+[node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
+self_modulate = Color(1, 0, 0, 1)
+z_index = 4
+texture = ExtResource("9_mirtk")
+script = ExtResource("4_tpib4")
+
+[node name="Inline" type="Sprite2D" parent="ShipVisuals"]
+modulate = Color(0.129412, 0.145098, 0.196078, 1)
+z_index = 5
+texture = ExtResource("11_vsl33")
+
+[node name="Outline" type="Sprite2D" parent="ShipVisuals"]
+modulate = Color(0.2, 0.545098, 1, 1)
+z_index = 6
+texture = ExtResource("12_m2iy2")
