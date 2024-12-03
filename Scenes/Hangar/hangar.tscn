@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=7 format=3 uid="uid://cm7727ch8vbsr"]
 
+[ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
+[ext_resource type="Texture2D" uid="uid://clodsahhwdpwl" path="res://Assets/Hangar/Upgrades/RotationSpeed0.png" id="2_4ahhh"]
+[ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="2_hd0wi"]
+[ext_resource type="Script" path="res://Scenes/Hangar/tech_tree.gd" id="4_eifcx"]
+[ext_resource type="PackedScene" uid="uid://bb44a3o0sq4ge" path="res://Scenes/Hangar/UpgradeIcon/upgrade.tscn" id="4_r883k"]
 
 [node name="Hangar" type="Node2D"]
+script = ExtResource("1_pl6hy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -49,6 +55,28 @@ offset_right = 158.0
 offset_bottom = -10.0
 grow_vertical = 0
 text = "main menu"
+
+[node name="ResourceCounter" parent="CanvasLayer/Control" instance=ExtResource("2_hd0wi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.13
+anchor_bottom = 0.188
+offset_left = 32.5
+offset_top = 31.5
+offset_right = 0.0999908
+offset_bottom = 0.139999
+ALWAYS_SHOW = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="TechTree" type="Node2D" parent="."]
+script = ExtResource("4_eifcx")
+
+[node name="RCSThrust" parent="TechTree" instance=ExtResource("4_r883k")]
+INTERNAL_NAME = "RCSThrust"
+SPRITE = ExtResource("2_4ahhh")
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

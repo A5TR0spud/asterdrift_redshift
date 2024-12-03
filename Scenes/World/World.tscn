@@ -1,22 +1,199 @@
-[gd_scene load_steps=6 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=13 format=3 uid="uid://depkd23s70wtg"]
 
+[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
 [ext_resource type="Script" path="res://Scenes/Player/camera.gd" id="3_jlwng"]
 [ext_resource type="Shader" path="res://Shaders/BasicOutliner.gdshader" id="4_0fsed"]
 [ext_resource type="Texture2D" uid="uid://bwoywwdghbg6k" path="res://Assets/Asteroids/Asteroid1.png" id="4_nsdby"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5hp0"]
+bg_color = Color(0.2967, 0.61134, 0.69, 1)
+border_width_right = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehodu"]
+bg_color = Color(0.188235, 0.364706, 0.439216, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_d6e1y"]
+font_size = 23
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlh84"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+corner_detail = 1
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfbx8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lcpg"]
+bg_color = Color(0.2322, 0.54, 0.54, 1)
+corner_detail = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ym2gn"]
 shader = ExtResource("4_0fsed")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_1esw0")
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
 z_index = 100
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+zoom = Vector2(2, 2)
 script = ExtResource("3_jlwng")
 Player = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndRunButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -147.0
+offset_top = -51.0
+offset_right = -18.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "terminate run"
+
+[node name="EnergyMeter" type="ProgressBar" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.395
+anchor_bottom = 0.085
+offset_left = 123.0
+offset_top = 29.0
+offset_right = -0.600006
+offset_bottom = -0.200001
+theme_override_styles/fill = SubResource("StyleBoxFlat_y5hp0")
+max_value = 30.0
+step = 0.1
+value = 30.0
+allow_greater = true
+show_percentage = false
+
+[node name="EnergyLabel" type="Label" parent="CanvasLayer/Control/EnergyMeter"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_right = 4.0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ehodu")
+text = "30.0"
+label_settings = SubResource("LabelSettings_d6e1y")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="ClipMask" type="Label" parent="CanvasLayer/Control/EnergyMeter/EnergyLabel"]
+clip_children = 1
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tlh84")
+text = "
+"
+label_settings = SubResource("LabelSettings_d6e1y")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter/EnergyLabel/ClipMask"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_vfbx8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8lcpg")
+fill_mode = 1
+indeterminate = true
+editor_preview_indeterminate = true
+
+[node name="EndRunScreenControl" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.6
+anchor_bottom = 0.8
+offset_left = -114.0
+offset_top = -62.0
+offset_right = 114.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/EndRunScreenControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="OverviewLabel" type="Label" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
+layout_mode = 2
+text = "Run Overview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
+layout_mode = 2
+text = "STATS statss aslasta stastast astsat
+STASTST statastas tast ast astastst ast 
+STAST stastast tast sta ststa sta st
+STATS satsta sta stastasttast ast
+STATS astastastastastastasasta astast ast 
+STaStstat sastsaat stasts  stasta sts tast as
+STAstss ststa stasts stasts asats statsa sts
+tsatasst stsastss stasts stast tsat"
+vertical_alignment = 1
+
+[node name="NewRun" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
+layout_mode = 2
+text = "New Run"
+
+[node name="ReturnToHangar" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
+layout_mode = 2
+text = "Return To Hangar"
 
 [node name="Asteroid1" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ym2gn")
@@ -72,3 +249,7 @@ texture = ExtResource("4_nsdby")
 material = SubResource("ShaderMaterial_ym2gn")
 position = Vector2(670, -745)
 texture = ExtResource("4_nsdby")
+
+[connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/ReturnToHangar" to="." method="_on_return_to_hangar_pressed"]

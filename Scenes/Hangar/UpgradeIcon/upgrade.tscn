@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=3 uid="uid://bb44a3o0sq4ge"]
+
+[ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
+[ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
+[ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/AvailableIcon.png" id="3_yu8kn"]
+[ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="4_dkm4s"]
+[ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0l6t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v4exw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ut4ab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djj7t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_csb6c"]
+
+[sub_resource type="Theme" id="Theme_daoqy"]
+Button/styles/disabled = SubResource("StyleBoxEmpty_t0l6t")
+Button/styles/focus = SubResource("StyleBoxEmpty_v4exw")
+Button/styles/hover = SubResource("StyleBoxEmpty_ut4ab")
+Button/styles/normal = SubResource("StyleBoxEmpty_djj7t")
+Button/styles/pressed = SubResource("StyleBoxEmpty_csb6c")
+
+[sub_resource type="LabelSettings" id="LabelSettings_lpjot"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y1hpi"]
+font_size = 14
+
+[node name="Upgrade" type="Node2D"]
+script = ExtResource("1_le4ru")
+SPRITE = ExtResource("2_wk4es")
+
+[node name="MainIcon" type="Sprite2D" parent="."]
+texture = ExtResource("2_wk4es")
+
+[node name="Button" type="Button" parent="MainIcon"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_daoqy")
+
+[node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
+rotation = -0.0832642
+scale = Vector2(0.85392, 0.85392)
+texture = ExtResource("3_yu8kn")
+script = ExtResource("4_dkm4s")
+
+[node name="Tooltip" type="VBoxContainer" parent="."]
+offset_left = 33.0
+offset_top = -74.0
+offset_right = 219.0
+offset_bottom = 74.0
+alignment = 1
+
+[node name="Nameplate" type="Label" parent="Tooltip"]
+layout_mode = 2
+text = "NAME"
+label_settings = SubResource("LabelSettings_lpjot")
+
+[node name="Description" type="Label" parent="Tooltip"]
+layout_mode = 2
+text = "DESC"
+label_settings = SubResource("LabelSettings_y1hpi")
+
+[node name="Costs" parent="Tooltip" instance=ExtResource("5_g1xj2")]
+layout_mode = 2

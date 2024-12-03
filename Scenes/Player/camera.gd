@@ -19,7 +19,7 @@ func _process(delta):
 	zoom.x = _zoom
 	zoom.y = _zoom
 	
-	global_position = Player.global_position + Player._velocity
+	global_position = Player.global_position + 16 * Player._velocity * delta
 
 func zoomIn():
 	_zoom += 0.1 * _zoom
