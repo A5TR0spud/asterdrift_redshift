@@ -11,8 +11,10 @@ var PowerDrain : float = 1.0
 @onready var EndScreen = $CanvasLayer/Control/EndRunScreenControl
 @onready var Player = $Player
 @onready var KillButton = $CanvasLayer/Control/EndRunButton
+@onready var StatPanel = $CanvasLayer/Control/EndRunScreenControl/VBoxContainer/StatsPanel
 
 func _ready():
+	RunHandler.StartRun()
 	EndScreen.hide()
 	TimeLeft = MaxTime
 	TimeBar.max_value = MaxTime
@@ -44,6 +46,8 @@ func StopRun():
 	Progressor.hide()
 	IsInRun = false
 	KillButton.hide()
+	StatPanel.run()
+	RunHandler.EndRun()
 
 func _on_new_run_pressed():
 	get_tree().change_scene_to_file("res://Scenes/World/World.tscn")

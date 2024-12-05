@@ -26,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("1_xd6br")
 metadata/_edit_use_anchors_ = true
 
@@ -68,15 +69,21 @@ offset_bottom = 0.139999
 ALWAYS_SHOW = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="TechTree" type="Node2D" parent="."]
 script = ExtResource("4_eifcx")
 
 [node name="RCSThrust" parent="TechTree" instance=ExtResource("4_r883k")]
+NAME = "Reaction Control System"
+DESCRIPTION = "Ship rotates towards cursor.
+Left and right now strafe instead of rotating.
+When not inputting, the ship will apply a braking thrust."
 INTERNAL_NAME = "RCSThrust"
 SPRITE = ExtResource("2_4ahhh")
+METAL_COST = 1
+CERAMIC_COST = 1
+ORGANIC_COST = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

@@ -6,9 +6,12 @@ signal upgrade_successfully_bought(level : int)
 
 @onready var MainIcon = $MainIcon
 @onready var AvailableIcon = $MainIcon/IsAvailableIcon
-@onready var NameT = $Tooltip/Nameplate
+@onready var MaxedIcon = $MainIcon/IsMaxedIcon
+@onready var Tooltip = $Tooltip
+@onready var NameT = $Tooltip/Top/Nameplate
+@onready var LeveT = $Tooltip/Top/Levels
 @onready var DescT = $Tooltip/Description
-@onready var CostT = $Tooltip/Costs
+@onready var CostT = $Tooltip/Bottom/Costs
 
 @export_group("Main")
 @export var NAME : String = "NAME":
@@ -18,7 +21,7 @@ signal upgrade_successfully_bought(level : int)
 		NAME = value
 		if is_node_ready():
 			_updateTooltip()
-@export var DESCRIPTION : String = "DESC":
+@export_multiline var DESCRIPTION : String = "DESC":
 	get:
 		return DESCRIPTION
 	set(value):
@@ -72,18 +75,22 @@ var CurrentLevel : int = 0:
 	set(value):
 		CurrentLevel = value
 		if is_node_ready():
-			pass
+			ReloadVisible()
+			_updateTooltip()
 
 var is_readied : bool = false
 func _ready():
+	Tooltip.hide()
 	is_readied = true
 	MainIcon.texture = SPRITE
 	ReloadVisible()
 	_updateTooltip()
+	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME)
 
 func _updateTooltip():
 	NameT.text = NAME
 	DescT.text = DESCRIPTION
+	LeveT.text = String.num(CurrentLevel) + "/" + String.num(MAX_LEVEL)
 	CostT.METAL = METAL_COST
 	CostT.CERAMIC = CERAMIC_COST
 	CostT.SYNTHETIC = SYNTHETIC_COST
@@ -92,18 +99,18 @@ func _updateTooltip():
 func ReloadVisible():
 	if !is_readied:
 		return
-	modulate = Color(1, 1, 1, 1)
+	MainIcon.modulate = Color(1, 1, 1, 1)
+	MaxedIcon.hide()
 	AvailableIcon.hide()
 	if _can_buy():
 		AvailableIcon.show()
+	elif CurrentLevel != MAX_LEVEL:
+		MainIcon.modulate = Color(0.5, 0.5, 0.5, 1)
 	else:
-		modulate = Color(0.5, 0.5, 0.5, 1)
+		MaxedIcon.show()
 
-func _on_button_pressed():
-	_try_buy()
-
-func _try_buy():
-	if !_can_buy:
+func _try_buy() -> void:
+	if !_can_buy():
 		return
 	MaterialsManager.Metals -= METAL_COST
 	MaterialsManager.Ceramics -= CERAMIC_COST
@@ -112,9 +119,10 @@ func _try_buy():
 	CurrentLevel += 1
 	emit_signal("upgrade_successfully_bought", CurrentLevel)
 	MaterialsManager.Save()
+	UpgradesManager.Save(INTERNAL_NAME, CurrentLevel)
 	ReloadVisible()
 
-func _can_buy():
+func _can_buy() -> bool:
 	MaterialsManager.Load()
 	if MaterialsManager.Metals < METAL_COST:
 		return false
@@ -125,3 +133,15 @@ func _can_buy():
 	if MaterialsManager.Organics < ORGANIC_COST:
 		return false
 	return CurrentLevel < MAX_LEVEL
+
+func _on_button_mouse_entered():
+	Tooltip.show()
+
+func _on_button_mouse_exited():
+	Tooltip.hide()
+
+func _on_button_pressed():
+	_try_buy()
+
+func _on_upgrade_successfully_bought(level):
+	UpgradesManager.Save(INTERNAL_NAME, level)

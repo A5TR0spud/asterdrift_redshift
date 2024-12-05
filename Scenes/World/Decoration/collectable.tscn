@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://blyasrd763sa3"]
+
+[ext_resource type="Script" path="res://Scenes/World/Decoration/collectable.gd" id="1_eeqgr"]
+[ext_resource type="Texture2D" uid="uid://dammmehqsgv04" path="res://Assets/Hangar/Resources/Metal.png" id="1_jecgk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rb2xb"]
+radius = 4.0
+
+[node name="Collectable" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 7
+mass = 0.1
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_eeqgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rb2xb")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_jecgk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

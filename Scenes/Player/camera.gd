@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var Player : Node2D
+@export var Player : RigidBody2D
 
 var _zoom : float = 2.0
 var _last_pos : Vector2
@@ -19,7 +19,7 @@ func _process(delta):
 	zoom.x = _zoom
 	zoom.y = _zoom
 	
-	global_position = Player.global_position + 16 * Player._velocity * delta
+	global_position = Player.global_position
 
 func zoomIn():
 	_zoom += 0.1 * _zoom

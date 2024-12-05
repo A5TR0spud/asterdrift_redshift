@@ -6,7 +6,7 @@ static var Ceramics : int = 0
 static var Synthetics : int = 0
 static var Organics : int = 0
 
-const RESOURCE_PATH : String = "user://resources.tres"
+const RESOURCE_PATH : String = "user://resources.json"
 
 static var _isLoaded : bool = false
 
@@ -18,7 +18,7 @@ static func Save() -> void:
 		"bio": Organics,
 	}
 
-	var json_string := JSON.stringify(data, "/t")
+	var json_string := JSON.stringify(data, "\t")
 
 	# We will need to open/create a new file for this data string
 	var file_access := FileAccess.open(RESOURCE_PATH, FileAccess.WRITE)
@@ -37,7 +37,7 @@ static func Load():
 	if not FileAccess.file_exists(RESOURCE_PATH):
 		return
 	var file_access := FileAccess.open(RESOURCE_PATH, FileAccess.READ)
-	var json_string := file_access.get_line()
+	var json_string := FileAccess.get_file_as_string(RESOURCE_PATH)
 	file_access.close()
 
 	var json := JSON.new()

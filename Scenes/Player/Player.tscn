@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=15 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
@@ -12,15 +12,28 @@
 [ext_resource type="Texture2D" uid="uid://qetf1yww2knv" path="res://Assets/Ships/Hauler/Blinkers.png" id="9_mirtk"]
 [ext_resource type="Texture2D" uid="uid://b7vm7s17jsbpc" path="res://Assets/Ships/Hauler/Inline.png" id="11_vsl33"]
 [ext_resource type="Texture2D" uid="uid://c4acnpm70m6on" path="res://Assets/Ships/Hauler/Outline.png" id="12_m2iy2"]
+[ext_resource type="Script" path="res://Scenes/Player/player_stat_block.gd" id="13_xyph6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
-radius = 13.0384
+radius = 13.0
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("Stats")]
+rotation = -1.5708
+disable_mode = 2
+collision_layer = 2
+collision_mask = 15
+collision_priority = 2.0
+can_sleep = false
+continuous_cd = 2
 script = ExtResource("1_wd8h7")
-DRAG_COEFFICIENT = 0.97
+Stats = NodePath("PlayerStatBlock")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kl7m2")
+debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="ShipVisuals" type="Node2D" parent="."]
+rotation = 1.5708
 script = ExtResource("3_qew4i")
 
 [node name="Hull" type="Sprite2D" parent="ShipVisuals"]
@@ -66,8 +79,5 @@ modulate = Color(0.2, 0.545098, 1, 1)
 z_index = 6
 texture = ExtResource("12_m2iy2")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("CircleShape2D_kl7m2")
-debug_color = Color(0, 0.595, 0.7, 0)
+[node name="PlayerStatBlock" type="Node" parent="."]
+script = ExtResource("13_xyph6")

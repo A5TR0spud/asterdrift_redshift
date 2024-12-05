@@ -1,5 +1,5 @@
 @tool
-extends VBoxContainer
+extends GridContainer
 
 @export var METAL : int = 0:
 	get:
@@ -36,6 +36,13 @@ extends VBoxContainer
 		ALWAYS_SHOW = value
 		if is_node_ready():
 			_updateDisplay()
+@export var FONT_SIZE : int = 16:
+	get:
+		return FONT_SIZE
+	set(value):
+		FONT_SIZE = value
+		if is_node_ready():
+			_updateDisplay()
 
 func _ready():
 	_updateDisplay()
@@ -45,6 +52,8 @@ func _updateDisplay():
 	$Ceramics/Label.text = String.num(CERAMIC) + (" Ceramics" if CERAMIC != 1 else " Ceramic")
 	$Synthetic/Label.text = String.num(SYNTHETIC) + (" Synthetics" if SYNTHETIC != 1 else " Synthetic")
 	$Organics/Label.text = String.num(ORGANIC) + (" Organics" if ORGANIC != 1 else " Organic")
+	
+	$Metals/Label.label_settings.font_size = FONT_SIZE
 	
 	$Metals.hide()
 	if ALWAYS_SHOW || METAL != 0:

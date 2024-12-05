@@ -1,38 +1,78 @@
-[gd_scene load_steps=14 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=20 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="4_dkm4s"]
+[ext_resource type="Texture2D" uid="uid://bpuscblega82w" path="res://Assets/Hangar/Upgrades/MaxedIcon.png" id="5_6470c"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0l6t"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ejoby"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v4exw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0hxl"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ut4ab"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oab7k"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djj7t"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hn16"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_csb6c"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7snbq"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+anti_aliasing = false
 
-[sub_resource type="Theme" id="Theme_daoqy"]
-Button/styles/disabled = SubResource("StyleBoxEmpty_t0l6t")
-Button/styles/focus = SubResource("StyleBoxEmpty_v4exw")
-Button/styles/hover = SubResource("StyleBoxEmpty_ut4ab")
-Button/styles/normal = SubResource("StyleBoxEmpty_djj7t")
-Button/styles/pressed = SubResource("StyleBoxEmpty_csb6c")
+[sub_resource type="Theme" id="Theme_bkje1"]
+Label/styles/normal = SubResource("StyleBoxFlat_7snbq")
 
 [sub_resource type="LabelSettings" id="LabelSettings_lpjot"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_annhj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk6xj"]
+bg_color = Color(0.32549, 0.32549, 0.32549, 1)
+border_width_left = 5
+border_width_right = 5
+expand_margin_left = 5.0
+expand_margin_top = 3.0
+expand_margin_right = 10.0
+expand_margin_bottom = 3.0
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_h5mw7"]
+Label/styles/normal = SubResource("StyleBoxFlat_kk6xj")
+
 [sub_resource type="LabelSettings" id="LabelSettings_y1hpi"]
 font_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
+bg_color = Color(0.20871, 0.20871, 0.20871, 1)
+border_width_left = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 2.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_3w4wk"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_1jsna")
 
 [node name="Upgrade" type="Node2D"]
 script = ExtResource("1_le4ru")
 SPRITE = ExtResource("2_wk4es")
 
 [node name="MainIcon" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("2_wk4es")
 
 [node name="Button" type="Button" parent="MainIcon"]
@@ -43,32 +83,61 @@ offset_left = -16.0
 offset_top = -16.0
 offset_right = -16.0
 offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_daoqy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ejoby")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t0hxl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oab7k")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
-rotation = -0.0832642
-scale = Vector2(0.85392, 0.85392)
+rotation = 0.219857
+scale = Vector2(1.4135, 1.4135)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
+[node name="IsMaxedIcon" type="Sprite2D" parent="MainIcon"]
+visible = false
+texture = ExtResource("5_6470c")
+
 [node name="Tooltip" type="VBoxContainer" parent="."]
-offset_left = 33.0
-offset_top = -74.0
-offset_right = 219.0
-offset_bottom = 74.0
+visible = false
+offset_left = 61.0
+offset_top = -62.0
+offset_right = 138.0
+offset_bottom = 62.0
 alignment = 1
 
-[node name="Nameplate" type="Label" parent="Tooltip"]
+[node name="Top" type="PanelContainer" parent="Tooltip"]
 layout_mode = 2
+
+[node name="Nameplate" type="Label" parent="Tooltip/Top"]
+layout_mode = 2
+theme = SubResource("Theme_bkje1")
 text = "NAME"
 label_settings = SubResource("LabelSettings_lpjot")
 
+[node name="Levels" type="Label" parent="Tooltip/Top"]
+layout_mode = 2
+text = "0/1"
+label_settings = SubResource("LabelSettings_annhj")
+horizontal_alignment = 2
+
 [node name="Description" type="Label" parent="Tooltip"]
 layout_mode = 2
+theme = SubResource("Theme_h5mw7")
 text = "DESC"
 label_settings = SubResource("LabelSettings_y1hpi")
 
-[node name="Costs" parent="Tooltip" instance=ExtResource("5_g1xj2")]
+[node name="Bottom" type="PanelContainer" parent="Tooltip"]
 layout_mode = 2
+theme = SubResource("Theme_3w4wk")
+
+[node name="Costs" parent="Tooltip/Bottom" instance=ExtResource("5_g1xj2")]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 4
+FONT_SIZE = 11
+
+[connection signal="upgrade_successfully_bought" from="." to="." method="_on_upgrade_successfully_bought"]
+[connection signal="mouse_entered" from="MainIcon/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="MainIcon/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="MainIcon/Button" to="." method="_on_button_pressed"]

@@ -7,14 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://ull3cjkjlkth" path="res://Assets/Hangar/Resources/Organics.png" id="5_625v2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vm8o0"]
+resource_local_to_scene = true
 
-[node name="ResourceCounter" type="VBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ResourceCounter" type="GridContainer"]
+offset_right = 120.0
+offset_bottom = 104.0
 script = ExtResource("1_eu6hn")
-ALWAYS_SHOW = null
 
 [node name="Metals" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Metals"]
@@ -25,10 +26,12 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="Metals"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "0 Metallics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Ceramics" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Ceramics"]
@@ -43,6 +46,7 @@ text = "0 Ceramics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Synthetic" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Synthetic"]
@@ -57,6 +61,7 @@ text = "0 Synthetics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Organics" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Organics"]
