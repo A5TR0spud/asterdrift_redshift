@@ -2,7 +2,6 @@ extends Node2D
 
 var MaxTime : float = 30.0
 var TimeLeft : float = 30.0
-var IsInRun : bool = true
 var PowerDrain : float = 1.0
 
 @onready var TimeBar = $CanvasLayer/Control/EnergyMeter
@@ -20,11 +19,13 @@ func _ready():
 	TimeBar.max_value = MaxTime
 	TimeBar.size.x = MaxTime * 16
 	_updateDisplay()
-	IsInRun = true
 
 func _physics_process(delta):
-	if IsInRun:
+	if RunHandler.IsInRun():
 		TimeLeft -= delta * PowerDrain
+	else:
+		StopRun()
+		return
 	if TimeLeft <= 0:
 		TimeLeft = 0
 		StopRun()
@@ -44,13 +45,14 @@ func StopRun():
 	Player.CAN_MOVE = false
 	EndScreen.show()
 	Progressor.hide()
-	IsInRun = false
 	KillButton.hide()
 	StatPanel.run()
 	RunHandler.EndRun()
 
 func _on_new_run_pressed():
+	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/World/World.tscn")
 
 func _on_return_to_hangar_pressed():
+	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")

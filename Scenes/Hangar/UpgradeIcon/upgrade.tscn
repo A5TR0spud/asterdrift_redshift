@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="4_dkm4s"]
-[ext_resource type="Texture2D" uid="uid://bpuscblega82w" path="res://Assets/Hangar/Upgrades/MaxedIcon.png" id="5_6470c"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
+[ext_resource type="Texture2D" uid="uid://bavifds8ksa17" path="res://Assets/Hangar/Upgrades/BooleanIcon.png" id="6_pugof"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ejoby"]
 
@@ -19,7 +19,6 @@
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
-border_width_bottom = 2
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 expand_margin_left = 5.0
@@ -89,17 +88,19 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_oab7k")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
-rotation = 0.219857
-scale = Vector2(1.4135, 1.4135)
+visible = false
+rotation = 0.184157
+scale = Vector2(1.26409, 1.26409)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
-[node name="IsMaxedIcon" type="Sprite2D" parent="MainIcon"]
-visible = false
-texture = ExtResource("5_6470c")
+[node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
+position = Vector2(0, 17)
+texture = ExtResource("6_pugof")
 
 [node name="Tooltip" type="VBoxContainer" parent="."]
 visible = false
+z_index = 10
 offset_left = 61.0
 offset_top = -62.0
 offset_right = 138.0
@@ -117,7 +118,7 @@ label_settings = SubResource("LabelSettings_lpjot")
 
 [node name="Levels" type="Label" parent="Tooltip/Top"]
 layout_mode = 2
-text = "0/1"
+text = "1/1"
 label_settings = SubResource("LabelSettings_annhj")
 horizontal_alignment = 2
 
@@ -135,7 +136,17 @@ theme = SubResource("Theme_3w4wk")
 layout_mode = 2
 theme_override_constants/h_separation = 20
 columns = 4
-FONT_SIZE = 11
+SHOW_TEXT = false
+FONT_SIZE = 12
+
+[node name="ParentLine" type="Line2D" parent="."]
+visible = false
+show_behind_parent = true
+z_index = -1
+points = PackedVector2Array(0, 0, 64, 64)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [connection signal="upgrade_successfully_bought" from="." to="." method="_on_upgrade_successfully_bought"]
 [connection signal="mouse_entered" from="MainIcon/Button" to="." method="_on_button_mouse_entered"]

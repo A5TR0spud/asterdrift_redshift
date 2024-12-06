@@ -1,5 +1,6 @@
 @tool
 extends RigidBody2D
+class_name Collectable
 
 enum ResourcesEnum {
 	Metal,
@@ -34,20 +35,3 @@ func _reloadIcon():
 		Icon.texture = SyntheticTex
 	elif COLLECTION == ResourcesEnum.Organic:
 		Icon.texture = OrganicTex
-
-func _on_body_entered(body):
-	if body is PhysicsBody2D:
-		var a : PhysicsBody2D = body
-		if !(a.collision_layer & 2):
-			return
-	else:
-		return
-	if COLLECTION == ResourcesEnum.Metal:
-		RunHandler.METAL += 1
-	elif COLLECTION == ResourcesEnum.Ceramic:
-		RunHandler.CERAMIC += 1
-	elif COLLECTION == ResourcesEnum.Synthetic:
-		RunHandler.SYNTHETIC += 1
-	elif COLLECTION == ResourcesEnum.Organic:
-		RunHandler.ORGANIC += 1
-	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=12 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="2_hd0wi"]
 [ext_resource type="Script" path="res://Scenes/Hangar/tech_tree.gd" id="4_eifcx"]
 [ext_resource type="PackedScene" uid="uid://bb44a3o0sq4ge" path="res://Scenes/Hangar/UpgradeIcon/upgrade.tscn" id="4_r883k"]
+[ext_resource type="Texture2D" uid="uid://ctu35osk4wl32" path="res://Assets/Hangar/Upgrades/RotationSpeed1.png" id="7_3ljve"]
+[ext_resource type="Texture2D" uid="uid://cxwkybickfaic" path="res://Assets/Hangar/Upgrades/Manipulator.png" id="8_7rt47"]
+[ext_resource type="Texture2D" uid="uid://ycs5jlgpof0s" path="res://Assets/Hangar/Upgrades/XLSpool.png" id="9_palqs"]
+[ext_resource type="Texture2D" uid="uid://dvtjvjymygrxc" path="res://Assets/Hangar/Upgrades/HookPropel.png" id="10_hm2a6"]
+[ext_resource type="Texture2D" uid="uid://dpawtsvssygqv" path="res://Assets/Hangar/Upgrades/RapidWinch.png" id="11_l2t6d"]
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -75,15 +80,71 @@ position_smoothing_enabled = true
 script = ExtResource("4_eifcx")
 
 [node name="RCSThrust" parent="TechTree" instance=ExtResource("4_r883k")]
+position = Vector2(-64, -64)
 NAME = "Reaction Control System"
 DESCRIPTION = "Ship rotates towards cursor.
 Left and right now strafe instead of rotating.
-When not inputting, the ship will apply a braking thrust."
+When not inputting, the ship will apply a braking thrust.
+Improves rotation speed."
 INTERNAL_NAME = "RCSThrust"
 SPRITE = ExtResource("2_4ahhh")
 METAL_COST = 1
 CERAMIC_COST = 1
+
+[node name="AdvancedRCS" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, -64)
+NAME = "Advanced RCS"
+DESCRIPTION = "Advanced RCS mitigates drifting.
+Acceleration is improved when not rotating.
+Further improves rotation speed."
+INTERNAL_NAME = "AdvancedRCS"
+PARENT_UPGRADE = NodePath("../RCSThrust")
+SPRITE = ExtResource("7_3ljve")
+METAL_COST = 2
+CERAMIC_COST = 1
+SYNTHETIC_COST = 2
+
+[node name="ResourceHook" parent="TechTree" instance=ExtResource("4_r883k")]
+position = Vector2(64, -64)
+NAME = "Resource Hook"
+DESCRIPTION = "Hooks in materials within 2 units.
+Extends at 3u/s.
+Retracts at 1u/s."
+INTERNAL_NAME = "Manipulator"
+SPRITE = ExtResource("8_7rt47")
+PRE_BOUGHT = true
+
+[node name="LongResourceHook" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(192, -192)
+NAME = "XL Spool+"
+DESCRIPTION = "Increases range of hook by +1u."
+INTERNAL_NAME = "BigSpool"
+PARENT_UPGRADE = NodePath("../ResourceHook")
+SPRITE = ExtResource("9_palqs")
+MAX_LEVEL = 3
+SYNTHETIC_COST = 2
+
+[node name="HookPropel" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(192, -64)
+NAME = "Compact Propellant"
+DESCRIPTION = "Increases extension speed by +1u/s."
+INTERNAL_NAME = "HookPropel"
+PARENT_UPGRADE = NodePath("../ResourceHook")
+SPRITE = ExtResource("10_hm2a6")
+MAX_LEVEL = 4
+SYNTHETIC_COST = 1
 ORGANIC_COST = 1
+
+[node name="RapidWinch" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(64, -192)
+NAME = "Rapid Winch"
+DESCRIPTION = "Increases retraction speed by +2u/s"
+INTERNAL_NAME = "RapidWinch"
+PARENT_UPGRADE = NodePath("../ResourceHook")
+SPRITE = ExtResource("11_l2t6d")
+MAX_LEVEL = 2
+METAL_COST = 1
+SYNTHETIC_COST = 2
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

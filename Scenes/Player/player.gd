@@ -14,8 +14,11 @@ extends RigidBody2D
 var _inputDir : Vector2
 
 @onready var ShipVisuals = $ShipVisuals
+@onready var Manipulator = $Manipulator
 
 func _ready():
+	_handleStats()
+	
 	linear_velocity = Vector2(0.0, 0.0)
 	angular_velocity = 0.0
 	rotation_degrees = -90
@@ -69,6 +72,13 @@ func _physics_process(delta):
 		
 		#if inputting, apply that force
 		if _inputDir.length() > 0.5:
+			#reduce drifting if not strafing
+			if Stats.Has_Better_RCS && absf(_inputDir.y) < 0.5:
+				var reduceDrift := linear_velocity.normalized().rotated(-rotation)
+				_inputDir.y -= sign(reduceDrift.y) if absf(reduceDrift.y) > 0.1 else 0
+			if Stats.Has_Better_RCS && absf(_inputDir.x) < 0.5:
+				var reduceDrift := linear_velocity.normalized().rotated(-rotation)
+				_inputDir.x -= sign(reduceDrift.x) if absf(reduceDrift.x) > 0.1 else 0
 			_inputDir = _inputDir.normalized().rotated(rotation)
 		#if not inputting, apply opposite velocity
 		elif Stats.Has_RCS:
@@ -80,24 +90,41 @@ func _physics_process(delta):
 	if CAN_MOVE && Stats.Has_RCS:
 		var angleToCursor : float = get_angle_to(get_global_mouse_position())
 		var x := deg_to_rad(TURN_ACCEL_DEGREES)
-		var coef := 3.5
+		var coef := 4.5 if Stats.Has_Better_RCS else 3.5
 		var angle_landing_if_deccel_now := angular_velocity / coef
 		var dif := angle_difference(angleToCursor, angle_landing_if_deccel_now)
-		if dif < 0:
+		if absf(dif) < deg_to_rad(5):
+			targetAngularAccel = -angular_velocity * delta * coef
+		elif dif < 0:
 			targetAngularAccel += coef * x * delta
 		elif dif > 0:
 			targetAngularAccel -= coef * x * delta
-		#else:
-		#	if sign(angular_velocity) == sign(angleToCursor) || absf(angular_velocity) > deg_to_rad(TURN_ACCEL_DEGREES):
-		#		targetAngularAccel += angleToCursor * delta * 0.50
-		#	else:
-		#		targetAngularAccel += angleToCursor * delta * 1.33
-	
+		#targetAngularAccel = clampf(targetAngularAccel, -absf(angleToCursor) * delta, absf(angleToCursor) * delta)
+
 	if targetLinearAccel.length() > ACCEL_FORCE:
 		targetLinearAccel = targetLinearAccel.normalized() * ACCEL_FORCE
+	
+	if Stats.Has_Better_RCS && absf(targetAngularAccel) < deg_to_rad(15) * delta:
+		targetLinearAccel += targetLinearAccel.normalized() * 32
+		
 	apply_force(targetLinearAccel)
+	
 	if linear_velocity.length() > MAX_SPEED:
 		linear_velocity = linear_velocity.normalized() * MAX_SPEED
-	
+		
 	angular_velocity += deg_to_rad(clampf(rad_to_deg(targetAngularAccel), -TURN_ACCEL_DEGREES, TURN_ACCEL_DEGREES))
 	angular_velocity = deg_to_rad(clampf(rad_to_deg(angular_velocity), -absf(TURN_MAX_SPEED_DEGREES), absf(TURN_MAX_SPEED_DEGREES)))
+	
+	# around here would be calls to set thruster visuals based on acceleration
+
+func _handleStats():
+	# Manipulator Stats
+	var x: int = Manipulator.RANGE
+	x += 16 * UpgradesManager.Load("BigSpool")
+	Manipulator.RANGE = x
+	var y: float = Manipulator.EXTEND_SPEED
+	y += 16 * UpgradesManager.Load("HookPropel")
+	Manipulator.EXTEND_SPEED = y
+	y = Manipulator.RETRACT_SPEED
+	y += 32 * UpgradesManager.Load("RapidWinch")
+	Manipulator.RETRACT_SPEED = y

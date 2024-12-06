@@ -2,16 +2,24 @@
 extends Node2D
 class_name Upgrade
 
-signal upgrade_successfully_bought(level : int)
+## How far up the tech tree to look ahead from bought upgrades
+const LOOK_AHEAD : int = 2
 
-@onready var MainIcon = $MainIcon
-@onready var AvailableIcon = $MainIcon/IsAvailableIcon
-@onready var MaxedIcon = $MainIcon/IsMaxedIcon
-@onready var Tooltip = $Tooltip
-@onready var NameT = $Tooltip/Top/Nameplate
-@onready var LeveT = $Tooltip/Top/Levels
-@onready var DescT = $Tooltip/Description
-@onready var CostT = $Tooltip/Bottom/Costs
+signal upgrade_successfully_bought(level : int)
+signal notify_children(propogation : int)
+
+@onready var LevelAccent := preload("res://Assets/Hangar/Upgrades/LevelAccentIcon.png")
+
+@onready var MainIcon := $MainIcon
+@onready var AvailableIcon := $MainIcon/IsAvailableIcon
+@onready var BoolIcon := $MainIcon/BooleanIcon
+@onready var Tooltip := $Tooltip
+@onready var NameT := $Tooltip/Top/Nameplate
+@onready var LeveT := $Tooltip/Top/Levels
+@onready var DescT := $Tooltip/Description
+@onready var CostT := $Tooltip/Bottom/Costs
+@onready var Bottom := $Tooltip/Bottom
+@onready var ParentLine := $ParentLine
 
 @export_group("Main")
 @export var NAME : String = "NAME":
@@ -40,6 +48,8 @@ signal upgrade_successfully_bought(level : int)
 			MainIcon.texture = SPRITE
 @export var MAX_LEVEL : int = 1
 @export_group("Cost")
+## If true, upgrade will always be bought at 0 cost
+@export var PRE_BOUGHT : bool = false
 @export var METAL_COST : int = 0:
 	get:
 		return METAL_COST
@@ -83,55 +93,109 @@ func _ready():
 	Tooltip.hide()
 	is_readied = true
 	MainIcon.texture = SPRITE
+	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME)
 	ReloadVisible()
 	_updateTooltip()
-	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME)
+	if PARENT_UPGRADE != null:
+		PARENT_UPGRADE.notify_children.connect(ChildIsNotified)
+	if PRE_BOUGHT:
+		_try_buy()
 
 func _updateTooltip():
 	NameT.text = NAME
 	DescT.text = DESCRIPTION
-	LeveT.text = String.num(CurrentLevel) + "/" + String.num(MAX_LEVEL)
+	if PRE_BOUGHT:
+		LeveT.hide()
+	else:
+		LeveT.show()
+		LeveT.text = String.num(CurrentLevel) + "/" + String.num(MAX_LEVEL)
 	CostT.METAL = METAL_COST
 	CostT.CERAMIC = CERAMIC_COST
 	CostT.SYNTHETIC = SYNTHETIC_COST
 	CostT.ORGANIC = ORGANIC_COST
 
+func ChildIsNotified(propogation : int):
+	if CurrentLevel > 0 || PARENT_UPGRADE.CurrentLevel > 0:
+		propogation = 0
+	else:
+		propogation += 1
+	emit_signal("notify_children", propogation)
+	if PRE_BOUGHT:
+		_try_buy()
+	ReloadVisible()
+	hide()
+	if propogation < LOOK_AHEAD:
+		show()
+
 func ReloadVisible():
 	if !is_readied:
 		return
+	ParentLine.hide()
+	if PARENT_UPGRADE:
+		ParentLine.show()
+		var dir : Vector2 = PARENT_UPGRADE.global_position - global_position
+		ParentLine.points[0] = 0.33 * dir
+		ParentLine.points[1] = 0.66 * dir
+		if PARENT_UPGRADE.CurrentLevel > 0:
+			ParentLine.default_color = Color(1,1,1,1)
+		else:
+			ParentLine.default_color = Color(0.5, 0.5, 0.5, 1)
+	if !PARENT_UPGRADE || CurrentLevel > 0:
+		emit_signal("notify_children", 0)
 	MainIcon.modulate = Color(1, 1, 1, 1)
-	MaxedIcon.hide()
+	BoolIcon.hide()
 	AvailableIcon.hide()
+	for child in BoolIcon.get_children():
+		child.queue_free()
 	if _can_buy():
 		AvailableIcon.show()
-	elif CurrentLevel != MAX_LEVEL:
+	elif CurrentLevel == 0:
 		MainIcon.modulate = Color(0.5, 0.5, 0.5, 1)
-	else:
-		MaxedIcon.show()
+	if CurrentLevel != 0:
+		BoolIcon.show()
+		for i: int in (CurrentLevel - 1) * 2:
+			var sprite2d = Sprite2D.new() # Create a new Sprite2D.
+			sprite2d.texture = LevelAccent
+			var x := i + 2
+			if x % 2 == 1:
+				x -= 1
+				x *= -1
+			x /= 2
+			sprite2d.position.x = 3 * sign(x) + 3 * x
+			BoolIcon.add_child(sprite2d)
 
 func _try_buy() -> void:
 	if !_can_buy():
 		return
-	MaterialsManager.Metals -= METAL_COST
-	MaterialsManager.Ceramics -= CERAMIC_COST
-	MaterialsManager.Synthetics -= SYNTHETIC_COST
-	MaterialsManager.Organics -= ORGANIC_COST
-	CurrentLevel += 1
-	emit_signal("upgrade_successfully_bought", CurrentLevel)
+	if !PRE_BOUGHT:
+		MaterialsManager.Metals -= METAL_COST
+		MaterialsManager.Ceramics -= CERAMIC_COST
+		MaterialsManager.Synthetics -= SYNTHETIC_COST
+		MaterialsManager.Organics -= ORGANIC_COST
+	if PRE_BOUGHT:
+		CurrentLevel = MAX_LEVEL
+	else:
+		CurrentLevel += 1
+	
 	MaterialsManager.Save()
 	UpgradesManager.Save(INTERNAL_NAME, CurrentLevel)
 	ReloadVisible()
+	emit_signal("upgrade_successfully_bought", CurrentLevel)
 
 func _can_buy() -> bool:
-	MaterialsManager.Load()
-	if MaterialsManager.Metals < METAL_COST:
-		return false
-	if MaterialsManager.Ceramics < CERAMIC_COST:
-		return false
-	if MaterialsManager.Synthetics < SYNTHETIC_COST:
-		return false
-	if MaterialsManager.Organics < ORGANIC_COST:
-		return false
+	if !PRE_BOUGHT:
+		MaterialsManager.Load()
+		if MaterialsManager.Metals < METAL_COST:
+			return false
+		if MaterialsManager.Ceramics < CERAMIC_COST:
+			return false
+		if MaterialsManager.Synthetics < SYNTHETIC_COST:
+			return false
+		if MaterialsManager.Organics < ORGANIC_COST:
+			return false
+	if PARENT_UPGRADE:
+		if PARENT_UPGRADE.CurrentLevel == 0:
+			return false
 	return CurrentLevel < MAX_LEVEL
 
 func _on_button_mouse_entered():
@@ -145,3 +209,4 @@ func _on_button_pressed():
 
 func _on_upgrade_successfully_bought(level):
 	UpgradesManager.Save(INTERNAL_NAME, level)
+	emit_signal("notify_children", 0)
