@@ -46,6 +46,7 @@ func _ReloadFromCached():
 	CockpitColor.Selected = CachedShip.cockpit_int
 	AccentColor.Selected = CachedShip.accent_color_int
 	AccentTypeSelector.select(CachedShip.accent_type_int)
+	Visuals.ACCENT_TYPE = _indexToAccent(CachedShip.accent_type_int)
 	BlinkerOnColor.Selected = CachedShip.blinker_on_int
 	BlinkerOffColor.Selected = CachedShip.blinker_off_int
 	BlinkerInterval.value = CachedShip.blinker_interval
