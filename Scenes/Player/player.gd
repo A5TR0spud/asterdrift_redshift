@@ -11,6 +11,8 @@ extends RigidBody2D
 @export var CAN_MOVE : bool = true
 @export @onready var Stats : PlayerStatBlock = $PlayerStatBlock
 
+signal damage(amount: float)
+
 var _inputDir : Vector2
 
 @onready var ShipVisuals = $ShipVisuals
@@ -128,3 +130,22 @@ func _handleStats():
 	y = Manipulator.RETRACT_SPEED
 	y += 32 * UpgradesManager.Load("RapidWinch")
 	Manipulator.RETRACT_SPEED = y
+
+func _on_body_entered(body : PhysicsBody2D):
+	if body is not RigidBody2D:
+		return
+	var other: RigidBody2D = body
+	#4 is dangerous collision
+	if body.collision_layer & 4:
+		var blunt: float = Vector2(self.linear_velocity - other.linear_velocity).length()
+		var abrasion: float = 0.5 * self.angular_velocity + other.angular_velocity
+		
+		var abrasionResistance = UpgradesManager.Load("AbrResistance") + 1
+		var bluntResistance = UpgradesManager.Load("BluntRes") + 1
+		var grace = 5
+		
+		var damage = (blunt / bluntResistance) + (abrasion / abrasionResistance) - grace
+		damage = maxf(damage, 0)
+		#print("Player took damage: ", damage)
+		
+		emit_signal("damage", damage)

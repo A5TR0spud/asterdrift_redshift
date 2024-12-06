@@ -88,13 +88,13 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_oab7k")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
-visible = false
-rotation = 0.184157
-scale = Vector2(1.26409, 1.26409)
+rotation = 0.261169
+scale = Vector2(1.36936, 1.36936)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
 [node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
+visible = false
 position = Vector2(0, 17)
 texture = ExtResource("6_pugof")
 
@@ -118,7 +118,7 @@ label_settings = SubResource("LabelSettings_lpjot")
 
 [node name="Levels" type="Label" parent="Tooltip/Top"]
 layout_mode = 2
-text = "1/1"
+text = "0/1"
 label_settings = SubResource("LabelSettings_annhj")
 horizontal_alignment = 2
 

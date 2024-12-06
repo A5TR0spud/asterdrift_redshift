@@ -56,3 +56,7 @@ func _on_new_run_pressed():
 func _on_return_to_hangar_pressed():
 	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")
+
+
+func _on_player_damage(amount):
+	TimeLeft -= amount

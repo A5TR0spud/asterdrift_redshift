@@ -76,6 +76,7 @@ func _ProcessValues():
 	#ResetSelfModulate()
 	if !readied:
 		return
+	#ship visuals
 	$Hull.modulate = HULL_COLOR
 	$Cockpit.modulate = COCKPIT_COLOR
 	$Accents.modulate = ACCENT_COLOR
@@ -86,3 +87,12 @@ func _ProcessValues():
 	$Blinkers.COLOR_INTERP = BLINKER_INTERPOLATION
 	$Inline.modulate = INLINE_COLOR
 	$Outline.modulate = OUTLINE_COLOR
+	
+	#manipulator visuals
+	$"../Manipulator/BaseSprite/ArmSprite".self_modulate = HULL_COLOR
+	$"../Manipulator/BaseSprite/ArmSprite/ArmAccent".self_modulate = ACCENT_COLOR
+	$"../Manipulator/BaseSprite/ArmSprite/RHSGrabber".self_modulate = HULL_COLOR
+	$"../Manipulator/BaseSprite/ArmSprite/LHSGrabber".self_modulate = HULL_COLOR
+	$"../Manipulator/BaseSprite/ArmSprite/RHSGrabber/RHSGAccent".self_modulate = ACCENT_COLOR
+	$"../Manipulator/BaseSprite/ArmSprite/LHSGrabber/LHSGAccent".self_modulate = ACCENT_COLOR
+	$"../Manipulator/BaseSprite/Extendo".default_color = INLINE_COLOR

@@ -344,14 +344,10 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(10, 10)
 
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
-scale = Vector2(5, 5)
 IS_IN_GARAGE = true
-
-[node name="Blinkers" parent="Player/ShipVisuals" index="3"]
-self_modulate = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="CanvasLayer/Control/Back" to="." method="_on_back_pressed"]
 [connection signal="colorChanged" from="CanvasLayer/Control/ShipEditorVH/HullColor" to="." method="_on_hull_color_color_changed"]

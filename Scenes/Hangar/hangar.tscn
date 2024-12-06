@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=14 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://ycs5jlgpof0s" path="res://Assets/Hangar/Upgrades/XLSpool.png" id="9_palqs"]
 [ext_resource type="Texture2D" uid="uid://dvtjvjymygrxc" path="res://Assets/Hangar/Upgrades/HookPropel.png" id="10_hm2a6"]
 [ext_resource type="Texture2D" uid="uid://dpawtsvssygqv" path="res://Assets/Hangar/Upgrades/RapidWinch.png" id="11_l2t6d"]
+[ext_resource type="Texture2D" uid="uid://ijo3yry5je3j" path="res://Assets/Hangar/Upgrades/AbrRes.png" id="12_sjd7r"]
+[ext_resource type="Texture2D" uid="uid://hsit4gva755d" path="res://Assets/Hangar/Upgrades/BluntRes.png" id="13_h35e1"]
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -88,7 +90,6 @@ When not inputting, the ship will apply a braking thrust.
 Improves rotation speed."
 INTERNAL_NAME = "RCSThrust"
 SPRITE = ExtResource("2_4ahhh")
-METAL_COST = 1
 CERAMIC_COST = 1
 
 [node name="AdvancedRCS" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -100,8 +101,7 @@ Further improves rotation speed."
 INTERNAL_NAME = "AdvancedRCS"
 PARENT_UPGRADE = NodePath("../RCSThrust")
 SPRITE = ExtResource("7_3ljve")
-METAL_COST = 2
-CERAMIC_COST = 1
+CERAMIC_COST = 2
 SYNTHETIC_COST = 2
 
 [node name="ResourceHook" parent="TechTree" instance=ExtResource("4_r883k")]
@@ -145,6 +145,25 @@ SPRITE = ExtResource("11_l2t6d")
 MAX_LEVEL = 2
 METAL_COST = 1
 SYNTHETIC_COST = 2
+
+[node name="AbrResistance" parent="TechTree" instance=ExtResource("4_r883k")]
+position = Vector2(-192, 64)
+NAME = "Abrasive-Resistant Hull"
+DESCRIPTION = "Damage taken from rotating collisions is halved."
+INTERNAL_NAME = "AbrResistance"
+SPRITE = ExtResource("12_sjd7r")
+METAL_COST = 2
+CERAMIC_COST = 2
+
+[node name="BluntRes" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-320, 64)
+NAME = "Crush-Resistant Hull"
+DESCRIPTION = "Damage taken from moving collisions is halved."
+INTERNAL_NAME = "BluntRes"
+PARENT_UPGRADE = NodePath("../AbrResistance")
+SPRITE = ExtResource("13_h35e1")
+METAL_COST = 3
+SYNTHETIC_COST = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

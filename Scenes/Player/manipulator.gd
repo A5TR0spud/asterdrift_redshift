@@ -60,6 +60,7 @@ func _physics_process(delta):
 	#set target position
 	if Target != null:
 		TargetPosition = Target.global_position - global_position
+		RetractPosition = TargetPosition
 	else:
 		TargetPosition = Vector2(0, 0)
 	
