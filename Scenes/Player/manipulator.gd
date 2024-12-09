@@ -23,8 +23,8 @@ var RetractPosition: Vector2 = Vector2(0, 1)
 		RANGE = value
 		if is_node_ready():
 			ManipCo.shape.radius = RANGE
-@export var EXTEND_SPEED: float = 48.0
-@export var RETRACT_SPEED: float = 16.0
+@export var EXTEND_SPEED: float = 32.0
+@export var RETRACT_SPEED: float = 32.0
 
 func _ready():
 	if !Engine.is_editor_hint():
@@ -77,9 +77,9 @@ func _physics_process(delta):
 	if !Engine.is_editor_hint():
 		#properly apply rotations to target position (from player etc)
 		if TargetPosition.distance_squared_to(Vector2.ZERO) < 1:
-			GrabBox.position = Vector2(0, GrabBox.position.length() + vel).rotated(RetractPosition.angle() - Player.rotation - deg_to_rad(90))
+			GrabBox.position = Vector2(0, GrabBox.position.length() + vel).rotated(RetractPosition.angle() - deg_to_rad(90))
 		else:
-			GrabBox.position = Vector2(0, GrabBox.position.length() + vel).rotated(TargetPosition.angle() - Player.rotation - deg_to_rad(90))
+			GrabBox.position = Vector2(0, GrabBox.position.length() + vel).rotated(TargetPosition.angle() - deg_to_rad(90))
 	#if grabbox is too far, yank it back
 	if GrabBox.position.length() > RANGE:
 		GrabBox.position = GrabBox.position.normalized() * RANGE
@@ -121,12 +121,14 @@ func _popGrasped():
 	if GraspedCollectable != null:
 		var c : Collectable = GraspedCollectable
 		if c.COLLECTION == Collectable.ResourcesEnum.Metal:
-			RunHandler.METAL += 1
+			RunHandler.Mats.Metals += 1
 		elif c.COLLECTION == Collectable.ResourcesEnum.Ceramic:
-			RunHandler.CERAMIC += 1
+			RunHandler.Mats.Ceramics += 1
 		elif c.COLLECTION == Collectable.ResourcesEnum.Synthetic:
-			RunHandler.SYNTHETIC += 1
+			RunHandler.Mats.Synthetics += 1
 		elif c.COLLECTION == Collectable.ResourcesEnum.Organic:
-			RunHandler.ORGANIC += 1
+			RunHandler.Mats.Organics += 1
+		elif c.COLLECTION == Collectable.ResourcesEnum.Core:
+			RunHandler.Mats.Components += 1
 		c.queue_free()
 		GraspedCollectable = null

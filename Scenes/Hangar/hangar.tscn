@@ -1,11 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=50 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
 [ext_resource type="Texture2D" uid="uid://clodsahhwdpwl" path="res://Assets/Hangar/Upgrades/RotationSpeed0.png" id="2_4ahhh"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="2_hd0wi"]
 [ext_resource type="Script" path="res://Scenes/Hangar/tech_tree.gd" id="4_eifcx"]
+[ext_resource type="Script" path="res://Statics/Materials.gd" id="4_fiej8"]
+[ext_resource type="Script" path="res://Scenes/Hangar/draggable_camera.gd" id="4_j8p1n"]
 [ext_resource type="PackedScene" uid="uid://bb44a3o0sq4ge" path="res://Scenes/Hangar/UpgradeIcon/upgrade.tscn" id="4_r883k"]
+[ext_resource type="Texture2D" uid="uid://bi6d4udy3pjya" path="res://Assets/Hangar/BlueprintTile.png" id="5_s07eq"]
 [ext_resource type="Texture2D" uid="uid://ctu35osk4wl32" path="res://Assets/Hangar/Upgrades/RotationSpeed1.png" id="7_3ljve"]
 [ext_resource type="Texture2D" uid="uid://cxwkybickfaic" path="res://Assets/Hangar/Upgrades/Manipulator.png" id="8_7rt47"]
 [ext_resource type="Texture2D" uid="uid://ycs5jlgpof0s" path="res://Assets/Hangar/Upgrades/XLSpool.png" id="9_palqs"]
@@ -13,6 +16,207 @@
 [ext_resource type="Texture2D" uid="uid://dpawtsvssygqv" path="res://Assets/Hangar/Upgrades/RapidWinch.png" id="11_l2t6d"]
 [ext_resource type="Texture2D" uid="uid://ijo3yry5je3j" path="res://Assets/Hangar/Upgrades/AbrRes.png" id="12_sjd7r"]
 [ext_resource type="Texture2D" uid="uid://hsit4gva755d" path="res://Assets/Hangar/Upgrades/BluntRes.png" id="13_h35e1"]
+[ext_resource type="Texture2D" uid="uid://cl34t2an2880e" path="res://Assets/Hangar/Upgrades/PhotonCannon.png" id="14_i2e82"]
+[ext_resource type="Texture2D" uid="uid://b23mswn5frmq1" path="res://Assets/Hangar/Upgrades/SmartPhoton.png" id="15_vtpn8"]
+[ext_resource type="Texture2D" uid="uid://irjdq2ru1h05" path="res://Assets/Hangar/Upgrades/HeavyLaser.png" id="16_2gfpv"]
+[ext_resource type="Texture2D" uid="uid://dtsoygs7q2w3s" path="res://Assets/Hangar/Upgrades/DualLaser.png" id="17_06lla"]
+[ext_resource type="Texture2D" uid="uid://dggf2ns8ak2mc" path="res://Assets/Hangar/Upgrades/MiningLaser.png" id="18_j10x7"]
+[ext_resource type="Texture2D" uid="uid://bkhf6dlxxhsdn" path="res://Assets/Hangar/Upgrades/Dish.png" id="21_5xmpu"]
+[ext_resource type="Texture2D" uid="uid://5d7gm0qm5d8b" path="res://Assets/Hangar/Upgrades/ReflectiveHull.png" id="22_utiiq"]
+[ext_resource type="Texture2D" uid="uid://cqg3hip1oekg3" path="res://Assets/Hangar/Upgrades/AttractorNeedle.png" id="23_pbsqd"]
+[ext_resource type="Texture2D" uid="uid://ukvjlqahx3t2" path="res://Assets/Hangar/Upgrades/LaserArray.png" id="24_hjrx4"]
+[ext_resource type="Texture2D" uid="uid://bo7klbmjfd310" path="res://Assets/Hangar/Upgrades/LookAhead.png" id="25_8ow2g"]
+[ext_resource type="Texture2D" uid="uid://c6hbwa5nea0ru" path="res://Assets/Hangar/Upgrades/StrongLaser.png" id="26_jgp56"]
+[ext_resource type="Texture2D" uid="uid://n4wac5jj3rjk" path="res://Assets/Hangar/Upgrades/PointDefense.png" id="27_rgnbw"]
+
+[sub_resource type="Resource" id="Resource_cv8oa"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_axi6p"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_km3c3"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 1
+Ceramics = 2
+Synthetics = 2
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_0idft"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_ruk6o"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 4
+Organics = 4
+Components = 0
+
+[sub_resource type="Resource" id="Resource_iqxgi"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 2
+Ceramics = 0
+Synthetics = 2
+Organics = 4
+Components = 0
+
+[sub_resource type="Resource" id="Resource_bjsy7"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 4
+Ceramics = 0
+Synthetics = 4
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_7f0nr"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 2
+Ceramics = 2
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_it780"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 4
+Ceramics = 0
+Synthetics = 4
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_cber5"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 4
+Ceramics = 4
+Synthetics = 0
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_vsrkx"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 4
+Ceramics = 0
+Synthetics = 4
+Organics = 4
+Components = 0
+
+[sub_resource type="Resource" id="Resource_pmmu6"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 10
+Ceramics = 10
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_7kw8l"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 32
+Ceramics = 2
+Synthetics = 8
+Organics = 4
+Components = 1
+
+[sub_resource type="Resource" id="Resource_yighi"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 28
+Ceramics = 4
+Synthetics = 2
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_d2k57"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 2
+Ceramics = 5
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_pab5s"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 5
+Ceramics = 0
+Synthetics = 1
+Organics = 3
+Components = 0
+
+[sub_resource type="Resource" id="Resource_lfgh2"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 14
+Ceramics = 0
+Synthetics = 6
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_fiaa4"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 64
+Ceramics = 16
+Synthetics = 16
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_ewipx"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 3
+Ceramics = 0
+Synthetics = 3
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_tyodo"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 15
+Ceramics = 10
+Synthetics = 10
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_owulg"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -73,15 +277,20 @@ offset_left = 32.5
 offset_top = 31.5
 offset_right = 0.0999908
 offset_bottom = 0.139999
+Display = SubResource("Resource_cv8oa")
 ALWAYS_SHOW = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+script = ExtResource("4_j8p1n")
+speed = 196.0
 
-[node name="TechTree" type="Node2D" parent="."]
+[node name="TechTree" type="Node2D" parent="Camera2D"]
+top_level = true
 script = ExtResource("4_eifcx")
 
-[node name="RCSThrust" parent="TechTree" instance=ExtResource("4_r883k")]
+[node name="RCSThrust" parent="Camera2D/TechTree" instance=ExtResource("4_r883k")]
 position = Vector2(-64, -64)
 NAME = "Reaction Control System"
 DESCRIPTION = "Ship rotates towards cursor.
@@ -90,21 +299,20 @@ When not inputting, the ship will apply a braking thrust.
 Improves rotation speed."
 INTERNAL_NAME = "RCSThrust"
 SPRITE = ExtResource("2_4ahhh")
-CERAMIC_COST = 1
+Cost = SubResource("Resource_axi6p")
 
-[node name="AdvancedRCS" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="AdvancedRCS" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-192, -64)
 NAME = "Advanced RCS"
 DESCRIPTION = "Advanced RCS mitigates drifting.
-Acceleration is improved when not rotating.
+Acceleration is improved when not applying rotation.
 Further improves rotation speed."
 INTERNAL_NAME = "AdvancedRCS"
 PARENT_UPGRADE = NodePath("../RCSThrust")
 SPRITE = ExtResource("7_3ljve")
-CERAMIC_COST = 2
-SYNTHETIC_COST = 2
+Cost = SubResource("Resource_km3c3")
 
-[node name="ResourceHook" parent="TechTree" instance=ExtResource("4_r883k")]
+[node name="ResourceHook" parent="Camera2D/TechTree" instance=ExtResource("4_r883k")]
 position = Vector2(64, -64)
 NAME = "Resource Hook"
 DESCRIPTION = "Hooks in materials within 2 units.
@@ -113,18 +321,19 @@ Retracts at 1u/s."
 INTERNAL_NAME = "Manipulator"
 SPRITE = ExtResource("8_7rt47")
 PRE_BOUGHT = true
+Cost = SubResource("Resource_0idft")
 
-[node name="LongResourceHook" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="LongResourceHook" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(192, -192)
-NAME = "XL Spool+"
+NAME = "Extra Spoolage"
 DESCRIPTION = "Increases range of hook by +1u."
 INTERNAL_NAME = "BigSpool"
 PARENT_UPGRADE = NodePath("../ResourceHook")
 SPRITE = ExtResource("9_palqs")
 MAX_LEVEL = 3
-SYNTHETIC_COST = 2
+Cost = SubResource("Resource_ruk6o")
 
-[node name="HookPropel" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="HookPropel" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(192, -64)
 NAME = "Compact Propellant"
 DESCRIPTION = "Increases extension speed by +1u/s."
@@ -132,10 +341,9 @@ INTERNAL_NAME = "HookPropel"
 PARENT_UPGRADE = NodePath("../ResourceHook")
 SPRITE = ExtResource("10_hm2a6")
 MAX_LEVEL = 4
-SYNTHETIC_COST = 1
-ORGANIC_COST = 1
+Cost = SubResource("Resource_iqxgi")
 
-[node name="RapidWinch" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="RapidWinch" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(64, -192)
 NAME = "Rapid Winch"
 DESCRIPTION = "Increases retraction speed by +2u/s"
@@ -143,27 +351,161 @@ INTERNAL_NAME = "RapidWinch"
 PARENT_UPGRADE = NodePath("../ResourceHook")
 SPRITE = ExtResource("11_l2t6d")
 MAX_LEVEL = 2
-METAL_COST = 1
-SYNTHETIC_COST = 2
+Cost = SubResource("Resource_bjsy7")
 
-[node name="AbrResistance" parent="TechTree" instance=ExtResource("4_r883k")]
-position = Vector2(-192, 64)
+[node name="AbrResistance" parent="Camera2D/TechTree" instance=ExtResource("4_r883k")]
+position = Vector2(-64, 64)
 NAME = "Abrasive-Resistant Hull"
-DESCRIPTION = "Damage taken from rotating collisions is halved."
+DESCRIPTION = "Damage taken from opposing rotation is halved."
 INTERNAL_NAME = "AbrResistance"
 SPRITE = ExtResource("12_sjd7r")
-METAL_COST = 2
-CERAMIC_COST = 2
+Cost = SubResource("Resource_7f0nr")
 
-[node name="BluntRes" parent="TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-320, 64)
-NAME = "Crush-Resistant Hull"
-DESCRIPTION = "Damage taken from moving collisions is halved."
+[node name="BluntRes" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, 64)
+NAME = "Impact-Resistant Hull"
+DESCRIPTION = "Damage taken from opposing motion is halved."
 INTERNAL_NAME = "BluntRes"
 PARENT_UPGRADE = NodePath("../AbrResistance")
 SPRITE = ExtResource("13_h35e1")
-METAL_COST = 3
-SYNTHETIC_COST = 1
+Cost = SubResource("Resource_it780")
+
+[node name="PhotonCannon" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, 192)
+NAME = "Needle Laser"
+DESCRIPTION = "Okay for asteroid persuasion, but not much else.
+Aimed with mouse. LMB to fire.
+Range: 8 units."
+INTERNAL_NAME = "Laser"
+PARENT_UPGRADE = NodePath("../BluntRes")
+SPRITE = ExtResource("14_i2e82")
+Cost = SubResource("Resource_cber5")
+
+[node name="AutoPhoton" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-320, 192)
+NAME = "LiDAR Targetting"
+DESCRIPTION = "Automatically aims and fires the needle laser at the
+nearest applicable object in range.
+Control can be taken back by holding LMB.
+Increases range by 2 units."
+INTERNAL_NAME = "AutoPhoton"
+PARENT_UPGRADE = NodePath("../PhotonCannon")
+SPRITE = ExtResource("15_vtpn8")
+Cost = SubResource("Resource_vsrkx")
+
+[node name="HeavyLaser" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, 320)
+NAME = "Heavy-Duty Laser"
+DESCRIPTION = "Triples the knockback effects of the needle laser."
+INTERNAL_NAME = "HeavyLaser"
+PARENT_UPGRADE = NodePath("../PhotonCannon")
+SPRITE = ExtResource("16_2gfpv")
+Cost = SubResource("Resource_pmmu6")
+
+[node name="DoubleLaser" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-320, 320)
+NAME = "Akimbo"
+DESCRIPTION = "THIS UPGRADE DOES NOTHING RIGHT NOW
+Double the lasers, double the power!
+The second laser is always automatically aimed at the farthest object."
+INTERNAL_NAME = "TwoLaser"
+PARENT_UPGRADE = NodePath("../AutoPhoton")
+SPRITE = ExtResource("17_06lla")
+Cost = SubResource("Resource_7kw8l")
+
+[node name="MiningLaser" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-64, 320)
+NAME = "Precision Prospector"
+DESCRIPTION = "The needle laser can now bite off resources from asteroids.
+Time per resource: 5 seconds."
+INTERNAL_NAME = "MiningLaser"
+PARENT_UPGRADE = NodePath("../PhotonCannon")
+SPRITE = ExtResource("18_j10x7")
+Cost = SubResource("Resource_yighi")
+
+[node name="Dish" parent="Camera2D/TechTree" instance=ExtResource("4_r883k")]
+position = Vector2(64, 64)
+NAME = "Basic Radar Dish"
+DESCRIPTION = "Unlocks the ability to zoom out 1.5x, then 2x."
+INTERNAL_NAME = "Dish"
+SPRITE = ExtResource("21_5xmpu")
+MAX_LEVEL = 2
+Cost = SubResource("Resource_d2k57")
+
+[node name="ReflectHull" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-64, 192)
+NAME = "Retroreflective"
+DESCRIPTION = "+25% of oncoming laser damage is reflected."
+INTERNAL_NAME = "ReflectHull"
+PARENT_UPGRADE = NodePath("../PhotonCannon")
+SPRITE = ExtResource("22_utiiq")
+MAX_LEVEL = 2
+Cost = SubResource("Resource_pab5s")
+
+[node name="TractorNeedle" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-64, 448)
+NAME = "Attractor Beam"
+DESCRIPTION = "The laser can now target and attract resources,
+but is only half as effective at pushing away asteroids.
+Time per resource is reduced by 1 second."
+INTERNAL_NAME = "TractorNeedle"
+PARENT_UPGRADE = NodePath("../MiningLaser")
+SPRITE = ExtResource("23_pbsqd")
+Cost = SubResource("Resource_lfgh2")
+
+[node name="LaserArray" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-320, 448)
+NAME = "Laser Array"
+DESCRIPTION = "Refracts 2 lasers into 4!
+Targets the closest, farthest, slowest, and fastest objects in range.
+Lasers can no longer be manually controlled.
+Each laser is 0.75x as efficient as the original."
+INTERNAL_NAME = "LaserArray"
+PARENT_UPGRADE = NodePath("../DoubleLaser")
+SPRITE = ExtResource("24_hjrx4")
+Cost = SubResource("Resource_fiaa4")
+
+[node name="LookAhead" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(192, 64)
+NAME = "Research Engine"
+DESCRIPTION = "Increases look-ahead by +1."
+INTERNAL_NAME = "LookAhead"
+PARENT_UPGRADE = NodePath("../Dish")
+SPRITE = ExtResource("25_8ow2g")
+MAX_LEVEL = 2
+Cost = SubResource("Resource_ewipx")
+
+[node name="StrongLaser" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, 448)
+NAME = "Military-Grade Laser"
+DESCRIPTION = "Quadruples the damage output.
+The knockback of the laser is doubled in strength.
+Reduces range by 2 units."
+INTERNAL_NAME = "StrongLaser"
+PARENT_UPGRADE = NodePath("../HeavyLaser")
+SPRITE = ExtResource("26_jgp56")
+Cost = SubResource("Resource_tyodo")
+
+[node name="PointDefense" parent="Camera2D/TechTree" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-320, 576)
+NAME = "Point Defense"
+DESCRIPTION = "An autonomous system fires small lasers at
+oncoming threats within laser range."
+INTERNAL_NAME = "PointDefense"
+PARENT_UPGRADE = NodePath("../StrongLaser")
+SPRITE = ExtResource("27_rgnbw")
+Cost = SubResource("Resource_owulg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_left = -672.0
+offset_top = -384.0
+offset_right = 704.0
+offset_bottom = 480.0
+texture = ExtResource("5_s07eq")
+expand_mode = 2
+stretch_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]
+[connection signal="reload_display" from="Camera2D/TechTree" to="." method="_on_tech_tree_reload_display"]

@@ -1,6 +1,8 @@
 @tool
 extends Node2D
 
+signal firemalasar
+
 @export_color_no_alpha var HULL_COLOR : Color = Color("363d52"):
 	get:
 		return HULL_COLOR;
@@ -96,3 +98,5 @@ func _ProcessValues():
 	$"../Manipulator/BaseSprite/ArmSprite/RHSGrabber/RHSGAccent".self_modulate = ACCENT_COLOR
 	$"../Manipulator/BaseSprite/ArmSprite/LHSGrabber/LHSGAccent".self_modulate = ACCENT_COLOR
 	$"../Manipulator/BaseSprite/Extendo".default_color = INLINE_COLOR
+	
+	emit_signal("firemalasar")

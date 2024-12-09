@@ -15,7 +15,7 @@ func _process(delta):
 		zoomOut()
 	if Input.is_action_just_pressed("reset zoom"):
 		_zoom = 2
-	_zoom = clampf(_zoom, 1, 5)
+	_zoom = clampf(_zoom, maxZoomOut(), 5)
 	zoom.x = _zoom
 	zoom.y = _zoom
 	
@@ -26,3 +26,9 @@ func zoomIn():
 
 func zoomOut():
 	_zoom -= 0.1 * _zoom
+
+func maxZoomOut() -> float:
+	var zoomOut: float = 1
+	var radarDish: int = UpgradesManager.Load("Dish")
+	zoomOut += 0.5 * radarDish
+	return 2 / zoomOut

@@ -1,16 +1,11 @@
 extends Node2D
 
-@onready var Resources = $CanvasLayer/Control/ResourceCounter
+@onready var Resources: ResourceCounter = $CanvasLayer/Control/ResourceCounter
 
 func _ready():
 	MaterialsManager.Load()
-	Resources.METAL = MaterialsManager.Metals
-	Resources.CERAMIC = MaterialsManager.Ceramics
-	Resources.SYNTHETIC = MaterialsManager.Synthetics
-	Resources.ORGANIC = MaterialsManager.Organics
+	Resources.Display = MaterialsManager.Mats
 
-func _physics_process(delta):
-	Resources.METAL = MaterialsManager.Metals
-	Resources.CERAMIC = MaterialsManager.Ceramics
-	Resources.SYNTHETIC = MaterialsManager.Synthetics
-	Resources.ORGANIC = MaterialsManager.Organics
+func _on_tech_tree_reload_display():
+	if is_node_ready():
+		Resources.Display = MaterialsManager.Mats

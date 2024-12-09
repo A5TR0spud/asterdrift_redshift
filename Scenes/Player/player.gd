@@ -17,6 +17,7 @@ var _inputDir : Vector2
 
 @onready var ShipVisuals = $ShipVisuals
 @onready var Manipulator = $Manipulator
+@onready var Laser = $NeedleLaser
 
 func _ready():
 	_handleStats()
@@ -42,8 +43,6 @@ func _ready():
 	ShipVisuals.BLINKER_INTERPOLATION = toBe.blinker_interp
 	ShipVisuals.INLINE_COLOR = toBe.inline
 	ShipVisuals.OUTLINE_COLOR = toBe.outline
-
-func _process(delta):
 	# move_and_collide(linear_velocity * delta)
 	# rotate(deg_to_rad(angular_velocity * delta))
 	pass
@@ -120,23 +119,61 @@ func _physics_process(delta):
 	# around here would be calls to set thruster visuals based on acceleration
 
 func _handleStats():
+	var x: int
+	var y: float
+	
 	# Manipulator Stats
-	var x: int = Manipulator.RANGE
-	x += 16 * UpgradesManager.Load("BigSpool")
-	Manipulator.RANGE = x
-	var y: float = Manipulator.EXTEND_SPEED
-	y += 16 * UpgradesManager.Load("HookPropel")
-	Manipulator.EXTEND_SPEED = y
-	y = Manipulator.RETRACT_SPEED
-	y += 32 * UpgradesManager.Load("RapidWinch")
-	Manipulator.RETRACT_SPEED = y
+	if IS_IN_GARAGE || UpgradesManager.Load("Manipulator") < 1:
+		Manipulator.queue_free()
+	else:
+		x = Manipulator.RANGE
+		x += 16 * UpgradesManager.Load("BigSpool")
+		Manipulator.RANGE = x
+		y = Manipulator.EXTEND_SPEED
+		y += 16 * UpgradesManager.Load("HookPropel")
+		Manipulator.EXTEND_SPEED = y
+		y = Manipulator.RETRACT_SPEED
+		y += 32 * UpgradesManager.Load("RapidWinch")
+		Manipulator.RETRACT_SPEED = y
+	
+	# Laser Stats
+	if IS_IN_GARAGE || UpgradesManager.Load("Laser") < 1:
+		Laser.queue_free()
+	else:
+		x = Laser.RANGE
+		x += 32 * UpgradesManager.Load("AutoPhoton")
+		if UpgradesManager.Load("StrongLaser") > 0:
+			x -= 32
+		Laser.RANGE = x
+		y = Laser.KNOCKBACK_COEF
+		y += 2 * UpgradesManager.Load("HeavyLaser")
+		if UpgradesManager.Load("StrongLaser") > 0:
+			y *= 2
+		Laser.KNOCKBACK_COEF = y
+		y = Laser.DAMAGE_COEF
+		y += 3 * UpgradesManager.Load("StrongLaser")
+		Laser.DAMAGE_COEF = y
+		y = Laser.MINING_COEF
+		y += UpgradesManager.Load("MiningLaser")
+		Laser.MINING_COEF = y
+		x = Laser.WIDTH
+		if UpgradesManager.Load("HeavyLaser") > 0:
+			x += 1
+		if UpgradesManager.Load("StrongLaser") > 0:
+			x += 1
+		Laser.WIDTH = x
+		if UpgradesManager.Load("AutoPhoton") > 0:
+			Laser.AUTO_LASER = true
+		if UpgradesManager.Load("TwoLaser") > 0:
+			Laser.DUO_LASER = true
+		if UpgradesManager.Load("TractorNeedle") > 0:
+			Laser.CAN_ATTRACT = true
 
 func _on_body_entered(body : PhysicsBody2D):
-	if body is not RigidBody2D:
+	if body is not Entity:
 		return
-	var other: RigidBody2D = body
-	#4 is dangerous collision
-	if body.collision_layer & 4:
+	var other: Entity = body
+	if other.DangerousCollision:
 		var blunt: float = Vector2(self.linear_velocity - other.linear_velocity).length()
 		var abrasion: float = 0.5 * self.angular_velocity + other.angular_velocity
 		

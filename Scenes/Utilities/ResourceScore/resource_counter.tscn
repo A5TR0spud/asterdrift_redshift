@@ -1,10 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl5fg1ej0bimi"]
+[gd_scene load_steps=11 format=3 uid="uid://dl5fg1ej0bimi"]
 
 [ext_resource type="Script" path="res://Scenes/Utilities/ResourceScore/resource_counter.gd" id="1_eu6hn"]
 [ext_resource type="Texture2D" uid="uid://dammmehqsgv04" path="res://Assets/Hangar/Resources/Metal.png" id="2_20p5i"]
+[ext_resource type="Script" path="res://Statics/Materials.gd" id="2_fmty3"]
 [ext_resource type="Texture2D" uid="uid://cfjprojna4c3j" path="res://Assets/Hangar/Resources/Ceramics.png" id="3_v12se"]
 [ext_resource type="Texture2D" uid="uid://b321u615h6m3g" path="res://Assets/Hangar/Resources/Synthetics.png" id="4_od0f1"]
+[ext_resource type="Script" path="res://Scenes/Utilities/ResourceScore/score.gd" id="4_pclhx"]
 [ext_resource type="Texture2D" uid="uid://ull3cjkjlkth" path="res://Assets/Hangar/Resources/Organics.png" id="5_625v2"]
+[ext_resource type="Texture2D" uid="uid://c6mm1u1jwviw6" path="res://Assets/Hangar/Resources/Component.png" id="6_uhf2u"]
+
+[sub_resource type="Resource" id="Resource_eytic"]
+resource_local_to_scene = true
+script = ExtResource("2_fmty3")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_vm8o0"]
 resource_local_to_scene = true
@@ -13,10 +25,55 @@ resource_local_to_scene = true
 offset_right = 120.0
 offset_bottom = 104.0
 script = ExtResource("1_eu6hn")
+Display = SubResource("Resource_eytic")
+
+[node name="Components" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Components"]
+layout_mode = 2
+texture = ExtResource("6_uhf2u")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Components"]
+layout_mode = 2
+text = "0 Cores"
+label_settings = SubResource("LabelSettings_vm8o0")
+
+[node name="Ceramics" type="HBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("4_pclhx")
+
+[node name="TextureRect" type="TextureRect" parent="Ceramics"]
+layout_mode = 2
+texture = ExtResource("3_v12se")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Ceramics"]
+layout_mode = 2
+text = "0 Ceramics"
+label_settings = SubResource("LabelSettings_vm8o0")
+
+[node name="Organics" type="HBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("4_pclhx")
+
+[node name="TextureRect" type="TextureRect" parent="Organics"]
+layout_mode = 2
+texture = ExtResource("5_625v2")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Organics"]
+layout_mode = 2
+text = "0 Organics"
+label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Metals" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 2
+script = ExtResource("4_pclhx")
 
 [node name="TextureRect" type="TextureRect" parent="Metals"]
 layout_mode = 2
@@ -30,24 +87,9 @@ theme_override_font_sizes/font_size = 16
 text = "0 Metallics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
-[node name="Ceramics" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Ceramics"]
-layout_mode = 2
-texture = ExtResource("3_v12se")
-expand_mode = 2
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="Ceramics"]
-layout_mode = 2
-text = "0 Ceramics"
-label_settings = SubResource("LabelSettings_vm8o0")
-
 [node name="Synthetic" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 2
+script = ExtResource("4_pclhx")
 
 [node name="TextureRect" type="TextureRect" parent="Synthetic"]
 layout_mode = 2
@@ -58,19 +100,4 @@ stretch_mode = 6
 [node name="Label" type="Label" parent="Synthetic"]
 layout_mode = 2
 text = "0 Synthetics"
-label_settings = SubResource("LabelSettings_vm8o0")
-
-[node name="Organics" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Organics"]
-layout_mode = 2
-texture = ExtResource("5_625v2")
-expand_mode = 2
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="Organics"]
-layout_mode = 2
-text = "0 Organics"
 label_settings = SubResource("LabelSettings_vm8o0")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpohketjg5p2b"]
+
+[ext_resource type="Texture2D" uid="uid://bwb1w2ad57sel" path="res://Assets/Mines/Rig.png" id="1_k62e1"]
+[ext_resource type="Texture2D" uid="uid://inslfg2ijtrj" path="res://Assets/Mines/Factory.png" id="2_bt44s"]
+[ext_resource type="Texture2D" uid="uid://bt0cqliecao2n" path="res://Assets/Mines/Scrapper.png" id="3_id4ih"]
+[ext_resource type="Texture2D" uid="uid://sjc4cx7g5nd8" path="res://Assets/Mines/Salvage.png" id="4_xyc6g"]
+
+[node name="Mine" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[node name="Rig" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(85, 0)
+texture = ExtResource("1_k62e1")
+
+[node name="Factory" type="Sprite2D" parent="."]
+texture = ExtResource("2_bt44s")
+
+[node name="Scrapper" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-85, 0)
+texture = ExtResource("3_id4ih")
+
+[node name="Salvage" type="Sprite2D" parent="."]
+position = Vector2(-85, 0)
+texture = ExtResource("4_xyc6g")

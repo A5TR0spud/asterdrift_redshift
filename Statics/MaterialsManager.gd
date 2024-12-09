@@ -1,21 +1,26 @@
 extends Node
 class_name MaterialsManager
 
-static var Metals : int = 0
-static var Ceramics : int = 0
-static var Synthetics : int = 0
-static var Organics : int = 0
+static var Mats: Materials = Materials.new()
+#static var Metals : int = 0
+#static var Ceramics : int = 0
+#static var Synthetics : int = 0
+#static var Organics : int = 0
+#static var Components : int = 0
 
 const RESOURCE_PATH : String = "user://resources.json"
 
 static var _isLoaded : bool = false
 
 static func Save() -> void:
+	if Mats == null:
+		Mats = Materials.new()
 	var data := {
-		"metal": Metals,
-		"glass": Ceramics,
-		"plastic": Synthetics,
-		"bio": Organics,
+		"metal": Mats.Metals,
+		"glass": Mats.Ceramics,
+		"plastic": Mats.Synthetics,
+		"bio": Mats.Organics,
+		"components": Mats.Components,
 	}
 
 	var json_string := JSON.stringify(data, "\t")
@@ -30,6 +35,8 @@ static func Save() -> void:
 	file_access.close()
 
 static func Load():
+	if Mats == null:
+		Mats = Materials.new()
 	if _isLoaded:
 		return
 	_isLoaded = true
@@ -47,7 +54,8 @@ static func Load():
 		return
 	# We saved a dictionary, lets assume is a dictionary
 	var data:Dictionary = json.data
-	Metals = data.get("metal", 0)
-	Ceramics = data.get("glass", 0)
-	Synthetics = data.get("plastic", 0)
-	Organics = data.get("bio", 0)
+	Mats.Metals = data.get("metal", 0)
+	Mats.Ceramics = data.get("glass", 0)
+	Mats.Synthetics = data.get("plastic", 0)
+	Mats.Organics = data.get("bio", 0)
+	Mats.Components = data.get("components", 0)

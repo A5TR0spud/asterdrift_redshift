@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=17 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
 [ext_resource type="Script" path="res://Scenes/Player/camera.gd" id="3_jlwng"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_op3xx"]
 [ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
+[ext_resource type="Script" path="res://Statics/Materials.gd" id="7_m8q4m"]
 [ext_resource type="PackedScene" uid="uid://ctcwf45fx53pw" path="res://Scenes/World/Decoration/asteroid.tscn" id="7_mfl33"]
 [ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
+[ext_resource type="PackedScene" uid="uid://blyasrd763sa3" path="res://Scenes/World/Decoration/collectable.tscn" id="9_28bwd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5hp0"]
 bg_color = Color(0.2967, 0.61134, 0.69, 1)
@@ -44,6 +46,15 @@ expand_margin_bottom = 4.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lcpg"]
 bg_color = Color(0.2322, 0.54, 0.54, 1)
 corner_detail = 1
+
+[sub_resource type="Resource" id="Resource_vegdo"]
+resource_local_to_scene = true
+script = ExtResource("7_m8q4m")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1esw0")
@@ -195,6 +206,8 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/h_separation = 16
 columns = 4
+Display = SubResource("Resource_vegdo")
+SORT = true
 
 [node name="NewRun" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
 layout_mode = 2
@@ -233,6 +246,11 @@ position = Vector2(-631, 57)
 
 [node name="Asteroid10" parent="." instance=ExtResource("7_mfl33")]
 position = Vector2(681, 258)
+
+[node name="Collectable" parent="." instance=ExtResource("9_28bwd")]
+position = Vector2(1, -81)
+COLLECTION = 4
+Health = 100.0
 
 [connection signal="damage" from="Player" to="." method="_on_player_damage"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]

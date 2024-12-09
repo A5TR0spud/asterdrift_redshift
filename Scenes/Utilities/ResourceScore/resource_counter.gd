@@ -1,32 +1,19 @@
 @tool
 extends GridContainer
+class_name ResourceCounter
 
-@export var METAL : int = 0:
+@export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Materials") var Display: Materials:
 	get:
-		return METAL
+		return Display
 	set(value):
-		METAL = value
+		Display = value
 		if is_node_ready():
 			_updateDisplay()
-@export var CERAMIC : int = 0:
+@export var SORT: bool = false:
 	get:
-		return CERAMIC
+		return SORT
 	set(value):
-		CERAMIC = value
-		if is_node_ready():
-			_updateDisplay()
-@export var SYNTHETIC : int = 0:
-	get:
-		return SYNTHETIC
-	set(value):
-		SYNTHETIC = value
-		if is_node_ready():
-			_updateDisplay()
-@export var ORGANIC : int = 0:
-	get:
-		return ORGANIC
-	set(value):
-		ORGANIC = value
+		SORT = value
 		if is_node_ready():
 			_updateDisplay()
 ## If false, displays with 0 will be culled
@@ -57,31 +44,56 @@ func _ready():
 	_updateDisplay()
 
 func _updateDisplay():
-	$Metals/Label.text = String.num(METAL)
+	$Metals/Label.text = String.num(Display.Metals)
 	if SHOW_TEXT:
-		$Metals/Label.text += " Metallics" if METAL != 1 else " Metallic"
-	$Ceramics/Label.text = String.num(CERAMIC)
+		$Metals/Label.text += " Metallics" if Display.Metals != 1 else " Metallic"
+	$Ceramics/Label.text = String.num(Display.Ceramics)
 	if SHOW_TEXT:
-		$Ceramics/Label.text += " Ceramics" if CERAMIC != 1 else " Ceramic"
-	$Synthetic/Label.text = String.num(SYNTHETIC)
+		$Ceramics/Label.text += " Ceramics" if Display.Ceramics != 1 else " Ceramic"
+	$Synthetic/Label.text = String.num(Display.Synthetics)
 	if SHOW_TEXT:
-		$Synthetic/Label.text += " Synthetics" if SYNTHETIC != 1 else " Synthetic"
-	$Organics/Label.text = String.num(ORGANIC)
+		$Synthetic/Label.text += " Synthetics" if Display.Synthetics != 1 else " Synthetic"
+	$Organics/Label.text = String.num(Display.Organics)
 	if SHOW_TEXT:
-		$Organics/Label.text += " Organics" if ORGANIC != 1 else " Organic"
+		$Organics/Label.text += " Organics" if Display.Organics != 1 else " Organic"
+	$Components/Label.text = String.num(Display.Components)
+	if SHOW_TEXT:
+		$Components/Label.text += " Cores" if Display.Components != 1 else " Core"
 	
 	$Metals/Label.label_settings.font_size = FONT_SIZE
 	
+	var b: bool = Engine.is_editor_hint()
 	$Metals.hide()
-	if ALWAYS_SHOW || METAL != 0:
+	if b || ALWAYS_SHOW || Display.Metals != 0:
 		$Metals.show()
 	$Ceramics.hide()
-	if ALWAYS_SHOW || CERAMIC != 0:
+	if b || ALWAYS_SHOW || Display.Ceramics != 0:
 		$Ceramics.show()
 	$Synthetic.hide()
-	if ALWAYS_SHOW || SYNTHETIC != 0:
+	if b || ALWAYS_SHOW || Display.Synthetics != 0:
 		$Synthetic.show()
 	$Organics.hide()
-	if ALWAYS_SHOW || ORGANIC != 0:
+	if b || ALWAYS_SHOW || Display.Organics != 0:
 		$Organics.show()
+	$Components.hide()
+	if b || ALWAYS_SHOW || Display.Components != 0:
+		$Components.show()
 	
+	if SORT && !Engine.is_editor_hint():
+		_sort()
+
+func _sort() -> void:
+	var ceram: int = Display.Ceramics
+	$Ceramics.vv = ceram
+	var organ: int = Display.Organics
+	$Organics.vv = organ
+	var metal: int = Display.Metals
+	$Metals.vv = metal
+	var synth: int = Display.Synthetics
+	$Synthetic.vv = synth
+	for child: Node in get_children():
+		if child is RScore:
+			for child2: Node in get_children():
+				if child2 is RScore:
+					if child.vv > child2.vv && child.get_index() > child2.get_index():
+						move_child(child, child2.get_index())

@@ -24,19 +24,12 @@ func _physics_process(delta) -> void:
 
 func _createCollectable(canBeInside : bool = false) -> void:
 	var instance : Collectable = CollectableScene.instantiate()
-	instance.COLLECTION = Collectable.ResourcesEnum.Metal
 	var dir : Vector2 = Vector2.RIGHT
 	dir = dir.rotated(randf_range(0, deg_to_rad(360)))
 	
-	var type := randi_range(0, 3)
-	if type == 0:
-		instance.COLLECTION = Collectable.ResourcesEnum.Metal
-	elif type == 1:
-		instance.COLLECTION = Collectable.ResourcesEnum.Ceramic
-	elif type == 2:
-		instance.COLLECTION = Collectable.ResourcesEnum.Synthetic
-	elif type == 3:
-		instance.COLLECTION = Collectable.ResourcesEnum.Organic
+	instance.COLLECTION = _rollCollectable()
+	if instance.COLLECTION == Collectable.ResourcesEnum.Organic:
+		instance.COLLECTION = _rollCollectable()
 	
 	add_child(instance)
 	var offset = CollectableRadius
@@ -45,3 +38,17 @@ func _createCollectable(canBeInside : bool = false) -> void:
 	dir *= offset
 	instance.global_position = Player.global_position + dir
 	
+
+func _rollCollectable() -> Collectable.ResourcesEnum:
+	var type := randi_range(0, 3)
+	if type == 0:
+		return Collectable.ResourcesEnum.Metal
+	elif type == 1:
+		return Collectable.ResourcesEnum.Ceramic
+	elif type == 2:
+		return Collectable.ResourcesEnum.Synthetic
+	elif type == 3:
+		return Collectable.ResourcesEnum.Organic
+	
+	#default
+	return Collectable.ResourcesEnum.Metal
