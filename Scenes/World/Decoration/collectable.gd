@@ -16,7 +16,7 @@ enum ResourcesEnum {
 	set(value):
 		COLLECTION = value
 		if is_node_ready():
-			_reloadIcon()
+			_reload()
 
 @onready var Icon := $Icon
 var MetalTex := preload("res://Assets/Hangar/Resources/Metal.png")
@@ -26,16 +26,21 @@ var OrganicTex := preload("res://Assets/Hangar/Resources/Organics.png")
 var CoreTex := preload("res://Assets/Hangar/Resources/Component.png")
 
 func _ready():
-	_reloadIcon()
+	_reload()
 
-func _reloadIcon():
+func _reload():
 	if COLLECTION == ResourcesEnum.Metal:
 		Icon.texture = MetalTex
+		Magnetism = 2.0
 	elif COLLECTION == ResourcesEnum.Ceramic:
 		Icon.texture = CeramicTex
+		Magnetism = 1.0
 	elif COLLECTION == ResourcesEnum.Synthetic:
 		Icon.texture = SyntheticTex
+		Magnetism = 1.0
 	elif COLLECTION == ResourcesEnum.Organic:
 		Icon.texture = OrganicTex
+		Magnetism = 0.5
 	elif COLLECTION == ResourcesEnum.Core:
 		Icon.texture = CoreTex
+		Magnetism = 1.5

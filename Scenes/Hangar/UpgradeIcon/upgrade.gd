@@ -44,6 +44,7 @@ signal notify_children(propogation : int)
 ## Used by the save system to save and load this node's information.
 @export var INTERNAL_NAME : String = "undefined"
 @export var PARENT_UPGRADE : Upgrade = null
+@export var REQUIRE_MAX_PARENT : bool = false
 @export var SPRITE : Texture2D = null:
 	get:
 		return SPRITE
@@ -78,6 +79,17 @@ func _ready():
 	is_readied = true
 	MainIcon.texture = SPRITE
 	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME)
+	if CurrentLevel > MAX_LEVEL:
+		MaterialsManager.Load()
+		MaterialsManager.Mats.Metals += Cost.Metals * (CurrentLevel - MAX_LEVEL)
+		MaterialsManager.Mats.Ceramics += Cost.Ceramics * (CurrentLevel - MAX_LEVEL)
+		MaterialsManager.Mats.Synthetics += Cost.Synthetics * (CurrentLevel - MAX_LEVEL)
+		MaterialsManager.Mats.Organics += Cost.Organics * (CurrentLevel - MAX_LEVEL)
+		MaterialsManager.Mats.Components += Cost.Components * (CurrentLevel - MAX_LEVEL)
+		CurrentLevel = MAX_LEVEL
+		UpgradesManager.Save(INTERNAL_NAME, CurrentLevel)
+		MaterialsManager.Save()
+	
 	ReloadVisible()
 	_updateTooltip()
 	if PARENT_UPGRADE != null:
@@ -187,6 +199,8 @@ func _can_buy() -> bool:
 			return false
 	if PARENT_UPGRADE:
 		if PARENT_UPGRADE.CurrentLevel == 0:
+			return false
+		if REQUIRE_MAX_PARENT && PARENT_UPGRADE.CurrentLevel < PARENT_UPGRADE.MAX_LEVEL:
 			return false
 	return CurrentLevel < MAX_LEVEL
 

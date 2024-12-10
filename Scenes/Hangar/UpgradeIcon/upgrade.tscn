@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/Meta/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="4_dkm4s"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
-[ext_resource type="Texture2D" uid="uid://bavifds8ksa17" path="res://Assets/Hangar/Upgrades/Meta/BooleanIcon.png" id="6_pugof"]
+[ext_resource type="Texture2D" uid="uid://bavifds8ksa17" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png" id="6_pugof"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="8_nu5sk"]
 
 [sub_resource type="Resource" id="Resource_0h8lx"]
@@ -86,6 +86,7 @@ point_count = 2
 
 [node name="Upgrade" type="Node2D"]
 script = ExtResource("1_le4ru")
+REQUIRE_MAX_PARENT = null
 SPRITE = ExtResource("2_wk4es")
 Cost = SubResource("Resource_0h8lx")
 
@@ -110,8 +111,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = 0.0147568
-scale = Vector2(1.14154, 1.14154)
+rotation = -0.24781
+scale = Vector2(1.39395, 1.39395)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 

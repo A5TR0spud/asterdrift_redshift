@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bavifds8ksa17"
-path="res://.godot/imported/BooleanIcon.png-db1f51597a11a991cd8c648fffad89b2.ctex"
+uid="uid://n15ohgwk2in3"
+path="res://.godot/imported/RCSReticle.png-cfc9e74d152392554b4dbd6af0961c5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/Meta/BooleanIcon.png"
-dest_files=["res://.godot/imported/BooleanIcon.png-db1f51597a11a991cd8c648fffad89b2.ctex"]
+source_file="res://Assets/Ships/Upgrades/RCSReticle.png"
+dest_files=["res://.godot/imported/RCSReticle.png-cfc9e74d152392554b4dbd6af0961c5e.ctex"]
 
 [params]
 

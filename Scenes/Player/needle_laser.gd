@@ -92,11 +92,12 @@ func _physics_process(delta) -> void:
 		Target.position = v
 	Target.position = Target.position.normalized() * RANGE
 	
-	if Engine.is_editor_hint() || Input.is_action_pressed("fire"):
+	if !Engine.is_editor_hint() && Input.is_action_pressed("fire"):
 		show()
 		_laserFiring = true
 	else:
-		hide()
+		if !Engine.is_editor_hint():
+			hide()
 		_laserFiring = false
 	Ray.target_position = Target.position
 	if _laserFiring && Ray.is_colliding():

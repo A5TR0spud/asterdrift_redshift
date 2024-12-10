@@ -13,6 +13,8 @@ signal killed
 @export var hasHealth := false
 @export var MaxHealth: float = 100
 @export_storage var Health: float = 100
+@export var Magnetism: float = 0
+@export var Radius: float = 4
 
 func _ready():
 	if hasHealth:

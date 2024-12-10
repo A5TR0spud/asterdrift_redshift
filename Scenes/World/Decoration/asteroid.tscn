@@ -53,6 +53,8 @@ isMineable = true
 MineWeights = SubResource("Resource_5y6c3")
 isAsteroid = true
 hasHealth = true
+Magnetism = 2.0
+Radius = 40.0
 
 [node name="Icon" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_wfgvo")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=37 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
@@ -12,11 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://qetf1yww2knv" path="res://Assets/Ships/Hauler/Blinkers.png" id="9_mirtk"]
 [ext_resource type="Texture2D" uid="uid://b7vm7s17jsbpc" path="res://Assets/Ships/Hauler/Inline.png" id="11_vsl33"]
 [ext_resource type="Texture2D" uid="uid://c4acnpm70m6on" path="res://Assets/Ships/Hauler/Outline.png" id="12_m2iy2"]
+[ext_resource type="Texture2D" uid="uid://n15ohgwk2in3" path="res://Assets/Ships/Upgrades/RCSReticle.png" id="13_lfga7"]
+[ext_resource type="Script" path="res://Scenes/Player/rcs.gd" id="13_mbj2r"]
 [ext_resource type="Script" path="res://Scenes/Player/player_stat_block.gd" id="13_xyph6"]
 [ext_resource type="Texture2D" uid="uid://d22xcm0wk7t4j" path="res://Assets/Ships/Upgrades/Manipulator.png" id="14_sk8mm"]
 [ext_resource type="Script" path="res://Scenes/Player/manipulator.gd" id="14_u3e7e"]
+[ext_resource type="Script" path="res://Scenes/Player/hookmagnet.gd" id="15_8a6ob"]
 [ext_resource type="Script" path="res://Scenes/Player/needle_laser.gd" id="16_0qxki"]
 [ext_resource type="Texture2D" uid="uid://13trc2cvbynb" path="res://Assets/Ships/Upgrades/LaserReticle.png" id="16_qb3xo"]
+[ext_resource type="Shader" path="res://Shaders/AreaPulse.gdshader" id="16_requx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
 radius = 13.0
@@ -61,6 +65,25 @@ region = Rect2(14, 14, 4, 4)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rfwe"]
 atlas = ExtResource("16_qb3xo")
 region = Rect2(19, 14, 4, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nf5yv"]
+radius = 80.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_837mv"]
+shader = ExtResource("16_requx")
+shader_parameter/ring_color = Color(0.2378, 0.460977, 0.82, 0.498039)
+shader_parameter/ring_frequency = 30.0
+shader_parameter/ring_portion = 0.99
+shader_parameter/move_speed = 5.0
+shader_parameter/smooth_edge = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ostx6"]
+shader = ExtResource("16_requx")
+shader_parameter/ring_color = Color(0.83, 0.1909, 0.25481, 0.498039)
+shader_parameter/ring_frequency = 30.0
+shader_parameter/ring_portion = 0.99
+shader_parameter/move_speed = -5.0
+shader_parameter/smooth_edge = true
 
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("Stats")]
 rotation = -1.5708
@@ -126,6 +149,20 @@ texture = ExtResource("11_vsl33")
 modulate = Color(0.2, 0.545098, 1, 1)
 z_index = 6
 texture = ExtResource("12_m2iy2")
+
+[node name="RCSTransform" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../RCS")
+update_rotation = false
+
+[node name="RCS" type="Node2D" parent="."]
+top_level = true
+script = ExtResource("13_mbj2r")
+
+[node name="RCSTarget" type="Marker2D" parent="RCS"]
+position = Vector2(0, -32)
+
+[node name="RcsReticle" type="Sprite2D" parent="RCS/RCSTarget"]
+texture = ExtResource("13_lfga7")
 
 [node name="PlayerStatBlock" type="Node" parent="."]
 script = ExtResource("13_xyph6")
@@ -224,6 +261,7 @@ update_rotation = false
 
 [node name="NeedleLaser" type="Node2D" parent="."]
 top_level = true
+z_index = -30
 script = ExtResource("16_0qxki")
 
 [node name="LaserArea" type="Area2D" parent="NeedleLaser"]
@@ -231,30 +269,75 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NeedleLaser/LaserArea"]
+z_index = -105
 shape = SubResource("CircleShape2D_kk0yk")
 debug_color = Color(0.15, 0.546667, 1, 0)
 
 [node name="LaserLine" type="Line2D" parent="NeedleLaser"]
-points = PackedVector2Array(0, 0, 40.4773, -121.431)
+points = PackedVector2Array(0, 0, 40.4774, -121.431)
 width = 1.0
-default_color = Color(1, 0.655035, 0.655035, 1)
+default_color = Color(1, 0.649202, 0.649202, 1)
 begin_cap_mode = 2
 
 [node name="LaserTarget" type="Marker2D" parent="NeedleLaser"]
-position = Vector2(40.4773, -121.431)
+position = Vector2(40.4774, -121.431)
 
 [node name="LaserRay" type="RayCast2D" parent="NeedleLaser"]
-target_position = Vector2(40.4773, -121.431)
+target_position = Vector2(40.4774, -121.431)
 
 [node name="Endpoint" type="Marker2D" parent="NeedleLaser"]
-position = Vector2(40.4773, -121.431)
+position = Vector2(40.4774, -121.431)
 
 [node name="Sprite2D" type="Sprite2D" parent="NeedleLaser/Endpoint"]
 texture = SubResource("AtlasTexture_v7d0o")
 
 [node name="Color" type="Sprite2D" parent="NeedleLaser/Endpoint"]
-modulate = Color(1, 0.655035, 0.655035, 1)
+modulate = Color(1, 0.649202, 0.649202, 1)
 texture = SubResource("AtlasTexture_5rfwe")
+
+[node name="MagnetArea" type="Area2D" parent="."]
+z_index = -200
+z_as_relative = false
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 5
+monitorable = false
+script = ExtResource("15_8a6ob")
+isRepelling = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
+shape = SubResource("CircleShape2D_nf5yv")
+debug_color = Color(0.653333, 0.7, 0, 0)
+
+[node name="Attract" type="ColorRect" parent="MagnetArea"]
+material = SubResource("ShaderMaterial_837mv")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+
+[node name="Repel" type="ColorRect" parent="MagnetArea"]
+material = SubResource("ShaderMaterial_ostx6")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="firemalasar" from="ShipVisuals" to="NeedleLaser" method="_on_ship_visuals_firemalasar"]

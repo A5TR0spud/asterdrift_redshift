@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4rdrfducf84v"
-path="res://.godot/imported/BooleanIconEmpty.png-80dec349910d14a9bb799ae9ff039d66.ctex"
+uid="uid://bavifds8ksa17"
+path="res://.godot/imported/BooleanIconTrue.png-febb59b11d8d3ad7938f60a87ed135a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/Meta/BooleanIconEmpty.png"
-dest_files=["res://.godot/imported/BooleanIconEmpty.png-80dec349910d14a9bb799ae9ff039d66.ctex"]
+source_file="res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png"
+dest_files=["res://.godot/imported/BooleanIconTrue.png-febb59b11d8d3ad7938f60a87ed135a9.ctex"]
 
 [params]
 

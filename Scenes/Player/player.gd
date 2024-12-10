@@ -18,6 +18,7 @@ var _inputDir : Vector2
 @onready var ShipVisuals = $ShipVisuals
 @onready var Manipulator = $Manipulator
 @onready var Laser = $NeedleLaser
+@onready var RCSCursor := $RCS/RCSTarget
 
 func _ready():
 	_handleStats()
@@ -70,6 +71,13 @@ func _physics_process(delta):
 				_inputDir.y += -1
 			else:
 				targetAngularAccel += -deg_to_rad(TURN_ACCEL_DEGREES) * delta
+		if Input.is_action_pressed("turn right"):
+			if !Stats.Has_RCS:
+				targetAngularAccel += deg_to_rad(TURN_ACCEL_DEGREES) * delta
+		if Input.is_action_pressed("turn left"):
+			if !Stats.Has_RCS:
+				targetAngularAccel -= deg_to_rad(TURN_ACCEL_DEGREES) * delta
+		
 		
 		#if inputting, apply that force
 		if _inputDir.length() > 0.5:
@@ -89,7 +97,7 @@ func _physics_process(delta):
 		targetLinearAccel = _inputDir * ACCEL_FORCE
 	
 	if CAN_MOVE && Stats.Has_RCS:
-		var angleToCursor : float = get_angle_to(get_global_mouse_position())
+		var angleToCursor : float = get_angle_to(RCSCursor.global_position)
 		var x := deg_to_rad(TURN_ACCEL_DEGREES)
 		var coef := 4.5 if Stats.Has_Better_RCS else 3.5
 		var angle_landing_if_deccel_now := angular_velocity / coef
@@ -127,10 +135,10 @@ func _handleStats():
 		Manipulator.queue_free()
 	else:
 		x = Manipulator.RANGE
-		x += 16 * UpgradesManager.Load("BigSpool")
+		x += 8 * UpgradesManager.Load("BigSpool")
 		Manipulator.RANGE = x
 		y = Manipulator.EXTEND_SPEED
-		y += 16 * UpgradesManager.Load("HookPropel")
+		y += 32 * UpgradesManager.Load("HookPropel")
 		Manipulator.EXTEND_SPEED = y
 		y = Manipulator.RETRACT_SPEED
 		y += 32 * UpgradesManager.Load("RapidWinch")
