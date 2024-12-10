@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Entity
 
 @export var ACCEL_FORCE : float = 32.0
 @export var MAX_SPEED : float = 64.0
@@ -55,6 +55,12 @@ func _physics_process(delta):
 	var targetAngularAccel : float = 0
 	var targetLinearAccel : Vector2 = Vector2(0, 0)
 	
+	var thrustDirection: float = 0
+	if Stats.Has_Better_RCS:
+		thrustDirection = $RCS.rotation - deg_to_rad(90)
+	else:
+		thrustDirection = rotation
+	
 	_inputDir = Vector2(0, 0)
 	if CAN_MOVE:
 		if Input.is_action_pressed("forward"):
@@ -83,12 +89,12 @@ func _physics_process(delta):
 		if _inputDir.length() > 0.5:
 			#reduce drifting if not strafing
 			if Stats.Has_Better_RCS && absf(_inputDir.y) < 0.5:
-				var reduceDrift := linear_velocity.normalized().rotated(-rotation)
+				var reduceDrift := linear_velocity.normalized().rotated(-thrustDirection)
 				_inputDir.y -= sign(reduceDrift.y) if absf(reduceDrift.y) > 0.1 else 0
 			if Stats.Has_Better_RCS && absf(_inputDir.x) < 0.5:
-				var reduceDrift := linear_velocity.normalized().rotated(-rotation)
+				var reduceDrift := linear_velocity.normalized().rotated(-thrustDirection)
 				_inputDir.x -= sign(reduceDrift.x) if absf(reduceDrift.x) > 0.1 else 0
-			_inputDir = _inputDir.normalized().rotated(rotation)
+			_inputDir = _inputDir.normalized().rotated(thrustDirection)
 		#if not inputting, apply opposite velocity
 		elif Stats.Has_RCS:
 			#decceleration when no input (it's actually just inputting opposite your velocity)
@@ -176,10 +182,7 @@ func _handleStats():
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x += 1
 		Laser.WIDTH = x
-		if UpgradesManager.Load("AutoPhoton") > 0:
-			Laser.AUTO_LASER = true
-		if UpgradesManager.Load("TwoLaser") > 0:
-			Laser.DUO_LASER = true
+		Laser.AUTO_LASER = UpgradesManager.Load("AutoPhoton") > 0
 		if UpgradesManager.Load("TractorNeedle") > 0:
 			Laser.CAN_ATTRACT = true
 
@@ -188,15 +191,17 @@ func _on_body_entered(body : PhysicsBody2D):
 		return
 	var other: Entity = body
 	if other.DangerousCollision:
-		var blunt: float = Vector2(self.linear_velocity - other.linear_velocity).length()
-		var abrasion: float = 0.5 * self.angular_velocity + other.angular_velocity
+		var blunt: float = 0.05 * (self.mass * self.linear_velocity - other.mass * other.linear_velocity).length()
+		var abrasion: float = 1 * absf(self.mass * self.angular_velocity + other.mass * other.angular_velocity)
 		
 		var abrasionResistance = UpgradesManager.Load("AbrResistance") + 1
 		var bluntResistance = UpgradesManager.Load("BluntRes") + 1
 		var grace = 5
 		
 		var damage = (blunt / bluntResistance) + (abrasion / abrasionResistance) - grace
-		damage = maxf(damage, 0)
+		#damage = maxf(damage, 0)
 		#print("Player took damage: ", damage)
-		
-		emit_signal("damage", damage)
+		#print("Abrasive: ", abrasion)
+		#print("Bludgeon: ", blunt)
+		if damage > 0:
+			emit_signal("damage", damage)

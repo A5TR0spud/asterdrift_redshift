@@ -32,7 +32,6 @@ extends Node2D
 			_reloadCollisions()
 @export var DAMAGE_COEF: float = 1
 @export var AUTO_LASER: bool = false
-@export var DUO_LASER: bool = false
 @export var WIDTH: int = 1:
 	get:
 		return WIDTH
@@ -82,24 +81,64 @@ func _laserifyColor(col: Color) -> Color:
 	col.a = 1
 	return col
 
+var autoRunTime: float = 0
+var autoUpdateTime: float = 0.05
+const AUTORUNTIME: float = 0.11
+const AUTOUPDATEINTERVAL: float = 0.1
+
+var _autoTargettedEntity: Entity = null
+
 func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
 		hide()
 		return
+	autoRunTime += delta
+	autoUpdateTime += delta
+	_laserFiring = autoRunTime < AUTORUNTIME
 	
-	if !Engine.is_editor_hint():
+	if _autoTargettedEntity != null && !is_instance_valid(_autoTargettedEntity):
+		_autoTargettedEntity = null
+		autoRunTime = AUTORUNTIME - 0.01
+		autoUpdateTime = AUTOUPDATEINTERVAL + 1
+	if _autoTargettedEntity != null:
+		if _autoTargettedEntity.global_position.distance_to(global_position) > RANGE:
+			_autoTargettedEntity = null
+	
+	if !Engine.is_editor_hint() && (autoRunTime > AUTORUNTIME || Input.is_action_pressed("fire")):
 		var v: Vector2 = get_local_mouse_position()
 		Target.position = v
+	if autoUpdateTime > AUTOUPDATEINTERVAL && !Engine.is_editor_hint() && AUTO_LASER && !Input.is_action_pressed("fire"):
+		autoUpdateTime = 0.0
+		var dis: float = -000.000
+		for thing in Area.get_overlapping_bodies():
+			if thing is Entity:
+				if !thing.isAsteroid && !thing.DangerousCollision:
+					if thing.isResource && !CAN_ATTRACT:
+						continue
+				var tes: float = thing.global_position.distance_squared_to(global_position)
+				if tes < dis || _autoTargettedEntity == null:
+					_autoTargettedEntity = thing
+					dis = tes
+	if _autoTargettedEntity != null && !Input.is_action_pressed("fire"):
+		Target.global_position = _autoTargettedEntity.global_position
+		_laserFiring = true
+		autoRunTime = 0.0
+	if autoRunTime < AUTORUNTIME:
+		_laserFiring = true
+	
 	Target.position = Target.position.normalized() * RANGE
 	
 	if !Engine.is_editor_hint() && Input.is_action_pressed("fire"):
-		show()
 		_laserFiring = true
-	else:
-		if !Engine.is_editor_hint():
-			hide()
-		_laserFiring = false
+	
 	Ray.target_position = Target.position
+	
+	if _laserFiring:
+		show()
+	elif !Engine.is_editor_hint():
+		hide()
+		return
+	
 	if _laserFiring && Ray.is_colliding():
 		var point: Vector2 = Ray.get_collision_point()
 		Endpoint.position = point - global_position
@@ -150,7 +189,3 @@ func _physics_process(delta) -> void:
 
 func _on_ship_visuals_firemalasar():
 	_reloadVisuals()
-
-
-func _on_laser_area_body_entered(body):
-	pass # Replace with function body.

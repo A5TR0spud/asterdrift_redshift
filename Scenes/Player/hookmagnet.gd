@@ -12,6 +12,9 @@ extends Area2D
 @export var FORCE_COEF: float = 1.0
 @export_storage var isRepelling: bool = false
 
+const MAGNETINTERVAL: float = 0.12
+var _magnetTimer: float = 0.3
+
 func _ready():
 	_reload()
 	if !Engine.is_editor_hint() && UpgradesManager.Load("Magnet") < 1:
@@ -21,6 +24,11 @@ func _physics_process(delta):
 	if !$"..".CAN_MOVE:
 		hide()
 		return
+	
+	_magnetTimer += delta
+	if _magnetTimer < MAGNETINTERVAL:
+		return
+	_magnetTimer -= MAGNETINTERVAL
 	
 	var closest: Entity = null
 	var cloDist: float = -000.000
@@ -43,7 +51,7 @@ func _physics_process(delta):
 			strength *= FORCE_COEF
 			if isRepelling:
 				strength *= -1
-			bod.apply_force(dir * strength)
+			bod.apply_impulse(dir * strength * _magnetTimer)
 			#$"..".apply_force(-dir * strength)
 	
 	if closest != null:

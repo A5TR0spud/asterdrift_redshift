@@ -59,6 +59,8 @@ signal notify_children(propogation : int)
 			MainIcon.texture = SPRITE
 ## The max level. If 1, will hide level counter in tooltip.
 @export var MAX_LEVEL : int = 1
+## If true, the upgrade gets removed in-game
+@export var HIDE : bool = false
 @export_group("Cost")
 ## If true, upgrade will always be bought automatically and for free. Also hides the level counter in the tooltip.
 @export var PRE_BOUGHT : bool = false
@@ -82,6 +84,8 @@ var CurrentLevel : int = 0:
 
 var is_readied : bool = false
 func _ready():
+	if HIDE && !Engine.is_editor_hint():
+		MAX_LEVEL = 0
 	Tooltip.hide()
 	is_readied = true
 	MainIcon.texture = SPRITE
@@ -96,13 +100,16 @@ func _ready():
 		CurrentLevel = MAX_LEVEL
 		UpgradesManager.Save(INTERNAL_NAME, CurrentLevel)
 		MaterialsManager.Save()
-	
+	if HIDE && !Engine.is_editor_hint():
+		queue_free()
+		return
 	ReloadVisible()
 	_updateTooltip()
 	if PARENT_UPGRADE != null:
 		PARENT_UPGRADE.notify_children.connect(ChildIsNotified)
 	if PRE_BOUGHT:
 		_try_buy()
+	
 
 func _updateTooltip():
 	NameT.text = NAME

@@ -21,4 +21,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("turn right"):
 		turn += 1
 	
-	rotate(turn * deg_to_rad(TURN_SPEED_DEGREES) * delta)
+	var deg: float = TURN_SPEED_DEGREES
+	if UpgradesManager.Load("Booster") > 0 && Input.is_action_pressed("boost"):
+		deg *= 0.5
+	
+	rotate(turn * deg_to_rad(deg) * delta)

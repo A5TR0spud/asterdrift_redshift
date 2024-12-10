@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=15 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_op3xx"]
 [ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="7_m8q4m"]
-[ext_resource type="PackedScene" uid="uid://ctcwf45fx53pw" path="res://Scenes/World/Decoration/asteroid.tscn" id="7_mfl33"]
 [ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
-[ext_resource type="PackedScene" uid="uid://blyasrd763sa3" path="res://Scenes/World/Decoration/collectable.tscn" id="9_28bwd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5hp0"]
 bg_color = Color(0.2967, 0.61134, 0.69, 1)
@@ -62,6 +60,8 @@ script = ExtResource("1_1esw0")
 [node name="DecorationSpawner" type="Node2D" parent="."]
 script = ExtResource("8_fn0el")
 CollectableInterval = 0.5
+AsteroidInterval = 0.5
+AsteroidRadius = 2048
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
 z_index = 100
@@ -216,41 +216,6 @@ text = "New Run"
 [node name="ReturnToHangar" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
 layout_mode = 2
 text = "Return To Hangar"
-
-[node name="Asteroid" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(-162, -71)
-
-[node name="Asteroid2" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(140, 113)
-
-[node name="Asteroid3" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(184, -69)
-
-[node name="Asteroid4" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(-222, 96)
-
-[node name="Asteroid5" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(63, 261)
-
-[node name="Asteroid6" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(-200, -396)
-
-[node name="Asteroid7" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(592, -349)
-
-[node name="Asteroid8" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(-476, 352)
-
-[node name="Asteroid9" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(-631, 57)
-
-[node name="Asteroid10" parent="." instance=ExtResource("7_mfl33")]
-position = Vector2(681, 258)
-
-[node name="Collectable" parent="." instance=ExtResource("9_28bwd")]
-position = Vector2(1, -81)
-COLLECTION = 4
-Magnetism = 1.5
 
 [connection signal="damage" from="Player" to="." method="_on_player_damage"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]

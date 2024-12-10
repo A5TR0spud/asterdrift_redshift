@@ -106,9 +106,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_w1q67"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 22
+Metals = 11
 Ceramics = 0
-Synthetics = 18
+Synthetics = 9
 Organics = 0
 Components = 0
 
@@ -134,7 +134,7 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 10
-Ceramics = 10
+Ceramics = 5
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -142,7 +142,7 @@ Components = 0
 [sub_resource type="Resource" id="Resource_7kw8l"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
+Metals = 16
 Ceramics = 2
 Synthetics = 8
 Organics = 4
@@ -151,7 +151,7 @@ Components = 1
 [sub_resource type="Resource" id="Resource_yighi"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 21
+Metals = 7
 Ceramics = 4
 Synthetics = 2
 Organics = 0
@@ -330,6 +330,8 @@ position = Vector2(-192, -64)
 NAME = "Advanced RCS"
 DESCRIPTION = "Advanced RCS mitigates drifting.
 Acceleration is improved when not applying rotation.
+The ship now thrusts in the intended direction rather
+than with the ship rotation.
 Further improves rotation speed."
 INTERNAL_NAME = "AdvancedRCS"
 PARENT_UPGRADE = NodePath("../RCSThrust")
@@ -393,8 +395,8 @@ Cost = SubResource("Resource_bjsy7")
 [node name="Magnet" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(320, -192)
 NAME = "Electromagnet"
-DESCRIPTION = "The ship now has an electromagnet attracting
-resources and repelling asteroids.
+DESCRIPTION = "The ship now has an electromagnet that attempts to
+attract resources and repel asteroids.
 Range: 5 units."
 INTERNAL_NAME = "Magnet"
 PARENT_UPGRADE = NodePath("../LongResourceHook")
@@ -441,12 +443,12 @@ Cost = SubResource("Resource_pmmu6")
 [node name="DoubleLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-320, 320)
 NAME = "Akimbo"
-DESCRIPTION = "THIS UPGRADE DOES NOTHING RIGHT NOW
-Double the lasers, double the power!
+DESCRIPTION = "Double the lasers, double the power!
 The second laser is always automatically aimed at the farthest object."
 INTERNAL_NAME = "TwoLaser"
 PARENT_UPGRADE = NodePath("../AutoPhoton")
 SPRITE = ExtResource("17_06lla")
+HIDE = true
 Cost = SubResource("Resource_7kw8l")
 
 [node name="MiningLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -480,6 +482,7 @@ Each laser is 0.75x as efficient as the original."
 INTERNAL_NAME = "LaserArray"
 PARENT_UPGRADE = NodePath("../DoubleLaser")
 SPRITE = ExtResource("24_hjrx4")
+HIDE = true
 Cost = SubResource("Resource_fiaa4")
 
 [node name="StrongLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -501,6 +504,7 @@ oncoming threats within laser range."
 INTERNAL_NAME = "PointDefense"
 PARENT_UPGRADE = NodePath("../StrongLaser")
 SPRITE = ExtResource("27_rgnbw")
+HIDE = true
 Cost = SubResource("Resource_owulg")
 
 [node name="AbrResistance" parent="Camera2D/TechTree/BottomLeft" instance=ExtResource("4_r883k")]
@@ -528,6 +532,7 @@ INTERNAL_NAME = "ReflectHull"
 PARENT_UPGRADE = NodePath("../Laser/PhotonCannon")
 SPRITE = ExtResource("22_utiiq")
 MAX_LEVEL = 2
+HIDE = true
 Cost = SubResource("Resource_pab5s")
 
 [node name="BottomRight" type="Node2D" parent="Camera2D/TechTree"]
