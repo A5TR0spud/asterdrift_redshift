@@ -28,7 +28,6 @@ func _physics_process(delta):
 	_magnetTimer += delta
 	if _magnetTimer < MAGNETINTERVAL:
 		return
-	_magnetTimer -= MAGNETINTERVAL
 	
 	var closest: Entity = null
 	var cloDist: float = -000.000
@@ -66,6 +65,7 @@ func _physics_process(delta):
 		else:
 			$Attract.show()
 			$Repel.hide()
+	_magnetTimer -= MAGNETINTERVAL
 
 func _reload():
 	$CollisionShape2D.shape.radius = RANGE

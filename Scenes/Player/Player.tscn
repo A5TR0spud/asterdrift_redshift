@@ -136,7 +136,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -278,7 +278,7 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserLine" type="Line2D" parent="NeedleLaser"]
 points = PackedVector2Array(0, 0, 40.4778, -121.431)
 width = 1.0
-default_color = Color(1, 0.801648, 0.801648, 1)
+default_color = Color(1, 0.694581, 0.694581, 1)
 begin_cap_mode = 2
 
 [node name="LaserTarget" type="Marker2D" parent="NeedleLaser"]
@@ -294,7 +294,7 @@ position = Vector2(40.4778, -121.431)
 texture = SubResource("AtlasTexture_v7d0o")
 
 [node name="Color" type="Sprite2D" parent="NeedleLaser/Endpoint"]
-modulate = Color(1, 0.801648, 0.801648, 1)
+modulate = Color(1, 0.694581, 0.694581, 1)
 texture = SubResource("AtlasTexture_5rfwe")
 
 [node name="MagnetArea" type="Area2D" parent="."]
