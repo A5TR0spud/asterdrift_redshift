@@ -86,7 +86,6 @@ point_count = 2
 
 [node name="Upgrade" type="Node2D"]
 script = ExtResource("1_le4ru")
-REQUIRE_MAX_PARENT = null
 SPRITE = ExtResource("2_wk4es")
 Cost = SubResource("Resource_0h8lx")
 
@@ -111,8 +110,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = -0.24781
-scale = Vector2(1.39395, 1.39395)
+rotation = 0.0263608
+scale = Vector2(1.16512, 1.16512)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 

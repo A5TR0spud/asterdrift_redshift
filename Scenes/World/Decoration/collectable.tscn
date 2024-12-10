@@ -14,6 +14,7 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_eeqgr")
 isResource = true
+Magnetism = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rb2xb")

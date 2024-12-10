@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=54 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cxwkybickfaic" path="res://Assets/Hangar/Upgrades/Manipulator.png" id="8_7rt47"]
 [ext_resource type="Texture2D" uid="uid://ycs5jlgpof0s" path="res://Assets/Hangar/Upgrades/XLSpool.png" id="9_palqs"]
 [ext_resource type="Texture2D" uid="uid://dvtjvjymygrxc" path="res://Assets/Hangar/Upgrades/HookPropel.png" id="10_hm2a6"]
+[ext_resource type="Texture2D" uid="uid://byxrkxkgaa85w" path="res://Assets/Hangar/Upgrades/Booster.png" id="10_uhh3a"]
 [ext_resource type="Texture2D" uid="uid://dpawtsvssygqv" path="res://Assets/Hangar/Upgrades/RapidWinch.png" id="11_l2t6d"]
 [ext_resource type="Texture2D" uid="uid://ijo3yry5je3j" path="res://Assets/Hangar/Upgrades/AbrRes.png" id="12_sjd7r"]
 [ext_resource type="Texture2D" uid="uid://hsit4gva755d" path="res://Assets/Hangar/Upgrades/BluntRes.png" id="13_h35e1"]
@@ -55,6 +56,15 @@ Metals = 1
 Ceramics = 2
 Synthetics = 2
 Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_nyedo"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 10
+Ceramics = 10
+Synthetics = 0
+Organics = 10
 Components = 0
 
 [sub_resource type="Resource" id="Resource_0idft"]
@@ -312,7 +322,6 @@ Unlocks the ability to strafe with Q and E.
 When not inputting, the ship will apply a braking thrust.
 Improves rotation speed."
 INTERNAL_NAME = "RCSThrust"
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("2_4ahhh")
 Cost = SubResource("Resource_axi6p")
 
@@ -324,9 +333,19 @@ Acceleration is improved when not applying rotation.
 Further improves rotation speed."
 INTERNAL_NAME = "AdvancedRCS"
 PARENT_UPGRADE = NodePath("../RCSThrust")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("7_3ljve")
 Cost = SubResource("Resource_km3c3")
+
+[node name="Booster" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, -192)
+NAME = "Stage 2"
+DESCRIPTION = "Holding shift reduces the ability to turn but
+greatly improves acceleration.
+Max speed is doubled."
+INTERNAL_NAME = "Booster"
+PARENT_UPGRADE = NodePath("../AdvancedRCS")
+SPRITE = ExtResource("10_uhh3a")
+Cost = SubResource("Resource_nyedo")
 
 [node name="TopRight" type="Node2D" parent="Camera2D/TechTree"]
 
@@ -337,7 +356,6 @@ DESCRIPTION = "Hooks in materials within 2 units.
 Extends at 3u/s.
 Retracts at 1u/s."
 INTERNAL_NAME = "Manipulator"
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("8_7rt47")
 PRE_BOUGHT = true
 Cost = SubResource("Resource_0idft")
@@ -348,7 +366,6 @@ NAME = "Extra Spoolage"
 DESCRIPTION = "Increases range of hook by +0.5u."
 INTERNAL_NAME = "BigSpool"
 PARENT_UPGRADE = NodePath("../ResourceHook")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("9_palqs")
 MAX_LEVEL = 4
 Cost = SubResource("Resource_ruk6o")
@@ -359,7 +376,6 @@ NAME = "Compact Propellant"
 DESCRIPTION = "Increases extension speed by +2u/s."
 INTERNAL_NAME = "HookPropel"
 PARENT_UPGRADE = NodePath("../ResourceHook")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("10_hm2a6")
 MAX_LEVEL = 3
 Cost = SubResource("Resource_iqxgi")
@@ -370,7 +386,6 @@ NAME = "Rapid Winch"
 DESCRIPTION = "Increases retraction speed by +2u/s"
 INTERNAL_NAME = "RapidWinch"
 PARENT_UPGRADE = NodePath("../ResourceHook")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("11_l2t6d")
 MAX_LEVEL = 2
 Cost = SubResource("Resource_bjsy7")
@@ -399,7 +414,6 @@ Aimed with mouse. LMB to fire.
 Range: 8 units."
 INTERNAL_NAME = "Laser"
 PARENT_UPGRADE = NodePath("../../BluntRes")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("14_i2e82")
 Cost = SubResource("Resource_cber5")
 
@@ -412,7 +426,6 @@ Control can be taken back by holding LMB.
 Increases range by 2 units."
 INTERNAL_NAME = "AutoPhoton"
 PARENT_UPGRADE = NodePath("../PhotonCannon")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("15_vtpn8")
 Cost = SubResource("Resource_vsrkx")
 
@@ -422,7 +435,6 @@ NAME = "Heavy-Duty Laser"
 DESCRIPTION = "Triples the knockback effects of the needle laser."
 INTERNAL_NAME = "HeavyLaser"
 PARENT_UPGRADE = NodePath("../PhotonCannon")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("16_2gfpv")
 Cost = SubResource("Resource_pmmu6")
 
@@ -434,7 +446,6 @@ Double the lasers, double the power!
 The second laser is always automatically aimed at the farthest object."
 INTERNAL_NAME = "TwoLaser"
 PARENT_UPGRADE = NodePath("../AutoPhoton")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("17_06lla")
 Cost = SubResource("Resource_7kw8l")
 
@@ -445,7 +456,6 @@ DESCRIPTION = "The needle laser can now bite off resources from asteroids.
 Time per resource: 5 seconds."
 INTERNAL_NAME = "MiningLaser"
 PARENT_UPGRADE = NodePath("../PhotonCannon")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("18_j10x7")
 Cost = SubResource("Resource_yighi")
 
@@ -457,7 +467,6 @@ but is only half as effective at pushing away asteroids.
 Time per resource is reduced by 1 second."
 INTERNAL_NAME = "TractorNeedle"
 PARENT_UPGRADE = NodePath("../MiningLaser")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("23_pbsqd")
 Cost = SubResource("Resource_lfgh2")
 
@@ -470,7 +479,6 @@ Lasers can no longer be manually controlled.
 Each laser is 0.75x as efficient as the original."
 INTERNAL_NAME = "LaserArray"
 PARENT_UPGRADE = NodePath("../DoubleLaser")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("24_hjrx4")
 Cost = SubResource("Resource_fiaa4")
 
@@ -482,7 +490,6 @@ The knockback of the laser is doubled in strength.
 Reduces range by 2 units."
 INTERNAL_NAME = "StrongLaser"
 PARENT_UPGRADE = NodePath("../HeavyLaser")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("26_jgp56")
 Cost = SubResource("Resource_tyodo")
 
@@ -493,7 +500,6 @@ DESCRIPTION = "An autonomous system fires small lasers at
 oncoming threats within laser range."
 INTERNAL_NAME = "PointDefense"
 PARENT_UPGRADE = NodePath("../StrongLaser")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("27_rgnbw")
 Cost = SubResource("Resource_owulg")
 
@@ -502,7 +508,6 @@ position = Vector2(-64, 64)
 NAME = "Abrasive-Resistant Hull"
 DESCRIPTION = "Damage taken from opposing rotation is halved."
 INTERNAL_NAME = "AbrResistance"
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("12_sjd7r")
 Cost = SubResource("Resource_7f0nr")
 
@@ -512,7 +517,6 @@ NAME = "Impact-Resistant Hull"
 DESCRIPTION = "Damage taken from opposing motion is halved."
 INTERNAL_NAME = "BluntRes"
 PARENT_UPGRADE = NodePath("../AbrResistance")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("13_h35e1")
 Cost = SubResource("Resource_it780")
 
@@ -522,7 +526,6 @@ NAME = "Retroreflective"
 DESCRIPTION = "+25% of oncoming laser damage is reflected."
 INTERNAL_NAME = "ReflectHull"
 PARENT_UPGRADE = NodePath("../Laser/PhotonCannon")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("22_utiiq")
 MAX_LEVEL = 2
 Cost = SubResource("Resource_pab5s")
@@ -534,7 +537,6 @@ position = Vector2(64, 64)
 NAME = "Basic Radar Dish"
 DESCRIPTION = "Unlocks the ability to zoom out 1.5x, then 2x."
 INTERNAL_NAME = "Dish"
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("21_5xmpu")
 MAX_LEVEL = 2
 Cost = SubResource("Resource_d2k57")
@@ -545,7 +547,6 @@ NAME = "Research Engine"
 DESCRIPTION = "Increases look-ahead by 1."
 INTERNAL_NAME = "LookAhead"
 PARENT_UPGRADE = NodePath("../Dish")
-REQUIRE_MAX_PARENT = false
 SPRITE = ExtResource("25_8ow2g")
 Cost = SubResource("Resource_ewipx")
 

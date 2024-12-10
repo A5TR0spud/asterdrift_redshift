@@ -115,12 +115,16 @@ func _physics_process(delta):
 	
 	if Stats.Has_Better_RCS && absf(targetAngularAccel) < deg_to_rad(15) * delta:
 		targetLinearAccel += targetLinearAccel.normalized() * 32
-		
+	
+	if Input.is_action_pressed("boost"):
+		targetLinearAccel *= 2
+		targetAngularAccel *= 0.5
+	
 	apply_force(targetLinearAccel)
 	
 	if linear_velocity.length() > MAX_SPEED:
 		linear_velocity = linear_velocity.normalized() * MAX_SPEED
-		
+	
 	angular_velocity += deg_to_rad(clampf(rad_to_deg(targetAngularAccel), -TURN_ACCEL_DEGREES, TURN_ACCEL_DEGREES))
 	angular_velocity = deg_to_rad(clampf(rad_to_deg(angular_velocity), -absf(TURN_MAX_SPEED_DEGREES), absf(TURN_MAX_SPEED_DEGREES)))
 	
@@ -129,6 +133,8 @@ func _physics_process(delta):
 func _handleStats():
 	var x: int
 	var y: float
+	
+	MAX_SPEED += 64 * UpgradesManager.Load("Booster")
 	
 	# Manipulator Stats
 	if IS_IN_GARAGE || UpgradesManager.Load("Manipulator") < 1:

@@ -27,6 +27,7 @@ signal notify_children(propogation : int)
 @onready var LevelBar := $MainIcon/LevelBar
 
 @export_group("Main")
+## The name to be displayed in-game.
 @export var NAME : String = "NAME":
 	get:
 		return NAME
@@ -34,6 +35,7 @@ signal notify_children(propogation : int)
 		NAME = value
 		if is_node_ready():
 			_updateTooltip()
+## The description to be displayed in-game.
 @export_multiline var DESCRIPTION : String = "DESC":
 	get:
 		return DESCRIPTION
@@ -43,8 +45,11 @@ signal notify_children(propogation : int)
 			_updateTooltip()
 ## Used by the save system to save and load this node's information.
 @export var INTERNAL_NAME : String = "undefined"
+## The prerequisite upgrade, if any.
 @export var PARENT_UPGRADE : Upgrade = null
+## Does this upgrade require the parent to be maxed out?
 @export var REQUIRE_MAX_PARENT : bool = false
+## The visual sprite.
 @export var SPRITE : Texture2D = null:
 	get:
 		return SPRITE
@@ -52,10 +57,12 @@ signal notify_children(propogation : int)
 		SPRITE = value
 		if is_node_ready():
 			MainIcon.texture = SPRITE
+## The max level. If 1, will hide level counter in tooltip.
 @export var MAX_LEVEL : int = 1
 @export_group("Cost")
-## If true, upgrade will always be bought at 0 cost
+## If true, upgrade will always be bought automatically and for free. Also hides the level counter in the tooltip.
 @export var PRE_BOUGHT : bool = false
+## What it costs to buy this upgrade.
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Materials") var Cost: Materials:
 	get:
 		return Cost

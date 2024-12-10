@@ -250,9 +250,7 @@ position = Vector2(681, 258)
 [node name="Collectable" parent="." instance=ExtResource("9_28bwd")]
 position = Vector2(1, -81)
 COLLECTION = 4
-Health = 100.0
-Magnetism = null
-Radius = null
+Magnetism = 1.5
 
 [connection signal="damage" from="Player" to="." method="_on_player_damage"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]
