@@ -6,9 +6,12 @@ const RESOURCE_PATH : String = "user://upgrades.json"
 static var _isLoaded : bool = false
 static var _data : Dictionary
 
-static func Save(internalName : String, level : int) -> void:
+static func Save(internalName : String, level : int, enabled: bool = true) -> void:
 	_data.get_or_add(internalName, level)
 	_data[internalName] = level
+	
+	_data.get_or_add(internalName + "_enabled", enabled)
+	_data[internalName + "_enabled"] = enabled
 
 	var json_string := JSON.stringify(_data, "\t")
 
@@ -21,7 +24,7 @@ static func Save(internalName : String, level : int) -> void:
 	file_access.store_string(json_string)
 	file_access.close()
 
-static func Load(internalName : String) -> int:
+static func Load(internalName : String, careForEnabled: bool = true) -> int:
 	if !_isLoaded:
 		if not FileAccess.file_exists(RESOURCE_PATH):
 			return 0
@@ -36,5 +39,10 @@ static func Load(internalName : String) -> int:
 			return 0
 		_data = json.data
 	_isLoaded = true
+	if careForEnabled && !LoadIsEnabled(internalName):
+		return 0
 	return _data.get(internalName, 0)
 	
+static func LoadIsEnabled(internalName : String) -> bool:
+	Load(internalName, false)
+	return _data.get(internalName + "_enabled", true)

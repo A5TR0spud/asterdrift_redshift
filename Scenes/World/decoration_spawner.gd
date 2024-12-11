@@ -43,13 +43,13 @@ func _createCollectable(canBeInside : bool = false) -> void:
 	dir = dir.rotated(randf_range(0, deg_to_rad(360)))
 	
 	instance.COLLECTION = _rollCollectable()
-	
-	add_child(instance)
 	var offset = CollectableRadius
 	if canBeInside:
 		offset = randf_range(256, CollectableRadius / 2.0)
 	dir *= offset
 	instance.global_position = Player.global_position + dir
+	add_child(instance)
+	
 	
 
 func _rollCollectable() -> Collectable.ResourcesEnum:
@@ -85,8 +85,7 @@ func _createAsteroid(canBeInside : bool = false) -> void:
 	var instance: Entity = AsteroidScene.instantiate()
 	var dir : Vector2 = Vector2.RIGHT
 	dir = dir.rotated(randf_range(0, deg_to_rad(360)))
-	
-	add_child(instance)
+
 	var offset = AsteroidRadius
 	if canBeInside:
 		offset = randf_range(10 + Player.Radius + instance.Radius, AsteroidRadius / 2.0)
@@ -101,4 +100,6 @@ func _createAsteroid(canBeInside : bool = false) -> void:
 	instance.linear_velocity = Vector2(x, y).normalized()
 	instance.angular_velocity = deg_to_rad(r)
 	instance.rotation_degrees = randf_range(0, 359.9999999)
+	
+	add_child(instance)
 	

@@ -12,8 +12,10 @@ extends Area2D
 @export var FORCE_COEF: float = 1.0
 @export_storage var isRepelling: bool = false
 
-const MAGNETINTERVAL: float = 0.12
+const MAGNETINTERVAL: float = 1.0
 var _magnetTimer: float = 0.3
+
+@export_storage var _trackedTargets: Array[Entity] = []
 
 func _ready():
 	_reload()
@@ -25,13 +27,23 @@ func _physics_process(delta):
 		hide()
 		return
 	
-	_magnetTimer += delta
-	if _magnetTimer < MAGNETINTERVAL:
+	if Engine.is_editor_hint():
 		return
+	
+	_magnetTimer += delta
+	if _magnetTimer > MAGNETINTERVAL:
+		_trackedTargets.clear()
+		for teet in get_overlapping_bodies():
+			if teet is Entity:
+				_trackedTargets.append(teet)
+		_magnetTimer = 0
 	
 	var closest: Entity = null
 	var cloDist: float = -000.000
-	for bod in get_overlapping_bodies():
+	for bod in _trackedTargets:
+		if !is_instance_valid(bod):
+			_trackedTargets.erase(bod)
+			continue
 		if bod is Entity:
 			var dif: Vector2 = bod.global_position - global_position
 			var dir: Vector2 = dif.normalized()
@@ -50,7 +62,7 @@ func _physics_process(delta):
 			strength *= FORCE_COEF
 			if isRepelling:
 				strength *= -1
-			bod.apply_impulse(dir * strength * _magnetTimer)
+			bod.apply_force(dir * strength)
 			#$"..".apply_force(-dir * strength)
 	
 	if closest != null:
@@ -65,7 +77,6 @@ func _physics_process(delta):
 		else:
 			$Attract.show()
 			$Repel.hide()
-	_magnetTimer -= MAGNETINTERVAL
 
 func _reload():
 	$CollisionShape2D.shape.radius = RANGE
@@ -77,3 +88,11 @@ func _reload():
 	$Repel.position.x = -RANGE
 	$Repel.scale.y = RANGE / 8.0
 	$Repel.position.y = -RANGE
+
+func _on_body_entered(body):
+	if body is Entity:
+		_trackedTargets.append(body)
+
+func _on_body_exited(body):
+	if _trackedTargets.has(body):
+		_trackedTargets.erase(body)

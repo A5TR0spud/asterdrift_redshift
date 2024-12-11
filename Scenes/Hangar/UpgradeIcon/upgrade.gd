@@ -10,6 +10,9 @@ const GRACE : int = 4
 signal upgrade_successfully_bought(level : int)
 signal notify_children(propogation : int)
 
+@onready var BoolOn := preload("res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png")
+@onready var BoolOff := preload("res://Assets/Hangar/Upgrades/Meta/BooleanIconFalse.png")
+
 @onready var LevelAccent := preload("res://Assets/Hangar/Upgrades/Meta/LevelAccentIcon.png")
 @onready var EmptyLevel := preload("res://Assets/Hangar/Upgrades/Meta/LevelAccentIconEmpty.png")
 
@@ -89,7 +92,7 @@ func _ready():
 	Tooltip.hide()
 	is_readied = true
 	MainIcon.texture = SPRITE
-	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME)
+	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME, false)
 	if CurrentLevel > MAX_LEVEL:
 		MaterialsManager.Load()
 		MaterialsManager.Mats.Metals += Cost.Metals * (CurrentLevel - MAX_LEVEL)
@@ -140,6 +143,10 @@ func ReloadVisible():
 	if !is_readied:
 		return
 	ParentLine.hide()
+	if UpgradesManager.LoadIsEnabled(INTERNAL_NAME):
+		BoolIcon.texture = BoolOn
+	else:
+		BoolIcon.texture = BoolOff
 	if PARENT_UPGRADE:
 		ParentLine.show()
 		var dir : Vector2 = PARENT_UPGRADE.global_position - global_position
@@ -225,7 +232,17 @@ func _on_button_mouse_exited():
 	Tooltip.hide()
 
 func _on_button_pressed():
-	_try_buy()
+	if CurrentLevel < MAX_LEVEL:
+		_try_buy()
+	else:
+		toggle()
+
+func toggle() -> void:
+	var b: bool = UpgradesManager.LoadIsEnabled(INTERNAL_NAME)
+	b = !b
+	emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
+	UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, b)
+	ReloadVisible()
 
 func _on_upgrade_successfully_bought(level):
 	UpgradesManager.Save(INTERNAL_NAME, level)

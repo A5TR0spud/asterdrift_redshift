@@ -10,6 +10,7 @@ signal killed
 @export var isAsteroid := false
 @export var isResource := false
 @export var isEnemy := false
+@export var isPlayer := false
 @export var hasHealth := false
 @export var MaxHealth: float = 100
 @export_storage var Health: float = 100

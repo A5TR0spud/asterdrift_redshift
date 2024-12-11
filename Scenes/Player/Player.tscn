@@ -96,6 +96,7 @@ contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_wd8h7")
 Stats = NodePath("PlayerStatBlock")
+isPlayer = true
 Radius = 13.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -136,7 +137,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(1, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -276,25 +277,26 @@ shape = SubResource("CircleShape2D_kk0yk")
 debug_color = Color(0.15, 0.546667, 1, 0)
 
 [node name="LaserLine" type="Line2D" parent="NeedleLaser"]
-points = PackedVector2Array(0, 0, 40.4778, -121.431)
+points = PackedVector2Array(0, 0, 40.4781, -121.431)
 width = 1.0
-default_color = Color(1, 0.694581, 0.694581, 1)
+default_color = Color(1, 0.842223, 0.842223, 1)
 begin_cap_mode = 2
 
 [node name="LaserTarget" type="Marker2D" parent="NeedleLaser"]
-position = Vector2(40.4778, -121.431)
+position = Vector2(40.4781, -121.431)
 
 [node name="LaserRay" type="RayCast2D" parent="NeedleLaser"]
-target_position = Vector2(40.4778, -121.431)
+enabled = false
+target_position = Vector2(40.4781, -121.431)
 
 [node name="Endpoint" type="Marker2D" parent="NeedleLaser"]
-position = Vector2(40.4778, -121.431)
+position = Vector2(40.4781, -121.431)
 
 [node name="Sprite2D" type="Sprite2D" parent="NeedleLaser/Endpoint"]
 texture = SubResource("AtlasTexture_v7d0o")
 
 [node name="Color" type="Sprite2D" parent="NeedleLaser/Endpoint"]
-modulate = Color(1, 0.694581, 0.694581, 1)
+modulate = Color(1, 0.842223, 0.842223, 1)
 texture = SubResource("AtlasTexture_5rfwe")
 
 [node name="MagnetArea" type="Area2D" parent="."]
@@ -344,3 +346,5 @@ scale = Vector2(10, 10)
 [connection signal="firemalasar" from="ShipVisuals" to="NeedleLaser" method="_on_ship_visuals_firemalasar"]
 [connection signal="body_entered" from="Manipulator/ManipulatorArea" to="Manipulator" method="_on_manipulator_area_body_entered"]
 [connection signal="body_entered" from="Manipulator/GrabBox" to="Manipulator" method="_on_grab_box_body_entered"]
+[connection signal="body_entered" from="MagnetArea" to="MagnetArea" method="_on_body_entered"]
+[connection signal="body_exited" from="MagnetArea" to="MagnetArea" method="_on_body_exited"]

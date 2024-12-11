@@ -56,7 +56,7 @@ func _physics_process(delta):
 	var targetLinearAccel : Vector2 = Vector2(0, 0)
 	
 	var thrustDirection: float = 0
-	if Stats.Has_Better_RCS:
+	if Stats.Has_RCS && Stats.Has_Better_RCS:
 		thrustDirection = $RCS.rotation - deg_to_rad(90)
 	else:
 		thrustDirection = rotation
@@ -198,10 +198,10 @@ func _on_body_entered(body : PhysicsBody2D):
 		var bluntResistance = UpgradesManager.Load("BluntRes") + 1
 		var grace = 5
 		
-		var damage = (blunt / bluntResistance) + (abrasion / abrasionResistance) - grace
+		var ddd = (blunt / bluntResistance) + (abrasion / abrasionResistance) - grace
 		#damage = maxf(damage, 0)
 		#print("Player took damage: ", damage)
 		#print("Abrasive: ", abrasion)
 		#print("Bludgeon: ", blunt)
-		if damage > 0:
-			emit_signal("damage", damage)
+		if ddd > 0:
+			emit_signal("damage", ddd)
