@@ -67,6 +67,7 @@ func _physics_process(delta):
 	#if grabbed exists, reset target position to 0, 0
 	if GraspedCollectable != null:
 		TargetPosition = Vector2(0, 0)
+		GraspedCollectable.IgnoredByLaser = true
 	
 	#if target position is too far, move it back
 	if TargetPosition.length() > RANGE:

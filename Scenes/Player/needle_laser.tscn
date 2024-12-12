@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3r4w12j3w543"]
+
+[ext_resource type="Script" path="res://Scenes/Player/needle_laser.gd" id="1_dsf08"]
+[ext_resource type="Texture2D" uid="uid://13trc2cvbynb" path="res://Assets/Ships/Upgrades/LaserReticle.png" id="2_jcipm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkho5"]
+atlas = ExtResource("2_jcipm")
+region = Rect2(14, 14, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2sln"]
+atlas = ExtResource("2_jcipm")
+region = Rect2(19, 14, 4, 4)
+
+[node name="NeedleLaser" type="Node2D"]
+script = ExtResource("1_dsf08")
+
+[node name="LaserLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 40.4781, -121.431)
+width = 1.0
+default_color = Color(1, 0.535201, 0.535201, 1)
+begin_cap_mode = 2
+
+[node name="LaserTarget" type="Marker2D" parent="."]
+position = Vector2(40.4781, -121.431)
+
+[node name="LaserRay" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(40.4781, -121.431)
+
+[node name="Endpoint" type="Marker2D" parent="."]
+position = Vector2(40.4781, -121.431)
+
+[node name="Sprite2D" type="Sprite2D" parent="Endpoint"]
+texture = SubResource("AtlasTexture_bkho5")
+
+[node name="Color" type="Sprite2D" parent="Endpoint"]
+modulate = Color(1, 0.535201, 0.535201, 1)
+texture = SubResource("AtlasTexture_y2sln")

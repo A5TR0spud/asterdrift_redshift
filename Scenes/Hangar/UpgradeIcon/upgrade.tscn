@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=26 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
@@ -80,6 +80,9 @@ anti_aliasing = false
 [sub_resource type="Theme" id="Theme_3w4wk"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_1jsna")
 
+[sub_resource type="LabelSettings" id="LabelSettings_qemxh"]
+font_size = 12
+
 [sub_resource type="Curve" id="Curve_d0ivw"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -110,8 +113,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = -0.213262
-scale = Vector2(1.28747, 1.28747)
+rotation = -0.0958404
+scale = Vector2(1.44475, 1.44475)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
@@ -157,6 +160,12 @@ label_settings = SubResource("LabelSettings_y1hpi")
 [node name="Bottom" type="PanelContainer" parent="Tooltip"]
 layout_mode = 2
 theme = SubResource("Theme_3w4wk")
+
+[node name="ToggleLabel" type="Label" parent="Tooltip/Bottom"]
+visible = false
+layout_mode = 2
+text = "Click to toggle on and off."
+label_settings = SubResource("LabelSettings_qemxh")
 
 [node name="Costs" parent="Tooltip/Bottom" instance=ExtResource("5_g1xj2")]
 layout_mode = 2

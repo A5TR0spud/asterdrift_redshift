@@ -15,12 +15,16 @@ extends Area2D
 const MAGNETINTERVAL: float = 1.0
 var _magnetTimer: float = 0.3
 
+const MAGNET_STRENGTH: float = 200
+
 @export_storage var _trackedTargets: Array[Entity] = []
 
 func _ready():
 	_reload()
 	if !Engine.is_editor_hint() && UpgradesManager.Load("Magnet") < 1:
 		queue_free()
+	else:
+		show()
 
 func _physics_process(delta):
 	if !$"..".CAN_MOVE:
@@ -50,20 +54,17 @@ func _physics_process(delta):
 			var len: float = dif.length() - bod.Radius
 			
 			var test: float = ((bod.global_position + bod.linear_velocity) - (global_position + $"..".linear_velocity)).length()
-			#if bod.isAsteroid || bod.DangerousCollision:
-			#	test *= 2
 			if test < cloDist || closest == null:
 				closest = bod
 				cloDist = test
 			
 			if len < 1:
 				len = 1
-			var strength: float = (RANGE * 100 * -bod.Magnetism) / (len ** 2)
+			var strength: float = (RANGE * MAGNET_STRENGTH * -bod.Magnetism) / (len ** 2)
 			strength *= FORCE_COEF
 			if isRepelling:
 				strength *= -1
 			bod.apply_force(dir * strength)
-			#$"..".apply_force(-dir * strength)
 	
 	if closest != null:
 		isRepelling = closest.isAsteroid || closest.DangerousCollision

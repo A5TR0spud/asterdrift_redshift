@@ -3,6 +3,7 @@ class_name RunHandler
 
 static var Mats: Materials
 static var _is_running : bool = false
+static var TimeLeft : float = 30.0
 
 static func IsInRun() -> bool:
 	return _is_running

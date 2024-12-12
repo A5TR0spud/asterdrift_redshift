@@ -26,6 +26,7 @@ signal notify_children(propogation : int)
 @onready var DescT := $Tooltip/Description
 @onready var CostT := $Tooltip/Bottom/Costs
 @onready var Bottom := $Tooltip/Bottom
+@onready var ToggleT := $Tooltip/Bottom/ToggleLabel
 @onready var ParentLine := $ParentLine
 @onready var LevelBar := $MainIcon/LevelBar
 
@@ -52,6 +53,8 @@ signal notify_children(propogation : int)
 @export var PARENT_UPGRADE : Upgrade = null
 ## Does this upgrade require the parent to be maxed out?
 @export var REQUIRE_MAX_PARENT : bool = false
+## If true, the upgrade won't be visible regardless of look-ahead if the parent hasn't been bought.
+@export var HIDE_WITHOUT_PARENT : bool = false
 ## The visual sprite.
 @export var SPRITE : Texture2D = null:
 	get:
@@ -137,7 +140,11 @@ func ChildIsNotified(propogation : int):
 		hide()
 	var b: int = LOOK_AHEAD + UpgradesManager.Load("LookAhead")
 	if propogation < b:
-		show()
+		if HIDE_WITHOUT_PARENT:
+			if PARENT_UPGRADE.CurrentLevel > 0:
+				show()
+		elif PARENT_UPGRADE.visible:
+			show()
 
 func ReloadVisible():
 	if !is_readied:
@@ -147,6 +154,12 @@ func ReloadVisible():
 		BoolIcon.texture = BoolOn
 	else:
 		BoolIcon.texture = BoolOff
+	if CurrentLevel == MAX_LEVEL:
+		CostT.hide()
+		ToggleT.show()
+	else:
+		CostT.show()
+		ToggleT.hide()
 	if PARENT_UPGRADE:
 		ParentLine.show()
 		var dir : Vector2 = PARENT_UPGRADE.global_position - global_position
@@ -154,8 +167,9 @@ func ReloadVisible():
 		ParentLine.points[1] = 0.66 * dir
 		if PARENT_UPGRADE.CurrentLevel > 0:
 			ParentLine.default_color = Color(1,1,1,1)
+			ParentLine.self_modulate = Color(1,1,1,1)
 		else:
-			ParentLine.default_color = Color(0.5, 0.5, 0.5, 1)
+			ParentLine.self_modulate = Color(0.5, 0.5, 0.5, 1)
 	if !PARENT_UPGRADE || CurrentLevel > 0:
 		emit_signal("notify_children", 0)
 	MainIcon.modulate = Color(1, 1, 1, 1)
@@ -206,6 +220,13 @@ func _try_buy() -> void:
 func _can_buy() -> bool:
 	if Engine.is_editor_hint():
 		return false
+	if PARENT_UPGRADE:
+		if REQUIRE_MAX_PARENT && PARENT_UPGRADE.CurrentLevel < PARENT_UPGRADE.MAX_LEVEL:
+			ParentLine.default_color = Color(1.0, 0.2, 0.3, 1.0)
+			return false
+		if PARENT_UPGRADE.CurrentLevel == 0:
+			return false
+		ParentLine.default_color = Color(1, 1, 1, 1)
 	if !PRE_BOUGHT:
 		MaterialsManager.Load()
 		if MaterialsManager.Mats.Metals < Cost.Metals:
@@ -217,11 +238,6 @@ func _can_buy() -> bool:
 		if MaterialsManager.Mats.Organics < Cost.Organics:
 			return false
 		if MaterialsManager.Mats.Components < Cost.Components:
-			return false
-	if PARENT_UPGRADE:
-		if PARENT_UPGRADE.CurrentLevel == 0:
-			return false
-		if REQUIRE_MAX_PARENT && PARENT_UPGRADE.CurrentLevel < PARENT_UPGRADE.MAX_LEVEL:
 			return false
 	return CurrentLevel < MAX_LEVEL
 
@@ -238,14 +254,16 @@ func _on_button_pressed():
 		toggle()
 
 func toggle() -> void:
+	if CurrentLevel != MAX_LEVEL:
+		return
 	var b: bool = UpgradesManager.LoadIsEnabled(INTERNAL_NAME)
 	b = !b
-	emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
 	UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, b)
 	ReloadVisible()
+	emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
 
 func _on_upgrade_successfully_bought(level):
-	UpgradesManager.Save(INTERNAL_NAME, level)
+	UpgradesManager.Save(INTERNAL_NAME, CurrentLevel, UpgradesManager.LoadIsEnabled(INTERNAL_NAME))
 	emit_signal("notify_children", 0)
 
 var _cPos: Vector2 = Vector2(0, 0)
@@ -259,7 +277,7 @@ func _process(_delta):
 			_cPos = get_global_mouse_position()
 			_c = true
 		if (_cPos - get_global_mouse_position()).length() > GRACE:
-			Butt.disabled = CurrentLevel < MAX_LEVEL
+			Butt.disabled = true
 	if !Input.is_action_pressed("left mouse button"):
 		_c = false
 		Butt.disabled = false

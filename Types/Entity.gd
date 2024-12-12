@@ -16,6 +16,7 @@ signal killed
 @export_storage var Health: float = 100
 @export var Magnetism: float = 0
 @export var Radius: float = 4
+@export var IgnoredByLaser: bool = false
 
 func _ready():
 	if hasHealth:

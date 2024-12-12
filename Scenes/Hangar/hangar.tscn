@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=66 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -14,10 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://ycs5jlgpof0s" path="res://Assets/Hangar/Upgrades/XLSpool.png" id="9_palqs"]
 [ext_resource type="Texture2D" uid="uid://dvtjvjymygrxc" path="res://Assets/Hangar/Upgrades/HookPropel.png" id="10_hm2a6"]
 [ext_resource type="Texture2D" uid="uid://byxrkxkgaa85w" path="res://Assets/Hangar/Upgrades/Booster.png" id="10_uhh3a"]
+[ext_resource type="Texture2D" uid="uid://cywubvjk72818" path="res://Assets/Hangar/Upgrades/MovementMode.png" id="11_epu5w"]
 [ext_resource type="Texture2D" uid="uid://dpawtsvssygqv" path="res://Assets/Hangar/Upgrades/RapidWinch.png" id="11_l2t6d"]
+[ext_resource type="Texture2D" uid="uid://8pd8bx213stc" path="res://Assets/Hangar/Upgrades/CameraMode.png" id="12_lle25"]
 [ext_resource type="Texture2D" uid="uid://ijo3yry5je3j" path="res://Assets/Hangar/Upgrades/AbrRes.png" id="12_sjd7r"]
 [ext_resource type="Texture2D" uid="uid://hsit4gva755d" path="res://Assets/Hangar/Upgrades/BluntRes.png" id="13_h35e1"]
+[ext_resource type="Texture2D" uid="uid://bn6o40cupg1o1" path="res://Assets/Hangar/Upgrades/ShipBattery.png" id="13_rcs7n"]
 [ext_resource type="Texture2D" uid="uid://dutsmcqx7yk7g" path="res://Assets/Hangar/Upgrades/Electromagnet.png" id="14_82eng"]
+[ext_resource type="Texture2D" uid="uid://cvsqkbund7mg7" path="res://Assets/Hangar/Upgrades/Stage0.png" id="14_ddjc3"]
 [ext_resource type="Texture2D" uid="uid://cl34t2an2880e" path="res://Assets/Hangar/Upgrades/PhotonCannon.png" id="14_i2e82"]
 [ext_resource type="Texture2D" uid="uid://b23mswn5frmq1" path="res://Assets/Hangar/Upgrades/SmartPhoton.png" id="15_vtpn8"]
 [ext_resource type="Texture2D" uid="uid://irjdq2ru1h05" path="res://Assets/Hangar/Upgrades/HeavyLaser.png" id="16_2gfpv"]
@@ -30,6 +34,8 @@
 [ext_resource type="Texture2D" uid="uid://bo7klbmjfd310" path="res://Assets/Hangar/Upgrades/LookAhead.png" id="25_8ow2g"]
 [ext_resource type="Texture2D" uid="uid://c6hbwa5nea0ru" path="res://Assets/Hangar/Upgrades/StrongLaser.png" id="26_jgp56"]
 [ext_resource type="Texture2D" uid="uid://n4wac5jj3rjk" path="res://Assets/Hangar/Upgrades/PointDefense.png" id="27_rgnbw"]
+[ext_resource type="Texture2D" uid="uid://c7rv3bfw1b6xv" path="res://Assets/Hangar/Upgrades/SpareBattery.png" id="28_2f4oq"]
+[ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -44,17 +50,17 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 0
+Ceramics = 1
 Synthetics = 0
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_km3c3"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 1
-Ceramics = 2
-Synthetics = 2
+Metals = 3
+Ceramics = 9
+Synthetics = 6
 Organics = 0
 Components = 0
 
@@ -67,6 +73,42 @@ Synthetics = 0
 Organics = 10
 Components = 0
 
+[sub_resource type="Resource" id="Resource_gjcie"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_y2qk2"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_unk4j"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 4
+Ceramics = 6
+Synthetics = 4
+Organics = 4
+Components = 0
+
+[sub_resource type="Resource" id="Resource_daqij"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 5
+Ceramics = 20
+Synthetics = 0
+Organics = 10
+Components = 0
+
 [sub_resource type="Resource" id="Resource_0idft"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
@@ -74,7 +116,7 @@ Metals = 0
 Ceramics = 0
 Synthetics = 0
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_ruk6o"]
 resource_local_to_scene = true
@@ -110,7 +152,7 @@ Metals = 11
 Ceramics = 0
 Synthetics = 9
 Organics = 0
-Components = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_cber5"]
 resource_local_to_scene = true
@@ -146,7 +188,7 @@ Metals = 16
 Ceramics = 2
 Synthetics = 8
 Organics = 4
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_yighi"]
 resource_local_to_scene = true
@@ -173,7 +215,7 @@ Metals = 64
 Ceramics = 16
 Synthetics = 16
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_tyodo"]
 resource_local_to_scene = true
@@ -182,7 +224,7 @@ Metals = 15
 Ceramics = 10
 Synthetics = 10
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_owulg"]
 resource_local_to_scene = true
@@ -191,6 +233,15 @@ Metals = 0
 Ceramics = 0
 Synthetics = 0
 Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_4ho7x"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 4
+Ceramics = 0
+Synthetics = 0
+Organics = 2
 Components = 0
 
 [sub_resource type="Resource" id="Resource_7f0nr"]
@@ -219,6 +270,15 @@ Ceramics = 0
 Synthetics = 1
 Organics = 3
 Components = 0
+
+[sub_resource type="Resource" id="Resource_u04gs"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 16
+Ceramics = 0
+Synthetics = 8
+Organics = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_d2k57"]
 resource_local_to_scene = true
@@ -329,7 +389,7 @@ Cost = SubResource("Resource_axi6p")
 position = Vector2(-192, -64)
 NAME = "Advanced RCS"
 DESCRIPTION = "Advanced RCS mitigates drifting.
-Acceleration is improved when not applying rotation.
+Acceleration is increased by 32 u/s² (doubled).
 The ship now thrusts in the intended direction rather
 than with the ship rotation.
 Further improves rotation speed."
@@ -339,15 +399,63 @@ SPRITE = ExtResource("7_3ljve")
 Cost = SubResource("Resource_km3c3")
 
 [node name="Booster" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-192, -192)
+position = Vector2(-192, -320)
 NAME = "Stage 2"
 DESCRIPTION = "Holding shift reduces the ability to turn but
 greatly improves acceleration.
 Max speed is doubled."
 INTERNAL_NAME = "Booster"
-PARENT_UPGRADE = NodePath("../AdvancedRCS")
+PARENT_UPGRADE = NodePath("../Stage0")
 SPRITE = ExtResource("10_uhh3a")
+HIDE = true
 Cost = SubResource("Resource_nyedo")
+
+[node name="MovementMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-128, -128)
+NAME = "Movement Relative to Ship"
+DESCRIPTION = "If on, rotating will move the digital cursor about the ship.
+If off, manual rotations are disabled and the
+cursor will move relative to the world. Camera is
+set to be relative to world."
+INTERNAL_NAME = "MovementMode"
+PARENT_UPGRADE = NodePath("../RCSThrust")
+REQUIRE_MAX_PARENT = true
+HIDE_WITHOUT_PARENT = true
+SPRITE = ExtResource("11_epu5w")
+PRE_BOUGHT = true
+Cost = SubResource("Resource_gjcie")
+
+[node name="CameraMode" parent="Camera2D/TechTree/TopLeft" instance=ExtResource("4_r883k")]
+position = Vector2(0, -64)
+NAME = "Camera Relative to World"
+DESCRIPTION = "If on, the camera will not rotate.
+If off, the camera will rotate with the ship,
+or the cursor if RCS is enabled."
+INTERNAL_NAME = "CameraMode"
+REQUIRE_MAX_PARENT = true
+SPRITE = ExtResource("12_lle25")
+PRE_BOUGHT = true
+Cost = SubResource("Resource_y2qk2")
+
+[node name="ShipBattery" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-64, -192)
+NAME = "On-Board Battery"
+DESCRIPTION = "Start every run with an additonal energy."
+INTERNAL_NAME = "ShipBattery"
+PARENT_UPGRADE = NodePath("../RCSThrust")
+SPRITE = ExtResource("13_rcs7n")
+MAX_LEVEL = 3
+Cost = SubResource("Resource_unk4j")
+
+[node name="Stage0" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-192, -192)
+NAME = "Combustion ARCS"
+DESCRIPTION = "Acceleration is further increased by 32 u/s².
+Max speed is increased by 16 u/s (x1.25)."
+INTERNAL_NAME = "Stage0"
+PARENT_UPGRADE = NodePath("../AdvancedRCS")
+SPRITE = ExtResource("14_ddjc3")
+Cost = SubResource("Resource_daqij")
 
 [node name="TopRight" type="Node2D" parent="Camera2D/TechTree"]
 
@@ -393,7 +501,7 @@ MAX_LEVEL = 2
 Cost = SubResource("Resource_bjsy7")
 
 [node name="Magnet" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, -192)
+position = Vector2(320, -320)
 NAME = "Electromagnet"
 DESCRIPTION = "The ship now has an electromagnet that attempts to
 attract resources and repel asteroids.
@@ -424,8 +532,7 @@ position = Vector2(-320, 192)
 NAME = "LiDAR Targetting"
 DESCRIPTION = "Automatically aims and fires the needle laser at the
 nearest applicable object in range.
-Control can be taken back by holding LMB.
-Increases range by 2 units."
+Control can be taken back by holding LMB."
 INTERNAL_NAME = "AutoPhoton"
 PARENT_UPGRADE = NodePath("../PhotonCannon")
 SPRITE = ExtResource("15_vtpn8")
@@ -507,6 +614,16 @@ SPRITE = ExtResource("27_rgnbw")
 HIDE = true
 Cost = SubResource("Resource_owulg")
 
+[node name="SpareBattery" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-448, 192)
+NAME = "Spare Battery"
+DESCRIPTION = "Increases laser range by +1 unit."
+INTERNAL_NAME = "SpareBattery"
+PARENT_UPGRADE = NodePath("../AutoPhoton")
+SPRITE = ExtResource("28_2f4oq")
+MAX_LEVEL = 2
+Cost = SubResource("Resource_4ho7x")
+
 [node name="AbrResistance" parent="Camera2D/TechTree/BottomLeft" instance=ExtResource("4_r883k")]
 position = Vector2(-64, 64)
 NAME = "Abrasive-Resistant Hull"
@@ -534,6 +651,18 @@ SPRITE = ExtResource("22_utiiq")
 MAX_LEVEL = 2
 HIDE = true
 Cost = SubResource("Resource_pab5s")
+
+[node name="EnergyShield" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-448, 64)
+NAME = "Shield Projector"
+DESCRIPTION = "When dangerous objects enter an area within 1.5
+units of your ship, they get deflected at the cost of
+energy based on force required to deflect."
+INTERNAL_NAME = "EnergyShield"
+PARENT_UPGRADE = NodePath("../Laser/SpareBattery")
+REQUIRE_MAX_PARENT = true
+SPRITE = ExtResource("32_8q8er")
+Cost = SubResource("Resource_u04gs")
 
 [node name="BottomRight" type="Node2D" parent="Camera2D/TechTree"]
 

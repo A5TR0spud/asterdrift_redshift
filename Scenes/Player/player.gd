@@ -1,4 +1,5 @@
 extends Entity
+class_name PlayerClass
 
 @export var ACCEL_FORCE : float = 32.0
 @export var MAX_SPEED : float = 64.0
@@ -17,8 +18,9 @@ var _inputDir : Vector2
 
 @onready var ShipVisuals = $ShipVisuals
 @onready var Manipulator = $Manipulator
-@onready var Laser = $NeedleLaser
+@onready var Laser = $NeedleLaserManager
 @onready var RCSCursor := $RCS/RCSTarget
+@onready var RCS := $RCS
 
 func _ready():
 	_handleStats()
@@ -80,10 +82,17 @@ func _physics_process(delta):
 		if Input.is_action_pressed("turn right"):
 			if !Stats.Has_RCS:
 				targetAngularAccel += deg_to_rad(TURN_ACCEL_DEGREES) * delta
+			if !UpgradesManager.LoadIsEnabled("MovementMode"):
+				_inputDir.y += 1
 		if Input.is_action_pressed("turn left"):
 			if !Stats.Has_RCS:
 				targetAngularAccel -= deg_to_rad(TURN_ACCEL_DEGREES) * delta
+			if !UpgradesManager.LoadIsEnabled("MovementMode"):
+				_inputDir.y += -1
 		
+		if !UpgradesManager.LoadIsEnabled("MovementMode"):
+			if _inputDir.length() > 0.5:
+				_inputDir = Vector2(1, 0)
 		
 		#if inputting, apply that force
 		if _inputDir.length() > 0.5:
@@ -119,9 +128,6 @@ func _physics_process(delta):
 	if targetLinearAccel.length() > ACCEL_FORCE:
 		targetLinearAccel = targetLinearAccel.normalized() * ACCEL_FORCE
 	
-	if Stats.Has_Better_RCS && absf(targetAngularAccel) < deg_to_rad(15) * delta:
-		targetLinearAccel += targetLinearAccel.normalized() * 32
-	
 	if Input.is_action_pressed("boost"):
 		targetLinearAccel *= 2
 		targetAngularAccel *= 0.5
@@ -140,6 +146,11 @@ func _handleStats():
 	var x: int
 	var y: float
 	
+	if Stats.Has_Better_RCS:
+		ACCEL_FORCE += 32
+	
+	ACCEL_FORCE += 32 * UpgradesManager.Load("Stage0")
+	MAX_SPEED += 16 * UpgradesManager.Load("Stage0")
 	MAX_SPEED += 64 * UpgradesManager.Load("Booster")
 	
 	# Manipulator Stats
@@ -161,7 +172,7 @@ func _handleStats():
 		Laser.queue_free()
 	else:
 		x = Laser.RANGE
-		x += 32 * UpgradesManager.Load("AutoPhoton")
+		x += 16 * UpgradesManager.Load("SpareBattery")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x -= 32
 		Laser.RANGE = x

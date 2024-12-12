@@ -67,8 +67,9 @@ AsteroidRadius = 2048
 z_index = 100
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+ignore_rotation = false
 zoom = Vector2(2, 2)
-position_smoothing_speed = 50.0
+rotation_smoothing_enabled = true
 script = ExtResource("3_jlwng")
 Player = NodePath("../Player")
 

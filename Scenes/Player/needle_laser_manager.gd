@@ -1,11 +1,13 @@
 @tool
 extends Node2D
 
+@onready var Area := $LaserArea
+@onready var ACol := $LaserArea/CollisionShape2D
 @onready var Line := $LaserLine
 @onready var Target := $LaserTarget
 @onready var Ray := $LaserRay
 @onready var Endpoint := $Endpoint
-@export var Player: PlayerClass
+@onready var Player := $".."
 @onready var Visuals := $"../ShipVisuals"
 
 @onready var Collect := preload("res://Scenes/World/Decoration/collectable.tscn")
@@ -15,6 +17,8 @@ extends Node2D
 		return RANGE
 	set(value):
 		RANGE = value
+		if is_node_ready():
+			ACol.shape.radius = RANGE
 
 @export var KNOCKBACK_COEF: float = 1
 @export_storage var FORCE: float = 35
@@ -46,13 +50,13 @@ func _ready() -> void:
 	Ray.add_exception($"..")
 	#Ray.add_exception($"../CollisionShape2D")
 	_colTime = 0.0
-	_laserFiring = false
 	_reloadVisuals()
 	_reloadCollisions()
 
 func _reloadCollisions() -> void:
 	if CAN_ATTRACT:
 		#4 is resource
+		Area.collision_mask |= 4
 		Ray.collision_mask |= 4
 
 func _reloadVisuals() -> void:
@@ -79,10 +83,45 @@ func _laserifyColor(col: Color) -> Color:
 	col.a = 1
 	return col
 
+var _autoTargettedEntity: Entity = null
+
 func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
 		hide()
 		return
+	_laserFiring = false
+	
+	if !is_instance_valid(_autoTargettedEntity):
+		_autoTargettedEntity = null
+	if _autoTargettedEntity != null:
+		if _autoTargettedEntity.global_position.distance_to(global_position) > RANGE + _autoTargettedEntity.Radius:
+			_autoTargettedEntity = null
+		elif _autoTargettedEntity.IgnoredByLaser:
+			_autoTargettedEntity = null
+	
+	if !Engine.is_editor_hint() && Input.is_action_pressed("fire"):
+		var v: Vector2 = get_local_mouse_position()
+		Target.position = v
+	if !Engine.is_editor_hint() && AUTO_LASER && !Input.is_action_pressed("fire"):
+		var dis: float = -000.000
+		if _autoTargettedEntity != null:
+			dis = _autoTargettedEntity.global_position.distance_to(global_position) - _autoTargettedEntity.Radius
+		for thing in Area.get_overlapping_bodies():
+			if thing is Entity:
+				if thing.isPlayer:
+					continue
+				if thing.IgnoredByLaser:
+					continue
+				if !thing.isAsteroid && !thing.DangerousCollision:
+					if thing.isResource && !CAN_ATTRACT:
+						continue
+				var tes: float = thing.global_position.distance_to(global_position) - thing.Radius
+				if tes < dis || _autoTargettedEntity == null:
+					_autoTargettedEntity = thing
+					dis = tes
+	if _autoTargettedEntity != null && !Input.is_action_pressed("fire"):
+		Target.global_position = _autoTargettedEntity.global_position
+		_laserFiring = true
 	
 	Target.position = Target.position.normalized() * RANGE
 	
@@ -144,3 +183,7 @@ func _physics_process(delta) -> void:
 			if c.hasHealth && doDamage > 0:
 				c.Damage(doDamage)
 	Line.points[1] = Endpoint.position
+
+
+func _on_ship_visuals_firemalasar():
+	_reloadVisuals()

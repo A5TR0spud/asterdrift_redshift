@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var Player : RigidBody2D
+@export var Player : PlayerClass
 
 var _zoom : float = 2.0
 var _last_pos : Vector2
@@ -9,6 +9,12 @@ func _ready():
 	_last_pos = Player.global_position
 
 func _process(delta):
+	if !UpgradesManager.LoadIsEnabled("CameraMode"):
+		if UpgradesManager.Load("RCSThrust") < 1:
+			rotation = Player.rotation + deg_to_rad(90)
+		else:
+			rotation = Player.RCS.rotation
+	
 	if Input.is_action_just_pressed("zoom in"):
 		zoomIn()
 	if Input.is_action_just_pressed("zoom out"):

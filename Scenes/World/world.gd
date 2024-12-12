@@ -1,7 +1,6 @@
 extends Node2D
 
 var MaxTime : float = 30.0
-var TimeLeft : float = 30.0
 var PowerDrain : float = 1.0
 
 @onready var TimeBar = $CanvasLayer/Control/EnergyMeter
@@ -15,25 +14,26 @@ var PowerDrain : float = 1.0
 func _ready():
 	RunHandler.StartRun()
 	EndScreen.hide()
-	TimeLeft = MaxTime
+	MaxTime += UpgradesManager.Load("ShipBattery")
+	RunHandler.TimeLeft = MaxTime
 	TimeBar.max_value = MaxTime
 	TimeBar.size.x = MaxTime * 16
 	_updateDisplay()
 
 func _physics_process(delta):
 	if RunHandler.IsInRun():
-		TimeLeft -= delta * PowerDrain
+		RunHandler.TimeLeft -= delta * PowerDrain
 	else:
 		StopRun()
 		return
-	if TimeLeft <= 0:
-		TimeLeft = 0
+	if RunHandler.TimeLeft <= 0:
+		RunHandler.TimeLeft = 0
 		StopRun()
 	_updateDisplay()
 	
 func _updateDisplay():
-	TimeBar.value = TimeLeft
-	var toDisplay : String = String.num(TimeLeft, 1)
+	TimeBar.value = RunHandler.TimeLeft
+	var toDisplay : String = String.num(RunHandler.TimeLeft, 1)
 	if !toDisplay.contains("."):
 		toDisplay += ".0"
 	TimeLabel.text = toDisplay
@@ -57,6 +57,5 @@ func _on_return_to_hangar_pressed():
 	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")
 
-
 func _on_player_damage(amount):
-	TimeLeft -= amount
+	RunHandler.TimeLeft -= amount
