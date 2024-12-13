@@ -140,7 +140,7 @@ func _physics_process(delta):
 	angular_velocity += deg_to_rad(clampf(rad_to_deg(targetAngularAccel), -TURN_ACCEL_DEGREES, TURN_ACCEL_DEGREES))
 	angular_velocity = deg_to_rad(clampf(rad_to_deg(angular_velocity), -absf(TURN_MAX_SPEED_DEGREES), absf(TURN_MAX_SPEED_DEGREES)))
 	
-	# around here would be calls to set thruster visuals based on acceleration
+	#$ThrusterParticles/Main.emitting = targetLinearAccel.angle_to(Vector2(0, -1)) < deg_to_rad(1) && targetLinearAccel.length() > 5
 
 func _handleStats():
 	var x: int

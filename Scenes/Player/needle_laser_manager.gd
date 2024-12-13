@@ -51,6 +51,8 @@ func _ready() -> void:
 	_reloadVisuals()
 	_reloadCollisions()
 	_reloadLasers()
+	if !Engine.is_editor_hint():
+		show()
 
 func _reloadLasers() -> void:
 	for child in List.get_children():
