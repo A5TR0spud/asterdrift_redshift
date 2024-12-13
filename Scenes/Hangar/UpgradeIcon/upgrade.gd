@@ -163,8 +163,7 @@ func ReloadVisible():
 	if PARENT_UPGRADE:
 		ParentLine.show()
 		var dir : Vector2 = PARENT_UPGRADE.global_position - global_position
-		ParentLine.points[0] = 0.33 * dir
-		ParentLine.points[1] = 0.66 * dir
+		ParentLine.points[1] = dir
 		if PARENT_UPGRADE.CurrentLevel > 0:
 			ParentLine.default_color = Color(1,1,1,1)
 			ParentLine.self_modulate = Color(1,1,1,1)

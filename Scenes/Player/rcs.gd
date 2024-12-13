@@ -8,7 +8,7 @@ func _ready():
 	inputDir = Vector2.ZERO
 	if !$"..".CAN_MOVE:
 		hide()
-	if UpgradesManager.Load("RCSThrust") < 1:
+	if UpgradesManager.Load("RCSThrust") < 1 || $"..".IS_IN_GARAGE:
 		queue_free()
 
 func _process(delta):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=19 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_op3xx"]
 [ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="7_m8q4m"]
+[ext_resource type="Shader" uid="uid://chvdu88j36ex3" path="res://Shaders/StarryNight.tres" id="8_17e2r"]
 [ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
+[ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="9_ik24p"]
+[ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_wix40"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5hp0"]
 bg_color = Color(0.2967, 0.61134, 0.69, 1)
@@ -53,6 +56,12 @@ Ceramics = 0
 Synthetics = 0
 Organics = 0
 Components = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbiqx"]
+shader = ExtResource("8_17e2r")
+shader_parameter/SpeedScaling = Vector2(1, 1)
+shader_parameter/Color = Color(0.0126667, 0, 0.02, 1)
+shader_parameter/NoiseTexture = ExtResource("9_ik24p")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1esw0")
@@ -217,6 +226,29 @@ text = "New Run"
 [node name="ReturnToHangar" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
 layout_mode = 2
 text = "Return To Hangar"
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_jbiqx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("10_wix40")
+expand_mode = 2
+stretch_mode = 1
 
 [connection signal="damage" from="Player" to="." method="_on_player_damage"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]

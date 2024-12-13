@@ -13,9 +13,9 @@ func _process(delta):
 		dir.y += 1
 	if Input.is_action_pressed("forward"):
 		dir.y -= 1
-	if Input.is_action_pressed("strafe left"):
+	if Input.is_action_pressed("turn left"):
 		dir.x -= 1
-	if Input.is_action_pressed("strafe right"):
+	if Input.is_action_pressed("turn right"):
 		dir.x += 1
 	dir = dir.normalized()
 	if Input.is_action_pressed("boost"):

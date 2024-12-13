@@ -1,12 +1,13 @@
 @tool
 extends Node2D
+class_name NeedleLaserClass
 
 @onready var Line := $LaserLine
 @onready var Target := $LaserTarget
 @onready var Ray := $LaserRay
 @onready var Endpoint := $Endpoint
 @export var Player: PlayerClass
-@onready var Visuals := $"../ShipVisuals"
+@export var VisLaserInterval: float
 
 @onready var Collect := preload("res://Scenes/World/Decoration/collectable.tscn")
 
@@ -36,15 +37,13 @@ extends Node2D
 		if is_node_ready():
 			_reloadVisuals()
 
-var _laserColorOn: Color
-var _laserColorOff: Color
+@export var _laserColorOn: Color
+@export var _laserColorOff: Color
 var _laserTime: float
 var _colTime: float = 0.0
-var _laserFiring: bool = false
+@export var _laserFiring: bool = false
 
 func _ready() -> void:
-	Ray.add_exception($"..")
-	#Ray.add_exception($"../CollisionShape2D")
 	_colTime = 0.0
 	_laserFiring = false
 	_reloadVisuals()
@@ -59,25 +58,14 @@ func _reloadVisuals() -> void:
 	if !is_node_ready():
 		return
 	Line.width = WIDTH
-	_laserColorOn = _laserifyColor(Visuals.BLINKER_ON_COLOR)
-	_laserColorOff = _laserifyColor(Visuals.BLINKER_OFF_COLOR)
 
 func _process(delta):
-	_laserTime += delta / (Visuals.BLINKER_INTERVAL * 0.5)
+	_laserTime += delta / (VisLaserInterval * 0.5)
 	_laserTime = _laserTime - 2.0 * floori(_laserTime * 0.5)
 	var x = absf(1.0 - _laserTime)
 	var c: Color = lerp(_laserColorOff, _laserColorOn, x)
 	$LaserLine.default_color = c
 	$Endpoint/Color.modulate = c
-
-func _laserifyColor(col: Color) -> Color:
-	if col.r + col.g + col.b < 0.5:
-		col = Color.WHITE
-	col.r = col.r * 0.5 + 0.5
-	col.g = col.g * 0.5 + 0.5
-	col.b = col.b * 0.5 + 0.5
-	col.a = 1
-	return col
 
 func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
@@ -85,9 +73,6 @@ func _physics_process(delta) -> void:
 		return
 	
 	Target.position = Target.position.normalized() * RANGE
-	
-	if !Engine.is_editor_hint() && Input.is_action_pressed("fire"):
-		_laserFiring = true
 	
 	Ray.position = Vector2.ZERO
 	Ray.target_position = Target.position

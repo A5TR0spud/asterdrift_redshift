@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi6d4udy3pjya"
-path="res://.godot/imported/BlueprintTile.png-a979921809b5ab6bf20132ab0d4d78cf.ctex"
+uid="uid://y6uvb10g740p"
+path="res://.godot/imported/noiseTexture.png-7ba05deb8dcaf0cdf0ccd1b13048fe51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/BlueprintTile.png"
-dest_files=["res://.godot/imported/BlueprintTile.png-a979921809b5ab6bf20132ab0d4d78cf.ctex"]
+source_file="res://Assets/Backdrops/noiseTexture.png"
+dest_files=["res://.godot/imported/noiseTexture.png-7ba05deb8dcaf0cdf0ccd1b13048fe51.ctex"]
 
 [params]
 

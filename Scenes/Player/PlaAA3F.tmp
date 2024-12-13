@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=38 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scenes/Player/hookmagnet.gd" id="15_8a6ob"]
 [ext_resource type="Shader" path="res://Shaders/AreaPulse.gdshader" id="16_requx"]
 [ext_resource type="Script" path="res://Scenes/Player/needle_laser_manager.gd" id="18_yrk6l"]
+[ext_resource type="PackedScene" uid="uid://d3r4w12j3w543" path="res://Scenes/Player/needle_laser.tscn" id="19_whh7u"]
 [ext_resource type="Script" path="res://Scenes/Player/shield_projector.gd" id="22_himiw"]
 [ext_resource type="Texture2D" uid="uid://xgkoxrkco1x6" path="res://Assets/Ships/Upgrades/ShieldDeflection.png" id="23_p2wwt"]
 
@@ -133,7 +134,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -273,6 +274,11 @@ shape = SubResource("CircleShape2D_kk0yk")
 debug_color = Color(0.15, 0.546667, 1, 0)
 
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
+
+[node name="NeedleLaser" parent="NeedleLaserManager/LaserList" node_paths=PackedStringArray("Player") instance=ExtResource("19_whh7u")]
+Player = NodePath("../../..")
+_laserColorOn = Color(1, 0.5, 0.5, 1)
+_laserColorOff = Color(1, 1, 1, 1)
 
 [node name="MagnetArea" type="Area2D" parent="."]
 z_index = -200

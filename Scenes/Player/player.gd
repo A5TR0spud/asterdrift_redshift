@@ -171,6 +171,11 @@ func _handleStats():
 	if IS_IN_GARAGE || UpgradesManager.Load("Laser") < 1:
 		Laser.queue_free()
 	else:
+		x = Laser.LASER_COUNT
+		x += UpgradesManager.Load("TwoLaser")
+		x += 2 * UpgradesManager.Load("LaserArray")
+		Laser.LASER_COUNT = x
+		
 		x = Laser.RANGE
 		x += 16 * UpgradesManager.Load("SpareBattery")
 		if UpgradesManager.Load("StrongLaser") > 0:
@@ -180,20 +185,28 @@ func _handleStats():
 		y += 2 * UpgradesManager.Load("HeavyLaser")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			y *= 2
+		if UpgradesManager.Load("LaserArray") > 0:
+			y *= 0.75
 		Laser.KNOCKBACK_COEF = y
 		y = Laser.DAMAGE_COEF
 		y += 3 * UpgradesManager.Load("StrongLaser")
+		if UpgradesManager.Load("LaserArray") > 0:
+			y *= 0.5
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
 		y += UpgradesManager.Load("MiningLaser")
+		if UpgradesManager.Load("LaserArray") > 0:
+			y *= 0.5
 		Laser.MINING_COEF = y
 		x = Laser.WIDTH
 		if UpgradesManager.Load("HeavyLaser") > 0:
 			x += 1
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x += 1
+		if UpgradesManager.Load("LaserArray") > 0:
+			x = maxi(x * 0.5, 1)
 		Laser.WIDTH = x
-		Laser.AUTO_LASER = UpgradesManager.Load("AutoPhoton") > 0
+		Laser.AUTO_LASER = UpgradesManager.Load("AutoPhoton") + UpgradesManager.Load("TwoLaser") + UpgradesManager.Load("LaserArray") > 0
 		if UpgradesManager.Load("TractorNeedle") > 0:
 			Laser.CAN_ATTRACT = true
 

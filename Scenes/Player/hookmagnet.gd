@@ -51,16 +51,16 @@ func _physics_process(delta):
 		if bod is Entity:
 			var dif: Vector2 = bod.global_position - global_position
 			var dir: Vector2 = dif.normalized()
-			var len: float = dif.length() - bod.Radius
+			var lenx: float = dif.length() - bod.Radius
 			
 			var test: float = ((bod.global_position + bod.linear_velocity) - (global_position + $"..".linear_velocity)).length()
 			if test < cloDist || closest == null:
 				closest = bod
 				cloDist = test
 			
-			if len < 1:
-				len = 1
-			var strength: float = (RANGE * MAGNET_STRENGTH * -bod.Magnetism) / (len ** 2)
+			if lenx < 1:
+				lenx = 1
+			var strength: float = (RANGE * MAGNET_STRENGTH * -bod.Magnetism) / (lenx ** 2)
 			strength *= FORCE_COEF
 			if isRepelling:
 				strength *= -1

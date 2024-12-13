@@ -1,12 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=27 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
 [ext_resource type="Texture2D" uid="uid://mudilooehc3w" path="res://Assets/Hangar/Upgrades/Meta/Disabled.png" id="3_pw2ue"]
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/Meta/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="4_dkm4s"]
+[ext_resource type="Texture2D" uid="uid://c1cei46gju2mb" path="res://Assets/Hangar/Upgrades/Meta/BackgroundOutline.png" id="5_41cas"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
 [ext_resource type="Texture2D" uid="uid://bavifds8ksa17" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png" id="6_pugof"]
+[ext_resource type="Texture2D" uid="uid://p388rwpp047n" path="res://Assets/Hangar/Upgrades/Meta/Background.png" id="8_djbwo"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="8_nu5sk"]
 
 [sub_resource type="Resource" id="Resource_0h8lx"]
@@ -83,14 +85,21 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_1jsna")
 [sub_resource type="LabelSettings" id="LabelSettings_qemxh"]
 font_size = 12
 
-[sub_resource type="Curve" id="Curve_d0ivw"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
 [node name="Upgrade" type="Node2D"]
 script = ExtResource("1_le4ru")
 SPRITE = ExtResource("2_wk4es")
 Cost = SubResource("Resource_0h8lx")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -4
+z_as_relative = false
+scale = Vector2(2, 2)
+texture = ExtResource("8_djbwo")
+
+[node name="Outline" type="Sprite2D" parent="Background"]
+z_index = -6
+z_as_relative = false
+texture = ExtResource("5_41cas")
 
 [node name="MainIcon" type="Sprite2D" parent="."]
 modulate = Color(0.5, 0.5, 0.5, 1)
@@ -113,17 +122,21 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = -0.0958404
-scale = Vector2(1.44475, 1.44475)
+rotation = -0.0145246
+scale = Vector2(0.930919, 0.930919)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
 [node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
+z_index = 1
+z_as_relative = false
 position = Vector2(0, 17)
 texture = ExtResource("6_pugof")
 
 [node name="LevelBar" type="Marker2D" parent="MainIcon"]
+z_index = 1
+z_as_relative = false
 position = Vector2(0, 17)
 
 [node name="Tooltip" type="VBoxContainer" parent="."]
@@ -179,9 +192,10 @@ FONT_SIZE = 12
 [node name="ParentLine" type="Line2D" parent="."]
 visible = false
 show_behind_parent = true
-z_index = -1
+z_index = -5
+z_as_relative = false
 points = PackedVector2Array(0, 0, 64, 64)
-width_curve = SubResource("Curve_d0ivw")
+width = 4.0
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
