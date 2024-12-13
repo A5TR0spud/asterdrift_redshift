@@ -31,16 +31,16 @@ func _ready():
 func _reload():
 	if COLLECTION == ResourcesEnum.Metal:
 		Icon.texture = MetalTex
-		Magnetism = 2.0
+		Magnetism = 1.75
 	elif COLLECTION == ResourcesEnum.Ceramic:
 		Icon.texture = CeramicTex
-		Magnetism = 1.0
+		Magnetism = 1.1
 	elif COLLECTION == ResourcesEnum.Synthetic:
 		Icon.texture = SyntheticTex
 		Magnetism = 1.0
 	elif COLLECTION == ResourcesEnum.Organic:
 		Icon.texture = OrganicTex
-		Magnetism = 0.5
+		Magnetism = 0.9
 	elif COLLECTION == ResourcesEnum.Core:
 		Icon.texture = CoreTex
 		Magnetism = 1.5

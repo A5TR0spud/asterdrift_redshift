@@ -191,12 +191,12 @@ func _handleStats():
 		y = Laser.DAMAGE_COEF
 		y += 3 * UpgradesManager.Load("StrongLaser")
 		if UpgradesManager.Load("LaserArray") > 0:
-			y *= 0.5
+			y *= 0.6
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
 		y += UpgradesManager.Load("MiningLaser")
 		if UpgradesManager.Load("LaserArray") > 0:
-			y *= 0.5
+			y *= 0.6
 		Laser.MINING_COEF = y
 		x = Laser.WIDTH
 		if UpgradesManager.Load("HeavyLaser") > 0:
@@ -215,12 +215,12 @@ func _on_body_entered(body : PhysicsBody2D):
 		return
 	var other: Entity = body
 	if other.DangerousCollision:
-		var blunt: float = 0.05 * (self.mass * self.linear_velocity - other.mass * other.linear_velocity).length()
-		var abrasion: float = 1 * absf(self.mass * self.angular_velocity + other.mass * other.angular_velocity)
+		var blunt: float = 0.05 * (other.mass + self.mass) * (self.linear_velocity - other.linear_velocity).length()
+		var abrasion: float = 0.4 * absf(self.mass * self.angular_velocity + other.mass * other.angular_velocity)
 		
 		var abrasionResistance = UpgradesManager.Load("AbrResistance") + 1
 		var bluntResistance = UpgradesManager.Load("BluntRes") + 1
-		var grace = 5
+		var grace = 4
 		
 		var ddd = (blunt / bluntResistance) + (abrasion / abrasionResistance) - grace
 		#damage = maxf(damage, 0)

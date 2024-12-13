@@ -17,7 +17,7 @@ script = ExtResource("1_dsf08")
 [node name="LaserLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 40.4781, -121.431)
 width = 1.0
-default_color = Color(1, 0.535201, 0.535201, 1)
+default_color = Color(nan, nan, nan, nan)
 begin_cap_mode = 2
 
 [node name="LaserTarget" type="Marker2D" parent="."]
@@ -34,5 +34,5 @@ position = Vector2(40.4781, -121.431)
 texture = SubResource("AtlasTexture_bkho5")
 
 [node name="Color" type="Sprite2D" parent="Endpoint"]
-modulate = Color(1, 0.535201, 0.535201, 1)
+modulate = Color(nan, nan, nan, nan)
 texture = SubResource("AtlasTexture_y2sln")

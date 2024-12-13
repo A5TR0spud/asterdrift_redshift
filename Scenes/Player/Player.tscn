@@ -337,7 +337,6 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
 [node name="MagnetArea" type="Area2D" parent="."]
-visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708

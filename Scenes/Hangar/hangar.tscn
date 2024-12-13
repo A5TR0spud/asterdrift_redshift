@@ -152,11 +152,11 @@ Components = 0
 [sub_resource type="Resource" id="Resource_w1q67"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 11
+Metals = 12
 Ceramics = 0
-Synthetics = 9
+Synthetics = 10
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_cber5"]
 resource_local_to_scene = true
@@ -188,10 +188,10 @@ Components = 0
 [sub_resource type="Resource" id="Resource_7kw8l"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 16
-Ceramics = 2
-Synthetics = 8
-Organics = 4
+Metals = 32
+Ceramics = 4
+Synthetics = 16
+Organics = 8
 Components = 1
 
 [sub_resource type="Resource" id="Resource_yighi"]
@@ -215,9 +215,9 @@ Components = 1
 [sub_resource type="Resource" id="Resource_fiaa4"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 48
-Ceramics = 16
-Synthetics = 16
+Metals = 64
+Ceramics = 32
+Synthetics = 24
 Organics = 0
 Components = 1
 
@@ -336,7 +336,7 @@ Metals = 32
 Ceramics = 32
 Synthetics = 32
 Organics = 32
-Components = 1
+Components = 2
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -457,7 +457,7 @@ Cost = SubResource("Resource_axi6p")
 position = Vector2(-256, -64)
 NAME = "Advanced RCS"
 DESCRIPTION = "Advanced RCS mitigates drifting.
-Acceleration is increased by 32 u/s² (doubled).
+Acceleration is increased by 2 u/s² (doubled).
 The ship now thrusts in the intended direction rather
 than with the ship rotation.
 Further improves rotation speed."
@@ -470,7 +470,7 @@ Cost = SubResource("Resource_km3c3")
 position = Vector2(-256, -240)
 NAME = "Stage 2"
 DESCRIPTION = "While holding shift, the ship accelerates forward at
-64 u/s² and max speed is increased by 128 u/s."
+4 u/s² and max speed is increased by 8 u/s."
 INTERNAL_NAME = "Booster"
 PARENT_UPGRADE = NodePath("../Stage0")
 SPRITE = ExtResource("10_uhh3a")
@@ -516,8 +516,8 @@ Cost = SubResource("Resource_unk4j")
 [node name="Stage0" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-256, -160)
 NAME = "Combustion ARCS"
-DESCRIPTION = "Acceleration is further increased by 32 u/s².
-Max speed is increased by 16 u/s (x1.25)."
+DESCRIPTION = "Acceleration is further increased by 2 u/s².
+Max speed is increased by 1 u/s (x1.25)."
 INTERNAL_NAME = "Stage0"
 PARENT_UPGRADE = NodePath("../AdvancedRCS")
 SPRITE = ExtResource("14_ddjc3")
@@ -649,9 +649,9 @@ position = Vector2(-256, 336)
 NAME = "Laser Array"
 DESCRIPTION = "Refracts 2 lasers into 4!
 Targets the closest, farthest, slowest, and fastest objects in range.
-Damage x0.5.
-Knockback x0.75.
-Mining Time x2."
+Damage: 4x0.6.
+Knockback: 4x0.75.
+Mining Speed: 4x0.6"
 INTERNAL_NAME = "LaserArray"
 PARENT_UPGRADE = NodePath("../DoubleLaser")
 SPRITE = ExtResource("24_hjrx4")
@@ -780,7 +780,7 @@ Cost = SubResource("Resource_wwfe1")
 [node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(256, 64)
 NAME = "Core Assembler"
-DESCRIPTION = "Every 2 minutes spent in a run, assembles
+DESCRIPTION = "Every 5 minutes spent in a run, assembles
 a core."
 INTERNAL_NAME = "CoreAssembler"
 PARENT_UPGRADE = NodePath("../LookAhead")

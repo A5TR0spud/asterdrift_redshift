@@ -62,6 +62,11 @@ func _physics_process(delta):
 				lenx = 1
 			var strength: float = (RANGE * MAGNET_STRENGTH * -bod.Magnetism) / (lenx ** 2)
 			strength *= FORCE_COEF
+			if bod.isResource:
+				if isRepelling:
+					strength *= 0.5
+				else:
+					strength *= 2
 			if isRepelling:
 				strength *= -1
 			bod.apply_force(dir * strength)
