@@ -321,7 +321,7 @@ update_rotation = false
 [node name="NeedleLaserManager" type="Node2D" parent="."]
 visible = false
 top_level = true
-z_index = -30
+z_index = -50
 script = ExtResource("18_yrk6l")
 
 [node name="LaserArea" type="Area2D" parent="NeedleLaserManager"]

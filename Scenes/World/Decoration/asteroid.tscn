@@ -7,11 +7,11 @@
 
 [sub_resource type="Resource" id="Resource_5y6c3"]
 script = ExtResource("2_pami1")
-Metals = 4
-Ceramics = 0
-Synthetics = 0
-Organics = 1
-Components = 0
+Metals = 400
+Ceramics = 50
+Synthetics = 25
+Organics = 100
+Components = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfgvo"]
 shader = ExtResource("1_6cy2n")
@@ -78,3 +78,4 @@ explosiveness = 0.8
 randomness = 1.0
 
 [connection signal="damaged" from="." to="." method="_on_damaged"]
+[connection signal="killed" from="." to="." method="_on_killed"]

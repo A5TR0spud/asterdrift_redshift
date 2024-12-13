@@ -59,18 +59,10 @@ func _reloadLasers() -> void:
 		if child is NeedleLaserClass:
 			child.free()
 	for i in LASER_COUNT:
-		var prefab := LaserPrefab.instantiate()
-		if i == 0:
-			if LASER_COUNT == 1:
-				prefab.position = Vector2.ZERO
-			else:
-				prefab.position = Vector2(0, -8)
-		elif i == 1:
-			prefab.position = Vector2(0, 8)
-		elif i == 2:
-			prefab.position = Vector2(-8, 0)
-		elif i == 3:
-			prefab.position = Vector2(8, 0)
+		var prefab: NeedleLaserClass = LaserPrefab.instantiate()
+		prefab.doesOrbit = i != 0
+		if LASER_COUNT - 1 > 0:
+			prefab._initialAngle = deg_to_rad((i - 1) * 360 / (LASER_COUNT - 1))
 		List.add_child(prefab)
 	_reloadVisuals()
 	_reloadCollisions()
@@ -86,6 +78,7 @@ func _reloadCollisions() -> void:
 func _reloadVisuals() -> void:
 	if !is_node_ready():
 		return
+	var i: int = 0
 	for child in List.get_children():
 		if child is NeedleLaserClass:
 			child.Line.width = WIDTH
@@ -93,8 +86,8 @@ func _reloadVisuals() -> void:
 			child._laserColorOn = _laserifyColor(Visuals.BLINKER_ON_COLOR)
 			child._laserColorOff = _laserifyColor(Visuals.BLINKER_OFF_COLOR)
 			child.Player = Player
-			if LASER_COUNT > 1:
-				child.RANGE = RANGE + 8
+			if LASER_COUNT > 1 && i != 0:
+				child.RANGE = RANGE + 16
 			else:
 				child.RANGE = RANGE
 			child.KNOCKBACK_COEF = KNOCKBACK_COEF
@@ -102,6 +95,7 @@ func _reloadVisuals() -> void:
 			child.CAN_ATTRACT = CAN_ATTRACT
 			child.DAMAGE_COEF = DAMAGE_COEF
 			child.WIDTH = WIDTH
+			i += 1
 
 func _laserifyColor(col: Color) -> Color:
 	if col.r + col.g + col.b < 0.5:
@@ -200,7 +194,7 @@ func _physics_process(delta) -> void:
 			if i % 4 == 0:
 				if Input.is_action_pressed("fire"):
 					child._laserFiring = true
-					child.Target.position = get_local_mouse_position()
+					child.Target.global_position = get_global_mouse_position()
 				elif AUTO_LASER && _closestEntity != null:
 					child._laserFiring = true
 					child.Target.global_position = _closestEntity.global_position

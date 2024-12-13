@@ -42,6 +42,7 @@ class_name NeedleLaserClass
 var _laserTime: float
 var _colTime: float = 0.0
 @export var _laserFiring: bool = false
+@export var _initialAngle: float = 0
 
 func _ready() -> void:
 	_colTime = 0.0
@@ -67,10 +68,18 @@ func _process(delta):
 	$LaserLine.default_color = c
 	$Endpoint/Color.modulate = c
 
+@export var orbitTime: float = 0
+@export var doesOrbit: bool = false
+
 func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
 		hide()
 		return
+	
+	if doesOrbit:
+		position.y = 7.0 * sin(_initialAngle + orbitTime)
+		position.x = 7.0 * cos(_initialAngle + orbitTime)
+		orbitTime += delta
 	
 	Target.position = Target.position.normalized() * RANGE
 	

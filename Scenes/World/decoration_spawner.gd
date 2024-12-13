@@ -56,8 +56,8 @@ func _rollCollectable() -> Collectable.ResourcesEnum:
 	var metalWeight = 100
 	var ceramicWeight = 100
 	var syntheticWeight = 100
-	var OrganicWeight = 50
-	var CoreWeight = 1
+	var OrganicWeight = 75
+	var CoreWeight = 2
 	
 	var totalWeight = metalWeight + ceramicWeight + syntheticWeight + OrganicWeight + CoreWeight
 	var type := randi_range(0, totalWeight)

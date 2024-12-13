@@ -11,6 +11,8 @@ func _ready():
 	if UpgradesManager.Load("EnergyShield") < 1:
 		queue_free()
 		return
+	else:
+		show()
 	_time = 5.0
 	_trackedObjects = []
 

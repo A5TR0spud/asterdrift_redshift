@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=74 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -33,9 +33,13 @@
 [ext_resource type="Texture2D" uid="uid://ukvjlqahx3t2" path="res://Assets/Hangar/Upgrades/LaserArray.png" id="24_hjrx4"]
 [ext_resource type="Texture2D" uid="uid://bo7klbmjfd310" path="res://Assets/Hangar/Upgrades/LookAhead.png" id="25_8ow2g"]
 [ext_resource type="Texture2D" uid="uid://c6hbwa5nea0ru" path="res://Assets/Hangar/Upgrades/StrongLaser.png" id="26_jgp56"]
-[ext_resource type="Texture2D" uid="uid://n4wac5jj3rjk" path="res://Assets/Hangar/Upgrades/PointDefense.png" id="27_rgnbw"]
 [ext_resource type="Texture2D" uid="uid://c7rv3bfw1b6xv" path="res://Assets/Hangar/Upgrades/SpareBattery.png" id="28_2f4oq"]
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
+[ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
+[ext_resource type="Texture2D" uid="uid://jm8cdtguwlmt" path="res://Assets/Hangar/Upgrades/ChargedShield.png" id="34_h0tj1"]
+[ext_resource type="Texture2D" uid="uid://c8s2r5jhf2ttq" path="res://Assets/Hangar/Upgrades/Radar.png" id="37_52wf2"]
+[ext_resource type="Texture2D" uid="uid://b36ncbowy370n" path="res://Assets/Hangar/Upgrades/BetterRadar.png" id="38_mnyow"]
+[ext_resource type="Texture2D" uid="uid://wh0lqw7p3wct" path="res://Assets/Hangar/Upgrades/CoreAssembler.png" id="39_25wo3"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -58,9 +62,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_km3c3"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 3
-Ceramics = 9
-Synthetics = 6
+Metals = 2
+Ceramics = 6
+Synthetics = 4
 Organics = 0
 Components = 0
 
@@ -188,7 +192,7 @@ Metals = 16
 Ceramics = 2
 Synthetics = 8
 Organics = 4
-Components = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_yighi"]
 resource_local_to_scene = true
@@ -211,7 +215,7 @@ Components = 1
 [sub_resource type="Resource" id="Resource_fiaa4"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
+Metals = 48
 Ceramics = 16
 Synthetics = 16
 Organics = 0
@@ -225,15 +229,6 @@ Ceramics = 10
 Synthetics = 10
 Organics = 0
 Components = 0
-
-[sub_resource type="Resource" id="Resource_owulg"]
-resource_local_to_scene = true
-script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
-Organics = 0
-Components = 1
 
 [sub_resource type="Resource" id="Resource_4ho7x"]
 resource_local_to_scene = true
@@ -280,11 +275,29 @@ Synthetics = 8
 Organics = 0
 Components = 1
 
+[sub_resource type="Resource" id="Resource_7lodx"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_lf1nv"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
 [sub_resource type="Resource" id="Resource_d2k57"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 2
-Ceramics = 5
+Ceramics = 2
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -292,11 +305,38 @@ Components = 0
 [sub_resource type="Resource" id="Resource_ewipx"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 3
+Metals = 0
 Ceramics = 0
 Synthetics = 3
+Organics = 3
+Components = 0
+
+[sub_resource type="Resource" id="Resource_lid5j"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
 Organics = 0
 Components = 0
+
+[sub_resource type="Resource" id="Resource_wwfe1"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_dfjfp"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 32
+Ceramics = 32
+Synthetics = 32
+Organics = 32
+Components = 1
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -335,6 +375,7 @@ offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "run"
+metadata/_edit_use_anchors_ = true
 
 [node name="main menu" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -347,6 +388,7 @@ offset_right = 158.0
 offset_bottom = -10.0
 grow_vertical = 0
 text = "main menu"
+metadata/_edit_use_anchors_ = true
 
 [node name="ResourceCounter" parent="CanvasLayer/Control" instance=ExtResource("2_hd0wi")]
 layout_mode = 1
@@ -359,6 +401,32 @@ offset_right = 0.0999908
 offset_bottom = 0.139999
 Display = SubResource("Resource_cv8oa")
 ALWAYS_SHOW = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RESET" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -71.5
+offset_top = 16.5
+offset_right = -17.5
+offset_bottom = 47.5
+grow_horizontal = 0
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="CHEAT" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -71.5
+offset_top = 64.5
+offset_right = -12.5
+offset_bottom = 95.5
+grow_horizontal = 0
+text = "CHEAT"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -401,13 +469,11 @@ Cost = SubResource("Resource_km3c3")
 [node name="Booster" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-256, -240)
 NAME = "Stage 2"
-DESCRIPTION = "Holding shift reduces the ability to turn but
-greatly improves acceleration.
-Max speed is doubled."
+DESCRIPTION = "While holding shift, the ship accelerates forward at
+64 u/s² and max speed is increased by 128 u/s."
 INTERNAL_NAME = "Booster"
 PARENT_UPGRADE = NodePath("../Stage0")
 SPRITE = ExtResource("10_uhh3a")
-HIDE = true
 Cost = SubResource("Resource_nyedo")
 
 [node name="MovementMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -602,17 +668,6 @@ PARENT_UPGRADE = NodePath("../HeavyLaser")
 SPRITE = ExtResource("26_jgp56")
 Cost = SubResource("Resource_tyodo")
 
-[node name="PointDefense" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-256, 432)
-NAME = "Point Defense"
-DESCRIPTION = "An autonomous system fires small lasers at
-oncoming threats within laser range."
-INTERNAL_NAME = "PointDefense"
-PARENT_UPGRADE = NodePath("../StrongLaser")
-SPRITE = ExtResource("27_rgnbw")
-HIDE = true
-Cost = SubResource("Resource_owulg")
-
 [node name="SpareBattery" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-320, 160)
 NAME = "Spare Battery"
@@ -663,6 +718,27 @@ REQUIRE_MAX_PARENT = true
 SPRITE = ExtResource("32_8q8er")
 Cost = SubResource("Resource_u04gs")
 
+[node name="BackupPower" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-240, 64)
+NAME = "Backup Power"
+DESCRIPTION = "The shield first draws from a dedicated backup
+power reserve, for 15 extra energy."
+INTERNAL_NAME = "BackupShield"
+PARENT_UPGRADE = NodePath("../EnergyShield")
+SPRITE = ExtResource("33_4v4tu")
+Cost = SubResource("Resource_7lodx")
+
+[node name="ChargedShield" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-400, 64)
+NAME = "Charged Shield"
+DESCRIPTION = "Deflected bodies take 25% of their max health
+as damage.
+This effect has a cooldown of 0.2s."
+INTERNAL_NAME = "ChargedShield"
+PARENT_UPGRADE = NodePath("../EnergyShield")
+SPRITE = ExtResource("34_h0tj1")
+Cost = SubResource("Resource_lf1nv")
+
 [node name="BottomRight" type="Node2D" parent="Camera2D/TechTree"]
 
 [node name="Dish" parent="Camera2D/TechTree/BottomRight" instance=ExtResource("4_r883k")]
@@ -675,13 +751,41 @@ MAX_LEVEL = 2
 Cost = SubResource("Resource_d2k57")
 
 [node name="LookAhead" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(144, 64)
+position = Vector2(160, 64)
 NAME = "Research Engine"
 DESCRIPTION = "Increases look-ahead by 1."
 INTERNAL_NAME = "LookAhead"
 PARENT_UPGRADE = NodePath("../Dish")
 SPRITE = ExtResource("25_8ow2g")
 Cost = SubResource("Resource_ewipx")
+
+[node name="Radar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(64, 144)
+NAME = "Radar"
+DESCRIPTION = "Displays objects within 48 units."
+INTERNAL_NAME = "Radar"
+PARENT_UPGRADE = NodePath("../Dish")
+SPRITE = ExtResource("37_52wf2")
+Cost = SubResource("Resource_lid5j")
+
+[node name="BetterRadar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(64, 224)
+NAME = "Radar Recognition Systems"
+DESCRIPTION = "Objects within 64 units are displayed and classified."
+INTERNAL_NAME = "BetterRadar"
+PARENT_UPGRADE = NodePath("../Radar")
+SPRITE = ExtResource("38_mnyow")
+Cost = SubResource("Resource_wwfe1")
+
+[node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(256, 64)
+NAME = "Core Assembler"
+DESCRIPTION = "Every 2 minutes spent in a run, assembles
+a core."
+INTERNAL_NAME = "CoreAssembler"
+PARENT_UPGRADE = NodePath("../LookAhead")
+SPRITE = ExtResource("39_25wo3")
+Cost = SubResource("Resource_dfjfp")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -705,7 +809,10 @@ grow_vertical = 2
 texture = ExtResource("5_s07eq")
 expand_mode = 2
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/RESET" to="Camera2D/TechTree" method="_on_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/CHEAT" to="." method="_on_cheat_pressed"]
 [connection signal="reload_display" from="Camera2D/TechTree" to="." method="_on_tech_tree_reload_display"]

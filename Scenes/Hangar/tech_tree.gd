@@ -30,3 +30,17 @@ func _reloadChildren(_ignored):
 		UpgradesManager.Save("CameraMode", 1, true)
 	emit_signal("reload_display")
 	_onAllUpgradeChildren(self, _relVis)
+
+func _reset(child: Upgrade):
+	child.CurrentLevel = 0
+	UpgradesManager.Save(child.INTERNAL_NAME, 0)
+
+func _on_reset_pressed():
+	_onAllUpgradeChildren(self, _reset)
+	MaterialsManager.Mats.Ceramics = 0
+	MaterialsManager.Mats.Metals = 0
+	MaterialsManager.Mats.Components = 0
+	MaterialsManager.Mats.Synthetics = 0
+	MaterialsManager.Mats.Organics = 0
+	MaterialsManager.Save()
+	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")
