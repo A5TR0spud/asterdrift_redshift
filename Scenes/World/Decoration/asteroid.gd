@@ -16,3 +16,4 @@ func _on_killed():
 	p.COLLECTION = Collectable.ResourcesEnum.Core
 	p.global_position = global_position
 	get_tree().root.get_child(0).add_child(p)
+	queue_free()

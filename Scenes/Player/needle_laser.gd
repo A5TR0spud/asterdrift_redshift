@@ -117,8 +117,9 @@ func _physics_process(delta) -> void:
 				if UpgradesManager.Load("BetterTractorNeedle") > 0:
 					extraPower *= 1.5
 					var antiOrbit: Vector2 = -c.linear_velocity + Player.linear_velocity
-					var coe: float = absf(dir.dot(kbDir.rotated(deg_to_rad(90))))
-					kbDir = kbDir * (1.0 - coe) + antiOrbit * coe * 2.0
+					var coe: float = absf((dir + Player.linear_velocity).dot(c.linear_velocity + Player.linear_velocity))
+					antiOrbit = antiOrbit.normalized()
+					kbDir = kbDir * (coe) - antiOrbit * (1.0 - coe) * 2.0
 				c.apply_force(extraPower * FORCE * kbDir.normalized() * 0.08 * KNOCKBACK_COEF, point - c.global_position)
 			if c.isMineable:
 				_colTime += delta * MINING_COEF

@@ -16,6 +16,10 @@ var PowerDrain : float = 1.0
 @onready var ChargeStatus = $CanvasLayer/Control/EnergyMeter/EnergyStatuses/Charger
 @onready var ChargeIndicator = $CanvasLayer/Control/EnergyMeter/Charger
 
+@onready var DecorationSpawner = $DecorationSpawner
+
+@onready var WorldBoundsCollider = $WorldBounds/WorldBoundCollider
+
 func _ready():
 	RunHandler.StartRun()
 	EndScreen.hide()
@@ -95,3 +99,16 @@ func _on_new_run_pressed():
 func _on_return_to_hangar_pressed():
 	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")
+
+func _on_player_bounds_body_exited(body):
+	if body is PlayerClass:
+		for child: Entity in DecorationSpawner.get_children():
+			child.global_position = child.global_position - Player.global_position
+		Player.global_position = Vector2.ZERO
+
+func _on_world_bounds_body_exited(body):
+	if body is Entity:
+		var dir: Vector2 = Player.global_position - body.global_position
+		dir = dir.normalized()
+		var r: float = WorldBoundsCollider.shape.radius
+		body.global_position = Player.global_position + dir * (r - body.Radius - 1)

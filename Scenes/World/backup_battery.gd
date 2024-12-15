@@ -1,7 +1,7 @@
 extends ProgressBar
 
 func _ready():
-	if UpgradesManager.Load("BackupShield") < 1 || UpgradesManager.Load("EnergyShield") < 1:
+	if UpgradesManager.Load("BackupShield") < 1:
 		hide()
 		queue_free()
 	else:

@@ -42,7 +42,8 @@ static func EndRun() -> void:
 
 static func DamageBackup(damage: float) -> void:
 	var fuseLevel: int = UpgradesManager.Load("Fuse")
-	if fuseLevel > 0:
+	var shield: int = UpgradesManager.Load("EnergyShield")
+	if fuseLevel > 0 && shield > 0:
 		damage = minf(damage, 6 - fuseLevel)
 	if UpgradesManager.Load("BackupShield") > 0:
 		BackupBattery -= damage

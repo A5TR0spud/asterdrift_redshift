@@ -4,50 +4,29 @@ extends Node2D
 
 @onready var Player = $"../Player"
 
-@export var InitialCollectables : int = 15
-@export var CollectableInterval : float = 1.0
-@export var CollectableRadius : int = 1024
+@export var InitialCollectables : int = 380
 var CollectableScene = preload("res://Scenes/World/Decoration/collectable.tscn")
-var CollectableTimer : float = 0.0
 
-@export var InitialAsteroids : int = 15
-@export var AsteroidInterval : float = 2.0
-@export var AsteroidRadius : int = 1024
+@export var InitialAsteroids : int = 180
 var AsteroidScene = preload("res://Scenes/World/Decoration/asteroid.tscn")
-var AsteroidTimer : float = 0.0
 
 
 func _ready() -> void:
-	CollectableTimer = 0
 	for i in InitialCollectables:
-		_createCollectable(true)
-	AsteroidTimer = 0
-	for i in InitialAsteroids:
-		_createAsteroid(true)
-
-func _physics_process(delta) -> void:
-	if !RunHandler.IsInRun():
-		return
-	CollectableTimer += delta
-	if CollectableTimer > CollectableInterval:
 		_createCollectable()
-		CollectableTimer -= CollectableInterval
-	AsteroidTimer += delta
-	if AsteroidTimer > AsteroidInterval:
+	for i in InitialAsteroids:
 		_createAsteroid()
-		AsteroidTimer -= AsteroidInterval
 
-func _createCollectable(canBeInside : bool = false) -> void:
+func _createCollectable() -> void:
 	var instance : Collectable = CollectableScene.instantiate()
-	var dir : Vector2 = Vector2.RIGHT
-	dir = dir.rotated(randf_range(0, deg_to_rad(360)))
+	var pos : Vector2 = Vector2.ZERO
 	
 	instance.COLLECTION = _rollCollectable()
-	var offset = CollectableRadius
-	if canBeInside:
-		offset = randf_range(256, CollectableRadius / 2.0)
-	dir *= offset
-	instance.global_position = Player.global_position + dir
+	pos.x = randf_range(-2500, 2500)
+	pos.y = randf_range(-2500, 2500)
+	if pos.length() < 256:
+		pos = pos.normalized() * 256
+	instance.global_position = pos
 	add_child(instance)
 	
 	
@@ -81,18 +60,14 @@ func _rollCollectable() -> Collectable.ResourcesEnum:
 	#default, something borked
 	return Collectable.ResourcesEnum.Metal
 
-func _createAsteroid(canBeInside : bool = false) -> void:
+func _createAsteroid() -> void:
 	var instance: Entity = AsteroidScene.instantiate()
-	var dir : Vector2 = Vector2.RIGHT
-	dir = dir.rotated(randf_range(0, deg_to_rad(360)))
-
-	var offset = AsteroidRadius
-	if canBeInside:
-		offset = randf_range(10 + Player.Radius + instance.Radius, AsteroidRadius / 2.0)
-	else:
-		offset = randf_range(1024, AsteroidRadius)
-	dir *= offset
-	instance.global_position = Player.global_position + dir
+	var pos : Vector2 = Vector2.ZERO
+	pos.x = randf_range(-2500, 2500)
+	pos.y = randf_range(-2500, 2500)
+	if pos.length() < 256:
+		pos = pos.normalized() * 256
+	instance.global_position = pos
 	
 	var x = randf() * randf() * randf_range(-64, 64)
 	var y = randf() * randf() * randf_range(-64, 64)

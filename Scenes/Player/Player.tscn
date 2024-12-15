@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=41 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
@@ -21,28 +21,12 @@
 [ext_resource type="Shader" path="res://Shaders/AreaPulse.gdshader" id="16_requx"]
 [ext_resource type="Script" path="res://Scenes/Player/needle_laser_manager.gd" id="18_yrk6l"]
 [ext_resource type="Script" path="res://Scenes/Player/shield_projector.gd" id="22_himiw"]
+[ext_resource type="Shader" path="res://Shaders/PixelCircle.gdshader" id="23_743qs"]
+[ext_resource type="Script" path="res://Scenes/Player/stasis_bay.gd" id="23_ci0kv"]
 [ext_resource type="Texture2D" uid="uid://xgkoxrkco1x6" path="res://Assets/Ships/Upgrades/ShieldDeflection.png" id="23_p2wwt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
 radius = 13.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_biarr"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(5.5, 0, 0)
-direction = Vector3(0, 1, 0)
-spread = 0.0
-initial_velocity_min = 159.42
-initial_velocity_max = 159.42
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g1req"]
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 15.0
-initial_velocity_min = 115.94
-initial_velocity_max = 115.94
-gravity = Vector3(0, 0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qfng1"]
 radius = 32.0
@@ -99,6 +83,14 @@ shader_parameter/smooth_edge = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7d02"]
 radius = 24.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w37fk"]
+radius = 124.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrr8l"]
+shader = ExtResource("23_743qs")
+shader_parameter/color = Color(0.877333, 0.54, 1, 0.25098)
+shader_parameter/threshold = 0.49
+
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("Stats")]
 rotation = -1.5708
 disable_mode = 2
@@ -119,47 +111,62 @@ shape = SubResource("CircleShape2D_kl7m2")
 debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="ThrusterParticles" type="Node2D" parent="."]
-visible = false
 rotation = 1.5708
 
-[node name="Main" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(0, 15)
-process_material = SubResource("ParticleProcessMaterial_biarr")
-lifetime = 0.1
+[node name="Main" type="ColorRect" parent="ThrusterParticles"]
+offset_left = -5.0
+offset_top = 14.0
+offset_right = 5.0
+offset_bottom = 40.0
+color = Color(1, 1, 0.717647, 1)
 
-[node name="TopLeft" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(-6, -10)
-process_material = SubResource("ParticleProcessMaterial_g1req")
-lifetime = 0.1
+[node name="TopRight" type="ColorRect" parent="ThrusterParticles"]
+offset_left = 14.0
+offset_top = -2.0
+offset_right = 16.0
+offset_bottom = 25.0
+rotation = -1.57079
+color = Color(0.74902, 0.87451, 1, 1)
 
-[node name="Reverse" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(-9, -4)
+[node name="BottomRight" type="ColorRect" parent="ThrusterParticles"]
+offset_left = 5.0
+offset_top = 13.0
+offset_right = 7.0
+offset_bottom = 40.0
+rotation = -1.57079
+color = Color(0.74902, 0.87451, 1, 1)
+
+[node name="TopLeft" type="ColorRect" parent="ThrusterParticles"]
+offset_left = -14.0
+offset_top = -4.0
+offset_right = -12.0
+offset_bottom = 23.0
 rotation = 1.57079
-process_material = SubResource("ParticleProcessMaterial_g1req")
-lifetime = 0.1
+color = Color(0.74902, 0.87451, 1, 1)
 
-[node name="Reverse2" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(9, -5)
+[node name="BottomLeft" type="ColorRect" parent="ThrusterParticles"]
+offset_left = -5.0
+offset_top = 11.0
+offset_right = -3.0
+offset_bottom = 38.0
 rotation = 1.57079
-process_material = SubResource("ParticleProcessMaterial_g1req")
-lifetime = 0.1
+color = Color(0.74902, 0.87451, 1, 1)
 
-[node name="TopRight" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(6, -10)
+[node name="ReverseLeft" type="ColorRect" parent="ThrusterParticles"]
+offset_left = -8.0
+offset_top = -5.0
+offset_right = -6.0
+offset_bottom = 22.0
 rotation = 3.14159
-process_material = SubResource("ParticleProcessMaterial_g1req")
-lifetime = 0.1
+color = Color(0.74902, 0.87451, 1, 1)
 
-[node name="BottomLeft" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(-5, 11)
-process_material = SubResource("ParticleProcessMaterial_g1req")
-lifetime = 0.1
-
-[node name="BottomRight" type="GPUParticles2D" parent="ThrusterParticles"]
-position = Vector2(5, 11)
-rotation = -3.14159
-process_material = SubResource("ParticleProcessMaterial_g1req")
-lifetime = 0.1
+[node name="ReverseRight" type="ColorRect" parent="ThrusterParticles"]
+offset_left = 10.0
+offset_top = -5.0
+offset_right = 12.0
+offset_bottom = 22.0
+rotation = 3.14159
+color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="ShipVisuals" type="Node2D" parent="."]
 z_index = 100
@@ -194,7 +201,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -209,10 +216,6 @@ modulate = Color(0.2, 0.545098, 1, 1)
 z_index = 6
 texture = ExtResource("12_m2iy2")
 
-[node name="RCSTransform" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../RCS")
-update_rotation = false
-
 [node name="RCS" type="Node2D" parent="."]
 top_level = true
 script = ExtResource("13_mbj2r")
@@ -226,8 +229,22 @@ texture = ExtResource("13_lfga7")
 [node name="PlayerStatBlock" type="Node" parent="."]
 script = ExtResource("13_xyph6")
 
-[node name="HookTransform" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../Manipulator")
+[node name="RemoteTransforms" type="Node2D" parent="."]
+
+[node name="RCSTransform" type="RemoteTransform2D" parent="RemoteTransforms"]
+remote_path = NodePath("../../RCS")
+update_rotation = false
+
+[node name="HookTransform" type="RemoteTransform2D" parent="RemoteTransforms"]
+remote_path = NodePath("../../Manipulator")
+update_rotation = false
+
+[node name="LaserTransform" type="RemoteTransform2D" parent="RemoteTransforms"]
+remote_path = NodePath("../../NeedleLaserManager")
+update_rotation = false
+
+[node name="ShieldTransform" type="RemoteTransform2D" parent="RemoteTransforms"]
+remote_path = NodePath("../../ShieldProjector")
 update_rotation = false
 
 [node name="Manipulator" type="Node2D" parent="."]
@@ -247,7 +264,6 @@ debug_color = Color(0.785, 0.14, 1, 0)
 
 [node name="GrabBox" type="Area2D" parent="Manipulator"]
 z_index = 110
-position = Vector2(21.7049, 23.5138)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -258,12 +274,13 @@ shape = SubResource("CircleShape2D_fveu6")
 debug_color = Color(0.7, 0.583333, 0, 0)
 
 [node name="BaseSprite" type="Node2D" parent="Manipulator"]
-rotation = -0.745416
+visible = false
+rotation = -1.5708
 
 [node name="ArmSprite" type="Sprite2D" parent="Manipulator/BaseSprite"]
 self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
 z_index = -1
-position = Vector2(0, 19)
+position = Vector2(0, -13)
 scale = Vector2(0.999866, 0.999866)
 texture = SubResource("AtlasTexture_raptr")
 centered = false
@@ -310,13 +327,9 @@ offset = Vector2(0, 3)
 
 [node name="Extendo" type="Line2D" parent="Manipulator/BaseSprite"]
 z_index = -2
-points = PackedVector2Array(0, 0, 0, 20)
+points = PackedVector2Array(0, 0, 0, -12)
 width = 1.0
 default_color = Color(0.129412, 0.145098, 0.196078, 1)
-
-[node name="LaserTransform" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../NeedleLaserManager")
-update_rotation = false
 
 [node name="NeedleLaserManager" type="Node2D" parent="."]
 visible = false
@@ -337,6 +350,7 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
 [node name="MagnetArea" type="Area2D" parent="."]
+visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708
@@ -379,10 +393,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(10, 10)
 
-[node name="ShieldTransform" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../ShieldProjector")
-update_rotation = false
-
 [node name="ShieldProjector" type="Area2D" parent="."]
 visible = false
 top_level = true
@@ -404,6 +414,26 @@ texture = ExtResource("23_p2wwt")
 remote_path = NodePath("../BounceShield")
 update_rotation = false
 
+[node name="StasisBay" type="Node2D" parent="."]
+visible = false
+script = ExtResource("23_ci0kv")
+
+[node name="Area2D" type="Area2D" parent="StasisBay"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StasisBay/Area2D"]
+shape = SubResource("CircleShape2D_w37fk")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="ColorRect" type="ColorRect" parent="StasisBay"]
+material = SubResource("ShaderMaterial_lrr8l")
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="firemalasar" from="ShipVisuals" to="NeedleLaserManager" method="_on_ship_visuals_firemalasar"]
 [connection signal="body_entered" from="Manipulator/ManipulatorArea" to="Manipulator" method="_on_manipulator_area_body_entered"]
@@ -411,3 +441,4 @@ update_rotation = false
 [connection signal="body_entered" from="MagnetArea" to="MagnetArea" method="_on_body_entered"]
 [connection signal="body_exited" from="MagnetArea" to="MagnetArea" method="_on_body_exited"]
 [connection signal="body_entered" from="ShieldProjector" to="ShieldProjector" method="_on_body_entered"]
+[connection signal="body_exited" from="StasisBay/Area2D" to="StasisBay" method="_on_area_2d_body_exited"]

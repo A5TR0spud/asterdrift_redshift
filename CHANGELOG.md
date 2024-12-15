@@ -42,25 +42,12 @@
 	- Core remains 1
 - Adjusted textures of RCS, ARCS, CARCS, Movement Relative to Ship
 - Radar was a flawed design so has been removed
-- TODO:
-	- Change decoration system to spawn on beginning of round
-	- Add wrap-around in some arbitrary large area (rolling wrap-around):
-		- A box around the player teleports entities to the other side
-		- A box around the world teleports every entity including the player to the other side when the player reaches it
-		- Goal: seamless
-	- Add the ORC or GARDEN or whatever farm for organics as a prerequisite for the core assembler. it spawns organics in-run.
-	- Add the Stasis Bay: projects a net in a radius of 3 units that resources are very likely to never escape from.
-		- upgrade to magnet. requires core.
-	- (v8): Add the Exclusive: array[upgrade] property.
-		- Whenever this upgrade is toggled on, all upgrades in list are disabled.
-	- (v8): Add the Additional Prerequisites: array[upgrade] property to upgrades
-		- Displays in tooltip (eg. NAME \n DESC \n Requires: NAME2 \n COST)
-	- (v8): Adding the next upgrades to magnet will likely require magnet to cost a core:
-		- Add Pulsar as upgrade to magnet: push threats (causes gravity assist)
-		- Add Quasar as upgrade to magnet: pull valuables (causes falling orbit)
-		- Add Tether as upgrade somewhere in top right: pull valuables in to 8u from 32-10u. priority: far.
-			- Mutually exclusive with attractor beam
-		- Electron spin: upgrade to magnet requiring pulsar and quasar. buffs both. mutually exlusive with magnet.
+- Fixed lasers targetting the wrong object
+- All lasers now target the cursor when holding fire
+- Added wrap-around to player and world
+- Added temporary thruster visual FX
+- Changed generation to be beginning of run instead of also over time
+	- Objects are distributed evenly instead of radially
 
 ## indev Build 6
 

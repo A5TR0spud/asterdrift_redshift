@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=29 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -91,17 +91,25 @@ Synthetics = 0
 Organics = 0
 Components = 0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ud3dr"]
+size = Vector2(5000, 5000)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8lkey"]
+radius = 2500.0
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_1esw0")
 
 [node name="DecorationSpawner" type="Node2D" parent="."]
 script = ExtResource("8_fn0el")
-CollectableInterval = 0.5
-AsteroidInterval = 0.5
-AsteroidRadius = 2048
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
 z_index = 100
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../WorldBounds")
+update_rotation = false
+update_scale = false
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 ignore_rotation = false
@@ -344,6 +352,28 @@ text = "New Run"
 layout_mode = 2
 text = "Return To Hangar"
 
+[node name="PlayerBounds" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="PlayerBoundCollider" type="CollisionShape2D" parent="PlayerBounds"]
+shape = SubResource("RectangleShape2D_ud3dr")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="WorldBounds" type="Area2D" parent="."]
+top_level = true
+rotation = -1.5708
+collision_layer = 0
+collision_mask = 5
+monitorable = false
+
+[node name="WorldBoundCollider" type="CollisionShape2D" parent="WorldBounds"]
+shape = SubResource("CircleShape2D_8lkey")
+debug_color = Color(0.311596, 0.621709, 3.85046e-07, 0)
+
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/ReturnToHangar" to="." method="_on_return_to_hangar_pressed"]
+[connection signal="body_exited" from="PlayerBounds" to="." method="_on_player_bounds_body_exited"]
+[connection signal="body_exited" from="WorldBounds" to="." method="_on_world_bounds_body_exited"]

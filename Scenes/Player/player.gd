@@ -20,6 +20,10 @@ var _inputDir : Vector2
 @onready var RCSCursor := $RCS/RCSTarget
 @onready var RCS := $RCS
 
+var _BonusMaxSpeedFromBoost: float = 0
+var ThrustVector: Vector2 = Vector2.ZERO
+var ThrustRotate: float = 0
+
 func _ready():
 	_handleStats()
 	
@@ -46,9 +50,8 @@ func _ready():
 	ShipVisuals.OUTLINE_COLOR = toBe.outline
 	# move_and_collide(linear_velocity * delta)
 	# rotate(deg_to_rad(angular_velocity * delta))
-	pass
-
-var _BonusMaxSpeedFromBoost: float = 0
+	ThrustVector = Vector2.ZERO
+	ThrustRotate = 0
 
 func _physics_process(delta):
 	if IS_IN_GARAGE:
@@ -108,45 +111,59 @@ func _physics_process(delta):
 		elif Stats.Has_RCS && !Input.is_action_pressed("boost"):
 			#decceleration when no input (it's actually just inputting opposite your velocity)
 			_inputDir = -linear_velocity.normalized()
+			if _inputDir.length() > linear_velocity.length():
+				_inputDir = -linear_velocity
 		
 		targetLinearAccel = _inputDir * ACCEL_FORCE
 	
-	if CAN_MOVE && Stats.Has_RCS:
-		var angleToCursor : float = get_angle_to(RCSCursor.global_position)
-		var x := deg_to_rad(TURN_ACCEL_DEGREES)
-		var coef := 4.5 if Stats.Has_Better_RCS else 3.5
-		var angle_landing_if_deccel_now := angular_velocity / coef
-		var dif := angle_difference(angleToCursor, angle_landing_if_deccel_now)
-		if absf(dif) < deg_to_rad(5):
-			targetAngularAccel = -angular_velocity * delta * coef
-		elif dif < 0:
-			targetAngularAccel += coef * x * delta
-		elif dif > 0:
-			targetAngularAccel -= coef * x * delta
-		#targetAngularAccel = clampf(targetAngularAccel, -absf(angleToCursor) * delta, absf(angleToCursor) * delta)
+		if Stats.Has_RCS:
+			var angleToCursor : float = get_angle_to(RCSCursor.global_position)
+			var x := deg_to_rad(TURN_ACCEL_DEGREES)
+			var coef := 4.5 if Stats.Has_Better_RCS else 3.5
+			var angle_landing_if_deccel_now := angular_velocity / coef
+			var dif := angle_difference(angleToCursor, angle_landing_if_deccel_now)
+			if absf(dif) < deg_to_rad(5):
+				targetAngularAccel = -angular_velocity * delta * coef
+			elif dif < 0:
+				targetAngularAccel += coef * x * delta
+			elif dif > 0:
+				targetAngularAccel -= coef * x * delta
+		
+		if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
+			_BonusMaxSpeedFromBoost += 64 * delta
+			if _BonusMaxSpeedFromBoost > 128:
+				_BonusMaxSpeedFromBoost = 128
+			apply_force(Vector2(64, 0).rotated(rotation))
+		elif _BonusMaxSpeedFromBoost > 0:
+			_BonusMaxSpeedFromBoost -= 64 * delta
+			if _BonusMaxSpeedFromBoost < 0:
+				_BonusMaxSpeedFromBoost = 0
 
-	if targetLinearAccel.length() > ACCEL_FORCE:
-		targetLinearAccel = targetLinearAccel.normalized() * ACCEL_FORCE
+		if targetLinearAccel.length() > ACCEL_FORCE:
+			targetLinearAccel = targetLinearAccel.normalized() * ACCEL_FORCE
+		
+		apply_force(targetLinearAccel)
+		
+		angular_velocity += deg_to_rad(clampf(rad_to_deg(targetAngularAccel), -TURN_ACCEL_DEGREES, TURN_ACCEL_DEGREES))
+		angular_velocity = deg_to_rad(clampf(rad_to_deg(angular_velocity), -absf(TURN_MAX_SPEED_DEGREES), absf(TURN_MAX_SPEED_DEGREES)))
+		
+		if linear_velocity.length() > GetCurrentMaxSpeed():
+			linear_velocity = linear_velocity.normalized() * GetCurrentMaxSpeed()
 	
-	apply_force(targetLinearAccel)
-	
-	angular_velocity += deg_to_rad(clampf(rad_to_deg(targetAngularAccel), -TURN_ACCEL_DEGREES, TURN_ACCEL_DEGREES))
-	angular_velocity = deg_to_rad(clampf(rad_to_deg(angular_velocity), -absf(TURN_MAX_SPEED_DEGREES), absf(TURN_MAX_SPEED_DEGREES)))
-	
-	if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
-		_BonusMaxSpeedFromBoost += 64 * delta
-		if _BonusMaxSpeedFromBoost > 128:
-			_BonusMaxSpeedFromBoost = 128
-		apply_force(Vector2(64, 0).rotated(rotation))
-	elif _BonusMaxSpeedFromBoost > 0:
-		_BonusMaxSpeedFromBoost -= 64 * delta
-		if _BonusMaxSpeedFromBoost < 0:
-			_BonusMaxSpeedFromBoost = 0
-	
-	if linear_velocity.length() > GetCurrentMaxSpeed():
-		linear_velocity = linear_velocity.normalized() * GetCurrentMaxSpeed()
-	
-	#$ThrusterParticles/Main.emitting = targetLinearAccel.angle_to(Vector2(0, -1)) < deg_to_rad(1) && targetLinearAccel.length() > 5
+	ThrustVector += targetLinearAccel.rotated(-rotation) * 0.4
+	ThrustVector *= 0.5
+	ThrustRotate += targetAngularAccel
+	ThrustRotate *= 0.9
+	var tR: float = ThrustRotate * 10
+	var tLHS: float = maxf(tR, 0)
+	var tRHS: float = maxf(-tR, 0)
+	$ThrusterParticles/Main.size.y = maxf(ThrustVector.x, 0)
+	$ThrusterParticles/ReverseLeft.size.y = maxf(-ThrustVector.x * 0.7, 0)
+	$ThrusterParticles/ReverseRight.size.y = maxf(-ThrustVector.x * 0.7, 0)
+	$ThrusterParticles/TopRight.size.y = maxf(-ThrustVector.y, 0) * 0.4 + tRHS
+	$ThrusterParticles/BottomRight.size.y = maxf(-ThrustVector.y, 0) * 0.4 + tLHS
+	$ThrusterParticles/TopLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tLHS
+	$ThrusterParticles/BottomLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tRHS
 
 func GetCurrentMaxSpeed() -> float:
 	return MAX_SPEED + _BonusMaxSpeedFromBoost

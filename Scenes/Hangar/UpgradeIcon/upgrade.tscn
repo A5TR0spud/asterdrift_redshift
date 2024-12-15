@@ -122,8 +122,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = 0.0130021
-scale = Vector2(1.0029, 1.0029)
+rotation = 0.0174185
+scale = Vector2(1.01895, 1.01895)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
