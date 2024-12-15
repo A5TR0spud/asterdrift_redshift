@@ -12,8 +12,6 @@ class_name PlayerClass
 @export var CAN_MOVE : bool = true
 @export @onready var Stats : PlayerStatBlock = $PlayerStatBlock
 
-signal damage(amount: float)
-
 var _inputDir : Vector2
 
 @onready var ShipVisuals = $ShipVisuals
@@ -243,4 +241,4 @@ func _on_body_entered(body : PhysicsBody2D):
 		#print("Abrasive: ", abrasion)
 		#print("Bludgeon: ", blunt)
 		if ddd > 0:
-			emit_signal("damage", ddd)
+			RunHandler.DamageBackup(ddd)

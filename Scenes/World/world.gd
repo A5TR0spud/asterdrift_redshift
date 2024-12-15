@@ -13,6 +13,8 @@ var PowerDrain : float = 1.0
 @onready var BackupShieldBar = $CanvasLayer/Control/EnergyMeter/BackupBattery
 @onready var SolarStatus = $CanvasLayer/Control/EnergyMeter/EnergyStatuses/Solar
 @onready var SolarIndicator = $CanvasLayer/Control/EnergyMeter/Solar
+@onready var ChargeStatus = $CanvasLayer/Control/EnergyMeter/EnergyStatuses/Charger
+@onready var ChargeIndicator = $CanvasLayer/Control/EnergyMeter/Charger
 
 func _ready():
 	RunHandler.StartRun()
@@ -23,16 +25,40 @@ func _ready():
 	TimeBar.size.x = MaxTime * 16
 	_updateDisplay()
 
+var _shouldReverseCharge: bool = false
 func _physics_process(delta):
 	if RunHandler.TimeLeft > MaxTime * 0.7 && UpgradesManager.Load("SolarPanel") > 0:
 		PowerDrain = 0.7
-		RunHandler.ChargeBackup(delta)
+		if UpgradesManager.Load("ReverseCharger") > 0:
+			RunHandler.ChargeBackup(delta)
 		SolarStatus.show()
 		SolarIndicator.show()
 	else:
 		PowerDrain = 1.0
 		SolarStatus.hide()
 		SolarIndicator.hide()
+	ChargeIndicator.visible = RunHandler.BackupBattery > 0 && !_shouldReverseCharge && UpgradesManager.Load("ReverseCharger") > 0
+	if RunHandler.BackupBattery > 0 && RunHandler.TimeLeft <= 5 && UpgradesManager.Load("ReverseCharger") > 0:
+		_shouldReverseCharge = true
+	if RunHandler.TimeLeft >= MaxTime:
+		_shouldReverseCharge = false
+	if _shouldReverseCharge && RunHandler.BackupBattery > 0:
+		ChargeStatus.show()
+		var _batteryToLose: float = 0
+		var _timeToAdd: float = 0
+		#its only +2 per second, because of the ratio and then -1 from time
+		_batteryToLose = delta * 2.0 * 3.0
+		if _batteryToLose > RunHandler.BackupBattery:
+			_batteryToLose = RunHandler.BackupBattery
+			_shouldReverseCharge = false
+		#ratio
+		_timeToAdd = 0.5 * _batteryToLose
+		RunHandler.BackupBattery -= _batteryToLose
+		RunHandler.TimeLeft += _timeToAdd
+	else:
+		_shouldReverseCharge = false
+	if !_shouldReverseCharge:
+		ChargeStatus.hide()
 	if RunHandler.IsInRun():
 		RunHandler.TimeLeft -= delta * PowerDrain
 		RunHandler.TimeSpent += delta
@@ -69,6 +95,3 @@ func _on_new_run_pressed():
 func _on_return_to_hangar_pressed():
 	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")
-
-func _on_player_damage(amount):
-	RunHandler.TimeLeft -= amount

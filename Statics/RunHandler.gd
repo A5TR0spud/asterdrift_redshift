@@ -15,7 +15,10 @@ static func StartRun() -> void:
 		return
 	_is_running = true
 	TimeSpent = 0.0
-	BackupBattery = 15
+	if UpgradesManager.Load("BackupShield"):
+		BackupBattery = 15
+	else:
+		BackupBattery = 0
 	if Mats == null:
 		Mats = Materials.new()
 	Mats.Metals = 0
@@ -38,6 +41,9 @@ static func EndRun() -> void:
 	MaterialsManager.Save()
 
 static func DamageBackup(damage: float) -> void:
+	var fuseLevel: int = UpgradesManager.Load("Fuse")
+	if fuseLevel > 0:
+		damage = minf(damage, 6 - fuseLevel)
 	if UpgradesManager.Load("BackupShield") > 0:
 		BackupBattery -= damage
 		if BackupBattery < 0:
@@ -47,6 +53,9 @@ static func DamageBackup(damage: float) -> void:
 		TimeLeft -= damage
 
 static func ChargeBackup(amount: float) -> void:
+	if UpgradesManager.Load("BackupShield") < 1:
+		BackupBattery = 0
+		return
 	BackupBattery += amount
 	if BackupBattery > 20:
 			BackupBattery = 20

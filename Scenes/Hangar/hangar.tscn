@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=87 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -45,6 +45,8 @@
 [ext_resource type="Texture2D" uid="uid://b36ncbowy370n" path="res://Assets/Hangar/Upgrades/BetterRadar.png" id="38_mnyow"]
 [ext_resource type="Texture2D" uid="uid://wh0lqw7p3wct" path="res://Assets/Hangar/Upgrades/CoreAssembler.png" id="39_25wo3"]
 [ext_resource type="Script" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
+[ext_resource type="Texture2D" uid="uid://d4e1bkjul6amk" path="res://Assets/Hangar/Upgrades/Fuse.png" id="42_whiub"]
+[ext_resource type="Texture2D" uid="uid://cley641x2bt1r" path="res://Assets/Hangar/Upgrades/ReverseCharger.png" id="43_qb64a"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -313,10 +315,10 @@ Components = 1
 [sub_resource type="Resource" id="Resource_7lodx"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 48
-Ceramics = 24
-Synthetics = 24
-Organics = 8
+Metals = 28
+Ceramics = 16
+Synthetics = 16
+Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_lf1nv"]
@@ -326,6 +328,24 @@ Metals = 24
 Ceramics = 0
 Synthetics = 6
 Organics = 6
+Components = 0
+
+[sub_resource type="Resource" id="Resource_ndgfn"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 16
+Ceramics = 14
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_hk1ki"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 58
+Ceramics = 28
+Synthetics = 32
+Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_d2k57"]
@@ -436,6 +456,7 @@ offset_left = 32.5
 offset_top = 31.5
 offset_right = 0.0999908
 offset_bottom = 0.139999
+mouse_filter = 2
 Display = SubResource("Resource_cv8oa")
 ALWAYS_SHOW = true
 metadata/_edit_use_anchors_ = true
@@ -468,10 +489,11 @@ text = "CHEAT"
 [node name="CoreAssembler" type="GridContainer" parent="CanvasLayer/Control"]
 layout_direction = 1
 layout_mode = 1
-offset_left = 24.5
-offset_top = 176.5
-offset_right = 301.5
-offset_bottom = 288.5
+offset_left = 25.0
+offset_top = 177.0
+offset_right = 97.0
+offset_bottom = 289.0
+mouse_filter = 2
 theme_override_constants/v_separation = -19
 script = ExtResource("5_k7a2t")
 
@@ -601,7 +623,7 @@ Cost = SubResource("Resource_daqij")
 [node name="Solar" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-96, -240)
 NAME = "Solar Cell"
-DESCRIPTION = "Reduces power drain to x0.7 while above 70% energy."
+DESCRIPTION = "Reduces energy drain by 30% while above 70% energy."
 INTERNAL_NAME = "SolarPanel"
 PARENT_UPGRADE = NodePath("../ShipBattery")
 SPRITE = ExtResource("19_u4yan")
@@ -818,11 +840,13 @@ HIDE = true
 Cost = SubResource("Resource_pab5s")
 
 [node name="EnergyShield" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-320, 64)
+position = Vector2(-416, 144)
 NAME = "Shield Projector"
 DESCRIPTION = "When dangerous objects enter an area within 1.5
 units of your ship, they get deflected at the cost of
-energy based on force required to deflect."
+energy based on force required to deflect.
+Bodies cannot be deflected again if they stay within
+range."
 INTERNAL_NAME = "EnergyShield"
 PARENT_UPGRADE = NodePath("../Laser/SpareBattery")
 REQUIRE_MAX_PARENT = true
@@ -830,19 +854,17 @@ SPRITE = ExtResource("32_8q8er")
 Cost = SubResource("Resource_u04gs")
 
 [node name="BackupPower" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-240, 64)
+position = Vector2(-416, 64)
 NAME = "Backup Power"
 DESCRIPTION = "The shield first draws from a dedicated backup
-power reserve, for 15 extra energy.
-If Solar Cell is active, the battery recharges
-at 1e/s, up to 20 energy."
+power reserve, for 15 extra energy."
 INTERNAL_NAME = "BackupShield"
 PARENT_UPGRADE = NodePath("../EnergyShield")
 SPRITE = ExtResource("33_4v4tu")
 Cost = SubResource("Resource_7lodx")
 
 [node name="ChargedShield" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-400, 64)
+position = Vector2(-416, 224)
 NAME = "Charged Shield"
 DESCRIPTION = "Deflected bodies take 25% of their max health
 as damage."
@@ -850,6 +872,30 @@ INTERNAL_NAME = "ChargedShield"
 PARENT_UPGRADE = NodePath("../EnergyShield")
 SPRITE = ExtResource("34_h0tj1")
 Cost = SubResource("Resource_lf1nv")
+
+[node name="Fuse" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-336, 64)
+NAME = "Industrial Fuse"
+DESCRIPTION = "The energy consumed by the shield is capped at
+5 (-1 per level) energy per hit."
+INTERNAL_NAME = "Fuse"
+PARENT_UPGRADE = NodePath("../BackupPower")
+SPRITE = ExtResource("42_whiub")
+MAX_LEVEL = 3
+Cost = SubResource("Resource_ndgfn")
+
+[node name="ReverseCharger" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-256, 64)
+NAME = "Alternating Charger"
+DESCRIPTION = "If Solar Cell is active, the backup battery
+recharges at 1e/s, up to 20 energy.
+When energy is reduced below 5,
+backup power is rapidly converted in a
+2:1 ratio."
+INTERNAL_NAME = "ReverseCharger"
+PARENT_UPGRADE = NodePath("../Fuse")
+SPRITE = ExtResource("43_qb64a")
+Cost = SubResource("Resource_hk1ki")
 
 [node name="BottomRight" type="Node2D" parent="Camera2D/TechTree"]
 

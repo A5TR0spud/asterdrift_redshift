@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=27 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scenes/World/backup_battery.gd" id="8_fgev5"]
 [ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="9_ik24p"]
+[ext_resource type="Texture2D" uid="uid://ydg6vos31dk" path="res://Assets/UI/Status/ReverseCharge.png" id="9_r5t40"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_wix40"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbiqx"]
@@ -36,6 +37,11 @@ border_color = Color(0.239216, 0.458824, 0.815686, 1)
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdm81"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 5
+border_color = Color(0.85098, 0.45098, 0.415686, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehodu"]
 bg_color = Color(0.85098, 0.45098, 0.415686, 1)
@@ -183,6 +189,12 @@ layout_mode = 2
 texture = ExtResource("8_awsfj")
 expand_mode = 2
 
+[node name="Charger" type="TextureRect" parent="CanvasLayer/Control/EnergyMeter/EnergyStatuses"]
+z_index = 6
+layout_mode = 2
+texture = ExtResource("9_r5t40")
+expand_mode = 2
+
 [node name="Solar" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter"]
 layout_mode = 1
 anchors_preset = 15
@@ -195,6 +207,20 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_tguol")
 step = 1.0
 value = 30.0
 fill_mode = 1
+show_percentage = false
+
+[node name="Charger" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 80.0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_insix")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mdm81")
+min_value = 1.0
+max_value = 1.0
+step = 1.0
+value = 1.0
 show_percentage = false
 
 [node name="EnergyLabel" type="Label" parent="CanvasLayer/Control/EnergyMeter"]
@@ -318,7 +344,6 @@ text = "New Run"
 layout_mode = 2
 text = "Return To Hangar"
 
-[connection signal="damage" from="Player" to="." method="_on_player_damage"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/ReturnToHangar" to="." method="_on_return_to_hangar_pressed"]

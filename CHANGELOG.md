@@ -11,6 +11,8 @@
 - Implemented Backup Power
 - Added Solar Cell upgrade to On-Board Battery
 - Added Juniper Beam upgrade to Attractor Beam
+- Added Industrial Fuse upgrade to Backup Power
+- Added Alternating Charger upgrade to Industrial Fuse
 - Fixed asteroid collision damage considering mass in a strange way, resulting in gentle collisions killing the player
 - Fixed mentions of units in RCS's upgrade path (divided by 16)
 - Electromagnet no longer costs a core.
