@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=83 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="4_fiej8"]
 [ext_resource type="Script" path="res://Scenes/Hangar/draggable_camera.gd" id="4_j8p1n"]
 [ext_resource type="PackedScene" uid="uid://bb44a3o0sq4ge" path="res://Scenes/Hangar/UpgradeIcon/upgrade.tscn" id="4_r883k"]
+[ext_resource type="Script" path="res://Scenes/Hangar/core_assembler.gd" id="5_k7a2t"]
 [ext_resource type="Texture2D" uid="uid://bi6d4udy3pjya" path="res://Assets/Backdrops/BlueprintTile.png" id="5_s07eq"]
 [ext_resource type="Texture2D" uid="uid://ctu35osk4wl32" path="res://Assets/Hangar/Upgrades/RotationSpeed1.png" id="7_3ljve"]
 [ext_resource type="Texture2D" uid="uid://cxwkybickfaic" path="res://Assets/Hangar/Upgrades/Manipulator.png" id="8_7rt47"]
@@ -27,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://irjdq2ru1h05" path="res://Assets/Hangar/Upgrades/HeavyLaser.png" id="16_2gfpv"]
 [ext_resource type="Texture2D" uid="uid://dtsoygs7q2w3s" path="res://Assets/Hangar/Upgrades/DualLaser.png" id="17_06lla"]
 [ext_resource type="Texture2D" uid="uid://dggf2ns8ak2mc" path="res://Assets/Hangar/Upgrades/MiningLaser.png" id="18_j10x7"]
+[ext_resource type="Texture2D" uid="uid://u4jg76311k4w" path="res://Assets/Hangar/Upgrades/SolarPanel.png" id="19_u4yan"]
 [ext_resource type="Texture2D" uid="uid://bkhf6dlxxhsdn" path="res://Assets/Hangar/Upgrades/Dish.png" id="21_5xmpu"]
 [ext_resource type="Texture2D" uid="uid://5d7gm0qm5d8b" path="res://Assets/Hangar/Upgrades/ReflectiveHull.png" id="22_utiiq"]
 [ext_resource type="Texture2D" uid="uid://cqg3hip1oekg3" path="res://Assets/Hangar/Upgrades/AttractorNeedle.png" id="23_pbsqd"]
@@ -37,9 +39,12 @@
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 [ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
 [ext_resource type="Texture2D" uid="uid://jm8cdtguwlmt" path="res://Assets/Hangar/Upgrades/ChargedShield.png" id="34_h0tj1"]
+[ext_resource type="Texture2D" uid="uid://povgcvf0pe2w" path="res://Assets/Hangar/Upgrades/Apollo.png" id="34_o3wij"]
+[ext_resource type="Texture2D" uid="uid://cg8nfm2x5ff0c" path="res://Assets/Hangar/Upgrades/TractorBeam.png" id="35_3wp7d"]
 [ext_resource type="Texture2D" uid="uid://c8s2r5jhf2ttq" path="res://Assets/Hangar/Upgrades/Radar.png" id="37_52wf2"]
 [ext_resource type="Texture2D" uid="uid://b36ncbowy370n" path="res://Assets/Hangar/Upgrades/BetterRadar.png" id="38_mnyow"]
 [ext_resource type="Texture2D" uid="uid://wh0lqw7p3wct" path="res://Assets/Hangar/Upgrades/CoreAssembler.png" id="39_25wo3"]
+[ext_resource type="Script" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -49,6 +54,9 @@ Ceramics = 0
 Synthetics = 0
 Organics = 0
 Components = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pwxsx"]
+font_size = 31
 
 [sub_resource type="Resource" id="Resource_axi6p"]
 resource_local_to_scene = true
@@ -75,7 +83,7 @@ Metals = 10
 Ceramics = 10
 Synthetics = 0
 Organics = 10
-Components = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_gjcie"]
 resource_local_to_scene = true
@@ -111,6 +119,15 @@ Metals = 5
 Ceramics = 20
 Synthetics = 0
 Organics = 10
+Components = 0
+
+[sub_resource type="Resource" id="Resource_msins"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 16
+Ceramics = 16
+Synthetics = 14
+Organics = 4
 Components = 0
 
 [sub_resource type="Resource" id="Resource_0idft"]
@@ -239,6 +256,24 @@ Synthetics = 0
 Organics = 2
 Components = 0
 
+[sub_resource type="Resource" id="Resource_c8v8h"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 256
+Ceramics = 128
+Synthetics = 64
+Organics = 32
+Components = 4
+
+[sub_resource type="Resource" id="Resource_fd43s"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 36
+Ceramics = 24
+Synthetics = 12
+Organics = 0
+Components = 0
+
 [sub_resource type="Resource" id="Resource_7f0nr"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
@@ -278,19 +313,19 @@ Components = 1
 [sub_resource type="Resource" id="Resource_7lodx"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
-Organics = 0
+Metals = 48
+Ceramics = 24
+Synthetics = 24
+Organics = 8
 Components = 0
 
 [sub_resource type="Resource" id="Resource_lf1nv"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
+Metals = 24
 Ceramics = 0
-Synthetics = 0
-Organics = 0
+Synthetics = 6
+Organics = 6
 Components = 0
 
 [sub_resource type="Resource" id="Resource_d2k57"]
@@ -314,19 +349,19 @@ Components = 0
 [sub_resource type="Resource" id="Resource_lid5j"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
+Metals = 5
+Ceramics = 5
+Synthetics = 5
 Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_wwfe1"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
-Organics = 0
+Metals = 5
+Ceramics = 15
+Synthetics = 5
+Organics = 15
 Components = 0
 
 [sub_resource type="Resource" id="Resource_dfjfp"]
@@ -336,12 +371,14 @@ Metals = 32
 Ceramics = 32
 Synthetics = 32
 Organics = 32
-Components = 2
+Components = 1
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("42_h2q48")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 custom_minimum_size = Vector2(1, 1)
@@ -427,6 +464,44 @@ offset_right = -12.5
 offset_bottom = 95.5
 grow_horizontal = 0
 text = "CHEAT"
+
+[node name="CoreAssembler" type="GridContainer" parent="CanvasLayer/Control"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 24.5
+offset_top = 176.5
+offset_right = 301.5
+offset_bottom = 288.5
+theme_override_constants/v_separation = -19
+script = ExtResource("5_k7a2t")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/CoreAssembler"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+texture = ExtResource("39_25wo3")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/CoreAssembler"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "5:00"
+label_settings = SubResource("LabelSettings_pwxsx")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+script = ExtResource("42_h2q48")
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_s07eq")
+expand_mode = 2
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -522,6 +597,15 @@ INTERNAL_NAME = "Stage0"
 PARENT_UPGRADE = NodePath("../AdvancedRCS")
 SPRITE = ExtResource("14_ddjc3")
 Cost = SubResource("Resource_daqij")
+
+[node name="Solar" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-96, -240)
+NAME = "Solar Cell"
+DESCRIPTION = "Reduces power drain to x0.7 while above 70% energy."
+INTERNAL_NAME = "SolarPanel"
+PARENT_UPGRADE = NodePath("../ShipBattery")
+SPRITE = ExtResource("19_u4yan")
+Cost = SubResource("Resource_msins")
 
 [node name="TopRight" type="Node2D" parent="Camera2D/TechTree"]
 
@@ -649,8 +733,8 @@ position = Vector2(-256, 336)
 NAME = "Laser Array"
 DESCRIPTION = "Refracts 2 lasers into 4!
 Targets the closest, farthest, slowest, and fastest objects in range.
-Damage: 4x0.6.
-Knockback: 4x0.75.
+Damage: 4x0.6
+Knockback: 4x0.75
 Mining Speed: 4x0.6"
 INTERNAL_NAME = "LaserArray"
 PARENT_UPGRADE = NodePath("../DoubleLaser")
@@ -677,6 +761,33 @@ PARENT_UPGRADE = NodePath("../AutoPhoton")
 SPRITE = ExtResource("28_2f4oq")
 MAX_LEVEL = 2
 Cost = SubResource("Resource_4ho7x")
+
+[node name="Apollo" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-160, 432)
+NAME = "Apollo"
+DESCRIPTION = "From 4 to 7!
+Targets the closest, farthest, slowest, fastest, focused, and closeset valuable objects in range.
+Damage: 7x0.6
+Knockback: 7x0.75
+Mining Speed: 7x0.6
+Range: +2u."
+INTERNAL_NAME = "Apollo"
+PARENT_UPGRADE = NodePath("../LaserArray")
+HIDE_WITHOUT_PARENT = true
+SPRITE = ExtResource("34_o3wij")
+HIDE = true
+Cost = SubResource("Resource_c8v8h")
+
+[node name="TractorBeam" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-64, 416)
+NAME = "Juniper Beam"
+DESCRIPTION = "The beam applies a resistance to
+avoid gravity-assisting resources.
+Attraction to resources is increased x1.5."
+INTERNAL_NAME = "BetterTractorNeedle"
+PARENT_UPGRADE = NodePath("../TractorNeedle")
+SPRITE = ExtResource("35_3wp7d")
+Cost = SubResource("Resource_fd43s")
 
 [node name="AbrResistance" parent="Camera2D/TechTree/BottomLeft" instance=ExtResource("4_r883k")]
 position = Vector2(-64, 64)
@@ -722,7 +833,9 @@ Cost = SubResource("Resource_u04gs")
 position = Vector2(-240, 64)
 NAME = "Backup Power"
 DESCRIPTION = "The shield first draws from a dedicated backup
-power reserve, for 15 extra energy."
+power reserve, for 15 extra energy.
+If Solar Cell is active, the battery recharges
+at 1e/s, up to 20 energy."
 INTERNAL_NAME = "BackupShield"
 PARENT_UPGRADE = NodePath("../EnergyShield")
 SPRITE = ExtResource("33_4v4tu")
@@ -732,8 +845,7 @@ Cost = SubResource("Resource_7lodx")
 position = Vector2(-400, 64)
 NAME = "Charged Shield"
 DESCRIPTION = "Deflected bodies take 25% of their max health
-as damage.
-This effect has a cooldown of 0.2s."
+as damage."
 INTERNAL_NAME = "ChargedShield"
 PARENT_UPGRADE = NodePath("../EnergyShield")
 SPRITE = ExtResource("34_h0tj1")
@@ -760,56 +872,34 @@ SPRITE = ExtResource("25_8ow2g")
 Cost = SubResource("Resource_ewipx")
 
 [node name="Radar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(64, 144)
+position = Vector2(64, 256)
 NAME = "Radar"
 DESCRIPTION = "Displays objects within 48 units."
 INTERNAL_NAME = "Radar"
 PARENT_UPGRADE = NodePath("../Dish")
 SPRITE = ExtResource("37_52wf2")
+HIDE = true
 Cost = SubResource("Resource_lid5j")
 
 [node name="BetterRadar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(64, 224)
+position = Vector2(64, 336)
 NAME = "Radar Recognition Systems"
 DESCRIPTION = "Objects within 64 units are displayed and classified."
 INTERNAL_NAME = "BetterRadar"
 PARENT_UPGRADE = NodePath("../Radar")
 SPRITE = ExtResource("38_mnyow")
+HIDE = true
 Cost = SubResource("Resource_wwfe1")
 
 [node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(256, 64)
 NAME = "Core Assembler"
-DESCRIPTION = "Every 5 minutes spent in a run, assembles
+DESCRIPTION = "Every 5 minutes spent in a run assembles
 a core."
 INTERNAL_NAME = "CoreAssembler"
 PARENT_UPGRADE = NodePath("../LookAhead")
 SPRITE = ExtResource("39_25wo3")
 Cost = SubResource("Resource_dfjfp")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-offset_left = -672.0
-offset_top = -384.0
-offset_right = 704.0
-offset_bottom = 480.0
-texture = ExtResource("5_s07eq")
-expand_mode = 2
-stretch_mode = 1
-
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="TextureRect" type="TextureRect" parent="Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_s07eq")
-expand_mode = 2
-stretch_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

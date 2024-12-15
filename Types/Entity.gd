@@ -33,6 +33,7 @@ func Damage(amount: float) -> bool:
 
 func Kill() -> void:
 	emit_signal("killed")
+	await killed
 	queue_free()
 
 func RollMineable() -> Materials.Mats:

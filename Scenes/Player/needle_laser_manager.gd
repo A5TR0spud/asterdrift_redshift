@@ -110,6 +110,8 @@ var _closestEntity: Entity = null
 var _farthestEntity: Entity = null
 var _fastestEntity: Entity = null
 var _slowestEntity: Entity = null
+var _focusedEntity: Entity = null
+var _valuableEntity: Entity = null
 
 func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
@@ -126,6 +128,10 @@ func _physics_process(delta) -> void:
 		_fastestEntity = null
 	if !is_instance_valid(_slowestEntity):
 		_slowestEntity = null
+	if !is_instance_valid(_focusedEntity):
+		_focusedEntity = null
+	if !is_instance_valid(_valuableEntity):
+		_valuableEntity = null
 	
 	if _closestEntity != null:
 		if _closestEntity.global_position.distance_to(global_position) > RANGE + _closestEntity.Radius:
@@ -147,6 +153,16 @@ func _physics_process(delta) -> void:
 			_slowestEntity = null
 		elif _slowestEntity.IgnoredByLaser:
 			_slowestEntity = null
+	if _focusedEntity != null:
+		if _focusedEntity.global_position.distance_to(global_position) > RANGE + _focusedEntity.Radius:
+			_focusedEntity = null
+		elif _focusedEntity.IgnoredByLaser:
+			_focusedEntity = null
+	if _valuableEntity != null:
+		if _valuableEntity.global_position.distance_to(global_position) > RANGE + _valuableEntity.Radius:
+			_valuableEntity = null
+		elif _valuableEntity.IgnoredByLaser:
+			_valuableEntity = null
 	
 	var collidersList : Array[Node2D] = Area.get_overlapping_bodies()
 	for col in collidersList:
@@ -165,11 +181,15 @@ func _physics_process(delta) -> void:
 				_fastestEntity = col
 			if _slowestEntity == null:
 				_slowestEntity = col
+			if _valuableEntity == null && col.isResource:
+				_valuableEntity = col
 			#close
 			var test1: float = col.global_position.distance_to(global_position) - col.Radius
 			var test2: float = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
 			if test1 < test2:
 				_closestEntity = col
+				if col.isResource:
+					_valuableEntity = col
 			#far
 			test2 = _farthestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
 			if test1 > test2:
@@ -184,6 +204,11 @@ func _physics_process(delta) -> void:
 			if test1 < test2:
 				_slowestEntity = col
 	
+	if _focusedEntity == null:
+		_focusedEntity = _closestEntity
+	if _valuableEntity == null:
+		_valuableEntity = _farthestEntity
+	
 	var i = -1
 	for child in List.get_children():
 		if child is NeedleLaserClass:
@@ -191,25 +216,34 @@ func _physics_process(delta) -> void:
 			child._laserFiring = false
 			if !child.is_node_ready():
 				continue
-			if i % 4 == 0:
-				if Input.is_action_pressed("fire"):
-					child._laserFiring = true
-					child.Target.global_position = get_global_mouse_position()
-				elif AUTO_LASER && _closestEntity != null:
+			if Input.is_action_pressed("fire"):
+				child._laserFiring = true
+				child.Target.global_position = get_global_mouse_position()
+				continue
+			if i % 6 == 0:
+				if _closestEntity != null:
 					child._laserFiring = true
 					child.Target.global_position = _closestEntity.global_position
-			elif i % 4 <= 1:
+			elif i % 6 == 1:
 				if _farthestEntity != null:
 					child._laserFiring = true
 					child.Target.global_position = _farthestEntity.global_position
-			elif i % 4 <= 2:
+			elif i % 6 == 2:
 				if _fastestEntity != null:
 					child._laserFiring = true
 					child.Target.global_position = _fastestEntity.global_position
-			elif i % 4 <= 3:
+			elif i % 6 == 3:
 				if _slowestEntity != null:
 					child._laserFiring = true
 					child.Target.global_position = _slowestEntity.global_position
+			elif i % 6 == 4:
+				if _focusedEntity != null:
+					child._laserFiring = true
+					child.Target.global_position = _focusedEntity.global_position
+			elif i % 6 == 5:
+				if _valuableEntity != null:
+					child._laserFiring = true
+					child.Target.global_position = _valuableEntity.global_position
 
 func _on_ship_visuals_firemalasar():
 	_reloadVisuals()

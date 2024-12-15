@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var Resources: ResourceCounter = $CanvasLayer/Control/ResourceCounter
+@onready var CoreAssembler = $CanvasLayer/Control/CoreAssembler
 
 func _ready():
 	MaterialsManager.Load()
@@ -9,6 +10,7 @@ func _ready():
 func _on_tech_tree_reload_display():
 	if is_node_ready():
 		Resources.Display = MaterialsManager.Mats
+		CoreAssembler._reload()
 
 
 func _on_cheat_pressed():

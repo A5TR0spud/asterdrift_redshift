@@ -1,5 +1,16 @@
 ## indev build 7
 
+- Implemented and nerfed Core Assembler
+- Re-added Stage 2 from v4 with some changes:
+	- Now costs a core
+	- Max speed is only increased while boosting
+	- Boosting always thrusts ship forward
+	- No longer decreases turn rate
+- Holding the boost key now disables RCS's "drag" effect, even if you don't have Stage 2
+- Implemented Charged Shield
+- Implemented Backup Power
+- Added Solar Cell upgrade to On-Board Battery
+- Added Juniper Beam upgrade to Attractor Beam
 - Fixed asteroid collision damage considering mass in a strange way, resulting in gentle collisions killing the player
 - Fixed mentions of units in RCS's upgrade path (divided by 16)
 - Electromagnet no longer costs a core.
@@ -21,19 +32,14 @@
 - Buffed Laser Array stats:
 	- Damage x0.5 -> x0.6
 	- Mining Time x2 -> Mining Speed x0.6
-	- Clarified description to reflect the amount of lasers.
+	- Clarified description stats to reflect the amount of lasers.
 - Nerfed Laser Array costs:
 	- Metal 48 -> 64
 	- Ceramics 16 -> 32
 	- Synthetics 16 -> 24
 	- Core remains 1
-TODO:
-- Re-added Booster from v4 with some changes
-- Implemented and nerfed Core Assembler
-- Implemented Radar
-- Implemented Radar Recognition Systems
-- Implemented Charged Shield
-- Implemented Backup Power
+- Adjusted textures of RCS, ARCS, CARCS, Movement Relative to Ship
+- Radar was a flawed design so has been removed
 
 ## indev Build 6
 

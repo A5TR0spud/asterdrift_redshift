@@ -50,6 +50,8 @@ func _ready():
 	# rotate(deg_to_rad(angular_velocity * delta))
 	pass
 
+var _BonusMaxSpeedFromBoost: float = 0
+
 func _physics_process(delta):
 	if IS_IN_GARAGE:
 		return
@@ -105,7 +107,7 @@ func _physics_process(delta):
 				_inputDir.x -= sign(reduceDrift.x) if absf(reduceDrift.x) > 0.1 else 0
 			_inputDir = _inputDir.normalized().rotated(thrustDirection)
 		#if not inputting, apply opposite velocity
-		elif Stats.Has_RCS:
+		elif Stats.Has_RCS && !Input.is_action_pressed("boost"):
 			#decceleration when no input (it's actually just inputting opposite your velocity)
 			_inputDir = -linear_velocity.normalized()
 		
@@ -128,19 +130,28 @@ func _physics_process(delta):
 	if targetLinearAccel.length() > ACCEL_FORCE:
 		targetLinearAccel = targetLinearAccel.normalized() * ACCEL_FORCE
 	
-	if Input.is_action_pressed("boost"):
-		targetLinearAccel *= 2
-		targetAngularAccel *= 0.5
-	
 	apply_force(targetLinearAccel)
-	
-	if linear_velocity.length() > MAX_SPEED:
-		linear_velocity = linear_velocity.normalized() * MAX_SPEED
 	
 	angular_velocity += deg_to_rad(clampf(rad_to_deg(targetAngularAccel), -TURN_ACCEL_DEGREES, TURN_ACCEL_DEGREES))
 	angular_velocity = deg_to_rad(clampf(rad_to_deg(angular_velocity), -absf(TURN_MAX_SPEED_DEGREES), absf(TURN_MAX_SPEED_DEGREES)))
 	
+	if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
+		_BonusMaxSpeedFromBoost += 64 * delta
+		if _BonusMaxSpeedFromBoost > 128:
+			_BonusMaxSpeedFromBoost = 128
+		apply_force(Vector2(64, 0).rotated(rotation))
+	elif _BonusMaxSpeedFromBoost > 0:
+		_BonusMaxSpeedFromBoost -= 64 * delta
+		if _BonusMaxSpeedFromBoost < 0:
+			_BonusMaxSpeedFromBoost = 0
+	
+	if linear_velocity.length() > GetCurrentMaxSpeed():
+		linear_velocity = linear_velocity.normalized() * GetCurrentMaxSpeed()
+	
 	#$ThrusterParticles/Main.emitting = targetLinearAccel.angle_to(Vector2(0, -1)) < deg_to_rad(1) && targetLinearAccel.length() > 5
+
+func GetCurrentMaxSpeed() -> float:
+	return MAX_SPEED + _BonusMaxSpeedFromBoost
 
 func _handleStats():
 	var x: int
@@ -174,28 +185,30 @@ func _handleStats():
 		x = Laser.LASER_COUNT
 		x += UpgradesManager.Load("TwoLaser")
 		x += 2 * UpgradesManager.Load("LaserArray")
+		x += 3 * UpgradesManager.Load("Apollo")
 		Laser.LASER_COUNT = x
 		
 		x = Laser.RANGE
 		x += 16 * UpgradesManager.Load("SpareBattery")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x -= 32
+		x += 32 * UpgradesManager.Load("Apollo")
 		Laser.RANGE = x
 		y = Laser.KNOCKBACK_COEF
 		y += 2 * UpgradesManager.Load("HeavyLaser")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			y *= 2
-		if UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") + UpgradesManager.Load("Apollo") > 0:
 			y *= 0.75
 		Laser.KNOCKBACK_COEF = y
 		y = Laser.DAMAGE_COEF
 		y += 3 * UpgradesManager.Load("StrongLaser")
-		if UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") + UpgradesManager.Load("Apollo") > 0:
 			y *= 0.6
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
 		y += UpgradesManager.Load("MiningLaser")
-		if UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") + UpgradesManager.Load("Apollo") > 0:
 			y *= 0.6
 		Laser.MINING_COEF = y
 		x = Laser.WIDTH
@@ -203,10 +216,12 @@ func _handleStats():
 			x += 1
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x += 1
-		if UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("Apollo") > 0:
+			x = maxi(x - 1, 1)
+		elif UpgradesManager.Load("LaserArray") > 0:
 			x = maxi(x * 0.5, 1)
 		Laser.WIDTH = x
-		Laser.AUTO_LASER = UpgradesManager.Load("AutoPhoton") + UpgradesManager.Load("TwoLaser") + UpgradesManager.Load("LaserArray") > 0
+		Laser.AUTO_LASER = UpgradesManager.Load("AutoPhoton") > 0
 		if UpgradesManager.Load("TractorNeedle") > 0:
 			Laser.CAN_ATTRACT = true
 

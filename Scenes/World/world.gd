@@ -10,6 +10,9 @@ var PowerDrain : float = 1.0
 @onready var Player = $Player
 @onready var KillButton = $CanvasLayer/Control/EndRunButton
 @onready var StatPanel = $CanvasLayer/Control/EndRunScreenControl/VBoxContainer/StatsPanel
+@onready var BackupShieldBar = $CanvasLayer/Control/EnergyMeter/BackupBattery
+@onready var SolarStatus = $CanvasLayer/Control/EnergyMeter/EnergyStatuses/Solar
+@onready var SolarIndicator = $CanvasLayer/Control/EnergyMeter/Solar
 
 func _ready():
 	RunHandler.StartRun()
@@ -21,8 +24,18 @@ func _ready():
 	_updateDisplay()
 
 func _physics_process(delta):
+	if RunHandler.TimeLeft > MaxTime * 0.7 && UpgradesManager.Load("SolarPanel") > 0:
+		PowerDrain = 0.7
+		RunHandler.ChargeBackup(delta)
+		SolarStatus.show()
+		SolarIndicator.show()
+	else:
+		PowerDrain = 1.0
+		SolarStatus.hide()
+		SolarIndicator.hide()
 	if RunHandler.IsInRun():
 		RunHandler.TimeLeft -= delta * PowerDrain
+		RunHandler.TimeSpent += delta
 	else:
 		StopRun()
 		return

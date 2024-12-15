@@ -25,12 +25,14 @@ func _on_body_entered(body):
 			var dxy: Vector2 = body.linear_velocity
 			var dir: Vector2 = body.global_position - global_position
 			dir = dir.normalized()
-			var tar: Vector2 = dir * (Player.MAX_SPEED + 1)
+			var tar: Vector2 = dir * (Player.GetCurrentMaxSpeed() + 1)
 			body.linear_velocity = tar
 			# 0.0625 = 1/16
 			# * 0.01 for asteroid mass
-			RunHandler.TimeLeft -= dxy.distance_to(tar) * body.mass * 0.000625
+			RunHandler.DamageBackup(dxy.distance_to(tar) * body.mass * 0.000625)
 			_time = 0.0
+			if body.hasHealth && UpgradesManager.Load("ChargedShield") > 0:
+				body.Damage(body.MaxHealth * 0.25)
 
 func _process(delta):
 	if _time < _Duration:

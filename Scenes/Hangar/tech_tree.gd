@@ -43,4 +43,5 @@ func _on_reset_pressed():
 	MaterialsManager.Mats.Synthetics = 0
 	MaterialsManager.Mats.Organics = 0
 	MaterialsManager.Save()
+	DataManager.Save("coreAssemblyTimeLeft", 300.0)
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")

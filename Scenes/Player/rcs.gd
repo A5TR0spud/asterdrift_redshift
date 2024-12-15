@@ -26,8 +26,6 @@ func _process(delta):
 			turn += 1
 		
 		var deg: float = TURN_SPEED_DEGREES
-		if UpgradesManager.Load("Booster") > 0 && Input.is_action_pressed("boost"):
-			deg *= 0.5
 		
 		rotate(turn * deg_to_rad(deg) * delta)
 	else:

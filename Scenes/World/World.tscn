@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=25 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -7,20 +7,38 @@
 [ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="7_m8q4m"]
 [ext_resource type="Shader" uid="uid://chvdu88j36ex3" path="res://Shaders/StarryNight.tres" id="8_17e2r"]
+[ext_resource type="Texture2D" uid="uid://cp2k4ek6m36ar" path="res://Assets/UI/Status/SolarPowered.png" id="8_awsfj"]
+[ext_resource type="Script" path="res://Scenes/World/backup_battery.gd" id="8_fgev5"]
 [ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="9_ik24p"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_wix40"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbiqx"]
+shader = ExtResource("8_17e2r")
+shader_parameter/SpeedScaling = Vector2(1, 1)
+shader_parameter/Color = Color(0.0126667, 0, 0.02, 1)
+shader_parameter/NoiseTexture = ExtResource("9_ik24p")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5hp0"]
-bg_color = Color(0.2967, 0.61134, 0.69, 1)
+bg_color = Color(1, 0.772549, 0.541176, 1)
 border_width_right = 5
-border_color = Color(1, 1, 1, 1)
+border_color = Color(1, 0.941176, 0.541176, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_insix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tguol"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_color = Color(0.239216, 0.458824, 0.815686, 1)
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehodu"]
-bg_color = Color(0.188235, 0.364706, 0.439216, 1)
+bg_color = Color(0.85098, 0.45098, 0.415686, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -45,7 +63,17 @@ expand_margin_bottom = 4.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfbx8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lcpg"]
-bg_color = Color(0.2322, 0.54, 0.54, 1)
+bg_color = Color(1, 0.941176, 0.541176, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3vni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obs6t"]
+bg_color = Color(0.541176, 0.760784, 1, 1)
+border_width_bottom = 5
+border_color = Color(0.239216, 0.458824, 0.815686, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
 corner_detail = 1
 
 [sub_resource type="Resource" id="Resource_vegdo"]
@@ -56,12 +84,6 @@ Ceramics = 0
 Synthetics = 0
 Organics = 0
 Components = 0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbiqx"]
-shader = ExtResource("8_17e2r")
-shader_parameter/SpeedScaling = Vector2(1, 1)
-shader_parameter/Color = Color(0.0126667, 0, 0.02, 1)
-shader_parameter/NoiseTexture = ExtResource("9_ik24p")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1esw0")
@@ -81,6 +103,29 @@ zoom = Vector2(2, 2)
 rotation_smoothing_enabled = true
 script = ExtResource("3_jlwng")
 Player = NodePath("../Player")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_jbiqx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("10_wix40")
+expand_mode = 2
+stretch_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -123,13 +168,42 @@ value = 30.0
 allow_greater = true
 show_percentage = false
 
+[node name="EnergyStatuses" type="HBoxContainer" parent="CanvasLayer/Control/EnergyMeter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -7
+
+[node name="Solar" type="TextureRect" parent="CanvasLayer/Control/EnergyMeter/EnergyStatuses"]
+z_index = 6
+layout_mode = 2
+texture = ExtResource("8_awsfj")
+expand_mode = 2
+
+[node name="Solar" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_insix")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tguol")
+step = 1.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
 [node name="EnergyLabel" type="Label" parent="CanvasLayer/Control/EnergyMeter"]
 z_index = 1
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_right = 4.0
+offset_left = -99.0
+offset_right = 5.0
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ehodu")
 text = "30.0"
@@ -170,6 +244,23 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_8lcpg")
 fill_mode = 1
 indeterminate = true
 editor_preview_indeterminate = true
+
+[node name="BackupBattery" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -99.0
+offset_top = -5.0
+offset_right = 221.0
+offset_bottom = 11.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_r3vni")
+theme_override_styles/fill = SubResource("StyleBoxFlat_obs6t")
+max_value = 20.0
+value = 15.0
+show_percentage = false
+script = ExtResource("8_fgev5")
 
 [node name="EndRunScreenControl" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -226,29 +317,6 @@ text = "New Run"
 [node name="ReturnToHangar" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
 layout_mode = 2
 text = "Return To Hangar"
-
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="ColorRect" type="ColorRect" parent="Background"]
-material = SubResource("ShaderMaterial_jbiqx")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="TextureRect" type="TextureRect" parent="Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
-texture = ExtResource("10_wix40")
-expand_mode = 2
-stretch_mode = 1
 
 [connection signal="damage" from="Player" to="." method="_on_player_damage"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]

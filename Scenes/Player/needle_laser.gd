@@ -72,6 +72,8 @@ func _process(delta):
 @export var doesOrbit: bool = false
 
 func _physics_process(delta) -> void:
+	if Player == null:
+		return
 	if !Player.CAN_MOVE:
 		hide()
 		return
@@ -110,8 +112,14 @@ func _physics_process(delta) -> void:
 				doDamage += DAMAGE_COEF * delta
 			if c.isResource && CAN_ATTRACT:
 				var dir: Vector2 = -Target.position.normalized()
-				var kb: Vector2 = FORCE * (dir * 2.0 + normal).normalized()
-				c.apply_force(kb * 0.08 * KNOCKBACK_COEF, point - c.global_position)
+				var kbDir: Vector2 = dir * 2.0 + normal
+				var extraPower: float = 1.0
+				if UpgradesManager.Load("BetterTractorNeedle") > 0:
+					extraPower *= 1.5
+					var antiOrbit: Vector2 = -c.linear_velocity + Player.linear_velocity
+					var coe: float = absf(dir.dot(kbDir.rotated(deg_to_rad(90))))
+					kbDir = kbDir * (1.0 - coe) + antiOrbit * coe * 2.0
+				c.apply_force(extraPower * FORCE * kbDir.normalized() * 0.08 * KNOCKBACK_COEF, point - c.global_position)
 			if c.isMineable:
 				_colTime += delta * MINING_COEF
 				var dd = 5
