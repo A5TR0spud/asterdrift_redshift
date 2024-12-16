@@ -1,3 +1,18 @@
+## indev build 8
+
+- Buffed Core Assembler cost 32's -> 16's
+	- Organics cost 24
+- Added Stasis Bay upgrade to Rapid Winch
+- Added Tractor Bay upgrade to Stasis Bay
+- Added Hydroponics Pod upgrade prior to Core Assembler
+- Fixed Core Assembler counting w/o the upgrade
+- Fixed asteroids having a 100% chance to drop cores on death
+- Fixed thrusters showing in garage
+- Fixed cores from killing asteroids not wrapping around with player
+- Fixed resources from mining asteroids not wrapping around with player
+- Holding boost with Stage 2 now forces ship to move forward
+- Boost from Stage 2 now has visual effect on thruster
+
 ## indev build 7
 
 - Implemented and nerfed Core Assembler
@@ -42,7 +57,7 @@
 	- Core remains 1
 - Adjusted textures of RCS, ARCS, CARCS, Movement Relative to Ship
 - Radar was a flawed design so has been removed
-- Fixed lasers targetting the wrong object
+- Fixed lasers targeting the wrong object
 - All lasers now target the cursor when holding fire
 - Added wrap-around to player and world
 - Added temporary thruster visual FX

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=28 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
@@ -50,20 +50,23 @@ Label/styles/normal = SubResource("StyleBoxFlat_7snbq")
 
 [sub_resource type="LabelSettings" id="LabelSettings_annhj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk6xj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54xy4"]
 bg_color = Color(0.32549, 0.32549, 0.32549, 1)
 border_width_left = 5
 border_width_right = 5
+corner_detail = 1
 expand_margin_left = 5.0
-expand_margin_top = 3.0
+expand_margin_top = 2.0
 expand_margin_right = 10.0
-expand_margin_bottom = 3.0
-anti_aliasing = false
+expand_margin_bottom = 2.0
 
-[sub_resource type="Theme" id="Theme_h5mw7"]
-Label/styles/normal = SubResource("StyleBoxFlat_kk6xj")
+[sub_resource type="Theme" id="Theme_r2qfw"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_54xy4")
 
 [sub_resource type="LabelSettings" id="LabelSettings_y1hpi"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font_size = 14
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
@@ -122,8 +125,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = 0.0174185
-scale = Vector2(1.01895, 1.01895)
+rotation = -0.00667855
+scale = Vector2(0.933461, 0.933461)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
@@ -164,11 +167,23 @@ text = "0/1"
 label_settings = SubResource("LabelSettings_annhj")
 horizontal_alignment = 2
 
-[node name="Description" type="Label" parent="Tooltip"]
+[node name="Middle" type="PanelContainer" parent="Tooltip"]
 layout_mode = 2
-theme = SubResource("Theme_h5mw7")
+theme = SubResource("Theme_r2qfw")
+
+[node name="Middleman" type="VBoxContainer" parent="Tooltip/Middle"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="Tooltip/Middle/Middleman"]
+layout_mode = 2
 text = "DESC"
 label_settings = SubResource("LabelSettings_y1hpi")
+
+[node name="Requirements" type="Label" parent="Tooltip/Middle/Middleman"]
+visible = false
+layout_mode = 2
+text = "Requires:"
+label_settings = SubResource("LabelSettings_uohsn")
 
 [node name="Bottom" type="PanelContainer" parent="Tooltip"]
 layout_mode = 2

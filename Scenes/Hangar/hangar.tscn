@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=93 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://cqjysa3i06yd0" path="res://Assets/Hangar/Upgrades/StasisBay.png" id="25_6kat8"]
 [ext_resource type="Texture2D" uid="uid://bo7klbmjfd310" path="res://Assets/Hangar/Upgrades/LookAhead.png" id="25_8ow2g"]
 [ext_resource type="Texture2D" uid="uid://c6hbwa5nea0ru" path="res://Assets/Hangar/Upgrades/StrongLaser.png" id="26_jgp56"]
+[ext_resource type="Texture2D" uid="uid://cbnllmem4iocm" path="res://Assets/Hangar/Upgrades/TractorBay.png" id="26_weqmt"]
 [ext_resource type="Texture2D" uid="uid://c7rv3bfw1b6xv" path="res://Assets/Hangar/Upgrades/SpareBattery.png" id="28_2f4oq"]
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 [ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
@@ -48,6 +49,7 @@
 [ext_resource type="Script" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
 [ext_resource type="Texture2D" uid="uid://d4e1bkjul6amk" path="res://Assets/Hangar/Upgrades/Fuse.png" id="42_whiub"]
 [ext_resource type="Texture2D" uid="uid://cley641x2bt1r" path="res://Assets/Hangar/Upgrades/ReverseCharger.png" id="43_qb64a"]
+[ext_resource type="Texture2D" uid="uid://cuj3o7e7acbec" path="res://Assets/Hangar/Upgrades/Hydroponics.png" id="49_ygbwp"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -181,11 +183,20 @@ Components = 0
 [sub_resource type="Resource" id="Resource_d7mx3"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 20
+Metals = 18
 Ceramics = 0
 Synthetics = 24
 Organics = 0
 Components = 1
+
+[sub_resource type="Resource" id="Resource_lo3s5"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 8
+Ceramics = 0
+Synthetics = 8
+Organics = 0
+Components = 0
 
 [sub_resource type="Resource" id="Resource_cber5"]
 resource_local_to_scene = true
@@ -397,11 +408,20 @@ Components = 0
 [sub_resource type="Resource" id="Resource_dfjfp"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
-Ceramics = 32
-Synthetics = 32
-Organics = 32
+Metals = 16
+Ceramics = 16
+Synthetics = 16
+Organics = 24
 Components = 1
+
+[sub_resource type="Resource" id="Resource_ukqjc"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 2
+Ceramics = 0
+Synthetics = 0
+Organics = 16
+Components = 0
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -695,15 +715,26 @@ SPRITE = ExtResource("14_82eng")
 Cost = SubResource("Resource_w1q67")
 
 [node name="StasisBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(272, -64)
+position = Vector2(96, -240)
 NAME = "Stasis Bay"
 DESCRIPTION = "Projects a net with a radius of 8u that
 captures resources."
 INTERNAL_NAME = "StasisBay"
-PARENT_UPGRADE = NodePath("../HookPropel")
+PARENT_UPGRADE = NodePath("../RapidWinch")
+REQUIRE_MAX_PARENT = true
 SPRITE = ExtResource("25_6kat8")
-HIDE = true
 Cost = SubResource("Resource_d7mx3")
+
+[node name="TractorBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
+position = Vector2(176, -240)
+NAME = "Tractor Bay"
+DESCRIPTION = "All resources in the stasis net are attracted
+inward."
+INTERNAL_NAME = "TractorBay"
+PARENT_UPGRADE = NodePath("../StasisBay")
+REQUIRED_UPGRADES = [NodePath("../Magnet")]
+SPRITE = ExtResource("26_weqmt")
+Cost = SubResource("Resource_lo3s5")
 
 [node name="BottomLeft" type="Node2D" parent="Camera2D/TechTree"]
 
@@ -961,14 +992,26 @@ HIDE = true
 Cost = SubResource("Resource_wwfe1")
 
 [node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, 64)
+position = Vector2(256, 144)
 NAME = "Core Assembler"
 DESCRIPTION = "Every 5 minutes spent in a run assembles
 a core."
 INTERNAL_NAME = "CoreAssembler"
-PARENT_UPGRADE = NodePath("../LookAhead")
+PARENT_UPGRADE = NodePath("../Hydroponics")
 SPRITE = ExtResource("39_25wo3")
 Cost = SubResource("Resource_dfjfp")
+
+[node name="Hydroponics" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(256, 64)
+NAME = "Hydroponics Pod"
+DESCRIPTION = "Every 7 seconds in a run grows an organic nearby,
+at the cost of 0.25 energy.
+Whenever an organic is collected in-run, gain 0.5
+energy."
+INTERNAL_NAME = "Farm"
+PARENT_UPGRADE = NodePath("../LookAhead")
+SPRITE = ExtResource("49_ygbwp")
+Cost = SubResource("Resource_ukqjc")
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=42 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
+[ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
 [ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
 [ext_resource type="Script" path="res://Scenes/Player/ShipVisuals.gd" id="3_qew4i"]
 [ext_resource type="Texture2D" uid="uid://dw82sd22ri00l" path="res://Assets/Ships/Hauler/Cockpit.png" id="4_bpyr2"]
@@ -112,6 +113,7 @@ debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="ThrusterParticles" type="Node2D" parent="."]
 rotation = 1.5708
+script = ExtResource("2_3ujnm")
 
 [node name="Main" type="ColorRect" parent="ThrusterParticles"]
 offset_left = -5.0

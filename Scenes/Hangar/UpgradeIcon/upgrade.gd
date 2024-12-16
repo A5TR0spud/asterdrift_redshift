@@ -23,12 +23,13 @@ signal notify_children(propogation : int)
 @onready var Tooltip := $Tooltip
 @onready var NameT := $Tooltip/Top/Nameplate
 @onready var LeveT := $Tooltip/Top/Levels
-@onready var DescT := $Tooltip/Description
+@onready var DescT := $Tooltip/Middle/Middleman/Description
 @onready var CostT := $Tooltip/Bottom/Costs
 @onready var Bottom := $Tooltip/Bottom
 @onready var ToggleT := $Tooltip/Bottom/ToggleLabel
 @onready var ParentLine := $ParentLine
 @onready var LevelBar := $MainIcon/LevelBar
+@onready var RequirementT := $Tooltip/Middle/Middleman/Requirements
 
 @export_group("Main")
 ## The name to be displayed in-game.
@@ -49,8 +50,10 @@ signal notify_children(propogation : int)
 			_updateTooltip()
 ## Used by the save system to save and load this node's information.
 @export var INTERNAL_NAME : String = "undefined"
-## The prerequisite upgrade, if any.
+## The parent upgrade determining tree-ism, if any.
 @export var PARENT_UPGRADE : Upgrade = null
+## Any additional prerequisite upgrades.
+@export var REQUIRED_UPGRADES: Array[Upgrade] = []
 ## Does this upgrade require the parent to be maxed out?
 @export var REQUIRE_MAX_PARENT : bool = false
 ## If true, the upgrade won't be visible regardless of look-ahead if the parent hasn't been bought.
@@ -110,6 +113,8 @@ func _ready():
 		queue_free()
 		return
 	ReloadVisible()
+	for requirement: Upgrade in REQUIRED_UPGRADES:
+		requirement.connect("upgrade_successfully_bought", self.ReloadVisible)
 	_updateTooltip()
 	if PARENT_UPGRADE != null:
 		PARENT_UPGRADE.notify_children.connect(ChildIsNotified)
@@ -126,6 +131,19 @@ func _updateTooltip():
 		LeveT.show()
 		LeveT.text = String.num(CurrentLevel) + "/" + String.num(MAX_LEVEL)
 	CostT.Display = Cost
+	RequirementT.hide()
+	if !REQUIRED_UPGRADES.is_empty():
+		RequirementT.text = "Requires: "
+		var i: int = 0
+		RequirementT.label_settings.font_color = Color(1, 1, 1, 1)
+		for requirement: Upgrade in REQUIRED_UPGRADES:
+			if requirement.CurrentLevel < 1:
+				RequirementT.show()
+				RequirementT.label_settings.font_color = Color(1, 0.7, 0.7, 1)
+			RequirementT.text += requirement.NAME
+			if i < REQUIRED_UPGRADES.size() - 1:
+				RequirementT.text += ", "
+			i += 1
 
 func ChildIsNotified(propogation : int):
 	if CurrentLevel > 0 || PARENT_UPGRADE.CurrentLevel > 0:
@@ -146,7 +164,7 @@ func ChildIsNotified(propogation : int):
 		elif PARENT_UPGRADE.visible:
 			show()
 
-func ReloadVisible():
+func ReloadVisible(_ignored: int = 0):
 	if !is_readied:
 		return
 	ParentLine.hide()
@@ -184,6 +202,7 @@ func ReloadVisible():
 	else:
 		LevelBar.show()
 		_updateLevelBar()
+	_updateTooltip()
 
 func _updateLevelBar():
 	if LevelBar.get_child_count() != MAX_LEVEL:
@@ -226,6 +245,10 @@ func _can_buy() -> bool:
 		if PARENT_UPGRADE.CurrentLevel == 0:
 			return false
 		ParentLine.default_color = Color(1, 1, 1, 1)
+	if !REQUIRED_UPGRADES.is_empty():
+		for requirement: Upgrade in REQUIRED_UPGRADES:
+			if requirement.CurrentLevel < 1:
+				return false
 	if !PRE_BOUGHT:
 		MaterialsManager.Load()
 		if MaterialsManager.Mats.Metals < Cost.Metals:

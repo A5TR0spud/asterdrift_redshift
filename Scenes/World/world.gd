@@ -15,10 +15,11 @@ var PowerDrain : float = 1.0
 @onready var SolarIndicator = $CanvasLayer/Control/EnergyMeter/Solar
 @onready var ChargeStatus = $CanvasLayer/Control/EnergyMeter/EnergyStatuses/Charger
 @onready var ChargeIndicator = $CanvasLayer/Control/EnergyMeter/Charger
-
 @onready var DecorationSpawner = $DecorationSpawner
-
 @onready var WorldBoundsCollider = $WorldBounds/WorldBoundCollider
+@onready var CollectableScene := preload("res://Scenes/World/Decoration/collectable.tscn")
+
+var FarmedOrganics: int = 0
 
 func _ready():
 	RunHandler.StartRun()
@@ -27,10 +28,20 @@ func _ready():
 	RunHandler.TimeLeft = MaxTime
 	TimeBar.max_value = MaxTime
 	TimeBar.size.x = MaxTime * 16
+	FarmedOrganics = 0
 	_updateDisplay()
 
 var _shouldReverseCharge: bool = false
 func _physics_process(delta):
+	if FarmedOrganics < RunHandler.TimeSpent / 7.0 - 1:
+		FarmedOrganics += 1
+		var instance : Collectable = CollectableScene.instantiate()
+		instance.COLLECTION = Collectable.ResourcesEnum.Organic
+		var pos : Vector2 = Vector2(0, 64).rotated(randf_range(0, deg_to_rad(360)))
+		instance.global_position = Player.global_position + pos
+		DecorationSpawner.add_child(instance)
+		RunHandler.TimeLeft -= 0.25
+	
 	if RunHandler.TimeLeft > MaxTime * 0.7 && UpgradesManager.Load("SolarPanel") > 0:
 		PowerDrain = 0.7
 		if UpgradesManager.Load("ReverseCharger") > 0:

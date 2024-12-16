@@ -10,17 +10,24 @@ func _ready():
 		show()
 
 func _on_area_2d_body_exited(body: Node2D):
-	_tryCaptureResource(body)
+	if Player.CAN_MOVE:
+		_tryCaptureResource(body)
 
 func _physics_process(delta):
+	if !Player.CAN_MOVE || Player.IS_IN_GARAGE:
+		hide()
+		return
+	
 	for body in $Area2D.get_overlapping_bodies():
 		if body is Entity:
 			if body.isResource:
 				var x: Vector2 = -body.linear_velocity + Player.linear_velocity
-				var dirToCenter: Vector2 = body.global_position - global_position
-				dirToCenter = -dirToCenter.normalized() * 2
-				x = x.normalized() * 1
-				body.apply_force(x + dirToCenter)
+				x = x.normalized()
+				if UpgradesManager.Load("TractorBay") > 0:
+					var dirToCenter: Vector2 = body.global_position - global_position
+					dirToCenter = -dirToCenter.normalized() * 2
+					x += dirToCenter
+				body.apply_force(x)
 
 func _tryCaptureResource(body: Node2D) -> void:
 	if body is Entity:

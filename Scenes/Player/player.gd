@@ -92,6 +92,8 @@ func _physics_process(delta):
 				targetAngularAccel -= deg_to_rad(TURN_ACCEL_DEGREES) * delta
 			if !UpgradesManager.LoadIsEnabled("MovementMode"):
 				_inputDir.y += -1
+		if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
+			_inputDir.x = 1
 		
 		if !UpgradesManager.LoadIsEnabled("MovementMode"):
 			if _inputDir.length() > 0.5:
@@ -151,6 +153,13 @@ func _physics_process(delta):
 			linear_velocity = linear_velocity.normalized() * GetCurrentMaxSpeed()
 	
 	ThrustVector += targetLinearAccel.rotated(-rotation) * 0.4
+	if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
+		ThrustVector.x += 16
+		$ThrusterParticles/Main.size.x = 12
+		$ThrusterParticles/Main.position.x = -6
+	else:
+		$ThrusterParticles/Main.size.x = 10
+		$ThrusterParticles/Main.position.x = -5
 	ThrustVector *= 0.5
 	ThrustRotate += targetAngularAccel
 	ThrustRotate *= 0.9

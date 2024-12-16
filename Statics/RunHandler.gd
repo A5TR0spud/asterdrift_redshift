@@ -30,8 +30,9 @@ static func StartRun() -> void:
 static func EndRun() -> void:
 	if !_is_running:
 		return
-	var x = DataManager.Load("coreAssemblyTimeLeft", 300)
-	DataManager.Save("coreAssemblyTimeLeft", x - TimeSpent)
+	if UpgradesManager.Load("CoreAssembler") > 0:
+		var x = DataManager.Load("coreAssemblyTimeLeft", 300)
+		DataManager.Save("coreAssemblyTimeLeft", x - TimeSpent)
 	_is_running = false
 	MaterialsManager.Mats.Metals += Mats.Metals
 	MaterialsManager.Mats.Ceramics += Mats.Ceramics

@@ -10,10 +10,11 @@ func _on_damaged(damageTaken):
 		$GPUParticles2D.emit_particle(self.transform, Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
 
 func _on_killed():
-	if randf() > 0.1:
+	if is_queued_for_deletion():
 		return
-	var p: Collectable = res.instantiate()
-	p.COLLECTION = Collectable.ResourcesEnum.Core
-	p.global_position = global_position
-	get_tree().root.get_child(0).add_child(p)
+	if randf() > 0.9:
+		var p: Collectable = res.instantiate()
+		p.COLLECTION = Collectable.ResourcesEnum.Core
+		p.global_position = global_position
+		get_parent().add_child(p)
 	queue_free()

@@ -120,16 +120,5 @@ func _on_grab_box_body_entered(body):
 
 func _popGrasped():
 	if GraspedCollectable != null:
-		var c : Collectable = GraspedCollectable
-		if c.COLLECTION == Collectable.ResourcesEnum.Metal:
-			RunHandler.Mats.Metals += 1
-		elif c.COLLECTION == Collectable.ResourcesEnum.Ceramic:
-			RunHandler.Mats.Ceramics += 1
-		elif c.COLLECTION == Collectable.ResourcesEnum.Synthetic:
-			RunHandler.Mats.Synthetics += 1
-		elif c.COLLECTION == Collectable.ResourcesEnum.Organic:
-			RunHandler.Mats.Organics += 1
-		elif c.COLLECTION == Collectable.ResourcesEnum.Core:
-			RunHandler.Mats.Components += 1
-		c.queue_free()
+		GraspedCollectable.Collect()
 		GraspedCollectable = null

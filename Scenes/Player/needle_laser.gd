@@ -130,7 +130,7 @@ func _physics_process(delta) -> void:
 					_colTime -= 5
 					doDamage += 10
 					var scene: Collectable = Collect.instantiate()
-					get_tree().root.get_child(0).add_child(scene)
+					get_parent().get_parent().get_parent().get_parent().find_child("DecorationSpawner").add_child(scene)
 					scene.global_position = point + normal * 4
 					scene.linear_velocity = normal * 8 * MINING_COEF
 					var m: Materials.Mats = c.RollMineable()

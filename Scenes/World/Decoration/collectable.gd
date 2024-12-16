@@ -44,3 +44,18 @@ func _reload():
 	elif COLLECTION == ResourcesEnum.Core:
 		Icon.texture = CoreTex
 		Magnetism = 1.5
+
+func Collect():
+	if COLLECTION == Collectable.ResourcesEnum.Metal:
+		RunHandler.Mats.Metals += 1
+	elif COLLECTION == Collectable.ResourcesEnum.Ceramic:
+		RunHandler.Mats.Ceramics += 1
+	elif COLLECTION == Collectable.ResourcesEnum.Synthetic:
+		RunHandler.Mats.Synthetics += 1
+	elif COLLECTION == Collectable.ResourcesEnum.Organic:
+		RunHandler.Mats.Organics += 1
+		if UpgradesManager.Load("Farm") > 0:
+			RunHandler.TimeLeft += 0.5
+	elif COLLECTION == Collectable.ResourcesEnum.Core:
+		RunHandler.Mats.Components += 1
+	queue_free()
