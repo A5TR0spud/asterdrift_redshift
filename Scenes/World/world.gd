@@ -16,8 +16,8 @@ var PowerDrain : float = 1.0
 @onready var ChargeStatus = $CanvasLayer/Control/EnergyMeter/EnergyStatuses/Charger
 @onready var ChargeIndicator = $CanvasLayer/Control/EnergyMeter/Charger
 @onready var DecorationSpawner = $DecorationSpawner
-@onready var WorldBoundsCollider = $WorldBounds/WorldBoundCollider
 @onready var CollectableScene := preload("res://Scenes/World/Decoration/collectable.tscn")
+@onready var ResourceMonitor := $CanvasLayer/Control/Resources/ResourceCounter
 
 var FarmedOrganics: int = 0
 
@@ -30,17 +30,22 @@ func _ready():
 	TimeBar.size.x = MaxTime * 16
 	FarmedOrganics = 0
 	_updateDisplay()
+	ResourceMonitor.visible = UpgradesManager.Load("ResourceMonitor") > 0
 
 var _shouldReverseCharge: bool = false
 func _physics_process(delta):
+	if UpgradesManager.Load("ResourceMonitor") > 0:
+		ResourceMonitor.Display = RunHandler.Mats
+	
 	if FarmedOrganics < RunHandler.TimeSpent / 7.0 - 1:
 		FarmedOrganics += 1
 		var instance : Collectable = CollectableScene.instantiate()
-		instance.COLLECTION = Collectable.ResourcesEnum.Organic
+		instance.COLLECTION = Materials.Mats.Organics
 		var pos : Vector2 = Vector2(0, 64).rotated(randf_range(0, deg_to_rad(360)))
 		instance.global_position = Player.global_position + pos
 		DecorationSpawner.add_child(instance)
 		RunHandler.TimeLeft -= 0.25
+		NotificationsManager.SendTransformNotification(Materials.Mats.Energy, Materials.Mats.Organics, TransformNotification.Sources.HYDROPONIC)
 	
 	if RunHandler.TimeLeft > MaxTime * 0.7 && UpgradesManager.Load("SolarPanel") > 0:
 		PowerDrain = 0.7
@@ -119,7 +124,12 @@ func _on_player_bounds_body_exited(body):
 
 func _on_world_bounds_body_exited(body):
 	if body is Entity:
-		var dir: Vector2 = Player.global_position - body.global_position
-		dir = dir.normalized()
-		var r: float = WorldBoundsCollider.shape.radius
-		body.global_position = Player.global_position + dir * (r - body.Radius - 1)
+		if body.global_position.x > Player.global_position.x + 5000 - body.Radius * 2 - 10:
+			body.global_position.x -= 10000 - 10
+		elif body.global_position.x < Player.global_position.x + -5000 + body.Radius * 2 + 10:
+			body.global_position.x += 10000 - 10
+		
+		if body.global_position.y > Player.global_position.y + 5000 - body.Radius * 2 - 10:
+			body.global_position.y -= 10000 - 10
+		elif body.global_position.y < Player.global_position.y + -5000 + body.Radius * 2 + 10:
+			body.global_position.y += 10000 - 10

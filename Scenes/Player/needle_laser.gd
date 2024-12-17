@@ -115,7 +115,7 @@ func _physics_process(delta) -> void:
 				var kbDir: Vector2 = dir * 2.0 + normal
 				var extraPower: float = 1.0
 				if UpgradesManager.Load("BetterTractorNeedle") > 0:
-					extraPower *= 1.5
+					extraPower *= 2
 					var antiOrbit: Vector2 = -c.linear_velocity + Player.linear_velocity
 					var coe: float = absf((dir + Player.linear_velocity).dot(c.linear_velocity + Player.linear_velocity))
 					antiOrbit = antiOrbit.normalized()
@@ -135,15 +135,15 @@ func _physics_process(delta) -> void:
 					scene.linear_velocity = normal * 8 * MINING_COEF
 					var m: Materials.Mats = c.RollMineable()
 					if m == Materials.Mats.Metals:
-						scene.COLLECTION = Collectable.ResourcesEnum.Metal
+						scene.COLLECTION = Materials.Mats.Metals
 					elif m == Materials.Mats.Ceramics:
-						scene.COLLECTION = Collectable.ResourcesEnum.Ceramic
+						scene.COLLECTION = Materials.Mats.Ceramics
 					elif m == Materials.Mats.Synthetics:
-						scene.COLLECTION = Collectable.ResourcesEnum.Synthetic
+						scene.COLLECTION = Materials.Mats.Synthetics
 					elif m == Materials.Mats.Organics:
-						scene.COLLECTION = Collectable.ResourcesEnum.Organic
+						scene.COLLECTION = Materials.Mats.Organics
 					elif m == Materials.Mats.Components:
-						scene.COLLECTION = Collectable.ResourcesEnum.Core
+						scene.COLLECTION = Materials.Mats.Components
 			if c.hasHealth && doDamage > 0:
 				c.Damage(doDamage)
 	Line.points[1] = Endpoint.position

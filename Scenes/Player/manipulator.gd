@@ -114,8 +114,9 @@ func _on_manipulator_area_body_entered(body: Node2D) -> void:
 			TargetQueue.append(body)
 
 func _on_grab_box_body_entered(body):
-	if body is Collectable:
+	if body is Collectable && GraspedCollectable == null:
 		GraspedCollectable = body
+		GraspedCollectable.collision_layer = 0
 		RetractPosition = body.global_position - global_position
 
 func _popGrasped():

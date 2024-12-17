@@ -1,30 +1,50 @@
-[gd_scene load_steps=29 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=38 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
 [ext_resource type="Script" path="res://Scenes/Player/camera.gd" id="3_jlwng"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_op3xx"]
 [ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
+[ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="7_7w45e"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="7_m8q4m"]
 [ext_resource type="Shader" uid="uid://chvdu88j36ex3" path="res://Shaders/StarryNight.tres" id="8_17e2r"]
 [ext_resource type="Texture2D" uid="uid://cp2k4ek6m36ar" path="res://Assets/UI/Status/SolarPowered.png" id="8_awsfj"]
 [ext_resource type="Script" path="res://Scenes/World/backup_battery.gd" id="8_fgev5"]
 [ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
+[ext_resource type="Script" path="res://Scenes/World/energy_meter.gd" id="9_8ooxm"]
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="9_ik24p"]
 [ext_resource type="Texture2D" uid="uid://ydg6vos31dk" path="res://Assets/UI/Status/ReverseCharge.png" id="9_r5t40"]
+[ext_resource type="Texture2D" uid="uid://dcyu8aj02jcf6" path="res://Assets/Hangar/Resources/Energy.png" id="10_k0f34"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_wix40"]
+[ext_resource type="Texture2D" uid="uid://cthbemr8dqafd" path="res://Assets/Hangar/Resources/Backup.png" id="12_bchvh"]
+[ext_resource type="Script" path="res://Scenes/World/notifactions_manager.gd" id="16_0jwnj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbiqx"]
 shader = ExtResource("8_17e2r")
 shader_parameter/SpeedScaling = Vector2(1, 1)
-shader_parameter/Color = Color(0.0126667, 0, 0.02, 1)
+shader_parameter/Color = Color(0.0117647, 0, 0.0862745, 1)
 shader_parameter/NoiseTexture = ExtResource("9_ik24p")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_viq4l"]
+shader = ExtResource("7_7w45e")
+shader_parameter/XSpeed = 0.007
+shader_parameter/YSpeed = 0.005
+shader_parameter/XOffset = 0.0
+shader_parameter/YOffset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nklna"]
+shader = ExtResource("7_7w45e")
+shader_parameter/XSpeed = -0.002
+shader_parameter/YSpeed = -0.003
+shader_parameter/XOffset = 2.23
+shader_parameter/YOffset = 0.18
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0nqut"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5hp0"]
 bg_color = Color(1, 0.772549, 0.541176, 1)
 border_width_right = 5
 border_color = Color(1, 0.941176, 0.541176, 1)
-corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_detail = 1
 
@@ -46,9 +66,7 @@ border_color = Color(0.85098, 0.45098, 0.415686, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehodu"]
 bg_color = Color(0.85098, 0.45098, 0.415686, 1)
 corner_radius_top_left = 5
-corner_radius_top_right = 5
 corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 corner_detail = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_d6e1y"]
@@ -57,9 +75,9 @@ font_size = 23
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlh84"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 7
-corner_radius_top_right = 7
+corner_radius_top_right = 2
 corner_radius_bottom_right = 7
-corner_radius_bottom_left = 7
+corner_radius_bottom_left = 2
 corner_detail = 1
 expand_margin_left = 4.0
 expand_margin_top = 4.0
@@ -91,17 +109,31 @@ Synthetics = 0
 Organics = 0
 Components = 0
 
+[sub_resource type="Resource" id="Resource_67px5"]
+script = ExtResource("7_m8q4m")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ud3dr"]
 size = Vector2(5000, 5000)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8lkey"]
-radius = 2500.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x62ss"]
+size = Vector2(10000, 10000)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1esw0")
 
 [node name="DecorationSpawner" type="Node2D" parent="."]
 script = ExtResource("8_fn0el")
+Metals = 404
+Ceramics = 404
+Synthetics = 404
+Organics = 300
+Cores = 8
+InitialAsteroids = 720
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
 z_index = 100
@@ -131,12 +163,24 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
+material = SubResource("ShaderMaterial_viq4l")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
+texture = ExtResource("10_wix40")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Background"]
+self_modulate = Color(1, 1, 1, 0.498039)
+material = SubResource("ShaderMaterial_nklna")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("10_wix40")
 expand_mode = 2
 stretch_mode = 1
@@ -174,13 +218,15 @@ anchor_bottom = 0.085
 offset_left = 123.0
 offset_top = 29.0
 offset_right = -0.600006
-offset_bottom = -0.200001
+offset_bottom = -7.365
+theme_override_styles/background = SubResource("StyleBoxEmpty_0nqut")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y5hp0")
 max_value = 30.0
 step = 0.1
 value = 30.0
 allow_greater = true
 show_percentage = false
+script = ExtResource("9_8ooxm")
 
 [node name="EnergyStatuses" type="HBoxContainer" parent="CanvasLayer/Control/EnergyMeter"]
 layout_mode = 1
@@ -238,6 +284,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = -99.0
 offset_right = 5.0
+offset_bottom = 7.165
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ehodu")
 text = "30.0"
@@ -279,15 +326,31 @@ fill_mode = 1
 indeterminate = true
 editor_preview_indeterminate = true
 
+[node name="EnergyIcon" type="TextureRect" parent="CanvasLayer/Control/EnergyMeter/EnergyLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -75.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_k0f34")
+expand_mode = 4
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
 [node name="BackupBattery" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -99.0
-offset_top = -5.0
+offset_top = 0.165001
 offset_right = 221.0
-offset_bottom = 11.0
+offset_bottom = 17.165
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxEmpty_r3vni")
 theme_override_styles/fill = SubResource("StyleBoxFlat_obs6t")
@@ -295,6 +358,19 @@ max_value = 20.0
 value = 15.0
 show_percentage = false
 script = ExtResource("8_fgev5")
+
+[node name="BackupIcon" type="TextureRect" parent="CanvasLayer/Control/EnergyMeter/BackupBattery"]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 26.0
+grow_vertical = 2
+texture = ExtResource("12_bchvh")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="EndRunScreenControl" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -352,9 +428,38 @@ text = "New Run"
 layout_mode = 2
 text = "Return To Hangar"
 
+[node name="Resources" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -363.0
+offset_top = 19.0
+offset_right = -19.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="ResourceCounter" parent="CanvasLayer/Control/Resources" instance=ExtResource("5_op3xx")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+Display = SubResource("Resource_67px5")
+SHOW_TEXT = false
+FLIPPED = true
+
+[node name="NotifactionsManager" type="VBoxContainer" parent="CanvasLayer/Control/Resources"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+script = ExtResource("16_0jwnj")
+
 [node name="PlayerBounds" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
+collision_priority = 201.0
 monitorable = false
 
 [node name="PlayerBoundCollider" type="CollisionShape2D" parent="PlayerBounds"]
@@ -362,14 +467,15 @@ shape = SubResource("RectangleShape2D_ud3dr")
 debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="WorldBounds" type="Area2D" parent="."]
-top_level = true
-rotation = -1.5708
+visible = false
 collision_layer = 0
 collision_mask = 5
+collision_priority = 200.0
 monitorable = false
 
 [node name="WorldBoundCollider" type="CollisionShape2D" parent="WorldBounds"]
-shape = SubResource("CircleShape2D_8lkey")
+position = Vector2(-3.99998, -5.00001)
+shape = SubResource("RectangleShape2D_x62ss")
 debug_color = Color(0.311596, 0.621709, 3.85046e-07, 0)
 
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]

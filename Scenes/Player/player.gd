@@ -1,6 +1,8 @@
 extends Entity
 class_name PlayerClass
 
+static var Instance: PlayerClass
+
 @export var ACCEL_FORCE : float = 32.0
 @export var MAX_SPEED : float = 64.0
 @export var TURN_ACCEL_DEGREES : float = 180.0
@@ -25,6 +27,7 @@ var ThrustVector: Vector2 = Vector2.ZERO
 var ThrustRotate: float = 0
 
 func _ready():
+	Instance = self
 	_handleStats()
 	
 	linear_velocity = Vector2(0.0, 0.0)
@@ -153,7 +156,7 @@ func _physics_process(delta):
 			linear_velocity = linear_velocity.normalized() * GetCurrentMaxSpeed()
 	
 	ThrustVector += targetLinearAccel.rotated(-rotation) * 0.4
-	if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
+	if CAN_MOVE && Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
 		ThrustVector.x += 16
 		$ThrusterParticles/Main.size.x = 12
 		$ThrusterParticles/Main.position.x = -6

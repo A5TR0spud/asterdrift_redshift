@@ -9,7 +9,7 @@ op_type = 0
 operator = 3
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_nnym3"]
-constant = 5.0
+constant = 27.627
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_b5s6u"]
 operator = 2
@@ -105,7 +105,7 @@ void fragment() {
 
 
 // FloatConstant:12
-	float n_out12p0 = 5.000000;
+	float n_out12p0 = 27.627001;
 
 
 // FloatOp:13

@@ -14,7 +14,7 @@ func _on_killed():
 		return
 	if randf() > 0.9:
 		var p: Collectable = res.instantiate()
-		p.COLLECTION = Collectable.ResourcesEnum.Core
+		p.COLLECTION = Materials.Mats.Components
 		p.global_position = global_position
 		get_parent().add_child(p)
 	queue_free()

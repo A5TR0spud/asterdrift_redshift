@@ -68,6 +68,7 @@ font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font_size = 14
+font_color = Color(1, 0.7, 0.7, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
@@ -125,8 +126,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = -0.00667855
-scale = Vector2(0.933461, 0.933461)
+rotation = 0.0170163
+scale = Vector2(1.02159, 1.02159)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 

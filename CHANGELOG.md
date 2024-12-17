@@ -4,14 +4,38 @@
 	- Organics cost 24
 - Added Stasis Bay upgrade to Rapid Winch
 - Added Tractor Bay upgrade to Stasis Bay
-- Added Hydroponics Pod upgrade prior to Core Assembler
+- Added 3 HUD upgrades, level 1 is always bought (like the hook)
+- Added Hydroponics Pod upgrade to Research Engine
+- Added Synthesizer upgrade to Hydroponics Pod
+- Added Composter upgrade to Synthesizer
+- Added Recycler upgrade to Composter
+- Added Furnace upgrade to Hydroponics Pod
+- Added Dynamo upgrade to Furnace
+- Added Upcycler upgrade to Recycler
+- Core Assembler is now a child of Synthesizer
+- Nerfed Laser Array Core cost: 1 -> 2
+- Nerfed Military-Grade Laser Core cost: 0 -> 1
+- Buffed Juniper Beam attraction multiplier: 1.5 -> 2
 - Fixed Core Assembler counting w/o the upgrade
 - Fixed asteroids having a 100% chance to drop cores on death
-- Fixed thrusters showing in garage
+- Fixed thrust showing in garage
+- Thrust is now trianglular instead of a box
 - Fixed cores from killing asteroids not wrapping around with player
 - Fixed resources from mining asteroids not wrapping around with player
 - Holding boost with Stage 2 now forces ship to move forward
 - Boost from Stage 2 now has visual effect on thruster
+- Fixed Core Assembler sometimes showing really weird second values in the Hangar
+- Changed wrap-around to both be square, fixing overcrowing
+- Quadrupled world size
+- Changed weight system to be exact amount per run, and adjusted numbers:
+	- Metal: 100 -> 404
+	- Synthetic: 100 -> 404
+	- Ceramic: 100 -> 404
+	- Organic: 75 -> 300
+	- Cores: 2 -> 8
+	- Total Collectables: 380 -> 1520
+	- Asteroids: 180 -> 720
+- Updated "Starry Night" background of runs
 
 ## indev build 7
 

@@ -33,6 +33,14 @@ class_name ResourceCounter
 		SHOW_TEXT = value
 		if is_node_ready():
 			_updateDisplay()
+## If true, flips from left-to-right to right-to-left
+@export var FLIPPED: bool = false:
+	get:
+		return FLIPPED
+	set(value):
+		FLIPPED = value
+		if is_node_ready():
+			_updateDisplay()
 ## If true, replaces numbers with boolean icons (negative for false, positive for true)
 @export var BOOL_ICON : bool = false:
 	get:
@@ -57,6 +65,32 @@ func _ready():
 @onready var OFF_ICON := preload("res://Assets/Hangar/Upgrades/Meta/BooleanIconFalse.png")
 
 func _updateDisplay():
+	if FLIPPED:
+		$Components.alignment = BoxContainer.AlignmentMode.ALIGNMENT_END
+		$Ceramics.alignment = BoxContainer.AlignmentMode.ALIGNMENT_END
+		$Organics.alignment = BoxContainer.AlignmentMode.ALIGNMENT_END
+		$Metals.alignment = BoxContainer.AlignmentMode.ALIGNMENT_END
+		$Synthetic.alignment = BoxContainer.AlignmentMode.ALIGNMENT_END
+		$Components.move_child($Components/TextureRect, 2)
+		$Ceramics.move_child($Ceramics/TextureRect, 2)
+		$Organics.move_child($Organics/TextureRect, 2)
+		$Metals.move_child($Metals/TextureRect, 2)
+		$Synthetic.move_child($Synthetic/TextureRect, 2)
+	else:
+		$Components.alignment = BoxContainer.AlignmentMode.ALIGNMENT_BEGIN
+		$Ceramics.alignment = BoxContainer.AlignmentMode.ALIGNMENT_BEGIN
+		$Organics.alignment = BoxContainer.AlignmentMode.ALIGNMENT_BEGIN
+		$Metals.alignment = BoxContainer.AlignmentMode.ALIGNMENT_BEGIN
+		$Synthetic.alignment = BoxContainer.AlignmentMode.ALIGNMENT_BEGIN
+		$Components.move_child($Components/TextureRect, 0)
+		$Ceramics.move_child($Ceramics/TextureRect, 0)
+		$Organics.move_child($Organics/TextureRect, 0)
+		$Metals.move_child($Metals/TextureRect, 0)
+		$Synthetic.move_child($Synthetic/TextureRect, 0)
+	
+	
+	
+	
 	$Metals/Bool.visible = BOOL_ICON
 	$Metals/Bool.texture = ON_ICON if Display.Metals > 0 else OFF_ICON
 	$Metals/Bool.custom_minimum_size.y = FONT_SIZE + 7

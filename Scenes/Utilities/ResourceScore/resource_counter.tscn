@@ -24,7 +24,7 @@ resource_local_to_scene = true
 
 [node name="ResourceCounter" type="GridContainer"]
 offset_right = 120.0
-offset_bottom = 104.0
+offset_bottom = 131.0
 script = ExtResource("1_eu6hn")
 Display = SubResource("Resource_eytic")
 

@@ -33,5 +33,8 @@ func _tryCaptureResource(body: Node2D) -> void:
 	if body is Entity:
 		if body.isResource:
 			var dirToCenter: Vector2 = body.global_position - global_position
-			dirToCenter = -dirToCenter.normalized() * 8
-			body.linear_velocity = Player.linear_velocity + dirToCenter
+			dirToCenter = -dirToCenter.normalized()
+			if UpgradesManager.Load("BetterBay") > 0:
+				body.linear_velocity = (Player.GetCurrentMaxSpeed() + 1) * dirToCenter + Player.linear_velocity
+			else:
+				body.linear_velocity = Player.linear_velocity + dirToCenter * 8

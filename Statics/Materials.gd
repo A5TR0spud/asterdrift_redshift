@@ -8,9 +8,14 @@ class_name Materials
 @export var Components : int = 0
 
 enum Mats {
+	# Materials
 	Metals,
 	Ceramics,
 	Synthetics,
 	Organics,
 	Components,
+	# Energy (For Notifications)
+	Energy,
+	BackupEnergy,
+	Danger,
 }

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3avnqvoq20e2"]
+
+[ext_resource type="Script" path="res://Scenes/Utilities/Notifications/transform_notification.gd" id="1_eibn8"]
+[ext_resource type="Texture2D" uid="uid://vcteoyu2fivs" path="res://Assets/Hangar/Resources/LostMedia.png" id="2_8x73s"]
+[ext_resource type="Texture2D" uid="uid://c316vb8j088ik" path="res://Assets/Hangar/Resources/Arrow.png" id="3_o5874"]
+[ext_resource type="Texture2D" uid="uid://cuj3o7e7acbec" path="res://Assets/Hangar/Upgrades/Hydroponics.png" id="4_y02mc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4sjfv"]
+
+[node name="TransformNotification" type="Panel"]
+offset_right = 32.0
+offset_bottom = 26.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4sjfv")
+script = ExtResource("1_eibn8")
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+anchors_preset = 0
+offset_left = -122.0
+offset_bottom = 32.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 33.0
+offset_top = 2.0
+offset_right = 122.0
+offset_bottom = 29.0
+alignment = 1
+
+[node name="Victim" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_8x73s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Arrow" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_o5874")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Result" type="TextureRect" parent="Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_8x73s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Source" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_y02mc")

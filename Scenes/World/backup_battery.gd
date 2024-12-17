@@ -9,3 +9,5 @@ func _ready():
 
 func _process(delta):
 	value = RunHandler.BackupBattery
+	if RunHandler.BackupBattery <= 0:
+		hide()

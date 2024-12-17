@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=44 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
 [ext_resource type="Texture2D" uid="uid://cwalw2q6eerxc" path="res://Assets/Ships/Hauler/Hull.png" id="3_nyebr"]
 [ext_resource type="Script" path="res://Scenes/Player/ShipVisuals.gd" id="3_qew4i"]
 [ext_resource type="Texture2D" uid="uid://dw82sd22ri00l" path="res://Assets/Ships/Hauler/Cockpit.png" id="4_bpyr2"]
+[ext_resource type="Shader" path="res://Shaders/Taper.gdshader" id="4_hj8vj"]
 [ext_resource type="Script" path="res://Scenes/Player/blinkers.gd" id="4_tpib4"]
 [ext_resource type="Texture2D" uid="uid://x2hbovos4tgm" path="res://Assets/Ships/Hauler/Accents/Standard.png" id="6_uxtss"]
 [ext_resource type="Script" path="res://Scenes/Player/accents.gd" id="7_m5e4n"]
@@ -28,6 +29,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
 radius = 13.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chy61"]
+shader = ExtResource("4_hj8vj")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qfng1"]
 radius = 32.0
@@ -112,25 +116,29 @@ shape = SubResource("CircleShape2D_kl7m2")
 debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="ThrusterParticles" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_chy61")
 rotation = 1.5708
 script = ExtResource("2_3ujnm")
 
 [node name="Main" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = -5.0
 offset_top = 14.0
 offset_right = 5.0
-offset_bottom = 40.0
+offset_bottom = 79.0
 color = Color(1, 1, 0.717647, 1)
 
 [node name="TopRight" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = 14.0
 offset_top = -2.0
 offset_right = 16.0
-offset_bottom = 25.0
+offset_bottom = 28.0
 rotation = -1.57079
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="BottomRight" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = 5.0
 offset_top = 13.0
 offset_right = 7.0
@@ -139,6 +147,7 @@ rotation = -1.57079
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="TopLeft" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = -14.0
 offset_top = -4.0
 offset_right = -12.0
@@ -147,6 +156,7 @@ rotation = 1.57079
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="BottomLeft" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = -5.0
 offset_top = 11.0
 offset_right = -3.0
@@ -155,6 +165,7 @@ rotation = 1.57079
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="ReverseLeft" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = -8.0
 offset_top = -5.0
 offset_right = -6.0
@@ -163,6 +174,7 @@ rotation = 3.14159
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="ReverseRight" type="ColorRect" parent="ThrusterParticles"]
+use_parent_material = true
 offset_left = 10.0
 offset_top = -5.0
 offset_right = 12.0
@@ -352,7 +364,6 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
 [node name="MagnetArea" type="Area2D" parent="."]
-visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708
