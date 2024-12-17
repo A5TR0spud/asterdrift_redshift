@@ -1247,13 +1247,14 @@ PARENT_UPGRADE = NodePath("../Recycler")
 SPRITE = ExtResource("59_vay1v")
 Cost = SubResource("Resource_4e528")
 
-[node name="Dynamo" parent="Camera2D/TechTree/BottomRight/Farming" instance=ExtResource("4_r883k")]
+[node name="Dynamo" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(416, 64)
 NAME = "Dynamo"
 DESCRIPTION = "Every resource collected grants energy
 based on ship velocity, but slightly slows
 the ship."
 INTERNAL_NAME = "Dynamo"
+PARENT_UPGRADE = NodePath("../Combustor")
 SPRITE = ExtResource("60_l6rli")
 Cost = SubResource("Resource_710cu")
 

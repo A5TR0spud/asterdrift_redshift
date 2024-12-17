@@ -1,3 +1,8 @@
+## indev build 9
+
+- Fixed Dynamo not having a parent (Furnace)
+- Fixed Hydroponics Pod generating organics even if it wasn't bought
+
 ## indev build 8
 
 - Added Stasis Bay upgrade to Rapid Winch

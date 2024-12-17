@@ -37,7 +37,7 @@ func _physics_process(delta):
 	if UpgradesManager.Load("ResourceMonitor") > 0:
 		ResourceMonitor.Display = RunHandler.Mats
 	
-	if FarmedOrganics < RunHandler.TimeSpent / 7.0 - 1:
+	if UpgradesManager.Load("Farm") > 0 && FarmedOrganics < RunHandler.TimeSpent / 7.0 - 1:
 		FarmedOrganics += 1
 		var instance : Collectable = CollectableScene.instantiate()
 		instance.COLLECTION = Materials.Mats.Organics
