@@ -1,7 +1,5 @@
 ## indev build 8
 
-- Buffed Core Assembler cost 32's -> 16's
-	- Organics cost 24
 - Added Stasis Bay upgrade to Rapid Winch
 - Added Tractor Bay upgrade to Stasis Bay
 - Added 3 HUD upgrades, level 1 is always bought (like the hook)
@@ -16,6 +14,8 @@
 - Nerfed Laser Array Core cost: 1 -> 2
 - Nerfed Military-Grade Laser Core cost: 0 -> 1
 - Buffed Juniper Beam attraction multiplier: 1.5 -> 2
+- Buffed Core Assembler cost 32's -> 16's
+	- Organics cost 24
 - Fixed Core Assembler counting w/o the upgrade
 - Fixed asteroids having a 100% chance to drop cores on death
 - Fixed thrust showing in garage
