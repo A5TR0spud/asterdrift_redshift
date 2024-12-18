@@ -1143,7 +1143,7 @@ Cost = SubResource("Resource_d2k57")
 
 [node name="LookAhead" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(160, 64)
-NAME = "Research Engine"
+NAME = "Research Network"
 DESCRIPTION = "Increases look-ahead by 1."
 INTERNAL_NAME = "LookAhead"
 PARENT_UPGRADE = NodePath("../StatusMonitor")

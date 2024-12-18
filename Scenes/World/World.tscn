@@ -184,6 +184,7 @@ grow_vertical = 2
 texture = ExtResource("10_wix40")
 expand_mode = 2
 stretch_mode = 1
+flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

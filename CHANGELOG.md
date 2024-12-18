@@ -1,8 +1,10 @@
 ## indev build 9
 
+- Adjusted/refurbished various sprites
 - Fixed Dynamo not having a parent (Furnace)
 - Fixed Hydroponics Pod generating organics even if it wasn't bought
 - Fixed Upcycler functioning even if it wasn't bought
+- Flipped a layer of Starry Night to prevent obviously identical stars from overlapping
 
 ## indev build 8
 
