@@ -100,6 +100,8 @@ func _tryRecycle(type: Materials.Mats) -> bool:
 	return false
 
 func _tryUpcycle(type: Materials.Mats) -> bool:
+	if UpgradesManager.Load("Upcycler") < 1:
+		return false
 	var convertToCore: float = randf_range(0, 100) < 0.5
 	if !convertToCore:
 		UpcyclerCount += 1

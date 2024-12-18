@@ -2,6 +2,7 @@
 
 - Fixed Dynamo not having a parent (Furnace)
 - Fixed Hydroponics Pod generating organics even if it wasn't bought
+- Fixed Upcycler functioning even if it wasn't bought
 
 ## indev build 8
 
