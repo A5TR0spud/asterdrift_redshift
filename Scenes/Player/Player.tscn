@@ -215,7 +215,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(1, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")

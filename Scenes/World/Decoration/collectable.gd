@@ -51,13 +51,16 @@ const DYNAMO_COEFFICIENT: float = 1.3 / 2048.0
 const DYNAMO_SLOW: float = 0.85
 
 func _onCollected(type: Materials.Mats) -> void:
+	var Sources: Array[Notification.Sources] = []
+	
+	
 	if UpgradesManager.Load("Dynamo") > 0:
 		# energy += 1/518 * velocity
 		# velocity = velocity * 517/518
 		RunHandler.TimeLeft += PlayerClass.Instance.linear_velocity.length() * DYNAMO_COEFFICIENT
 		PlayerClass.Instance.linear_velocity *= DYNAMO_SLOW
 	
-	if _tryUpcycle(type):
+	if _tryUpcycle(type, Sources):
 		return
 	
 	if type == Materials.Mats.Components:
@@ -65,7 +68,7 @@ func _onCollected(type: Materials.Mats) -> void:
 		NotificationsManager.SendPickupNotification(Materials.Mats.Components)
 		return
 	
-	if _tryRecycle(type):
+	if _tryRecycle(type, Sources):
 		return
 	
 	if type == Materials.Mats.Metals:
@@ -77,7 +80,7 @@ func _onCollected(type: Materials.Mats) -> void:
 	elif type == Materials.Mats.Organics:
 		_onOrganicCollected()
 
-func _tryRecycle(type: Materials.Mats) -> bool:
+func _tryRecycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:
 	if UpgradesManager.Load("Recycler") < 1:
 		return false
 	var target := _getLowestResourceFromMaterials(MaterialsManager.Mats, _getLowestResourceFromMaterials(RunHandler.Mats, Materials.Mats.Organics))
@@ -87,7 +90,8 @@ func _tryRecycle(type: Materials.Mats) -> bool:
 		if target == type:
 			RecyclerCount -= 1
 			return false
-		NotificationsManager.SendTransformNotification(type, target, TransformNotification.Sources.RECYCLER)
+		Sources.append(Notification.Sources.RECYCLER)
+		NotificationsManager.SendTransformNotification(type, target, Sources)
 		if target == Materials.Mats.Metals:
 			RunHandler.Mats.Metals += 1
 		elif target == Materials.Mats.Synthetics:
@@ -99,7 +103,7 @@ func _tryRecycle(type: Materials.Mats) -> bool:
 		return true
 	return false
 
-func _tryUpcycle(type: Materials.Mats) -> bool:
+func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:
 	if UpgradesManager.Load("Upcycler") < 1:
 		return false
 	var convertToCore: float = randf_range(0, 100) < 0.5
@@ -107,20 +111,21 @@ func _tryUpcycle(type: Materials.Mats) -> bool:
 		UpcyclerCount += 1
 	elif type != Materials.Mats.Components:
 		RunHandler.Mats.Components += 1
-		NotificationsManager.SendTransformNotification(type, Materials.Mats.Components, TransformNotification.Sources.UPCYCLER)
+		NotificationsManager.SendTransformNotification(type, Materials.Mats.Components, [TransformNotification.Sources.UPCYCLER])
 		return true
 	if UpcyclerCount % 7 == 0:
 		var target := _getLowestResourceFromMaterials(RunHandler.Mats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
+		Sources.append(Notification.Sources.UPCYCLER)
 		if target == Materials.Mats.Metals:
-			_onMetalCollected(PickupNotification.Sources.UPCYCLER)
+			_onMetalCollected(Sources)
 		elif target == Materials.Mats.Organics:
-			_onOrganicCollected(PickupNotification.Sources.UPCYCLER)
+			_onOrganicCollected(Sources)
 		elif target == Materials.Mats.Synthetics:
-			_onSyntheticCollected(PickupNotification.Sources.UPCYCLER)
+			_onSyntheticCollected(Sources)
 		elif target == Materials.Mats.Ceramics:
-			_onCeramicCollected(PickupNotification.Sources.UPCYCLER)
+			_onCeramicCollected(Sources)
 		else:
-			_onSyntheticCollected(PickupNotification.Sources.UPCYCLER)
+			_onSyntheticCollected(Sources)
 	return false
 
 func _getLowestResourceFromMaterials(mat: Materials, tiebreaker: Materials.Mats = Materials.Mats.Metals) -> Materials.Mats:
@@ -151,38 +156,41 @@ func _getLowestResourceFromMaterials(mat: Materials, tiebreaker: Materials.Mats 
 	
 	return tiebreaker
 
-func _onMetalCollected(source: PickupNotification.Sources = PickupNotification.Sources.NONE):
+func _onMetalCollected(Sources: Array[Notification.Sources] = []):
 	RunHandler.Mats.Metals += 1
-	NotificationsManager.SendPickupNotification(Materials.Mats.Metals, source)
+	NotificationsManager.SendPickupNotification(Materials.Mats.Metals, Sources)
 
-func _onCeramicCollected(source: PickupNotification.Sources = PickupNotification.Sources.NONE):
+func _onCeramicCollected(Sources: Array[Notification.Sources] = []):
 	RunHandler.Mats.Ceramics += 1
-	NotificationsManager.SendPickupNotification(Materials.Mats.Ceramics, source)
+	NotificationsManager.SendPickupNotification(Materials.Mats.Ceramics, Sources)
 
-func _onSyntheticCollected(source: PickupNotification.Sources = PickupNotification.Sources.NONE):
+func _onSyntheticCollected(Sources: Array[Notification.Sources] = []):
 	if UpgradesManager.Load("Composter") > 0:
 		ComposterCount += 1
 		if ComposterCount % 2 == 0:
 			RunHandler.Mats.Organics += 1
-			NotificationsManager.SendTransformNotification(Materials.Mats.Synthetics, Materials.Mats.Organics, TransformNotification.Sources.COMPOSTER)
+			Sources.append(Notification.Sources.COMPOSTER)
+			NotificationsManager.SendTransformNotification(Materials.Mats.Synthetics, Materials.Mats.Organics, Sources)
 			return
 	RunHandler.Mats.Synthetics += 1
-	NotificationsManager.SendPickupNotification(Materials.Mats.Synthetics, source)
+	NotificationsManager.SendPickupNotification(Materials.Mats.Synthetics, Sources)
 
-func _onOrganicCollected(source: PickupNotification.Sources = PickupNotification.Sources.NONE):
+func _onOrganicCollected(Sources: Array[Notification.Sources] = []):
 	#synthesizer
 	if UpgradesManager.Load("Processor") > 0:
 		ProcessorCount += 1
 		if ProcessorCount % 2 == 0:
 			RunHandler.Mats.Synthetics += 1
-			NotificationsManager.SendTransformNotification(Materials.Mats.Organics, Materials.Mats.Synthetics, TransformNotification.Sources.SYNTHESIZER)
+			Sources.append(Notification.Sources.SYNTHESIZER)
+			NotificationsManager.SendTransformNotification(Materials.Mats.Organics, Materials.Mats.Synthetics, Sources)
 			return
 	#furnace
 	if UpgradesManager.Load("Combustor") > 0:
 		FurnaceCount += 1
 		if FurnaceCount % 2 == 0:
 			RunHandler.TimeLeft += 1
-			NotificationsManager.SendTransformNotification(Materials.Mats.Organics, Materials.Mats.Energy, TransformNotification.Sources.FURNACE)
+			Sources.append(Notification.Sources.FURNACE)
+			NotificationsManager.SendTransformNotification(Materials.Mats.Organics, Materials.Mats.Energy, Sources)
 			return
 	RunHandler.Mats.Organics += 1
-	NotificationsManager.SendPickupNotification(Materials.Mats.Organics, source)
+	NotificationsManager.SendPickupNotification(Materials.Mats.Organics, Sources)

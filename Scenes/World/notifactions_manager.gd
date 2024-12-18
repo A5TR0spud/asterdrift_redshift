@@ -16,7 +16,7 @@ func _ready():
 		show()
 		Enabled = true
 
-static func SendTransformNotification(original: Materials.Mats, result: Materials.Mats, source: TransformNotification.Sources = TransformNotification.Sources.NONE) -> void:
+static func SendTransformNotification(original: Materials.Mats, result: Materials.Mats, source: Array[Notification.Sources] = []) -> void:
 	if !Enabled:
 		return
 	
@@ -26,13 +26,13 @@ static func SendTransformNotification(original: Materials.Mats, result: Material
 	notif.Source = source
 	Instance.add_child(notif)
 
-static func SendPickupNotification(result: Materials.Mats, source: PickupNotification.Sources = PickupNotification.Sources.NONE) -> void:
+static func SendPickupNotification(result: Materials.Mats, source: Array[Notification.Sources] = []) -> void:
 	if !Enabled:
 		return
 	
 	var notif: PickupNotification = PickupPrefab.instantiate()
 	notif.Result = result
 	notif.Source = source
-	if source != PickupNotification.Sources.NONE:
+	if !source.is_empty():
 		notif.Duration = 3
 	Instance.add_child(notif)

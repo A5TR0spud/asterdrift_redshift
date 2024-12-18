@@ -8,17 +8,16 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5uno"]
 
 [node name="PickupNotification" type="Panel"]
-offset_right = 76.0
-offset_bottom = 27.0
-size_flags_horizontal = 0
+offset_right = 90.0
+offset_bottom = 30.0
+size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m5uno")
 script = ExtResource("1_ow7fi")
 
 [node name="Control" type="Control" parent="."]
-clip_contents = true
 anchors_preset = 0
-offset_left = -90.0
+offset_left = -91.0
 offset_bottom = 32.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
@@ -40,8 +39,14 @@ texture = ExtResource("1_dna3a")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Source" type="TextureRect" parent="Control"]
+[node name="Sources" type="HBoxContainer" parent="Control"]
+layout_direction = 3
 layout_mode = 0
-offset_right = 32.0
+offset_left = 60.0
+offset_right = 92.0
 offset_bottom = 32.0
+alignment = 2
+
+[node name="Source" type="TextureRect" parent="Control/Sources"]
+layout_mode = 2
 texture = ExtResource("4_oexbe")

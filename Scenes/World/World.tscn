@@ -132,7 +132,7 @@ Metals = 404
 Ceramics = 404
 Synthetics = 404
 Organics = 300
-Cores = 8
+Cores = 6
 InitialAsteroids = 720
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
@@ -451,7 +451,6 @@ FLIPPED = true
 
 [node name="NotifactionsManager" type="VBoxContainer" parent="CanvasLayer/Control/Resources"]
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/separation = 0
 script = ExtResource("16_0jwnj")

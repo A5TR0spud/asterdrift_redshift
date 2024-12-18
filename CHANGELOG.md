@@ -1,3 +1,24 @@
+## indev build 10
+
+- Reduced Core generation 8 -> 6
+- Nerfed Stage 2 Ceramic cost: 10 -> 32
+- Fixed Upcycler and Core cropping issue on pickup notifications from Inventory Audit
+- Fixed overwriting of source in inventory log; Upcycler now properly displays next to conversions that it causes
+TODO: FIX NOTIFICATION CROPPING, RN THEY DONT CROP
+- Adjusted Core Assembler costs:
+	- Ceramics: 16 -> 24
+	- Synthetics: 16 -> 24
+	- Organics: 24 -> 32
+	- Cores: 1 -> 0
+	- Metal remains 16
+- Combustion ARCS now changes color of RCS thrust to the same as main thrust
+
+- TODO:
+	- Added 11 more sizes of asteroid
+		- Asteroids either split when killed or lose mass when mined
+	- Added comets (very fast asteroids that drop organic and deal damage to impacted objects, likely shattering)
+		- Has two tails: one is very faint but stays constant, the other is much more visible and indicates velocity
+
 ## indev build 9
 
 - Adjusted/refurbished various sprites
