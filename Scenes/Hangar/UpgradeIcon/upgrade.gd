@@ -243,6 +243,7 @@ func _try_buy() -> void:
 		CurrentLevel += 1
 	
 	MaterialsManager.Save()
+	SetEnabled(true)
 	UpgradesManager.Save(INTERNAL_NAME, CurrentLevel)
 	ReloadVisible()
 	emit_signal("upgrade_successfully_bought", CurrentLevel)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=46 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://Scenes/Player/hookmagnet.gd" id="15_8a6ob"]
 [ext_resource type="Shader" path="res://Shaders/AreaPulse.gdshader" id="16_requx"]
 [ext_resource type="Script" path="res://Scenes/Player/needle_laser_manager.gd" id="18_yrk6l"]
+[ext_resource type="Shader" path="res://Shaders/Apollo.gdshader" id="21_jcrno"]
 [ext_resource type="Script" path="res://Scenes/Player/shield_projector.gd" id="22_himiw"]
 [ext_resource type="Shader" path="res://Shaders/PixelCircle.gdshader" id="23_743qs"]
 [ext_resource type="Script" path="res://Scenes/Player/stasis_bay.gd" id="23_ci0kv"]
@@ -65,6 +66,18 @@ region = Rect2(0, 14, 3, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kk0yk"]
 radius = 144.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eptyk"]
+shader = ExtResource("21_jcrno")
+shader_parameter/Color1 = Color(1, 1, 0.5, 1)
+shader_parameter/Color2 = Color(1, 0, 0, 0)
+shader_parameter/minAlpha = 0.543
+shader_parameter/distCoefficient = 18.0
+shader_parameter/timeCoefficient = 2.0
+shader_parameter/distFade = 0.5
+shader_parameter/rotationCoefficient = 0.125
+shader_parameter/rotationSpeed = 2.0
+shader_parameter/rotationPulse = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nf5yv"]
 radius = 80.0
@@ -214,7 +227,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -345,7 +358,6 @@ width = 1.0
 default_color = Color(0.129412, 0.145098, 0.196078, 1)
 
 [node name="NeedleLaserManager" type="Node2D" parent="."]
-visible = false
 top_level = true
 z_index = -50
 script = ExtResource("18_yrk6l")
@@ -361,6 +373,20 @@ shape = SubResource("CircleShape2D_kk0yk")
 debug_color = Color(0.15, 0.546667, 1, 0)
 
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
+
+[node name="ApolloRect" type="ColorRect" parent="NeedleLaserManager"]
+material = SubResource("ShaderMaterial_eptyk")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -144.0
+offset_right = 144.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MagnetArea" type="Area2D" parent="."]
 z_index = -200
@@ -427,6 +453,7 @@ remote_path = NodePath("../BounceShield")
 update_rotation = false
 
 [node name="StasisBay" type="Node2D" parent="."]
+visible = false
 script = ExtResource("23_ci0kv")
 
 [node name="Area2D" type="Area2D" parent="StasisBay"]
