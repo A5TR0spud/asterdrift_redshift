@@ -1,6 +1,7 @@
 ## indev build 10
 
 - Added Artemis upgrade to Military-Grade Laser
+- Buffed Inventory Monitor to include hangar materials
 - Reduced Core generation 8 -> 4
 - Nerfed Stage 2 Ceramic cost: 10 -> 32
 - Fixed Upcycler and Core cropping issue on pickup notifications from Inventory Audit
@@ -32,9 +33,6 @@
 		- Cores can no longer be obtained from mining
 
 - TODO:
-	- Buff Inventory Monitor to include hangar materials
-	- Add Solar Focus
-	TODO: FIX NOTIFICATION CROPPING, RN THEY DONT CROP
 	- Added comets (very fast asteroids that drop organic and deal damage to impacted objects, likely shattering)
 		- Has two tails: one is very faint but stays constant, the other is much more visible and indicates velocity
 

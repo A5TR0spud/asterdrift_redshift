@@ -17,7 +17,9 @@ var PowerDrain : float = 1.0
 @onready var ChargeIndicator = $CanvasLayer/Control/EnergyMeter/Charger
 @onready var DecorationSpawner = $DecorationSpawner
 @onready var CollectableScene := preload("res://Scenes/World/Decoration/collectable.tscn")
-@onready var ResourceMonitor := $CanvasLayer/Control/Resources/ResourceCounter
+@onready var ResourceMonitor := $CanvasLayer/Control/Resources/Inventory/Run/ResourceCounter
+@onready var ResourceInventory := $CanvasLayer/Control/Resources/Inventory
+@onready var HangarInventory := $CanvasLayer/Control/Resources/Inventory/Hangar/ResourceCounter
 
 var FarmedOrganics: int = 0
 
@@ -30,7 +32,8 @@ func _ready():
 	TimeBar.size.x = MaxTime * 16
 	FarmedOrganics = 0
 	_updateDisplay()
-	ResourceMonitor.visible = UpgradesManager.Load("ResourceMonitor") > 0
+	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0
+	HangarInventory.Display = MaterialsManager.Mats
 
 var _shouldReverseCharge: bool = false
 func _physics_process(delta):

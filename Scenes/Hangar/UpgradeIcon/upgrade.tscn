@@ -68,7 +68,6 @@ font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font_size = 14
-font_color = Color(1, 0.7, 0.7, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)

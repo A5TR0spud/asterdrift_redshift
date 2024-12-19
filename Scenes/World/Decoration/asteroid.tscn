@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctcwf45fx53pw"]
+[gd_scene load_steps=11 format=3 uid="uid://ctcwf45fx53pw"]
 
 [ext_resource type="Script" path="res://Scenes/World/Decoration/asteroid.gd" id="1_4rkgv"]
 [ext_resource type="Shader" path="res://Shaders/BasicOutliner.gdshader" id="1_6cy2n"]
@@ -37,25 +37,29 @@ damping_min = 2.0
 damping_max = 2.0
 damping_curve = SubResource("CurveTexture_d5t0r")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vb2s"]
+radius = 92.0
+
 [node name="Asteroid" type="RigidBody2D"]
 collision_layer = 53
 collision_mask = 7
 input_pickable = true
-mass = 50.0
+mass = 350.0
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_4rkgv")
 SIZE = 12
-MaxMiningHealth = null
-MaxResources = null
-ResourcesLeft = null
+MaxMiningHealth = 240.0
+MiningHealth = 240.0
+MaxResources = 47
+ResourcesLeft = 47
 MineWeights = SubResource("Resource_5y6c3")
 DangerousCollision = true
 isAsteroid = true
 hasHealth = true
-MaxHealth = 240.0
-Health = 20.0
+MaxHealth = 350.0
+Health = 350.0
 Magnetism = 2.0
 Radius = 92.0
 
@@ -73,6 +77,7 @@ explosiveness = 0.8
 randomness = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6vb2s")
 
 [connection signal="damaged" from="." to="." method="_on_damaged"]
 [connection signal="killed" from="." to="." method="_on_killed"]

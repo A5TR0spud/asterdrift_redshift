@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=39 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -101,6 +101,15 @@ corner_radius_bottom_left = 5
 corner_detail = 1
 
 [sub_resource type="Resource" id="Resource_vegdo"]
+resource_local_to_scene = true
+script = ExtResource("7_m8q4m")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_b8x27"]
 resource_local_to_scene = true
 script = ExtResource("7_m8q4m")
 Metals = 0
@@ -441,11 +450,45 @@ offset_right = -19.0
 offset_bottom = 154.0
 grow_horizontal = 2
 
-[node name="ResourceCounter" parent="CanvasLayer/Control/Resources" instance=ExtResource("5_op3xx")]
+[node name="Inventory" type="HBoxContainer" parent="CanvasLayer/Control/Resources"]
+layout_mode = 2
+
+[node name="Hangar" type="VBoxContainer" parent="CanvasLayer/Control/Resources/Inventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Resources/Inventory/Hangar"]
+layout_mode = 2
+text = "Hangar
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResourceCounter" parent="CanvasLayer/Control/Resources/Inventory/Hangar" instance=ExtResource("5_op3xx")]
+layout_mode = 2
+size_flags_horizontal = 8
+Display = SubResource("Resource_b8x27")
+SORT = true
+SHOW_TEXT = false
+FLIPPED = true
+
+[node name="Run" type="VBoxContainer" parent="CanvasLayer/Control/Resources/Inventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Resources/Inventory/Run"]
+layout_mode = 2
+text = "Run
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResourceCounter" parent="CanvasLayer/Control/Resources/Inventory/Run" instance=ExtResource("5_op3xx")]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 Display = SubResource("Resource_67px5")
+SORT = true
 SHOW_TEXT = false
 FLIPPED = true
 

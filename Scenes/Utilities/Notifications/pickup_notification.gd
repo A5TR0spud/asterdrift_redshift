@@ -34,6 +34,7 @@ func _reload():
 		tex.texture = TurnSourceEnumToSprite(source)
 		tex.size = Vector2(32, 32)
 		SourcesNode.add_child(tex)
+		SourcesNode.move_child(tex, 0)
 
 func _physics_process(delta):
 	if is_queued_for_deletion() || !is_node_ready():
@@ -41,7 +42,7 @@ func _physics_process(delta):
 	
 	#size.x = lerpf(1, 76, clampf(10.0 * (Duration - _timeLeft), 0, 1))
 	custom_minimum_size.y = lerpf(0, 27, clampf(10.0 * _timeLeft, 0, 1))
-	Clipper.size.y = lerpf(1, 32, clampf(10.0 * _timeLeft, 0, 1))
+	Clipper.size.y = lerpf(0, 32, clampf(10.0 * _timeLeft, 0, 1))
 	
 	if _timeLeft <= 0:
 		#hide()

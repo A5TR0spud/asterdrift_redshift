@@ -1308,7 +1308,8 @@ Cost = SubResource("Resource_15g7d")
 [node name="ResourceMonitor" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(64, 144)
 NAME = "Inventory Monitor"
-DESCRIPTION = "Displays the current run's obtained resources."
+DESCRIPTION = "Displays the hangar's resources in-run.
+Displays the current run's obtained resources."
 INTERNAL_NAME = "ResourceMonitor"
 SPRITE = ExtResource("61_1lmmb")
 PARENT_UPGRADE = NodePath("../StatusMonitor")
