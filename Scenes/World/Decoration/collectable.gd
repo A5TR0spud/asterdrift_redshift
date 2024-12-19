@@ -50,10 +50,7 @@ func Collect():
 const DYNAMO_COEFFICIENT: float = 1.3 / 2048.0
 const DYNAMO_SLOW: float = 0.85
 
-func _onCollected(type: Materials.Mats) -> void:
-	var Sources: Array[Notification.Sources] = []
-	
-	
+func _onCollected(type: Materials.Mats, Sources: Array[Notification.Sources] = []) -> void:
 	if UpgradesManager.Load("Dynamo") > 0:
 		# energy += 1/518 * velocity
 		# velocity = velocity * 517/518
@@ -72,13 +69,13 @@ func _onCollected(type: Materials.Mats) -> void:
 		return
 	
 	if type == Materials.Mats.Metals:
-		_onMetalCollected()
+		_onMetalCollected(Sources)
 	elif type == Materials.Mats.Ceramics:
-		_onCeramicCollected()
+		_onCeramicCollected(Sources)
 	elif type == Materials.Mats.Synthetics:
-		_onSyntheticCollected()
+		_onSyntheticCollected(Sources)
 	elif type == Materials.Mats.Organics:
-		_onOrganicCollected()
+		_onOrganicCollected(Sources)
 
 func _tryRecycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:
 	if UpgradesManager.Load("Recycler") < 1:
@@ -115,17 +112,17 @@ func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> 
 		return true
 	if UpcyclerCount % 7 == 0:
 		var target := _getLowestResourceFromMaterials(RunHandler.Mats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
-		Sources.append(Notification.Sources.UPCYCLER)
+		var upcycleCopy: Array[Notification.Sources] = [Notification.Sources.UPCYCLER]
 		if target == Materials.Mats.Metals:
-			_onMetalCollected(Sources)
+			_onMetalCollected(upcycleCopy)
 		elif target == Materials.Mats.Organics:
-			_onOrganicCollected(Sources)
+			_onOrganicCollected(upcycleCopy)
 		elif target == Materials.Mats.Synthetics:
-			_onSyntheticCollected(Sources)
+			_onSyntheticCollected(upcycleCopy)
 		elif target == Materials.Mats.Ceramics:
-			_onCeramicCollected(Sources)
+			_onCeramicCollected(upcycleCopy)
 		else:
-			_onSyntheticCollected(Sources)
+			_onSyntheticCollected(upcycleCopy)
 	return false
 
 func _getLowestResourceFromMaterials(mat: Materials, tiebreaker: Materials.Mats = Materials.Mats.Metals) -> Materials.Mats:

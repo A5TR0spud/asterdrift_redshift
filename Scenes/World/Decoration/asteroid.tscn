@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctcwf45fx53pw"]
+[gd_scene load_steps=10 format=3 uid="uid://ctcwf45fx53pw"]
 
 [ext_resource type="Script" path="res://Scenes/World/Decoration/asteroid.gd" id="1_4rkgv"]
 [ext_resource type="Shader" path="res://Shaders/BasicOutliner.gdshader" id="1_6cy2n"]
-[ext_resource type="Texture2D" uid="uid://bwoywwdghbg6k" path="res://Assets/Asteroids/Asteroid1.png" id="2_0hmh7"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="2_pami1"]
+[ext_resource type="Texture2D" uid="uid://cjya5h6158u85" path="res://Assets/Asteroids/Asteroid12.png" id="4_wgtna"]
 
 [sub_resource type="Resource" id="Resource_5y6c3"]
 script = ExtResource("2_pami1")
@@ -11,14 +11,12 @@ Metals = 400
 Ceramics = 50
 Synthetics = 25
 Organics = 100
-Components = 1
+Components = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfgvo"]
 shader = ExtResource("1_6cy2n")
 shader_parameter/outline_color = Color(0.45, 0.1395, 0.1395, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_uoetv"]
-radius = 40.0125
+shader_parameter/fill_corners = true
 
 [sub_resource type="Curve" id="Curve_cvq1m"]
 max_value = 100.0
@@ -48,25 +46,22 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_4rkgv")
-SIZE = 3
-DangerousCollision = true
-isMineable = true
+SIZE = 12
+MaxMiningHealth = null
+MaxResources = null
+ResourcesLeft = null
 MineWeights = SubResource("Resource_5y6c3")
+DangerousCollision = true
 isAsteroid = true
 hasHealth = true
+MaxHealth = 240.0
+Health = 20.0
 Magnetism = 2.0
-Radius = 40.0
+Radius = 92.0
 
 [node name="Icon" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_wfgvo")
-texture = ExtResource("2_0hmh7")
-
-[node name="ComplexCollider" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(15, -45, 23, -27, 40, -9, 36, -2, 37, 12, 34, 31, 25, 33, 20, 42, 9, 38, -14, 38, -20, 30, -35, 18, -44, -2, -36, -16, -27, -23, -13, -29, -5, -41)
-
-[node name="SimpleColllider" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_uoetv")
+texture = ExtResource("4_wgtna")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
@@ -77,5 +72,8 @@ preprocess = 0.2
 explosiveness = 0.8
 randomness = 1.0
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
 [connection signal="damaged" from="." to="." method="_on_damaged"]
 [connection signal="killed" from="." to="." method="_on_killed"]
+[connection signal="resource_mined" from="." to="." method="_on_resource_mined"]

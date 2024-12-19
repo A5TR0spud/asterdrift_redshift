@@ -40,12 +40,10 @@ class_name NeedleLaserClass
 @export var _laserColorOn: Color
 @export var _laserColorOff: Color
 var _laserTime: float
-var _colTime: float = 0.0
 @export var _laserFiring: bool = false
 @export var _initialAngle: float = 0
 
 func _ready() -> void:
-	_colTime = 0.0
 	_laserFiring = false
 	_reloadVisuals()
 	_reloadCollisions()
@@ -121,29 +119,8 @@ func _physics_process(delta) -> void:
 					antiOrbit = antiOrbit.normalized()
 					kbDir = kbDir * (coe) - antiOrbit * (1.0 - coe) * 2.0
 				c.apply_force(extraPower * FORCE * kbDir.normalized() * 0.08 * KNOCKBACK_COEF, point - c.global_position)
-			if c.isMineable:
-				_colTime += delta * MINING_COEF
-				var dd = 5
-				if CAN_ATTRACT:
-					dd -= 1
-				if _colTime > dd:
-					_colTime -= 5
-					doDamage += 10
-					var scene: Collectable = Collect.instantiate()
-					get_parent().get_parent().get_parent().get_parent().find_child("DecorationSpawner").add_child(scene)
-					scene.global_position = point + normal * 4
-					scene.linear_velocity = normal * 8 * MINING_COEF
-					var m: Materials.Mats = c.RollMineable()
-					if m == Materials.Mats.Metals:
-						scene.COLLECTION = Materials.Mats.Metals
-					elif m == Materials.Mats.Ceramics:
-						scene.COLLECTION = Materials.Mats.Ceramics
-					elif m == Materials.Mats.Synthetics:
-						scene.COLLECTION = Materials.Mats.Synthetics
-					elif m == Materials.Mats.Organics:
-						scene.COLLECTION = Materials.Mats.Organics
-					elif m == Materials.Mats.Components:
-						scene.COLLECTION = Materials.Mats.Components
+			if c is Mineable && MINING_COEF > 0:
+				c.Mine(point + normal * 4, MINING_COEF * delta)
 			if c.hasHealth && doDamage > 0:
 				c.Damage(doDamage)
 	Line.points[1] = Endpoint.position

@@ -45,11 +45,11 @@
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 [ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
 [ext_resource type="Texture2D" uid="uid://jm8cdtguwlmt" path="res://Assets/Hangar/Upgrades/ChargedShield.png" id="34_h0tj1"]
-[ext_resource type="Texture2D" uid="uid://povgcvf0pe2w" path="res://Assets/Hangar/Upgrades/Apollo.png" id="34_o3wij"]
 [ext_resource type="Texture2D" uid="uid://cg8nfm2x5ff0c" path="res://Assets/Hangar/Upgrades/TractorBeam.png" id="35_3wp7d"]
 [ext_resource type="Texture2D" uid="uid://c8s2r5jhf2ttq" path="res://Assets/Hangar/Upgrades/Radar.png" id="37_52wf2"]
 [ext_resource type="Texture2D" uid="uid://b36ncbowy370n" path="res://Assets/Hangar/Upgrades/BetterRadar.png" id="38_mnyow"]
 [ext_resource type="Texture2D" uid="uid://wh0lqw7p3wct" path="res://Assets/Hangar/Upgrades/CoreAssembler.png" id="39_25wo3"]
+[ext_resource type="Texture2D" uid="uid://im5633hhroe4" path="res://Assets/Hangar/Upgrades/SolarLaser.png" id="42_cg4iy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
 [ext_resource type="Texture2D" uid="uid://d4e1bkjul6amk" path="res://Assets/Hangar/Upgrades/Fuse.png" id="42_whiub"]
 [ext_resource type="Texture2D" uid="uid://cley641x2bt1r" path="res://Assets/Hangar/Upgrades/ReverseCharger.png" id="43_qb64a"]
@@ -317,7 +317,7 @@ Metals = 15
 Ceramics = 10
 Synthetics = 10
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_4ho7x"]
 resource_local_to_scene = true
@@ -328,15 +328,6 @@ Synthetics = 0
 Organics = 2
 Components = 0
 
-[sub_resource type="Resource" id="Resource_c8v8h"]
-resource_local_to_scene = true
-script = ExtResource("4_fiej8")
-Metals = 256
-Ceramics = 128
-Synthetics = 64
-Organics = 32
-Components = 4
-
 [sub_resource type="Resource" id="Resource_fd43s"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
@@ -345,6 +336,15 @@ Ceramics = 24
 Synthetics = 12
 Organics = 0
 Components = 0
+
+[sub_resource type="Resource" id="Resource_8c7rl"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 32
+Ceramics = 64
+Synthetics = 0
+Organics = 0
+Components = 2
 
 [sub_resource type="Resource" id="Resource_u04gs"]
 resource_local_to_scene = true
@@ -515,7 +515,7 @@ Metals = 0
 Ceramics = 8
 Synthetics = 0
 Organics = 32
-Components = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_710cu"]
 resource_local_to_scene = true
@@ -963,7 +963,7 @@ Cost = SubResource("Resource_7kw8l")
 position = Vector2(-64, 256)
 NAME = "Precision Prospector"
 DESCRIPTION = "The needle laser can now bite off resources from asteroids.
-Time per resource: 5 seconds."
+Time per resource varies with the target."
 INTERNAL_NAME = "MiningLaser"
 PARENT_UPGRADE = NodePath("../PhotonCannon")
 SPRITE = ExtResource("18_j10x7")
@@ -974,7 +974,8 @@ position = Vector2(-64, 336)
 NAME = "Attractor Beam"
 DESCRIPTION = "The laser can now target and attract resources,
 but is only half as effective at pushing away asteroids.
-Time per resource is reduced by 1 second."
+Attraction to resources scales with knockback.
+Mining speed is multiplied by 120%."
 INTERNAL_NAME = "TractorNeedle"
 PARENT_UPGRADE = NodePath("../MiningLaser")
 SPRITE = ExtResource("23_pbsqd")
@@ -1014,32 +1015,32 @@ SPRITE = ExtResource("28_2f4oq")
 MAX_LEVEL = 2
 Cost = SubResource("Resource_4ho7x")
 
-[node name="Apollo" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-256, 432)
-NAME = "Apollo"
-DESCRIPTION = "From 4 to 7!
-Targets the closest, farthest, slowest, fastest, focused, and closeset valuable objects in range.
-Damage: 7x0.6
-Knockback: 7x0.75
-Mining Speed: 7x0.6
-Range: +2u."
-INTERNAL_NAME = "Apollo"
-PARENT_UPGRADE = NodePath("../LaserArray")
-HIDE_WITHOUT_PARENT = true
-SPRITE = ExtResource("34_o3wij")
-HIDE = true
-Cost = SubResource("Resource_c8v8h")
-
 [node name="TractorBeam" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-64, 416)
 NAME = "Juniper Beam"
 DESCRIPTION = "The beam applies a resistance to
 avoid gravity-assisting resources.
-Attraction to resources is increased to 200%."
+Attraction to resources is increased to 200%.
+Mining speed is multiplied by 120%."
 INTERNAL_NAME = "BetterTractorNeedle"
 PARENT_UPGRADE = NodePath("../TractorNeedle")
 SPRITE = ExtResource("35_3wp7d")
 Cost = SubResource("Resource_fd43s")
+
+[node name="Solar" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-160, 416)
+NAME = "Solar Focus"
+DESCRIPTION = "Doubles the knockback of the laser.
+Reduces the amount of beams to 1.
+Increases range by 1 unit per laser discarded.
+Increases mining speed by 60% per laser discarded.
+Increases damage by 60% per laser discarded.
+Increases knockback by 60% per laser discarded.
+Negates reductive modifiers of Laser Array."
+INTERNAL_NAME = "SolarFocus"
+PARENT_UPGRADE = NodePath("../StrongLaser")
+SPRITE = ExtResource("42_cg4iy")
+Cost = SubResource("Resource_8c7rl")
 
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
 

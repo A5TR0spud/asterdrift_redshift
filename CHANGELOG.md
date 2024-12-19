@@ -1,21 +1,35 @@
 ## indev build 10
 
-- Reduced Core generation 8 -> 6
+- Added Solar Focus upgrade to Military-Grade Laser
+- Reduced Core generation 8 -> 4
 - Nerfed Stage 2 Ceramic cost: 10 -> 32
 - Fixed Upcycler and Core cropping issue on pickup notifications from Inventory Audit
 - Fixed overwriting of source in inventory log; Upcycler now properly displays next to conversions that it causes
-TODO: FIX NOTIFICATION CROPPING, RN THEY DONT CROP
+- Buffed Military-Grade Laser Core cost: 1 -> 0
+- Buffed Juniper Beam: now applies a 1.2x multiplier to mining speed
 - Adjusted Core Assembler costs:
 	- Ceramics: 16 -> 24
 	- Synthetics: 16 -> 24
 	- Organics: 24 -> 32
 	- Cores: 1 -> 0
 	- Metal remains 16
+- Upcycler costs a core now
 - Combustion ARCS now changes color of RCS thrust to the same as main thrust
+- Completely reworked asteroids
+	- Asteroids now spawn in different sizes
+	- Killing an asteroid causes it to split if its big enough
+		- If it's too small to split, it rolls a resource from its loot table
+	- Mining has been reworked
+		- Switched timer from per laser to per asteroid
+		- Asteroids will lose size after being mined sufficiently
+			- If it's too small to lose size, it will have to be killed with damage
+		- Resources mined no longer cause a burst of damage to the asteroid
+		- Cores can no longer be obtained from mining
 
 - TODO:
-	- Added 11 more sizes of asteroid
-		- Asteroids either split when killed or lose mass when mined
+	- Buff Inventory Monitor to include hangar materials
+	- Add Solar Focus
+	TODO: FIX NOTIFICATION CROPPING, RN THEY DONT CROP
 	- Added comets (very fast asteroids that drop organic and deal damage to impacted objects, likely shattering)
 		- Has two tails: one is very faint but stays constant, the other is much more visible and indicates velocity
 

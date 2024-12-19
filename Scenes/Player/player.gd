@@ -209,33 +209,51 @@ func _handleStats():
 	if IS_IN_GARAGE || UpgradesManager.Load("Laser") < 1:
 		Laser.queue_free()
 	else:
-		x = Laser.LASER_COUNT
-		x += UpgradesManager.Load("TwoLaser")
-		x += 2 * UpgradesManager.Load("LaserArray")
-		x += 3 * UpgradesManager.Load("Apollo")
-		Laser.LASER_COUNT = x
+		var LaserCount: int = 0
+		var HasSolarFocus: bool = false
+		LaserCount = Laser.LASER_COUNT
+		LaserCount += UpgradesManager.Load("TwoLaser")
+		LaserCount += 2 * UpgradesManager.Load("LaserArray")
+		if UpgradesManager.Load("SolarFocus") > 0:
+			Laser.LASER_COUNT = 1
+			LaserCount -= 1
+			HasSolarFocus = true
+		else:
+			Laser.LASER_COUNT = LaserCount
 		
 		x = Laser.RANGE
 		x += 16 * UpgradesManager.Load("SpareBattery")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x -= 32
-		x += 32 * UpgradesManager.Load("Apollo")
+		if HasSolarFocus:
+			x += 16 * LaserCount
 		Laser.RANGE = x
 		y = Laser.KNOCKBACK_COEF
 		y += 2 * UpgradesManager.Load("HeavyLaser")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			y *= 2
-		if UpgradesManager.Load("LaserArray") + UpgradesManager.Load("Apollo") > 0:
+		if HasSolarFocus:
+			y *= 2
+			y += 0.6 * LaserCount
+		elif UpgradesManager.Load("LaserArray") > 0:
 			y *= 0.75
 		Laser.KNOCKBACK_COEF = y
 		y = Laser.DAMAGE_COEF
 		y += 3 * UpgradesManager.Load("StrongLaser")
-		if UpgradesManager.Load("LaserArray") + UpgradesManager.Load("Apollo") > 0:
+		if UpgradesManager.Load("LaserArray") > 0 && !HasSolarFocus:
 			y *= 0.6
+		if HasSolarFocus:
+			y += 0.6 * LaserCount
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
 		y += UpgradesManager.Load("MiningLaser")
-		if UpgradesManager.Load("LaserArray") + UpgradesManager.Load("Apollo") > 0:
+		if UpgradesManager.Load("TractorNeedle") > 0:
+			y *= 1.2
+		if HasSolarFocus:
+			y += 0.6 * LaserCount
+		if UpgradesManager.Load("BetterTractorNeedle") > 0:
+			y *= 1.2
+		if UpgradesManager.Load("LaserArray") > 0 && !HasSolarFocus:
 			y *= 0.6
 		Laser.MINING_COEF = y
 		x = Laser.WIDTH
@@ -243,8 +261,8 @@ func _handleStats():
 			x += 1
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x += 1
-		if UpgradesManager.Load("Apollo") > 0:
-			x = maxi(x - 1, 1)
+		if HasSolarFocus:
+			x += 0.5 * LaserCount
 		elif UpgradesManager.Load("LaserArray") > 0:
 			x = maxi(x * 0.5, 1)
 		Laser.WIDTH = x
