@@ -1041,7 +1041,7 @@ SPRITE = ExtResource("35_3wp7d")
 PARENT_UPGRADE = NodePath("../TractorNeedle")
 Cost = SubResource("Resource_fd43s")
 
-[node name="Artemis" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "EXCLUDE_UPGRADES") instance=ExtResource("4_r883k")]
+[node name="Artemis" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-160, 432)
 NAME = "Artemis"
 DESCRIPTION = "Doubles the knockback of the laser.
@@ -1052,14 +1052,13 @@ Increases mining speed by 60% per laser discarded.
 Increases damage by 60% per laser discarded.
 Increases knockback by 60% per laser discarded.
 Negates reductive modifiers of Laser Array.
-Incompatible with Apollo."
+See Apollo for compatibility effects."
 INTERNAL_NAME = "Artemis"
 SPRITE = ExtResource("41_f8evi")
 PARENT_UPGRADE = NodePath("../StrongLaser")
-EXCLUDE_UPGRADES = [NodePath("../Apollo")]
 Cost = SubResource("Resource_8c7rl")
 
-[node name="Apollo" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES", "EXCLUDE_UPGRADES") instance=ExtResource("4_r883k")]
+[node name="Apollo" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(-256, 432)
 NAME = "Apollo"
 DESCRIPTION = "Replaces lasers with an area of effect.
@@ -1067,12 +1066,12 @@ Reduces range by 3u.
 Starts at 60% efficiency per beam, but splits
 effect between all objects in the area.
 Negates reductive modifiers of Laser Array.
-Incompatible with Artemis."
+Weaker but longer-ranged if used
+alongside Artemis."
 INTERNAL_NAME = "Apollo"
 SPRITE = ExtResource("34_o3wij")
 PARENT_UPGRADE = NodePath("../LaserArray")
 REQUIRED_UPGRADES = [NodePath("../../../TopRight/Magnet")]
-EXCLUDE_UPGRADES = [NodePath("../Artemis")]
 Cost = SubResource("Resource_uuedo")
 
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
