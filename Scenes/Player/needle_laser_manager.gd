@@ -98,15 +98,17 @@ func _reloadVisuals() -> void:
 			c2.a = 0
 			x.set_shader_parameter("Color1", c1)
 			x.set_shader_parameter("Color2", c2)
+			x.set_shader_parameter("coronaCount", 6)
 			var y: ShaderMaterial = $ApolloCorona/ApolloFlare.material
 			y.set_shader_parameter("Color1", c1)
 			y.set_shader_parameter("Color2", c2)
+			y.set_shader_parameter("coronaCount", 6)
 	else:
 		$ApolloCorona.hide()
 	for child in List.get_children():
 		if child is NeedleLaserClass:
 			child.Line.width = WIDTH
-			child.VisLaserInterval = Visuals.BLINKER_INTERVAL
+			child.VisLaserInterval = Visuals.BLINKER_INTERVAL if UpgradesManager.Load("Artemis") < 1 else 5
 			child._laserColorOn = _laserifyColor(Visuals.BLINKER_ON_COLOR, true)
 			child._laserColorOff = _laserifyColor(Visuals.BLINKER_OFF_COLOR, false)
 			child.Player = Player
@@ -129,7 +131,7 @@ func _laserifyColor(col: Color, on: bool) -> Color:
 				col = Color(0.5, 0.5, 1, 1)
 			return col
 		if on:
-			col = Color(0.8, 0.5, 1, 1)
+			col = Color(0.6, 0.5, 1, 1)
 		if !on:
 			col = Color(0.5, 0.8, 1, 1)
 		return col

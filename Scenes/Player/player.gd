@@ -217,6 +217,7 @@ func _handleStats():
 		LaserCount = Laser.LASER_COUNT
 		LaserCount += UpgradesManager.Load("TwoLaser")
 		LaserCount += 2 * UpgradesManager.Load("LaserArray")
+		LaserCount += UpgradesManager.Load("ExtraLaser")
 		if UpgradesManager.Load("Artemis") > 0:
 			Laser.LASER_COUNT = 1
 			LaserCount -= 1

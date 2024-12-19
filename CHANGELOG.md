@@ -1,7 +1,7 @@
 ## indev build 10
 
-- Added Apollo upgrade to Laser Array
-- Added Artemis upgrade to Military-Grade Laser
+- Added Apollo upgrade to Akimbo
+- Added Artemis upgrade to Akimbo
 - Buffed Inventory Monitor to include hangar materials
 - Reduced Core generation 8 -> 4
 - Nerfed Stage 2 Ceramic cost: 10 -> 32

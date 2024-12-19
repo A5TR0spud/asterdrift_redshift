@@ -380,6 +380,7 @@ width = 1.0
 default_color = Color(0.129412, 0.145098, 0.196078, 1)
 
 [node name="NeedleLaserManager" type="Node2D" parent="."]
+visible = false
 top_level = true
 z_index = -50
 script = ExtResource("18_yrk6l")

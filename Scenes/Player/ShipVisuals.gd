@@ -67,6 +67,8 @@ signal firemalasar
 
 var readied : bool = false
 
+@onready var Manip := $"../Manipulator"
+
 func _ready():
 	readied = true
 	_ProcessValues()
@@ -92,7 +94,7 @@ func _ProcessValues():
 	$Outline.modulate = OUTLINE_COLOR
 	
 	#manipulator visuals
-	if is_instance_valid($"../Manipulator"):
+	if is_instance_valid(Manip):
 		$"../Manipulator/BaseSprite/ArmSprite".self_modulate = HULL_COLOR
 		$"../Manipulator/BaseSprite/ArmSprite/ArmAccent".self_modulate = ACCENT_COLOR
 		$"../Manipulator/BaseSprite/ArmSprite/RHSGrabber".self_modulate = HULL_COLOR

@@ -2,7 +2,7 @@ extends Camera2D
 
 @export var speed: float = 128
 @export var grace: int = 4
-var _zoom: float = 0.75
+var _zoom: float = 0.375
 var _clickPos: Vector2 = Vector2(0, 0)
 var _clicked: bool = false
 var _isGraced: bool = false
@@ -26,8 +26,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("zoom out"):
 		zoomOut()
 	if Input.is_action_just_pressed("reset zoom"):
-		_zoom = 0.75
-	_zoom = clampf(_zoom, 0.333, 2)
+		_zoom = 0.375
+	_zoom = clampf(_zoom, 0.188, 1)
 	zoom.x = _zoom
 	zoom.y = _zoom
 	
