@@ -210,14 +210,14 @@ func _handleStats():
 		Laser.queue_free()
 	else:
 		var LaserCount: int = 0
-		var HasSolarFocus: bool = false
+		var HasArtemis: bool = false
 		LaserCount = Laser.LASER_COUNT
 		LaserCount += UpgradesManager.Load("TwoLaser")
 		LaserCount += 2 * UpgradesManager.Load("LaserArray")
-		if UpgradesManager.Load("SolarFocus") > 0:
+		if UpgradesManager.Load("Artemis") > 0:
 			Laser.LASER_COUNT = 1
 			LaserCount -= 1
-			HasSolarFocus = true
+			HasArtemis = true
 		else:
 			Laser.LASER_COUNT = LaserCount
 		
@@ -225,14 +225,14 @@ func _handleStats():
 		x += 16 * UpgradesManager.Load("SpareBattery")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x -= 32
-		if HasSolarFocus:
+		if HasArtemis:
 			x += 16 * LaserCount
 		Laser.RANGE = x
 		y = Laser.KNOCKBACK_COEF
 		y += 2 * UpgradesManager.Load("HeavyLaser")
 		if UpgradesManager.Load("StrongLaser") > 0:
 			y *= 2
-		if HasSolarFocus:
+		if HasArtemis:
 			y *= 2
 			y += 0.6 * LaserCount
 		elif UpgradesManager.Load("LaserArray") > 0:
@@ -240,20 +240,20 @@ func _handleStats():
 		Laser.KNOCKBACK_COEF = y
 		y = Laser.DAMAGE_COEF
 		y += 3 * UpgradesManager.Load("StrongLaser")
-		if UpgradesManager.Load("LaserArray") > 0 && !HasSolarFocus:
+		if UpgradesManager.Load("LaserArray") > 0 && !HasArtemis:
 			y *= 0.6
-		if HasSolarFocus:
+		if HasArtemis:
 			y += 0.6 * LaserCount
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
 		y += UpgradesManager.Load("MiningLaser")
 		if UpgradesManager.Load("TractorNeedle") > 0:
 			y *= 1.2
-		if HasSolarFocus:
+		if HasArtemis:
 			y += 0.6 * LaserCount
 		if UpgradesManager.Load("BetterTractorNeedle") > 0:
 			y *= 1.2
-		if UpgradesManager.Load("LaserArray") > 0 && !HasSolarFocus:
+		if UpgradesManager.Load("LaserArray") > 0 && !HasArtemis:
 			y *= 0.6
 		Laser.MINING_COEF = y
 		x = Laser.WIDTH
@@ -261,7 +261,7 @@ func _handleStats():
 			x += 1
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x += 1
-		if HasSolarFocus:
+		if HasArtemis:
 			x += 0.5 * LaserCount
 		elif UpgradesManager.Load("LaserArray") > 0:
 			x = maxi(x * 0.5, 1)

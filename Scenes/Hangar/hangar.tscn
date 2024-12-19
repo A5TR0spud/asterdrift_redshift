@@ -49,7 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://c8s2r5jhf2ttq" path="res://Assets/Hangar/Upgrades/Radar.png" id="37_52wf2"]
 [ext_resource type="Texture2D" uid="uid://b36ncbowy370n" path="res://Assets/Hangar/Upgrades/BetterRadar.png" id="38_mnyow"]
 [ext_resource type="Texture2D" uid="uid://wh0lqw7p3wct" path="res://Assets/Hangar/Upgrades/CoreAssembler.png" id="39_25wo3"]
-[ext_resource type="Texture2D" uid="uid://im5633hhroe4" path="res://Assets/Hangar/Upgrades/SolarLaser.png" id="42_cg4iy"]
+[ext_resource type="Texture2D" uid="uid://c8gyxp6tehn6d" path="res://Assets/Hangar/Upgrades/Artemis.png" id="41_f8evi"]
 [ext_resource type="Script" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
 [ext_resource type="Texture2D" uid="uid://d4e1bkjul6amk" path="res://Assets/Hangar/Upgrades/Fuse.png" id="42_whiub"]
 [ext_resource type="Texture2D" uid="uid://cley641x2bt1r" path="res://Assets/Hangar/Upgrades/ReverseCharger.png" id="43_qb64a"]
@@ -1027,9 +1027,9 @@ PARENT_UPGRADE = NodePath("../TractorNeedle")
 SPRITE = ExtResource("35_3wp7d")
 Cost = SubResource("Resource_fd43s")
 
-[node name="Solar" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="Artemis" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-160, 416)
-NAME = "Solar Focus"
+NAME = "Artemis"
 DESCRIPTION = "Doubles the knockback of the laser.
 Reduces the amount of beams to 1.
 Increases range by 1 unit per laser discarded.
@@ -1037,9 +1037,9 @@ Increases mining speed by 60% per laser discarded.
 Increases damage by 60% per laser discarded.
 Increases knockback by 60% per laser discarded.
 Negates reductive modifiers of Laser Array."
-INTERNAL_NAME = "SolarFocus"
+INTERNAL_NAME = "Artemis"
 PARENT_UPGRADE = NodePath("../StrongLaser")
-SPRITE = ExtResource("42_cg4iy")
+SPRITE = ExtResource("41_f8evi")
 Cost = SubResource("Resource_8c7rl")
 
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
