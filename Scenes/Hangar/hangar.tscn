@@ -1064,7 +1064,7 @@ position = Vector2(-256, 432)
 NAME = "Apollo"
 DESCRIPTION = "Replaces lasers with an area of effect.
 Reduces range by 3u.
-Starts at 100% efficiency per beam, but splits
+Starts at 60% efficiency per beam, but splits
 effect between all objects in the area.
 Negates reductive modifiers of Laser Array.
 Incompatible with Artemis."

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=47 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -71,11 +71,33 @@ radius = 144.0
 shader = ExtResource("21_jcrno")
 shader_parameter/Color1 = Color(1, 1, 0.5, 1)
 shader_parameter/Color2 = Color(1, 0, 0, 0)
+shader_parameter/coronaPercent = 0.0625
+shader_parameter/coronaPercentPulse = 0.025
+shader_parameter/coronaPercentPulseSpeed = 1.0
+shader_parameter/coronaCount = 50
+shader_parameter/coronaSpeed = 0.3
 shader_parameter/minAlpha = 0.543
 shader_parameter/distCoefficient = 18.0
 shader_parameter/timeCoefficient = 2.0
 shader_parameter/distFade = 0.5
 shader_parameter/rotationCoefficient = 0.125
+shader_parameter/rotationSpeed = 2.0
+shader_parameter/rotationPulse = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1q01y"]
+shader = ExtResource("21_jcrno")
+shader_parameter/Color1 = Color(1, 1, 0.5, 1)
+shader_parameter/Color2 = Color(1, 0, 0, 0)
+shader_parameter/coronaPercent = 1.0
+shader_parameter/coronaPercentPulse = 0.074627
+shader_parameter/coronaPercentPulseSpeed = 1.0
+shader_parameter/coronaCount = 16
+shader_parameter/coronaSpeed = -0.065
+shader_parameter/minAlpha = 1.0
+shader_parameter/distCoefficient = 18.0
+shader_parameter/timeCoefficient = 2.0
+shader_parameter/distFade = 0.0
+shader_parameter/rotationCoefficient = 0.0
 shader_parameter/rotationSpeed = 2.0
 shader_parameter/rotationPulse = 5.0
 
@@ -374,7 +396,8 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
-[node name="ApolloRect" type="ColorRect" parent="NeedleLaserManager"]
+[node name="ApolloCorona" type="ColorRect" parent="NeedleLaserManager"]
+modulate = Color(1, 1, 1, 0.501961)
 material = SubResource("ShaderMaterial_eptyk")
 anchors_preset = 8
 anchor_left = 0.5
@@ -385,6 +408,22 @@ offset_left = -144.0
 offset_top = -144.0
 offset_right = 144.0
 offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ApolloFlare" type="ColorRect" parent="NeedleLaserManager/ApolloCorona"]
+modulate = Color(1, 1, 1, 0.501961)
+material = SubResource("ShaderMaterial_1q01y")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -72.0
+offset_right = 72.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -476,6 +515,8 @@ offset_bottom = 128.0
 [connection signal="firemalasar" from="ShipVisuals" to="NeedleLaserManager" method="_on_ship_visuals_firemalasar"]
 [connection signal="body_entered" from="Manipulator/ManipulatorArea" to="Manipulator" method="_on_manipulator_area_body_entered"]
 [connection signal="body_entered" from="Manipulator/GrabBox" to="Manipulator" method="_on_grab_box_body_entered"]
+[connection signal="body_entered" from="NeedleLaserManager/LaserArea" to="NeedleLaserManager" method="_on_laser_area_body_entered"]
+[connection signal="body_exited" from="NeedleLaserManager/LaserArea" to="NeedleLaserManager" method="_on_laser_area_body_exited"]
 [connection signal="body_entered" from="MagnetArea" to="MagnetArea" method="_on_body_entered"]
 [connection signal="body_exited" from="MagnetArea" to="MagnetArea" method="_on_body_exited"]
 [connection signal="body_entered" from="ShieldProjector" to="ShieldProjector" method="_on_body_entered"]

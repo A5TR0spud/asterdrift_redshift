@@ -100,27 +100,6 @@ func _physics_process(delta) -> void:
 		var c: Object = Ray.get_collider()
 		if c is Entity:
 			var normal: Vector2 = Ray.get_collision_normal()
-			var doDamage: float = 0.0
-			if c.DangerousCollision || c.isAsteroid:
-				var dir: Vector2 = Target.position.normalized()
-				var kb: Vector2 = FORCE * (dir * 1.1 - normal).normalized()
-				if CAN_ATTRACT:
-					kb *= 0.5
-				c.apply_force(kb * KNOCKBACK_COEF, point - c.global_position)
-				doDamage += DAMAGE_COEF * delta
-			if c.isResource && CAN_ATTRACT:
-				var dir: Vector2 = -Target.position.normalized()
-				var kbDir: Vector2 = dir * 2.0 + normal
-				var extraPower: float = 1.0
-				if UpgradesManager.Load("BetterTractorNeedle") > 0:
-					extraPower *= 2
-					var antiOrbit: Vector2 = -c.linear_velocity + Player.linear_velocity
-					var coe: float = absf((dir + Player.linear_velocity).dot(c.linear_velocity + Player.linear_velocity))
-					antiOrbit = antiOrbit.normalized()
-					kbDir = kbDir * (coe) - antiOrbit * (1.0 - coe) * 2.0
-				c.apply_force(extraPower * FORCE * kbDir.normalized() * 0.08 * KNOCKBACK_COEF, point - c.global_position)
-			if c is Mineable && MINING_COEF > 0:
-				c.Mine(point + normal * 4, MINING_COEF * delta)
-			if c.hasHealth && doDamage > 0:
-				c.Damage(doDamage)
+			var dir: Vector2 = Target.position.normalized()
+			NeedleLaserManager.ApplyLaserEffects(c, dir, point, normal, delta)
 	Line.points[1] = Endpoint.position

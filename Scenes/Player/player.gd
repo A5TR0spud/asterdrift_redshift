@@ -211,12 +211,16 @@ func _handleStats():
 	else:
 		var LaserCount: int = 0
 		var HasArtemis: bool = false
+		var HasApollo: bool = UpgradesManager.Load("Apollo") > 0
+		Laser.APOLLO = HasApollo
+		var CancelLaserArrayBad: bool = HasApollo
 		LaserCount = Laser.LASER_COUNT
 		LaserCount += UpgradesManager.Load("TwoLaser")
 		LaserCount += 2 * UpgradesManager.Load("LaserArray")
 		if UpgradesManager.Load("Artemis") > 0:
 			Laser.LASER_COUNT = 1
 			LaserCount -= 1
+			CancelLaserArrayBad = true
 			HasArtemis = true
 		else:
 			Laser.LASER_COUNT = LaserCount
@@ -227,6 +231,8 @@ func _handleStats():
 			x -= 32
 		if HasArtemis:
 			x += 32 * LaserCount
+		if HasApollo:
+			x -= 32
 		Laser.RANGE = x
 		y = Laser.KNOCKBACK_COEF
 		y += 2 * UpgradesManager.Load("HeavyLaser")
@@ -235,7 +241,7 @@ func _handleStats():
 		if HasArtemis:
 			y *= 2
 			y += 0.6 * LaserCount
-		elif UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			y *= 0.75
 		Laser.KNOCKBACK_COEF = y
 		y = Laser.DAMAGE_COEF
@@ -243,7 +249,7 @@ func _handleStats():
 		if HasArtemis:
 			y *= 2.0
 			y += 0.6 * LaserCount
-		elif UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			y *= 0.6
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
@@ -252,7 +258,7 @@ func _handleStats():
 			y *= 1.2
 		if HasArtemis:
 			y += 0.6 * LaserCount
-		elif UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			y *= 0.6
 		if UpgradesManager.Load("BetterTractorNeedle") > 0:
 			y *= 1.2
@@ -265,7 +271,7 @@ func _handleStats():
 		if HasArtemis:
 			@warning_ignore("narrowing_conversion")
 			x += 0.5 * LaserCount
-		elif UpgradesManager.Load("LaserArray") > 0:
+		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			@warning_ignore("narrowing_conversion")
 			x = maxi(x * 0.5, 1)
 		Laser.WIDTH = x

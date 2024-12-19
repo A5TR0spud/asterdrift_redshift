@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name NeedleLaserManager
 
 @onready var Area := $LaserArea
 @onready var ACol := $LaserArea/CollisionShape2D
@@ -45,12 +46,17 @@ extends Node2D
 		if is_node_ready():
 			_reloadVisuals()
 
+@export var APOLLO: bool = false
+
 @onready var LaserPrefab := preload("res://Scenes/Player/needle_laser.tscn")
+
+var Entities: Array[Entity] = []
 
 func _ready() -> void:
 	_reloadVisuals()
 	_reloadCollisions()
 	_reloadLasers()
+	Instance = self
 	if !Engine.is_editor_hint():
 		show()
 
@@ -58,12 +64,13 @@ func _reloadLasers() -> void:
 	for child in List.get_children():
 		if child is NeedleLaserClass:
 			child.free()
-	for i in LASER_COUNT:
-		var prefab: NeedleLaserClass = LaserPrefab.instantiate()
-		prefab.doesOrbit = i != 0
-		if LASER_COUNT - 1 > 0:
-			prefab._initialAngle = deg_to_rad((i - 1) * 360.0 / (LASER_COUNT - 1))
-		List.add_child(prefab)
+	if !APOLLO:
+		for i in LASER_COUNT:
+			var prefab: NeedleLaserClass = LaserPrefab.instantiate()
+			prefab.doesOrbit = i != 0
+			if LASER_COUNT - 1 > 0:
+				prefab._initialAngle = deg_to_rad((i - 1) * 360.0 / (LASER_COUNT - 1))
+			List.add_child(prefab)
 	_reloadVisuals()
 	_reloadCollisions()
 
@@ -78,6 +85,14 @@ func _reloadCollisions() -> void:
 func _reloadVisuals() -> void:
 	if !is_node_ready():
 		return
+	if APOLLO:
+		$ApolloCorona.show()
+		$ApolloCorona.size.x = RANGE * 2.0
+		$ApolloCorona.size.y = RANGE * 2.0
+		$ApolloCorona.position.x = -RANGE
+		$ApolloCorona.position.y = -RANGE
+	else:
+		$ApolloCorona.hide()
 	for child in List.get_children():
 		if child is NeedleLaserClass:
 			child.Line.width = WIDTH
@@ -109,7 +124,9 @@ var _farthestEntity: Entity = null
 var _fastestEntity: Entity = null
 var _slowestEntity: Entity = null
 
-func _physics_process(_delta) -> void:
+static var Instance: NeedleLaserManager
+
+func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
 		hide()
 		return
@@ -121,72 +138,82 @@ func _physics_process(_delta) -> void:
 	_fastestEntity = _tryNullifyTarget(_fastestEntity)
 	_slowestEntity = _tryNullifyTarget(_slowestEntity)
 	
-	var collidersList : Array[Node2D] = Area.get_overlapping_bodies()
-	if AUTO_LASER:
-		for col in collidersList:
-			if col is Entity:
-				if col.IgnoredByLaser:
+	if AUTO_LASER && !APOLLO:
+		for col in Entities:
+			if !is_instance_valid(col):
+				Entities.erase(col)
+		for col: Entity in Entities:
+			if col.IgnoredByLaser:
+				continue
+			if !col.isAsteroid && !col.DangerousCollision:
+				if col.isResource && !CAN_ATTRACT:
 					continue
-				if !col.isAsteroid && !col.DangerousCollision:
-					if col.isResource && !CAN_ATTRACT:
-						continue
-				
-				if _closestEntity == null:
-					_closestEntity = col
-				if _farthestEntity == null:
-					_farthestEntity = col
-				if _fastestEntity == null:
-					_fastestEntity = col
-				if _slowestEntity == null:
-					_slowestEntity = col
-				#close
-				var test1: float = col.global_position.distance_to(global_position) - col.Radius
-				var test2: float = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
-				if test1 < test2:
-					_closestEntity = col
-				#far
-				test2 = _farthestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
-				if test1 > test2:
-					_farthestEntity = col
-				#fast
-				test1 = col.linear_velocity.length()
-				test2 = _fastestEntity.linear_velocity.length()
-				if test1 > test2:
-					_fastestEntity = col
-				#slow
-				test2 = _slowestEntity.linear_velocity.length()
-				if test1 < test2:
-					_slowestEntity = col
+			
+			if _closestEntity == null:
+				_closestEntity = col
+			if _farthestEntity == null:
+				_farthestEntity = col
+			if _fastestEntity == null:
+				_fastestEntity = col
+			if _slowestEntity == null:
+				_slowestEntity = col
+			#close
+			var test1: float = col.global_position.distance_to(global_position) - col.Radius
+			var test2: float = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
+			if test1 < test2:
+				_closestEntity = col
+			#far
+			test2 = _farthestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
+			if test1 > test2:
+				_farthestEntity = col
+			#fast
+			test1 = col.linear_velocity.length()
+			test2 = _fastestEntity.linear_velocity.length()
+			if test1 > test2:
+				_fastestEntity = col
+			#slow
+			test2 = _slowestEntity.linear_velocity.length()
+			if test1 < test2:
+				_slowestEntity = col
 	
-	var i = -1
-	for child in List.get_children():
-		if child is NeedleLaserClass:
-			i += 1
-			child._laserFiring = false
-			if !child.is_node_ready():
-				continue
-			if Input.is_action_pressed("fire"):
-				child._laserFiring = true
-				child.Target.global_position = get_global_mouse_position()
-				continue
-			if !AUTO_LASER:
-				continue
-			if i % 4 == 0:
-				if _closestEntity != null:
+	if APOLLO:
+		for ent: Entity in Entities:
+			var dir: Vector2 = ent.global_position - Player.global_position
+			dir = dir.normalized()
+			var pos: Vector2 = ent.global_position - dir * ent.Radius
+			var potency: float = 0.6 * float(LASER_COUNT) / float(Entities.size())
+			ApplyLaserEffects(ent, pos, dir, -dir, delta, potency)
+	
+	if !APOLLO:
+		var i = -1
+		for child in List.get_children():
+			if child is NeedleLaserClass:
+				i += 1
+				child._laserFiring = false
+				if !child.is_node_ready():
+					continue
+				if Input.is_action_pressed("fire"):
 					child._laserFiring = true
-					child.Target.global_position = _closestEntity.global_position
-			elif i % 4 == 1:
-				if _farthestEntity != null:
-					child._laserFiring = true
-					child.Target.global_position = _farthestEntity.global_position
-			elif i % 4 == 2:
-				if _fastestEntity != null:
-					child._laserFiring = true
-					child.Target.global_position = _fastestEntity.global_position
-			elif i % 4 == 3:
-				if _slowestEntity != null:
-					child._laserFiring = true
-					child.Target.global_position = _slowestEntity.global_position
+					child.Target.global_position = get_global_mouse_position()
+					continue
+				if !AUTO_LASER:
+					continue
+				if i % 4 == 0:
+					if _closestEntity != null:
+						child._laserFiring = true
+						child.Target.global_position = _closestEntity.global_position
+				elif i % 4 == 1:
+					if _farthestEntity != null:
+						child._laserFiring = true
+						child.Target.global_position = _farthestEntity.global_position
+				elif i % 4 == 2:
+					if _fastestEntity != null:
+						child._laserFiring = true
+						child.Target.global_position = _fastestEntity.global_position
+				elif i % 4 == 3:
+					if _slowestEntity != null:
+						child._laserFiring = true
+						child.Target.global_position = _slowestEntity.global_position
 
 func _on_ship_visuals_firemalasar():
 	_reloadVisuals()
@@ -204,3 +231,36 @@ func _tryNullifyTarget(target) -> Entity:
 		elif target.IgnoredByLaser:
 			target = null
 	return target
+
+static func ApplyLaserEffects(target: Entity, global_pos: Vector2, laser_direction: Vector2, normal: Vector2, delta: float = 1.0, potency: float = 1.0) -> void:
+	var doDamage: float = 0.0
+	if target.DangerousCollision || target.isAsteroid:
+		var kb: Vector2 = Instance.FORCE * (laser_direction * 1.1 - normal).normalized()
+		if Instance.CAN_ATTRACT:
+			kb *= 0.5
+		target.apply_force(potency * kb * Instance.KNOCKBACK_COEF, global_pos - target.global_position)
+		doDamage += Instance.DAMAGE_COEF * delta
+	if target.isResource && Instance.CAN_ATTRACT:
+		var kbDir: Vector2 = -laser_direction * 2.0 + normal
+		var extraPower: float = 1.0
+		if UpgradesManager.Load("BetterTractorNeedle") > 0:
+			extraPower *= 2
+			var antiOrbit: Vector2 = Instance.Player.linear_velocity - target.linear_velocity
+			var coe: float = absf((-laser_direction + Instance.Player.linear_velocity).dot(target.linear_velocity + Instance.Player.linear_velocity))
+			antiOrbit = antiOrbit.normalized()
+			kbDir = kbDir * (coe) - antiOrbit * (1.0 - coe) * 2.0
+		target.apply_force(potency * extraPower * Instance.FORCE * kbDir.normalized() * 0.08 * Instance.KNOCKBACK_COEF, global_pos - target.global_position)
+	if target is Mineable && Instance.MINING_COEF > 0:
+		target.Mine(global_pos + normal * 4, potency * Instance.MINING_COEF * delta)
+	if target.hasHealth && doDamage > 0:
+		target.Damage(potency * doDamage)
+
+
+func _on_laser_area_body_entered(body):
+	if body is Entity:
+		Entities.append(body)
+
+
+func _on_laser_area_body_exited(body):
+	if Entities.has(body):
+		Entities.erase(body)

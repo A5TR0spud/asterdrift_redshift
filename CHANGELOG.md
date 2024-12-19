@@ -1,5 +1,6 @@
 ## indev build 10
 
+- Added Apollo upgrade to Laser Array
 - Added Artemis upgrade to Military-Grade Laser
 - Buffed Inventory Monitor to include hangar materials
 - Reduced Core generation 8 -> 4
