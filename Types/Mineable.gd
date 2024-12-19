@@ -7,6 +7,7 @@ class_name Mineable
 @export_storage var ResourcesLeft: int = 20
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Materials") var MineWeights: Materials 
 
+@warning_ignore("unused_signal")
 signal resource_mined(global_pos: Vector2)
 
 func _ready():

@@ -8,7 +8,7 @@ var _last_pos : Vector2
 func _ready():
 	_last_pos = Player.global_position
 
-func _process(delta):
+func _process(_delta):
 	if !UpgradesManager.LoadIsEnabled("CameraMode"):
 		if UpgradesManager.Load("RCSThrust") < 1:
 			rotation = Player.rotation + deg_to_rad(90)
@@ -34,7 +34,8 @@ func zoomOut():
 	_zoom -= 0.1 * _zoom
 
 func maxZoomOut() -> float:
-	var zoomOut: float = 1
+	var z: float = 1
 	var radarDish: int = UpgradesManager.Load("Dish")
-	zoomOut += 0.5 * radarDish
-	return 2 / zoomOut
+	var radar: int = UpgradesManager.Load("Radar")
+	z += 0.5 * radarDish + 0.5 * radar
+	return 2.0 / z

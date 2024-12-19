@@ -13,7 +13,7 @@ func _on_area_2d_body_exited(body: Node2D):
 	if Player.CAN_MOVE:
 		_tryCaptureResource(body)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !Player.CAN_MOVE || Player.IS_IN_GARAGE:
 		hide()
 		return

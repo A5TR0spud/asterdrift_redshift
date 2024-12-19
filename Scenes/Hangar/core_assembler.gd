@@ -1,16 +1,16 @@
 extends GridContainer
 
-var _timeLeft: float = 300.0
+var _timeLeft: float = 180.0
 
 func _ready():
 	_reload()
 
 func _reload():
 	visible = UpgradesManager.Load("CoreAssembler") > 0
-	_timeLeft = DataManager.Load("coreAssemblyTimeLeft", 300.0)
+	_timeLeft = DataManager.Load("coreAssemblyTimeLeft", 180.0)
 	MaterialsManager.Load()
 	while _timeLeft <= 0.0:
-		_timeLeft += 300.0
+		_timeLeft += 180.0
 		MaterialsManager.Mats.Components += 1
 	DataManager.Save("coreAssemblyTimeLeft", _timeLeft)
 	MaterialsManager.Save()

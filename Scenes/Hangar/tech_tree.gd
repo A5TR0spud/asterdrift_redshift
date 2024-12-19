@@ -1,5 +1,5 @@
 extends Node2D
-
+@warning_ignore("unused_signal")
 signal reload_display
 
 func _ready():
@@ -43,5 +43,5 @@ func _on_reset_pressed():
 	MaterialsManager.Mats.Synthetics = 0
 	MaterialsManager.Mats.Organics = 0
 	MaterialsManager.Save()
-	DataManager.Save("coreAssemblyTimeLeft", 300.0)
+	DataManager.Save("coreAssemblyTimeLeft", 180.0)
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")

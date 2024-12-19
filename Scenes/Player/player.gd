@@ -12,7 +12,7 @@ static var Instance: PlayerClass
 # @export var ANGULAR_DRAG : float = 0.99
 @export var IS_IN_GARAGE : bool = false
 @export var CAN_MOVE : bool = true
-@export @onready var Stats : PlayerStatBlock = $PlayerStatBlock
+@onready var Stats : PlayerStatBlock = $PlayerStatBlock
 
 var _inputDir : Vector2
 
@@ -226,7 +226,7 @@ func _handleStats():
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x -= 32
 		if HasArtemis:
-			x += 16 * LaserCount
+			x += 32 * LaserCount
 		Laser.RANGE = x
 		y = Laser.KNOCKBACK_COEF
 		y += 2 * UpgradesManager.Load("HeavyLaser")
@@ -240,10 +240,11 @@ func _handleStats():
 		Laser.KNOCKBACK_COEF = y
 		y = Laser.DAMAGE_COEF
 		y += 3 * UpgradesManager.Load("StrongLaser")
-		if UpgradesManager.Load("LaserArray") > 0 && !HasArtemis:
-			y *= 0.6
 		if HasArtemis:
+			y *= 2.0
 			y += 0.6 * LaserCount
+		elif UpgradesManager.Load("LaserArray") > 0:
+			y *= 0.6
 		Laser.DAMAGE_COEF = y
 		y = Laser.MINING_COEF
 		y += UpgradesManager.Load("MiningLaser")
@@ -251,10 +252,10 @@ func _handleStats():
 			y *= 1.2
 		if HasArtemis:
 			y += 0.6 * LaserCount
+		elif UpgradesManager.Load("LaserArray") > 0:
+			y *= 0.6
 		if UpgradesManager.Load("BetterTractorNeedle") > 0:
 			y *= 1.2
-		if UpgradesManager.Load("LaserArray") > 0 && !HasArtemis:
-			y *= 0.6
 		Laser.MINING_COEF = y
 		x = Laser.WIDTH
 		if UpgradesManager.Load("HeavyLaser") > 0:
@@ -262,8 +263,10 @@ func _handleStats():
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x += 1
 		if HasArtemis:
+			@warning_ignore("narrowing_conversion")
 			x += 0.5 * LaserCount
 		elif UpgradesManager.Load("LaserArray") > 0:
+			@warning_ignore("narrowing_conversion")
 			x = maxi(x * 0.5, 1)
 		Laser.WIDTH = x
 		Laser.AUTO_LASER = UpgradesManager.Load("AutoPhoton") > 0

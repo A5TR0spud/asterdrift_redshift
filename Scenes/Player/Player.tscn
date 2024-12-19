@@ -96,7 +96,7 @@ shader = ExtResource("23_743qs")
 shader_parameter/color = Color(0.877333, 0.54, 1, 0.25098)
 shader_parameter/threshold = 0.49
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("Stats")]
+[node name="Player" type="RigidBody2D"]
 rotation = -1.5708
 disable_mode = 2
 collision_layer = 2
@@ -106,7 +106,6 @@ continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_wd8h7")
-Stats = NodePath("PlayerStatBlock")
 isPlayer = true
 Radius = 13.0
 

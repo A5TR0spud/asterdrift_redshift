@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+@warning_ignore("unused_signal")
 signal firemalasar
 
 @export_color_no_alpha var HULL_COLOR : Color = Color("363d52"):

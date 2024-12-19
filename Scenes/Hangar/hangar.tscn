@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=121 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 [ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
 [ext_resource type="Texture2D" uid="uid://jm8cdtguwlmt" path="res://Assets/Hangar/Upgrades/ChargedShield.png" id="34_h0tj1"]
+[ext_resource type="Texture2D" uid="uid://povgcvf0pe2w" path="res://Assets/Hangar/Upgrades/Apollo.png" id="34_o3wij"]
 [ext_resource type="Texture2D" uid="uid://cg8nfm2x5ff0c" path="res://Assets/Hangar/Upgrades/TractorBeam.png" id="35_3wp7d"]
 [ext_resource type="Texture2D" uid="uid://c8s2r5jhf2ttq" path="res://Assets/Hangar/Upgrades/Radar.png" id="37_52wf2"]
 [ext_resource type="Texture2D" uid="uid://b36ncbowy370n" path="res://Assets/Hangar/Upgrades/BetterRadar.png" id="38_mnyow"]
@@ -209,7 +210,7 @@ Metals = 0
 Ceramics = 4
 Synthetics = 32
 Organics = 0
-Components = 1
+Components = 0
 
 [sub_resource type="Resource" id="Resource_63rld"]
 resource_local_to_scene = true
@@ -340,7 +341,16 @@ Components = 0
 [sub_resource type="Resource" id="Resource_8c7rl"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
+Metals = 64
+Ceramics = 32
+Synthetics = 0
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_uuedo"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 48
 Ceramics = 64
 Synthetics = 0
 Organics = 0
@@ -389,7 +399,7 @@ Metals = 58
 Ceramics = 28
 Synthetics = 32
 Organics = 0
-Components = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_7f0nr"]
 resource_local_to_scene = true
@@ -439,19 +449,19 @@ Components = 0
 [sub_resource type="Resource" id="Resource_lid5j"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 5
-Ceramics = 5
-Synthetics = 5
-Organics = 0
+Metals = 0
+Ceramics = 32
+Synthetics = 8
+Organics = 16
 Components = 0
 
 [sub_resource type="Resource" id="Resource_wwfe1"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 5
-Ceramics = 15
-Synthetics = 5
-Organics = 15
+Metals = 16
+Ceramics = 24
+Synthetics = 24
+Organics = 32
 Components = 0
 
 [sub_resource type="Resource" id="Resource_dfjfp"]
@@ -1028,11 +1038,12 @@ SPRITE = ExtResource("35_3wp7d")
 Cost = SubResource("Resource_fd43s")
 
 [node name="Artemis" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-160, 416)
+position = Vector2(-160, 432)
 NAME = "Artemis"
 DESCRIPTION = "Doubles the knockback of the laser.
+Doubles the damage of the laser.
 Reduces the amount of beams to 1.
-Increases range by 1 unit per laser discarded.
+Increases range by 2 units per laser discarded.
 Increases mining speed by 60% per laser discarded.
 Increases damage by 60% per laser discarded.
 Increases knockback by 60% per laser discarded.
@@ -1041,6 +1052,20 @@ INTERNAL_NAME = "Artemis"
 PARENT_UPGRADE = NodePath("../StrongLaser")
 SPRITE = ExtResource("41_f8evi")
 Cost = SubResource("Resource_8c7rl")
+
+[node name="Apollo" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
+position = Vector2(-256, 432)
+NAME = "Apollo"
+DESCRIPTION = "Replaces lasers with an area of effect.
+Reduces range by 3u.
+Starts at 100% efficiency per beam, but splits
+effect between all objects in the area."
+INTERNAL_NAME = "Apollo"
+PARENT_UPGRADE = NodePath("../LaserArray")
+REQUIRED_UPGRADES = [NodePath("../../../TopRight/Magnet")]
+SPRITE = ExtResource("34_o3wij")
+HIDE = true
+Cost = SubResource("Resource_uuedo")
 
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
 
@@ -1154,18 +1179,17 @@ Cost = SubResource("Resource_ewipx")
 [node name="Radar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(160, 240)
 NAME = "Radar"
-DESCRIPTION = "Displays objects within 48 units."
+DESCRIPTION = "Allows you to zoom out to 2.5x."
 INTERNAL_NAME = "Radar"
 PARENT_UPGRADE = NodePath("../Dish")
 SPRITE = ExtResource("37_52wf2")
-HIDE = true
 Cost = SubResource("Resource_lid5j")
 
 [node name="BetterRadar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(160, 320)
-NAME = "Radar Recognition Systems"
-DESCRIPTION = "Objects within 64 units are displayed and classified."
-INTERNAL_NAME = "BetterRadar"
+NAME = "Core Keeper"
+DESCRIPTION = "Pings the nearest core."
+INTERNAL_NAME = "KeeperOfTheCore"
 PARENT_UPGRADE = NodePath("../Radar")
 SPRITE = ExtResource("38_mnyow")
 HIDE = true
@@ -1176,7 +1200,7 @@ Cost = SubResource("Resource_wwfe1")
 [node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(256, 240)
 NAME = "Core Assembler"
-DESCRIPTION = "Every 5 minutes spent in a run assembles
+DESCRIPTION = "Every 3 minutes spent in a run assembles
 a core."
 INTERNAL_NAME = "CoreAssembler"
 PARENT_UPGRADE = NodePath("../Processor")

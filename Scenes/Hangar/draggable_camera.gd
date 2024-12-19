@@ -31,7 +31,7 @@ func _process(delta):
 	zoom.x = _zoom
 	zoom.y = _zoom
 	
-	if Input.is_action_pressed("left mouse button"):
+	if Input.is_action_pressed("drag"):
 		position_smoothing_enabled = false
 		if !_clicked:
 			_clickPos = get_global_mouse_position()

@@ -7,6 +7,8 @@ const LOOK_AHEAD : int = 1
 ## How many pixels the cursor can drag before disabling the button
 const GRACE : int = 4
 
+@warning_ignore("unused_signal")
+
 signal upgrade_successfully_bought(level : int)
 signal notify_children(propogation : int)
 
@@ -284,6 +286,7 @@ func toggle() -> void:
 	ReloadVisible()
 	emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
 
+@warning_ignore("unused_parameter")
 func _on_upgrade_successfully_bought(level):
 	UpgradesManager.Save(INTERNAL_NAME, CurrentLevel, UpgradesManager.LoadIsEnabled(INTERNAL_NAME))
 	emit_signal("notify_children", 0)

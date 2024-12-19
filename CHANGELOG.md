@@ -1,18 +1,23 @@
 ## indev build 10
 
-- Added Solar Focus upgrade to Military-Grade Laser
+- Added Artemis upgrade to Military-Grade Laser
 - Reduced Core generation 8 -> 4
 - Nerfed Stage 2 Ceramic cost: 10 -> 32
 - Fixed Upcycler and Core cropping issue on pickup notifications from Inventory Audit
 - Fixed overwriting of source in inventory log; Upcycler now properly displays next to conversions that it causes
 - Buffed Military-Grade Laser Core cost: 1 -> 0
 - Buffed Juniper Beam: now applies a 1.2x multiplier to mining speed
+- In the hangar, middle mouse button no longer resets zoom
+- In the hangar, the camera can now be dragged with LMB, RMB, or MMB
+- Buffed Core Assembler: 5 minutes -> 3 minutes
 - Adjusted Core Assembler costs:
 	- Ceramics: 16 -> 24
 	- Synthetics: 16 -> 24
 	- Organics: 24 -> 32
 	- Cores: 1 -> 0
 	- Metal remains 16
+- Alternating Charger now costs a core
+- Tractor Bay no longer costs a core
 - Upcycler costs a core now
 - Combustion ARCS now changes color of RCS thrust to the same as main thrust
 - Completely reworked asteroids

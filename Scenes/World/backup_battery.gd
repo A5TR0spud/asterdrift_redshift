@@ -7,7 +7,7 @@ func _ready():
 	else:
 		show()
 
-func _process(delta):
+func _process(_delta):
 	value = RunHandler.BackupBattery
 	if RunHandler.BackupBattery <= 0:
 		hide()

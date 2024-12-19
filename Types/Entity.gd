@@ -1,7 +1,9 @@
 extends RigidBody2D
 class_name Entity
 
+@warning_ignore("unused_signal")
 signal damaged(damageTaken: float)
+@warning_ignore("unused_signal")
 signal killed
 
 @export var DangerousCollision := false
