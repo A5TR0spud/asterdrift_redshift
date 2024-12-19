@@ -29,6 +29,8 @@ func _ready():
 		Health = MaxHealth
 
 func Damage(amount: float) -> bool:
+	if !is_node_ready():
+		return false
 	if !hasHealth:
 		return false
 	Health -= amount

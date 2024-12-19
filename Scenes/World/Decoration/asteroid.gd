@@ -6,7 +6,7 @@ class_name Asteroid
 	get:
 		return SIZE
 	set(value):
-		SIZE = value
+		SIZE = clampi(value, 1, 12)
 		if is_node_ready():
 			_reload()
 
@@ -33,18 +33,13 @@ func _ready():
 	_reload()
 
 func _reload():
-	if SIZE > 12:
-		SIZE = 12
-	if SIZE < 1:
-		SIZE = 1
-	
 	MaxHealth = SIZE * 30 - 10
 	Health = SIZE * 30 - 10
 	MaxMiningHealth = SIZE * 20
 	MiningHealth = SIZE * 20
 	MaxResources = SIZE * 4 - 1
 	ResourcesLeft = SIZE * 4 - 1
-	mass = SIZE * 30 - 10
+	mass = minf(SIZE * 30 - 10, 3**SIZE)
 	Radius = 8 + SIZE * 7
 	var Shape: CircleShape2D = CircleShape2D.new()
 	Shape.radius = 8 + SIZE * 7
@@ -79,8 +74,18 @@ func _on_damaged(damageTaken):
 	for i in damageTaken:
 		$GPUParticles2D.emit_particle(self.transform, Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
 
+var deaded: bool = false
+
 func _on_killed():
-	if is_queued_for_deletion():
+	if !is_node_ready():
+		Health = MaxHealth
+		return
+	
+	if deaded && !is_queued_for_deletion():
+		queue_free()
+		return
+	
+	if is_queued_for_deletion() || deaded || !is_instance_valid(self) || self == null:
 		return
 	
 	if SIZE > 1:
@@ -92,7 +97,8 @@ func _on_killed():
 		p1.linear_velocity = linear_velocity + splitDir
 		p1.rotation = -rotation
 		p1.angular_velocity = angular_velocity
-		get_parent().add_child(p1)
+		call_deferred("_spawn", p1)#.call_deferred("add_child", p1)
+		#get_parent().add_child(p1)
 		
 		var p2: Asteroid = AsteroidScene.instantiate()
 		p2.SIZE = ceili(SIZE * 0.5)
@@ -100,7 +106,8 @@ func _on_killed():
 		p2.linear_velocity = linear_velocity - splitDir
 		p2.rotation = rotation
 		p2.angular_velocity = -angular_velocity
-		get_parent().add_child(p2)
+		call_deferred("_spawn", p2)#.call_deferred("add_child", p2)
+		#get_parent().add_child(p2)
 	else:
 		var col: Collectable = CollectableScene.instantiate()
 		col.COLLECTION = RollMineable()
@@ -108,10 +115,14 @@ func _on_killed():
 		col.linear_velocity = linear_velocity
 		col.angular_velocity = angular_velocity
 		col.rotation = rotation
-		get_parent().add_child(col)
+		call_deferred("_spawn", col)#.call_deferred("add_child", col)
+		#get_parent().add_child(col)
 
+	deaded = true
 	queue_free()
 
+func _spawn(p: Node2D):
+	get_parent().add_child(p)
 
 func _on_resource_mined(global_pos):
 	var col: Collectable = CollectableScene.instantiate()
@@ -123,3 +134,19 @@ func _on_resource_mined(global_pos):
 		if SIZE > 1:
 			SIZE -= 1
 			_reload()
+
+
+func _on_body_entered(body):
+	if body is not Entity:
+		return
+	var other: Entity = body
+	var blunt: float = 0.05 * maxf(other.mass - self.mass, other.mass) * (self.linear_velocity - other.linear_velocity).length()
+	var abrasion: float = 0.4 * absf(self.mass * self.angular_velocity + other.mass * other.angular_velocity)
+	
+	var abrasionResistance = 1
+	var bluntResistance = 3
+	var grace = 2
+	
+	var ddd = (blunt / bluntResistance) + (abrasion / abrasionResistance) - grace
+	if ddd > 0:
+		Damage(ddd)

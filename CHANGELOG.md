@@ -23,6 +23,7 @@
 - Combustion ARCS now changes color of RCS thrust to the same as main thrust
 - Completely reworked asteroids
 	- Asteroids now spawn in different sizes
+	- Asteroids colliding with each other take damage
 	- Killing an asteroid causes it to split if its big enough
 		- If it's too small to split, it rolls a resource from its loot table
 	- Mining has been reworked

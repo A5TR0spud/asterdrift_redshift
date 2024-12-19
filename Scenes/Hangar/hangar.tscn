@@ -1062,7 +1062,8 @@ NAME = "Apollo"
 DESCRIPTION = "Replaces lasers with an area of effect.
 Reduces range by 3u.
 Starts at 100% efficiency per beam, but splits
-effect between all objects in the area."
+effect between all objects in the area.
+Negates reductive modifiers of Laser Array."
 INTERNAL_NAME = "Apollo"
 SPRITE = ExtResource("34_o3wij")
 PARENT_UPGRADE = NodePath("../LaserArray")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/World/Decoration/asteroid.gd" id="1_4rkgv"]
 [ext_resource type="Shader" path="res://Shaders/BasicOutliner.gdshader" id="1_6cy2n"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="2_pami1"]
-[ext_resource type="Texture2D" uid="uid://cjya5h6158u85" path="res://Assets/Asteroids/Asteroid12.png" id="4_wgtna"]
+[ext_resource type="Texture2D" uid="uid://cmx3d58fp5gv" path="res://Assets/Asteroids/Asteroid5.png" id="4_qbeo8"]
 
 [sub_resource type="Resource" id="Resource_5y6c3"]
 script = ExtResource("2_pami1")
@@ -37,35 +37,32 @@ damping_min = 2.0
 damping_max = 2.0
 damping_curve = SubResource("CurveTexture_d5t0r")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6vb2s"]
-radius = 92.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_w5tww"]
+radius = 43.0
 
 [node name="Asteroid" type="RigidBody2D"]
 collision_layer = 53
 collision_mask = 7
 input_pickable = true
-mass = 350.0
+mass = 140.0
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_4rkgv")
-SIZE = 12
-MaxMiningHealth = 240.0
-MiningHealth = 240.0
-MaxResources = 47
-ResourcesLeft = 47
+MaxResources = 19
+ResourcesLeft = 19
 MineWeights = SubResource("Resource_5y6c3")
 DangerousCollision = true
 isAsteroid = true
 hasHealth = true
-MaxHealth = 350.0
-Health = 350.0
+MaxHealth = 140.0
+Health = 140.0
 Magnetism = 2.0
-Radius = 92.0
+Radius = 43.0
 
 [node name="Icon" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_wfgvo")
-texture = ExtResource("4_wgtna")
+texture = ExtResource("4_qbeo8")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
@@ -77,8 +74,9 @@ explosiveness = 0.8
 randomness = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6vb2s")
+shape = SubResource("CircleShape2D_w5tww")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="damaged" from="." to="." method="_on_damaged"]
 [connection signal="killed" from="." to="." method="_on_killed"]
 [connection signal="resource_mined" from="." to="." method="_on_resource_mined"]

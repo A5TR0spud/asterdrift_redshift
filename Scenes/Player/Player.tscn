@@ -94,7 +94,7 @@ radius = 124.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lrr8l"]
 shader = ExtResource("23_743qs")
 shader_parameter/color = Color(0.877333, 0.54, 1, 0.25098)
-shader_parameter/threshold = 0.49
+shader_parameter/threshold = 0.499
 
 [node name="Player" type="RigidBody2D"]
 rotation = -1.5708
@@ -427,7 +427,6 @@ remote_path = NodePath("../BounceShield")
 update_rotation = false
 
 [node name="StasisBay" type="Node2D" parent="."]
-visible = false
 script = ExtResource("23_ci0kv")
 
 [node name="Area2D" type="Area2D" parent="StasisBay"]
