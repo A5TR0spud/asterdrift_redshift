@@ -743,7 +743,7 @@ PARENT_UPGRADE = NodePath("../Stage0")
 SPRITE = ExtResource("10_uhh3a")
 Cost = SubResource("Resource_nyedo")
 
-[node name="MovementMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="MovementMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE", "INVERSE_DEPENDENT_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(-176, -64)
 NAME = "Movement Relative to Ship"
 DESCRIPTION = "If on, rotating will move the digital cursor about the ship.
@@ -752,19 +752,22 @@ cursor will move relative to the world. Camera is
 set to be relative to world."
 INTERNAL_NAME = "MovementMode"
 PARENT_UPGRADE = NodePath("../RCSThrust")
+INVERSE_DEPENDENT_UPGRADES = [NodePath("../CameraMode")]
 REQUIRE_MAX_PARENT = true
 HIDE_WITHOUT_PARENT = true
 SPRITE = ExtResource("11_epu5w")
 PRE_BOUGHT = true
 Cost = SubResource("Resource_gjcie")
 
-[node name="CameraMode" parent="Camera2D/TechTree/TopLeft" instance=ExtResource("4_r883k")]
+[node name="CameraMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("INCLUDE_UPGRADES", "INVERSE_DEPENDENT_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(0, -96)
 NAME = "Camera Relative to World"
 DESCRIPTION = "If on, the camera will not rotate.
 If off, the camera will rotate with the ship,
 or the cursor if RCS is enabled."
 INTERNAL_NAME = "CameraMode"
+INCLUDE_UPGRADES = [NodePath("../MovementMode")]
+INVERSE_DEPENDENT_UPGRADES = [NodePath("../MovementMode")]
 REQUIRE_MAX_PARENT = true
 SPRITE = ExtResource("12_lle25")
 PRE_BOUGHT = true

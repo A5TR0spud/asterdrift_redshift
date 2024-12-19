@@ -52,14 +52,6 @@ signal notify_children(propogation : int)
 			_updateTooltip()
 ## Used by the save system to save and load this node's information.
 @export var INTERNAL_NAME : String = "undefined"
-## The parent upgrade determining tree-ism, if any.
-@export var PARENT_UPGRADE : Upgrade = null
-## Any additional prerequisite upgrades.
-@export var REQUIRED_UPGRADES: Array[Upgrade] = []
-## Does this upgrade require the parent to be maxed out?
-@export var REQUIRE_MAX_PARENT : bool = false
-## If true, the upgrade won't be visible regardless of look-ahead if the parent hasn't been bought.
-@export var HIDE_WITHOUT_PARENT : bool = false
 ## The visual sprite.
 @export var SPRITE : Texture2D = null:
 	get:
@@ -68,11 +60,29 @@ signal notify_children(propogation : int)
 		SPRITE = value
 		if is_node_ready():
 			MainIcon.texture = SPRITE
+@export_subgroup("Parent")
+## The parent upgrade determining tree-ism, if any.
+@export var PARENT_UPGRADE : Upgrade = null
+## Any additional prerequisite upgrades.
+@export var REQUIRED_UPGRADES: Array[Upgrade] = []
+## Does this upgrade require the parent to be maxed out?
+@export var REQUIRE_MAX_PARENT : bool = false
+## If true, the upgrade won't be visible regardless of look-ahead if the parent hasn't been bought.
+@export var HIDE_WITHOUT_PARENT : bool = false
+@export_subgroup("Siblings")
+## Turning this upgrade on disables all of these.
+@export var EXCLUDE_UPGRADES: Array[Upgrade] = []
+## Turning this upgrade on enables all of these.
+@export var INCLUDE_UPGRADES: Array[Upgrade] = []
+## Turning this upgrade off disables all of these.
+@export var DEPENDENT_UPGRADES: Array[Upgrade] = []
+## Turning this upgrade off enables all of these.
+@export var INVERSE_DEPENDENT_UPGRADES: Array[Upgrade] = []
+@export_group("Buying")
 ## The max level. If 1, will hide level counter in tooltip.
 @export var MAX_LEVEL : int = 1
 ## If true, the upgrade gets removed in-game
 @export var HIDE : bool = false
-@export_group("Cost")
 ## If true, upgrade will always be bought automatically and for free. Also hides the level counter in the tooltip.
 @export var PRE_BOUGHT : bool = false
 ## What it costs to buy this upgrade.
@@ -277,14 +287,40 @@ func _on_button_pressed():
 	else:
 		toggle()
 
+func SetEnabled(enabled: bool, triggerIncludes: bool = true) -> void:
+	if CurrentLevel != MAX_LEVEL:
+		return
+	UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, enabled)
+	ReloadVisible()
+	# Turning this upgrade on disables all of these.
+	#@export var EXCLUDE_UPGRADES: Array[Upgrade] = []
+	# Turning this upgrade on enables all of these.
+	#@export var INCLUDE_UPGRADES: Array[Upgrade] = []
+	# Turning this upgrade off disables all of these.
+	#@export var DEPENDENT_UPGRADES: Array[Upgrade] = []
+	# Turning this upgrade off enables all of these.
+	#@export var INVERSE_DEPENDENT_UPGRADES: Array[Upgrade] = []
+	if enabled && triggerIncludes:
+		for exclude: Upgrade in EXCLUDE_UPGRADES:
+			exclude.SetEnabled(false, false)
+		for include: Upgrade in INCLUDE_UPGRADES:
+			include.SetEnabled(true, false)
+	if !enabled && triggerIncludes:
+		for dependent: Upgrade in DEPENDENT_UPGRADES:
+			dependent.SetEnabled(false, false)
+		for inverse_dependent: Upgrade in INVERSE_DEPENDENT_UPGRADES:
+			inverse_dependent.SetEnabled(true, false)
+	emit_signal("upgrade_successfully_bought", CurrentLevel if enabled else 0)
+
 func toggle() -> void:
 	if CurrentLevel != MAX_LEVEL:
 		return
 	var b: bool = UpgradesManager.LoadIsEnabled(INTERNAL_NAME)
 	b = !b
-	UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, b)
-	ReloadVisible()
-	emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
+	SetEnabled(b)
+	#UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, b)
+	#ReloadVisible()
+	#emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
 
 @warning_ignore("unused_parameter")
 func _on_upgrade_successfully_bought(level):

@@ -26,8 +26,8 @@ func _propo(child: Upgrade):
 
 func _reloadChildren(_ignored):
 	#await get_tree().process_frame
-	if !UpgradesManager.LoadIsEnabled("MovementMode"):
-		UpgradesManager.Save("CameraMode", 1, true)
+	#if !UpgradesManager.LoadIsEnabled("MovementMode"):
+		#UpgradesManager.Save("CameraMode", 1, true)
 	emit_signal("reload_display")
 	_onAllUpgradeChildren(self, _relVis)
 
