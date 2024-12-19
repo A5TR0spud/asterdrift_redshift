@@ -101,5 +101,5 @@ func _physics_process(delta) -> void:
 		if c is Entity:
 			var normal: Vector2 = Ray.get_collision_normal()
 			var dir: Vector2 = Target.position.normalized()
-			NeedleLaserManager.ApplyLaserEffects(c, dir, point, normal, delta)
+			NeedleLaserManager.ApplyLaserEffects(c, point, dir, normal, delta)
 	Line.points[1] = Endpoint.position
