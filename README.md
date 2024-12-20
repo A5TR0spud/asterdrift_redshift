@@ -8,4 +8,4 @@ A tech-tree game inspired by Deep Space Cache and Wanderbots' video on it.
 
 [Discord](https://discord.gg/StBXkB86aT): a5tr0spud
 
-[Bluesky](a5tr0spud.bsky.social): a5tr0spud
+[Bluesky](https://a5tr0spud.bsky.social): a5tr0spud
