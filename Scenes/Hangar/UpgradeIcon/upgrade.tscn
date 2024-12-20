@@ -32,15 +32,15 @@ texture = ExtResource("3_pw2ue")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hn16"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7snbq"]
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 10.0
-expand_margin_bottom = 2.0
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 4.0
 anti_aliasing = false
 
 [sub_resource type="Theme" id="Theme_bkje1"]
@@ -54,13 +54,13 @@ font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54xy4"]
 bg_color = Color(0.32549, 0.32549, 0.32549, 1)
-border_width_left = 5
-border_width_right = 5
+border_width_left = 10
+border_width_right = 10
 corner_detail = 1
-expand_margin_left = 5.0
-expand_margin_top = 2.0
-expand_margin_right = 10.0
-expand_margin_bottom = 2.0
+expand_margin_left = 10.0
+expand_margin_top = 4.0
+expand_margin_right = 20.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="Theme" id="Theme_r2qfw"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_54xy4")
@@ -70,19 +70,18 @@ font_size = 28
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font_size = 28
-font_color = Color(1, 0.7, 0.7, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
-border_width_left = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 5.0
-expand_margin_top = 2.0
-expand_margin_right = 10.0
-expand_margin_bottom = 5.0
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 4.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
 anti_aliasing = false
 
 [sub_resource type="Theme" id="Theme_3w4wk"]
@@ -128,8 +127,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = 0.0172508
-scale = Vector2(0.94994, 0.94994)
+rotation = -0.00257247
+scale = Vector2(0.932637, 0.932637)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
@@ -148,9 +147,9 @@ position = Vector2(0, 17)
 [node name="Tooltip" type="VBoxContainer" parent="."]
 z_index = 10
 offset_left = 112.0
-offset_top = -64.0
-offset_right = 462.0
-offset_bottom = 72.0
+offset_top = -72.0
+offset_right = 472.0
+offset_bottom = 74.0
 alignment = 1
 
 [node name="Top" type="PanelContainer" parent="Tooltip"]

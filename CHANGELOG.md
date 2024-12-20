@@ -34,10 +34,6 @@
 		- Resources mined no longer cause a burst of damage to the asteroid
 		- Cores can no longer be obtained from mining
 
-- TODO:
-	- Added comets (very fast asteroids that drop organic and deal damage to impacted objects, likely shattering)
-		- Has two tails: one is very faint but stays constant, the other is much more visible and indicates velocity
-
 ## indev build 9
 
 - Adjusted/refurbished various sprites

@@ -249,7 +249,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -511,6 +511,34 @@ offset_left = -128.0
 offset_top = -128.0
 offset_right = 128.0
 offset_bottom = 128.0
+
+[node name="Electron" type="Node2D" parent="."]
+visible = false
+
+[node name="Quasar1" type="Area2D" parent="Electron"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Electron/Quasar1"]
+polygon = PackedVector2Array(0, 0, 48.983, 90.51, -48.983, 90.51)
+
+[node name="Quasar2" type="Area2D" parent="Electron"]
+rotation = -3.14159
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Electron/Quasar2"]
+polygon = PackedVector2Array(0, 0, 48.983, 90.51, -48.983, 90.51)
+
+[node name="Pulsar1" type="Area2D" parent="Electron"]
+visible = false
+rotation = 4.71238
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Electron/Pulsar1"]
+polygon = PackedVector2Array(0, 0, 48.983, 90.51, -48.983, 90.51)
+
+[node name="Pulsar2" type="Area2D" parent="Electron"]
+visible = false
+rotation = 7.85397
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Electron/Pulsar2"]
+polygon = PackedVector2Array(0, 0, 48.983, 90.51, -48.983, 90.51)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="firemalasar" from="ShipVisuals" to="NeedleLaserManager" method="_on_ship_visuals_firemalasar"]

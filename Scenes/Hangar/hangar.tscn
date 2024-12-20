@@ -1003,7 +1003,7 @@ SPRITE = ExtResource("18_j10x7")
 PARENT_UPGRADE = NodePath("../PhotonCannon")
 Cost = SubResource("Resource_yighi")
 
-[node name="TractorNeedle" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
+[node name="TractorNeedle" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-96, 640)
 NAME = "Attractor Beam"
 DESCRIPTION = "The needle laser can now target and attract resources,
@@ -1013,7 +1013,6 @@ Mining speed is multiplied by 120%."
 INTERNAL_NAME = "TractorNeedle"
 SPRITE = ExtResource("23_pbsqd")
 PARENT_UPGRADE = NodePath("../MiningLaser")
-REQUIRED_UPGRADES = [NodePath("../../../BottomRight/Farming/GreenBeam")]
 Cost = SubResource("Resource_lfgh2")
 
 [node name="LaserArray" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -1269,7 +1268,7 @@ PARENT_UPGRADE = NodePath("../Hydroponics")
 Cost = SubResource("Resource_v0aau")
 
 [node name="Combustor" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(672, 112)
+position = Vector2(672, 128)
 NAME = "Furnace"
 DESCRIPTION = "Every other organic collected in-run
 is burned for 1 energy."
@@ -1279,7 +1278,7 @@ PARENT_UPGRADE = NodePath("../Hydroponics")
 Cost = SubResource("Resource_l28ra")
 
 [node name="Composter" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(672, 304)
+position = Vector2(672, 288)
 NAME = "Composter"
 DESCRIPTION = "Every other synthetic collected is converted into
 an organic."
@@ -1289,7 +1288,7 @@ PARENT_UPGRADE = NodePath("../Processor")
 Cost = SubResource("Resource_vk4mf")
 
 [node name="Recycler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 304)
+position = Vector2(832, 288)
 NAME = "Recycler"
 DESCRIPTION = "Every 4th resource collected is converted
 into the resource you have the least of in
@@ -1301,7 +1300,7 @@ PARENT_UPGRADE = NodePath("../Composter")
 Cost = SubResource("Resource_k56g5")
 
 [node name="Upcycler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(992, 304)
+position = Vector2(992, 288)
 NAME = "Upcycler"
 DESCRIPTION = "Every 7th resource collected also collects
 a copy of the resource you have the least
@@ -1314,7 +1313,7 @@ PARENT_UPGRADE = NodePath("../Recycler")
 Cost = SubResource("Resource_4e528")
 
 [node name="Dynamo" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 112)
+position = Vector2(832, 128)
 NAME = "Dynamo"
 DESCRIPTION = "Every resource collected grants energy
 based on ship velocity, but slightly slows
@@ -1333,6 +1332,7 @@ range of 8 units."
 INTERNAL_NAME = "GreenBeam"
 SPRITE = ExtResource("63_bc8h3")
 PARENT_UPGRADE = NodePath("../../Radar")
+HIDE = true
 Cost = SubResource("Resource_sv8w4")
 
 [node name="StatusMonitor" parent="Camera2D/TechTree/BottomRight" instance=ExtResource("4_r883k")]
