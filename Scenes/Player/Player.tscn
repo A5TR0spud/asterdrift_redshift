@@ -249,7 +249,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(1, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -296,6 +296,7 @@ remote_path = NodePath("../../ShieldProjector")
 update_rotation = false
 
 [node name="Manipulator" type="Node2D" parent="."]
+visible = false
 top_level = true
 z_index = -1
 script = ExtResource("14_u3e7e")
@@ -398,7 +399,8 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
 [node name="ApolloCorona" type="ColorRect" parent="NeedleLaserManager"]
-modulate = Color(1, 1, 1, 0.501961)
+visible = false
+modulate = Color(1, 1, 1, 0.74902)
 material = SubResource("ShaderMaterial_eptyk")
 anchors_preset = 8
 anchor_left = 0.5
@@ -429,6 +431,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MagnetArea" type="Area2D" parent="."]
+visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708

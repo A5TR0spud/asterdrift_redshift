@@ -29,6 +29,7 @@ var RetractPosition: Vector2 = Vector2(0, 1)
 func _ready():
 	if !Engine.is_editor_hint():
 		GrabBox.position = Vector2(0, 0)
+		show()
 	Extendo.points[0] = Vector2(0, 0)
 	ManipCo.shape.radius = RANGE
 	Target = null

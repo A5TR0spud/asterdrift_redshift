@@ -127,8 +127,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = -0.00257247
-scale = Vector2(0.932637, 0.932637)
+rotation = -0.016642
+scale = Vector2(0.952948, 0.952948)
 texture = ExtResource("3_yu8kn")
 script = ExtResource("4_dkm4s")
 
@@ -145,6 +145,7 @@ z_as_relative = false
 position = Vector2(0, 17)
 
 [node name="Tooltip" type="VBoxContainer" parent="."]
+visible = false
 z_index = 10
 offset_left = 112.0
 offset_top = -72.0

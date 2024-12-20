@@ -91,6 +91,7 @@ func _reloadVisuals() -> void:
 		$ApolloCorona.size.y = RANGE * 2.0
 		$ApolloCorona.position.x = -RANGE
 		$ApolloCorona.position.y = -RANGE
+		$ApolloCorona.modulate.a = 0.9
 		if UpgradesManager.Load("Artemis") > 0:
 			var x: ShaderMaterial = $ApolloCorona.material
 			var c1: Color = _laserifyColor(Visuals.BLINKER_ON_COLOR, true)
@@ -103,6 +104,7 @@ func _reloadVisuals() -> void:
 			y.set_shader_parameter("Color1", c1)
 			y.set_shader_parameter("Color2", c2)
 			y.set_shader_parameter("coronaCount", 6)
+			$ApolloCorona.modulate.a = 0.5
 	else:
 		$ApolloCorona.hide()
 	for child in List.get_children():

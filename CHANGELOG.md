@@ -1,3 +1,18 @@
+## indev build 11
+
+- Moved Mining Needle upgrade path to synthetics quadrant
+- Increased opacity of Apollo when not combined with Artemis
+- Core Assembler now directly follows Research Network
+- Hydroponics is now a child of Core Assembler
+- Adjusted Core Assembler costs:
+	- Metal: 16 -> 4
+	- Ceramics: 24 -> 8
+	- Synthetics: 24 -> 8
+	- Organics: 32 -> 16
+- Nerfed Core generation: 4 -> 1
+- Figured out and fixed the seconds issue for Core Assembler
+- Hid (removed) Stasis Bay and Tractor Bay
+
 ## indev build 10
 
 - Added Apollo upgrade to Akimbo

@@ -37,7 +37,7 @@ damping_min = 2.0
 damping_max = 2.0
 damping_curve = SubResource("CurveTexture_d5t0r")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w5tww"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_faxba"]
 radius = 43.0
 
 [node name="Asteroid" type="RigidBody2D"]
@@ -74,7 +74,7 @@ explosiveness = 0.8
 randomness = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_w5tww")
+shape = SubResource("CircleShape2D_faxba")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="damaged" from="." to="." method="_on_damaged"]
