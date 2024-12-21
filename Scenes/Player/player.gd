@@ -104,6 +104,22 @@ func _physics_process(delta):
 		
 		#if inputting, apply that force
 		if _inputDir.length() > 0.5:
+			if UpgradesManager.Load("LinearDrive") > 0:
+				var linearPower: float = 256.0
+				var fakeInput: Vector2 = _inputDir#.normalized()#.rotated(thrustDirection)
+				var fakeVel: Vector2 = linear_velocity.rotated(-thrustDirection)
+				
+				var reduceDrift := -fakeVel
+				reduceDrift.x *= 1 if absf(fakeInput.y) > 0.1 else 0
+				reduceDrift.y *= 1 if absf(fakeInput.x) > 0.1 else 0
+				if UpgradesManager.Load("GimbalDrive") > 0:
+					reduceDrift += fakeInput.normalized() * reduceDrift.length()
+				
+				if reduceDrift.length() > linearPower:
+					reduceDrift = reduceDrift.normalized() * linearPower
+				reduceDrift = reduceDrift.rotated(thrustDirection)
+				apply_force(reduceDrift)
+				
 			#reduce drifting if not strafing
 			if Stats.Has_Better_RCS && absf(_inputDir.y) < 0.5:
 				var reduceDrift := linear_velocity.normalized().rotated(-thrustDirection)
@@ -112,6 +128,7 @@ func _physics_process(delta):
 				var reduceDrift := linear_velocity.normalized().rotated(-thrustDirection)
 				_inputDir.x -= sign(reduceDrift.x) if absf(reduceDrift.x) > 0.1 else 0
 			_inputDir = _inputDir.normalized().rotated(thrustDirection)
+
 		#if not inputting, apply opposite velocity
 		elif Stats.Has_RCS && !Input.is_action_pressed("boost"):
 			#decceleration when no input (it's actually just inputting opposite your velocity)

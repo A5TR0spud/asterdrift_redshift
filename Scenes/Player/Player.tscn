@@ -128,11 +128,11 @@ shader_parameter/threshold = 0.49
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aon4f"]
 shader = ExtResource("25_8rbcp")
 shader_parameter/Color = Color(0.878, 0.541, 1, 0.5)
-shader_parameter/DistFade = 5.0
+shader_parameter/DistFade = 10.0
 shader_parameter/TimeCoefficient = 5.0
-shader_parameter/DistCoefficient = 60.0
+shader_parameter/DistCoefficient = 50.0
 shader_parameter/EdgeFadeout = 0.1
-shader_parameter/Step = 0.4
+shader_parameter/Step = 0.8
 shader_parameter/StepInfuence = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7d02"]
@@ -256,7 +256,7 @@ z_index = 3
 texture = ExtResource("8_a3clv")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -490,10 +490,11 @@ scale = Vector2(10, 10)
 
 [node name="TractorBay" type="ColorRect" parent="MagnetArea"]
 material = SubResource("ShaderMaterial_aon4f")
-offset_left = -83.0
-offset_top = -81.0
-offset_right = 81.0
-offset_bottom = 82.0
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
+scale = Vector2(10, 10)
 
 [node name="ShieldProjector" type="Area2D" parent="."]
 visible = false

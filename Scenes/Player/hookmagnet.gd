@@ -19,10 +19,12 @@ const MAGNET_STRENGTH: float = 200
 @onready var Player := $".."
 
 func _ready():
-	_reload()
 	if !Engine.is_editor_hint() && UpgradesManager.Load("Magnet") < 1:
 		queue_free()
 	else:
+		RANGE += 16 * UpgradesManager.Load("BiggerCoil")
+		FORCE_COEF += UpgradesManager.Load("StrongerCoil")
+		_reload()
 		show()
 		if UpgradesManager.Load("StasisBay") > 0:
 			$StasisBay.show()
@@ -110,6 +112,10 @@ func _reload():
 	$StasisBay.position.x = -RANGE
 	$StasisBay.scale.y = RANGE / 8.0
 	$StasisBay.position.y = -RANGE
+	$TractorBay.scale.x = RANGE / 8.0
+	$TractorBay.position.x = -RANGE
+	$TractorBay.scale.y = RANGE / 8.0
+	$TractorBay.position.y = -RANGE
 
 func _on_body_entered(body):
 	if body is Entity:

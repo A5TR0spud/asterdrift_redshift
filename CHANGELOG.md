@@ -9,12 +9,15 @@
 - Added Idle Process upgrade to Solar Cell
 - Fixed Stage 2 increasing max speed passively
 	- To compensate, the active bonus has been buffed from 8u/s to 12u/s
-- Added Ion Drive upgrade to Overclocking
+- Added Ion Engine upgrade to Overclocking
+- Added Linear Drive upgrade to Idle Process
+- Added Gimbal Drive upgrade to Linear Drive
+- Added Bigger Coils upgrade to Electromagnet
+- Added Fine Wire upgrade to Electromagnet
 - Core Assembler now directly follows Research Network
 - Hydroponics is now a child of Core Assembler
-- Synthesizer is now a child of Core Assembler
-- Furnace is now a child of Synthesizer
-- Composter is now a child of Hydroponics
+- Synthesizer is now a child of Composter
+- Composter is now a child of Hydroponics Pod
 - Reworked Stasis Bay, and its now a child of Electromagnet
 - Reworked Tractor Bay
 - Removed Electromagnet's doubled attraction and halved repulsion to resources
