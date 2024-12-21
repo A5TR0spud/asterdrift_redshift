@@ -136,8 +136,8 @@ func _physics_process(delta):
 		
 		if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
 			_BonusMaxSpeedFromBoost += 64 * delta
-			if _BonusMaxSpeedFromBoost > 128:
-				_BonusMaxSpeedFromBoost = 128
+			if _BonusMaxSpeedFromBoost > 192:
+				_BonusMaxSpeedFromBoost = 192
 			apply_force(Vector2(64, 0).rotated(rotation))
 		elif _BonusMaxSpeedFromBoost > 0:
 			_BonusMaxSpeedFromBoost -= 64 * delta
@@ -189,7 +189,8 @@ func _handleStats():
 	
 	ACCEL_FORCE += 32 * UpgradesManager.Load("Stage0")
 	MAX_SPEED += 16 * UpgradesManager.Load("Stage0")
-	MAX_SPEED += 64 * UpgradesManager.Load("Booster")
+	MAX_SPEED += 256 * UpgradesManager.Load("IonDrive")
+	ACCEL_FORCE -= 16 * UpgradesManager.Load("IonDrive")
 	
 	# Manipulator Stats
 	if IS_IN_GARAGE || UpgradesManager.Load("Manipulator") < 1:

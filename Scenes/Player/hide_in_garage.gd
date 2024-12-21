@@ -22,3 +22,7 @@ func _ready():
 			$BottomLeft.color = Color("bfdfff")
 			$ReverseLeft.color = Color("bfdfff")
 			$ReverseRight.color = Color("bfdfff")
+		if UpgradesManager.Load("IonDrive") > 0:
+			$Main.color = Color("bfdfff")
+		else:
+			$Main.color = Color("ffffb7")

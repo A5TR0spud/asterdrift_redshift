@@ -7,6 +7,9 @@
 - Increased opacity of Apollo when not combined with Artemis
 - Added Overclocking upgrade to Stage 2
 - Added Idle Process upgrade to Solar Cell
+- Fixed Stage 2 increasing max speed passively
+	- To compensate, the active bonus has been buffed from 8u/s to 12u/s
+- Added Ion Drive upgrade to Overclocking
 - Core Assembler now directly follows Research Network
 - Hydroponics is now a child of Core Assembler
 - Synthesizer is now a child of Core Assembler

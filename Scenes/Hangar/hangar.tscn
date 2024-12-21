@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=130 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://hfdd0xhc1de4" path="res://Assets/Hangar/Upgrades/Overclock.png" id="20_2ccpa"]
 [ext_resource type="Texture2D" uid="uid://bkhf6dlxxhsdn" path="res://Assets/Hangar/Upgrades/Dish.png" id="21_5xmpu"]
 [ext_resource type="Texture2D" uid="uid://vpmx02itga3h" path="res://Assets/Hangar/Upgrades/Idle.png" id="21_wec62"]
+[ext_resource type="Texture2D" uid="uid://c088dm6cly5g6" path="res://Assets/Hangar/Upgrades/IonDrive.png" id="22_lnnfh"]
 [ext_resource type="Texture2D" uid="uid://5d7gm0qm5d8b" path="res://Assets/Hangar/Upgrades/ReflectiveHull.png" id="22_utiiq"]
 [ext_resource type="Texture2D" uid="uid://cqg3hip1oekg3" path="res://Assets/Hangar/Upgrades/AttractorNeedle.png" id="23_pbsqd"]
 [ext_resource type="Texture2D" uid="uid://ukvjlqahx3t2" path="res://Assets/Hangar/Upgrades/LaserArray.png" id="24_hjrx4"]
@@ -168,6 +169,15 @@ Metals = 0
 Ceramics = 38
 Synthetics = 24
 Organics = 24
+Components = 1
+
+[sub_resource type="Resource" id="Resource_xxs1w"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 22
+Ceramics = 48
+Synthetics = 0
+Organics = 0
 Components = 1
 
 [sub_resource type="Resource" id="Resource_0idft"]
@@ -777,7 +787,7 @@ Cost = SubResource("Resource_km3c3")
 position = Vector2(-512, -480)
 NAME = "Stage 2"
 DESCRIPTION = "While holding shift, the ship accelerates forward at
-4 u/s² and max speed is increased by 8 u/s."
+4 u/s² and max speed is increased by 12 u/s."
 INTERNAL_NAME = "Booster"
 SPRITE = ExtResource("10_uhh3a")
 PARENT_UPGRADE = NodePath("../Stage0")
@@ -845,7 +855,8 @@ Cost = SubResource("Resource_msins")
 [node name="Overclocking" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-352, -640)
 NAME = "Overclocking"
-DESCRIPTION = "The faster you go, the slower energy drains."
+DESCRIPTION = "The closer you get to max speed, the
+slower energy drains."
 INTERNAL_NAME = "Overclocking"
 SPRITE = ExtResource("20_2ccpa")
 PARENT_UPGRADE = NodePath("../Booster")
@@ -859,6 +870,16 @@ INTERNAL_NAME = "Idling"
 SPRITE = ExtResource("21_wec62")
 PARENT_UPGRADE = NodePath("../Solar")
 Cost = SubResource("Resource_148e4")
+
+[node name="IonDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-512, -800)
+NAME = "Ion Drive"
+DESCRIPTION = "Increases max speed by 16 u/s.
+Decreases acceleration by 1 u/s²."
+INTERNAL_NAME = "IonDrive"
+SPRITE = ExtResource("22_lnnfh")
+PARENT_UPGRADE = NodePath("../Overclocking")
+Cost = SubResource("Resource_xxs1w")
 
 [node name="TopRight" type="Node2D" parent="Camera2D/TechTree"]
 
