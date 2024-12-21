@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3qugeulmu7mf"
-path="res://.godot/imported/dual.png-1f91056697e24444a24b7c2695d5f802.ctex"
+uid="uid://bv450k00ppwgd"
+path="res://.godot/imported/Anvil.png-28f293c523b3fba586a7138cfdbbb726.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/dual.png"
-dest_files=["res://.godot/imported/dual.png-1f91056697e24444a24b7c2695d5f802.ctex"]
+source_file="res://Assets/Hangar/Upgrades/Anvil.png"
+dest_files=["res://.godot/imported/Anvil.png-28f293c523b3fba586a7138cfdbbb726.ctex"]
 
 [params]
 

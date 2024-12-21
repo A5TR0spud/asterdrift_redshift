@@ -42,6 +42,9 @@ static var ComposterCount: int = 0
 static var FurnaceCount: int = 0
 static var RecyclerCount: int = 0
 static var UpcyclerCount: int = 0
+static var KilnCount: int = 0
+static var ScrapperCount: int = 0
+static var ForgeCount: int = 0
 
 func Collect():
 	_onCollected(COLLECTION)
@@ -154,10 +157,31 @@ func _getLowestResourceFromMaterials(mat: Materials, tiebreaker: Materials.Mats 
 	return tiebreaker
 
 func _onMetalCollected(Sources: Array[Notification.Sources] = []):
+	if UpgradesManager.Load("Kiln") > 0:
+		KilnCount += 1
+		if KilnCount % 2 == 0:
+			RunHandler.Mats.Ceramics += 1
+			Sources.append(Notification.Sources.KILN)
+			NotificationsManager.SendTransformNotification(Materials.Mats.Metals, Materials.Mats.Ceramics, Sources)
+			return
 	RunHandler.Mats.Metals += 1
 	NotificationsManager.SendPickupNotification(Materials.Mats.Metals, Sources)
 
 func _onCeramicCollected(Sources: Array[Notification.Sources] = []):
+	if UpgradesManager.Load("Scrapper") > 0:
+		ScrapperCount += 1
+		if ScrapperCount % 2 == 0:
+			RunHandler.Mats.Synthetics += 1
+			Sources.append(Notification.Sources.SCRAPPER)
+			NotificationsManager.SendTransformNotification(Materials.Mats.Ceramics, Materials.Mats.Synthetics, Sources)
+			return
+	if UpgradesManager.Load("Forge") > 0:
+		ForgeCount += 1
+		if ForgeCount % 2 == 0:
+			RunHandler.Mats.Metals += 1
+			Sources.append(Notification.Sources.FORGE)
+			NotificationsManager.SendTransformNotification(Materials.Mats.Ceramics, Materials.Mats.Metals, Sources)
+			return
 	RunHandler.Mats.Ceramics += 1
 	NotificationsManager.SendPickupNotification(Materials.Mats.Ceramics, Sources)
 

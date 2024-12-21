@@ -106,6 +106,10 @@ func _physics_process(delta):
 		if _inputDir.length() > 0.5:
 			if UpgradesManager.Load("LinearDrive") > 0:
 				var linearPower: float = 256.0
+				var GravityWell: bool = UpgradesManager.Load("GravityWell") > 0
+				if GravityWell:
+					linearPower *= 2.0
+				
 				var fakeInput: Vector2 = _inputDir#.normalized()#.rotated(thrustDirection)
 				var fakeVel: Vector2 = linear_velocity.rotated(-thrustDirection)
 				
@@ -114,6 +118,9 @@ func _physics_process(delta):
 				reduceDrift.y *= 1 if absf(fakeInput.x) > 0.1 else 0
 				if UpgradesManager.Load("GimbalDrive") > 0:
 					reduceDrift += fakeInput.normalized() * reduceDrift.length()
+				
+				if GravityWell:
+					reduceDrift *= 2.0
 				
 				if reduceDrift.length() > linearPower:
 					reduceDrift = reduceDrift.normalized() * linearPower
@@ -207,6 +214,7 @@ func _handleStats():
 	ACCEL_FORCE += 32 * UpgradesManager.Load("Stage0")
 	MAX_SPEED += 16 * UpgradesManager.Load("Stage0")
 	MAX_SPEED += 256 * UpgradesManager.Load("IonDrive")
+	ACCEL_FORCE *= 1.0 + UpgradesManager.Load("GravityWell")
 	ACCEL_FORCE -= 16 * UpgradesManager.Load("IonDrive")
 	
 	# Manipulator Stats

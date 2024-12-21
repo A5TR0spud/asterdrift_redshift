@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtmtakcpcqfbi"
-path="res://.godot/imported/AirFilter.png-ca92e542c54d6eae960908043e36c4dc.ctex"
+uid="uid://81nu82cqlylw"
+path="res://.godot/imported/Scrapper.png-c1fd525a2f1e4114a4645c56cd9f07eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/AirFilter.png"
-dest_files=["res://.godot/imported/AirFilter.png-ca92e542c54d6eae960908043e36c4dc.ctex"]
+source_file="res://Assets/Hangar/Upgrades/Scrapper.png"
+dest_files=["res://.godot/imported/Scrapper.png-c1fd525a2f1e4114a4645c56cd9f07eb.ctex"]
 
 [params]
 

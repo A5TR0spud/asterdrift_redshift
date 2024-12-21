@@ -18,6 +18,9 @@ static var ComposterTex := preload("res://Assets/Hangar/Upgrades/Composter.png")
 static var RecyclerTex := preload("res://Assets/Hangar/Upgrades/Recycler.png")
 static var SynthesizerTex := preload("res://Assets/Hangar/Upgrades/Processor.png")
 static var UpcyclerTex := preload("res://Assets/Hangar/Upgrades/Upcycler.png")
+static var KilnTex := preload("res://Assets/Hangar/Upgrades/Kiln.png")
+static var ScrapperTex := preload("res://Assets/Hangar/Upgrades/Scrapper.png")
+static var ForgeTex := preload("res://Assets/Hangar/Upgrades/Forge.png")
 
 enum Sources {
 	HYDROPONIC,
@@ -26,6 +29,9 @@ enum Sources {
 	RECYCLER,
 	SYNTHESIZER,
 	UPCYCLER,
+	KILN,
+	SCRAPPER,
+	FORGE,
 }
 
 func _ready():
@@ -48,6 +54,12 @@ func TurnSourceEnumToSprite(input: Sources) -> Texture2D:
 		return RecyclerTex
 	elif input == Sources.UPCYCLER:
 		return UpcyclerTex
+	elif input == Sources.KILN:
+		return KilnTex
+	elif input == Sources.FORGE:
+		return ForgeTex
+	elif input == Sources.SCRAPPER:
+		return ScrapperTex
 	return HydroponicTex
 
 func TurnMatEnumToSprite(input: Materials.Mats) -> Texture2D:

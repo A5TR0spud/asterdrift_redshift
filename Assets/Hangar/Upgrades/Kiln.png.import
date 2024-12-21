@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwb1w2ad57sel"
-path="res://.godot/imported/Rig.png-1bc8c17322a5751c722964b60bfae6ec.ctex"
+uid="uid://dv68arsrmso82"
+path="res://.godot/imported/Kiln.png-ebc37d3aeb8f355794411f5231e6b94c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Mines/Rig.png"
-dest_files=["res://.godot/imported/Rig.png-1bc8c17322a5751c722964b60bfae6ec.ctex"]
+source_file="res://Assets/Hangar/Upgrades/Kiln.png"
+dest_files=["res://.godot/imported/Kiln.png-ebc37d3aeb8f355794411f5231e6b94c.ctex"]
 
 [params]
 

@@ -12,12 +12,16 @@
 - Added Ion Engine upgrade to Overclocking
 - Added Linear Drive upgrade to Idle Process
 - Added Gimbal Drive upgrade to Linear Drive
+- Added Gravity Well upgrade to Gimbal Drive
 - Added Bigger Coils upgrade to Electromagnet
 - Added Fine Wire upgrade to Electromagnet
 - Core Assembler now directly follows Research Network
 - Hydroponics is now a child of Core Assembler
-- Synthesizer is now a child of Composter
 - Composter is now a child of Hydroponics Pod
+- Synthesizer is now a child of Composter
+- Added Kiln upgrade to Synthesizer
+- Added Scrapper upgrade to Kiln
+- Added Forge upgrade to Kiln
 - Reworked Stasis Bay, and its now a child of Electromagnet
 - Reworked Tractor Bay
 - Removed Electromagnet's doubled attraction and halved repulsion to resources
