@@ -21,7 +21,7 @@
 - Synthesizer is now a child of Composter
 - Added Kiln upgrade to Synthesizer
 - Added Scrapper upgrade to Kiln
-- Added Forge upgrade to Kiln
+- Added Foundry upgrade to Kiln
 - Reworked Stasis Bay, and its now a child of Electromagnet
 - Reworked Tractor Bay
 - Removed Electromagnet's doubled attraction and halved repulsion to resources

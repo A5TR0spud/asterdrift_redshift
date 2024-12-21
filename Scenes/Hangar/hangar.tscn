@@ -1558,7 +1558,7 @@ Cost = SubResource("Resource_qa8vc")
 
 [node name="Forge" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(832, 640)
-NAME = "Forge"
+NAME = "Foundry"
 DESCRIPTION = "Every other ceramic collected is converted into
 a metal."
 INTERNAL_NAME = "Forge"
