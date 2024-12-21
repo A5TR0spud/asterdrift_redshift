@@ -37,6 +37,26 @@ func _ready():
 
 var _shouldReverseCharge: bool = false
 func _physics_process(delta):
+	PowerDrain = 1.0
+	
+	if UpgradesManager.Load("Idling") > 0:
+		var idleDrain: float = 0.625
+		
+		var d: float = (Player.linear_velocity.length() / Player.GetCurrentMaxSpeed())
+		d = maxf(d - 0.5, 0.0)
+		d *= 2.0
+		d *= d
+		PowerDrain *= d + (1.0 - d) * idleDrain
+	
+	if UpgradesManager.Load("Overclocking") > 0:
+		var overclockDrain: float = 0.75
+		
+		var d: float = 1.0 - (Player.linear_velocity.length() / Player.GetCurrentMaxSpeed())
+		d = maxf(d - 0.2, 0.0)
+		d *= 1.25
+		d *= d
+		PowerDrain *= d + (1.0 - d) * overclockDrain
+	
 	if UpgradesManager.Load("ResourceMonitor") > 0:
 		ResourceMonitor.Display = RunHandler.Mats
 	
@@ -51,13 +71,12 @@ func _physics_process(delta):
 		NotificationsManager.SendTransformNotification(Materials.Mats.Energy, Materials.Mats.Organics, [Notification.Sources.HYDROPONIC])
 	
 	if RunHandler.TimeLeft > MaxTime * 0.7 && UpgradesManager.Load("SolarPanel") > 0:
-		PowerDrain = 0.7
+		PowerDrain *= 0.7
 		if UpgradesManager.Load("ReverseCharger") > 0:
 			RunHandler.ChargeBackup(delta)
 		SolarStatus.show()
 		SolarIndicator.show()
 	else:
-		PowerDrain = 1.0
 		SolarStatus.hide()
 		SolarIndicator.hide()
 	ChargeIndicator.visible = RunHandler.BackupBattery > 0 && !_shouldReverseCharge && UpgradesManager.Load("ReverseCharger") > 0

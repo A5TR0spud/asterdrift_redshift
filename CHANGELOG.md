@@ -1,17 +1,28 @@
 ## indev build 11
 
-- Moved Mining Needle upgrade path to synthetics quadrant
+- Precision Prospector is now a child of Rapid Winch, and costs of that path have been adjusted to be more synthetic-focused
+- Adjusted Electromagnet costs:
+	- Metal: 12 -> 10
+	- Synthetic: 10 -> 12
 - Increased opacity of Apollo when not combined with Artemis
+- Added Overclocking upgrade to Stage 2
+- Added Idle Process upgrade to Solar Cell
 - Core Assembler now directly follows Research Network
 - Hydroponics is now a child of Core Assembler
+- Synthesizer is now a child of Core Assembler
+- Furnace is now a child of Synthesizer
+- Composter is now a child of Hydroponics
+- Reworked Stasis Bay, and its now a child of Electromagnet
+- Reworked Tractor Bay
+- Removed Electromagnet's doubled attraction and halved repulsion to resources
 - Adjusted Core Assembler costs:
 	- Metal: 16 -> 4
 	- Ceramics: 24 -> 8
 	- Synthetics: 24 -> 8
 	- Organics: 32 -> 16
 - Nerfed Core generation: 4 -> 1
-- Figured out and fixed the seconds issue for Core Assembler
-- Hid (removed) Stasis Bay and Tractor Bay
+- Figured out and fixed the seconds issue for Core Assembler's timer
+- Adjusted zoom and scaling in the hangar in hopes of making text more legible
 
 ## indev build 10
 
