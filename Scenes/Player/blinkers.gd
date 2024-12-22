@@ -16,3 +16,4 @@ func _process(delta):
 	if (!COLOR_INTERP):
 		y = 1 if x > 0.5 else 0
 	self_modulate = lerp(OFF_COLOR, ON_COLOR, y)
+	$OnLight.self_modulate.a = self_modulate.a

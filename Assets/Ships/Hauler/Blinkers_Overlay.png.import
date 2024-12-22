@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmdit3xt8lyf7"
-path="res://.godot/imported/HullL.png-392a4f934e5bc581225a1f2cdad575ef.ctex"
+uid="uid://buypvc5m5e1um"
+path="res://.godot/imported/Blinkers_Overlay.png-8a5cd5bb4733ffe9a796a3e0ac9cdb5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Ships/LEGACY PLAYER HAULER/HullL.png"
-dest_files=["res://.godot/imported/HullL.png-392a4f934e5bc581225a1f2cdad575ef.ctex"]
+source_file="res://Assets/Ships/Hauler/Blinkers_Overlay.png"
+dest_files=["res://.godot/imported/Blinkers_Overlay.png-8a5cd5bb4733ffe9a796a3e0ac9cdb5d.ctex"]
 
 [params]
 

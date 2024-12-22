@@ -2,7 +2,8 @@ extends Camera2D
 
 @export var Player : PlayerClass
 
-var _zoom : float = 2.0
+const BASE_ZOOM: float = 1.0
+var _zoom : float = BASE_ZOOM
 var _last_pos : Vector2
 
 func _ready():
@@ -20,7 +21,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("zoom out"):
 		zoomOut()
 	if Input.is_action_just_pressed("reset zoom"):
-		_zoom = 2
+		_zoom = BASE_ZOOM
 	_zoom = clampf(_zoom, maxZoomOut(), 5)
 	zoom.x = _zoom
 	zoom.y = _zoom
@@ -38,4 +39,4 @@ func maxZoomOut() -> float:
 	var radarDish: int = UpgradesManager.Load("Dish")
 	var radar: int = UpgradesManager.Load("Radar")
 	z += 0.5 * radarDish + 0.5 * radar
-	return 2.0 / z
+	return BASE_ZOOM / z

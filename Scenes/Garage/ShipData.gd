@@ -41,7 +41,7 @@ func new():
 	accent_color = Color("478cbf")
 	accent_type = AccentTypes.STANDARD
 	blinker_on = Color(1, 0, 0, 1)
-	blinker_off = Color(0, 0, 0, 1)
+	blinker_off = Color(1, 1, 1, 0)
 	blinker_interval = 1
 	blinker_interp = false
 	inline = Color("212532")

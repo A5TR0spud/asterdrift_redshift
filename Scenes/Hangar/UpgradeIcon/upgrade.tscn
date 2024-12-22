@@ -1,15 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=27 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
 [ext_resource type="Texture2D" uid="uid://mudilooehc3w" path="res://Assets/Hangar/Upgrades/Meta/Disabled.png" id="3_pw2ue"]
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/Meta/AvailableIcon.png" id="3_yu8kn"]
-[ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="4_dkm4s"]
-[ext_resource type="Texture2D" uid="uid://c1cei46gju2mb" path="res://Assets/Hangar/Upgrades/Meta/BackgroundOutline.png" id="5_41cas"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
 [ext_resource type="Texture2D" uid="uid://bavifds8ksa17" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png" id="6_pugof"]
-[ext_resource type="Texture2D" uid="uid://p388rwpp047n" path="res://Assets/Hangar/Upgrades/Meta/Background.png" id="8_djbwo"]
+[ext_resource type="Texture2D" uid="uid://c2yjrmcysqnsd" path="res://Assets/Hangar/Upgrades/Meta/Background.png" id="8_djbwo"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="8_nu5sk"]
+[ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="10_sd7c2"]
 
 [sub_resource type="Resource" id="Resource_0h8lx"]
 resource_local_to_scene = true
@@ -32,63 +31,61 @@ texture = ExtResource("3_pw2ue")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hn16"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7snbq"]
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-corner_radius_top_left = 10
-corner_radius_top_right = 10
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+corner_detail = 1
 expand_margin_left = 10.0
-expand_margin_top = 10.0
+expand_margin_top = 2.0
 expand_margin_right = 20.0
-expand_margin_bottom = 4.0
+expand_margin_bottom = 2.0
 anti_aliasing = false
 
 [sub_resource type="Theme" id="Theme_bkje1"]
 Label/styles/normal = SubResource("StyleBoxFlat_7snbq")
 
 [sub_resource type="LabelSettings" id="LabelSettings_lpjot"]
-font_size = 32
+font = ExtResource("10_sd7c2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_annhj"]
-font_size = 32
+font = ExtResource("10_sd7c2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54xy4"]
 bg_color = Color(0.32549, 0.32549, 0.32549, 1)
-border_width_left = 10
-border_width_right = 10
+border_width_left = 4
+border_width_right = 4
 corner_detail = 1
 expand_margin_left = 10.0
-expand_margin_top = 4.0
+expand_margin_top = 2.0
 expand_margin_right = 20.0
-expand_margin_bottom = 4.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="Theme" id="Theme_r2qfw"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_54xy4")
 
 [sub_resource type="LabelSettings" id="LabelSettings_y1hpi"]
-font_size = 28
+font = ExtResource("10_sd7c2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
-font_size = 28
+font = ExtResource("10_sd7c2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.20871, 0.20871, 0.20871, 1)
-border_width_left = 10
-border_width_right = 10
-border_width_bottom = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+border_width_left = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_detail = 1
 expand_margin_left = 10.0
-expand_margin_top = 4.0
+expand_margin_top = 2.0
 expand_margin_right = 20.0
-expand_margin_bottom = 10.0
+expand_margin_bottom = 2.0
 anti_aliasing = false
 
 [sub_resource type="Theme" id="Theme_3w4wk"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_1jsna")
 
 [sub_resource type="LabelSettings" id="LabelSettings_qemxh"]
-font_size = 24
+font = ExtResource("10_sd7c2")
 
 [node name="Upgrade" type="Node2D"]
 script = ExtResource("1_le4ru")
@@ -98,17 +95,10 @@ Cost = SubResource("Resource_0h8lx")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -4
 z_as_relative = false
-scale = Vector2(4, 4)
 texture = ExtResource("8_djbwo")
-
-[node name="Outline" type="Sprite2D" parent="Background"]
-z_index = -6
-z_as_relative = false
-texture = ExtResource("5_41cas")
 
 [node name="MainIcon" type="Sprite2D" parent="."]
 modulate = Color(0.5, 0.5, 0.5, 1)
-scale = Vector2(4, 4)
 texture = ExtResource("2_wk4es")
 
 [node name="Button" type="Button" parent="MainIcon"]
@@ -127,10 +117,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
-rotation = -0.017415
-scale = Vector2(1.01666, 1.01666)
 texture = ExtResource("3_yu8kn")
-script = ExtResource("4_dkm4s")
 
 [node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
@@ -147,9 +134,9 @@ position = Vector2(0, 17)
 [node name="Tooltip" type="VBoxContainer" parent="."]
 visible = false
 z_index = 10
-offset_left = 112.0
+offset_left = 48.0
 offset_top = -72.0
-offset_right = 472.0
+offset_right = 232.0
 offset_bottom = 74.0
 alignment = 1
 
@@ -175,6 +162,7 @@ theme = SubResource("Theme_r2qfw")
 
 [node name="Middleman" type="VBoxContainer" parent="Tooltip/Middle"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="Description" type="Label" parent="Tooltip/Middle/Middleman"]
 layout_mode = 2
@@ -204,7 +192,6 @@ columns = 5
 Display = SubResource("Resource_0h8lx")
 SORT = true
 SHOW_TEXT = false
-FONT_SIZE = 24
 
 [node name="ParentLine" type="Line2D" parent="."]
 visible = false
@@ -212,7 +199,7 @@ show_behind_parent = true
 z_index = -5
 z_as_relative = false
 points = PackedVector2Array(0, 0, 64, 64)
-width = 8.0
+width = 2.0
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2

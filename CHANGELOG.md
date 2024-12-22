@@ -1,3 +1,13 @@
+## indev build 12
+
+- Fixed Upcycler having a 1/200 chance to convert *every* resource rather than every *seventh* resource
+- Nerfed Upcycler chance from 1/200 to 1/250
+- Buffed Core Assembler costs:
+	- Organics: 16 -> 6
+	- Ceramics: 8 -> 4
+	- Synthetics: 8 -> 4
+	- Metals: 4 -> 2
+
 ## indev build 11
 
 - Precision Prospector is now a child of Rapid Winch, and costs of that path have been adjusted to be more synthetic-focused

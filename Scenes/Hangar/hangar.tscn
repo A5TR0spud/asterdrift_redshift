@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=150 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -7,11 +7,13 @@
 [ext_resource type="Script" path="res://Scenes/Hangar/tech_tree.gd" id="4_eifcx"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="4_fiej8"]
 [ext_resource type="Script" path="res://Scenes/Hangar/draggable_camera.gd" id="4_j8p1n"]
+[ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="4_lt2yv"]
 [ext_resource type="PackedScene" uid="uid://bb44a3o0sq4ge" path="res://Scenes/Hangar/UpgradeIcon/upgrade.tscn" id="4_r883k"]
 [ext_resource type="Script" path="res://Scenes/Hangar/core_assembler.gd" id="5_k7a2t"]
 [ext_resource type="Texture2D" uid="uid://bi6d4udy3pjya" path="res://Assets/Backdrops/BlueprintTile.png" id="5_s07eq"]
 [ext_resource type="Texture2D" uid="uid://ctu35osk4wl32" path="res://Assets/Hangar/Upgrades/RotationSpeed1.png" id="7_3ljve"]
 [ext_resource type="Texture2D" uid="uid://cxwkybickfaic" path="res://Assets/Hangar/Upgrades/Manipulator.png" id="8_7rt47"]
+[ext_resource type="Texture2D" uid="uid://cs5sstr58w78w" path="res://Assets/Hints/ShiftWASD.png" id="9_3ncyr"]
 [ext_resource type="Texture2D" uid="uid://ycs5jlgpof0s" path="res://Assets/Hangar/Upgrades/XLSpool.png" id="9_palqs"]
 [ext_resource type="Texture2D" uid="uid://dvtjvjymygrxc" path="res://Assets/Hangar/Upgrades/HookPropel.png" id="10_hm2a6"]
 [ext_resource type="Texture2D" uid="uid://byxrkxkgaa85w" path="res://Assets/Hangar/Upgrades/Booster.png" id="10_uhh3a"]
@@ -88,7 +90,7 @@ Organics = 0
 Components = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_pwxsx"]
-font_size = 31
+font = ExtResource("4_lt2yv")
 
 [sub_resource type="Resource" id="Resource_axi6p"]
 resource_local_to_scene = true
@@ -552,10 +554,10 @@ Components = 0
 [sub_resource type="Resource" id="Resource_dfjfp"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 4
-Ceramics = 8
-Synthetics = 8
-Organics = 16
+Metals = 2
+Ceramics = 4
+Synthetics = 4
+Organics = 6
 Components = 0
 
 [sub_resource type="Resource" id="Resource_ukqjc"]
@@ -706,7 +708,6 @@ Components = 0
 script = ExtResource("1_pl6hy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("42_h2q48")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
@@ -729,42 +730,44 @@ metadata/_edit_use_anchors_ = true
 
 [node name="run" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = -1
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.999
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -164.0
-offset_top = -77.0
-offset_right = -30.0
-offset_bottom = -16.0
+anchor_bottom = 0.999
+offset_left = -122.0
+offset_top = -58.46
+offset_right = -15.0001
+offset_bottom = -13.46
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_lt2yv")
+theme_override_font_sizes/font_size = 16
 text = "run"
 metadata/_edit_use_anchors_ = true
 
 [node name="main menu" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_top = 1.008
+anchor_bottom = 1.008
 offset_left = 24.0
-offset_top = -71.0
-offset_right = 158.0
-offset_bottom = -10.0
+offset_top = -36.32
+offset_right = 97.0
+offset_bottom = -14.32
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_lt2yv")
+theme_override_font_sizes/font_size = 16
 text = "main menu"
 metadata/_edit_use_anchors_ = true
 
 [node name="ResourceCounter" parent="CanvasLayer/Control" instance=ExtResource("2_hd0wi")]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.13
-anchor_bottom = 0.188
-offset_left = 32.5
-offset_top = 31.5
-offset_right = 0.0999908
-offset_bottom = 0.139999
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 117.0
+offset_bottom = 118.0
 mouse_filter = 2
 Display = SubResource("Resource_cv8oa")
 ALWAYS_SHOW = true
@@ -772,14 +775,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RESET" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
+anchors_preset = -1
+anchor_left = 1.00052
+anchor_top = 0.000925926
+anchor_right = 1.00052
+anchor_bottom = 0.000925926
 offset_left = -71.5
 offset_top = 16.5
 offset_right = -17.5
-offset_bottom = 47.5
+offset_bottom = 38.5
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_lt2yv")
+theme_override_font_sizes/font_size = 16
 text = "RESET"
 metadata/_edit_use_anchors_ = true
 
@@ -788,26 +795,28 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -71.5
-offset_top = 64.5
-offset_right = -12.5
-offset_bottom = 95.5
+offset_left = -71.0
+offset_top = 65.0
+offset_right = -12.0
+offset_bottom = 87.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_lt2yv")
+theme_override_font_sizes/font_size = 16
 text = "CHEAT"
 
 [node name="CoreAssembler" type="GridContainer" parent="CanvasLayer/Control"]
 layout_direction = 1
 layout_mode = 1
-offset_left = 25.0
-offset_top = 177.0
-offset_right = 97.0
-offset_bottom = 289.0
+offset_left = 32.5
+offset_top = 128.5
+offset_right = 104.5
+offset_bottom = 240.5
 mouse_filter = 2
-theme_override_constants/v_separation = -19
+theme_override_constants/v_separation = -9
 script = ExtResource("5_k7a2t")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/CoreAssembler"]
-custom_minimum_size = Vector2(48, 0)
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 texture = ExtResource("39_25wo3")
 expand_mode = 4
@@ -818,28 +827,42 @@ size_flags_horizontal = 4
 text = "5:00"
 label_settings = SubResource("LabelSettings_pwxsx")
 
-[node name="Background" type="CanvasLayer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.5
+offset_top = -67.5
+offset_right = 56.5
+offset_bottom = -17.5
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("9_3ncyr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_j8p1n")
+speed = 196.0
+
+[node name="Background" type="CanvasLayer" parent="Camera2D"]
 layer = -1
 visible = false
 script = ExtResource("42_h2q48")
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
+[node name="TextureRect" type="TextureRect" parent="Camera2D/Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 64.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_s07eq")
 expand_mode = 2
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.375, 0.375)
-position_smoothing_enabled = true
-position_smoothing_speed = 8.0
-script = ExtResource("4_j8p1n")
-speed = 196.0
 
 [node name="TechTree" type="Node2D" parent="Camera2D"]
 top_level = true
@@ -848,7 +871,7 @@ script = ExtResource("4_eifcx")
 [node name="TopLeft" type="Node2D" parent="Camera2D/TechTree"]
 
 [node name="RCSThrust" parent="Camera2D/TechTree/TopLeft" instance=ExtResource("4_r883k")]
-position = Vector2(-192, -128)
+position = Vector2(-64, -32)
 NAME = "Reaction Control System"
 DESCRIPTION = "Places a digital cursor in front of your ship.
 The cursor can be rotated with A and D.
@@ -861,7 +884,7 @@ SPRITE = ExtResource("2_4ahhh")
 Cost = SubResource("Resource_axi6p")
 
 [node name="AdvancedRCS" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-512, -128)
+position = Vector2(-160, -32)
 NAME = "Advanced RCS"
 DESCRIPTION = "Advanced RCS mitigates drifting.
 Acceleration is increased by 2 u/s² (doubled).
@@ -874,7 +897,7 @@ PARENT_UPGRADE = NodePath("../RCSThrust")
 Cost = SubResource("Resource_km3c3")
 
 [node name="Booster" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-512, -480)
+position = Vector2(-160, -160)
 NAME = "Stage 2"
 DESCRIPTION = "While holding shift, the ship accelerates forward at
 4 u/s² and max speed is increased by 12 u/s."
@@ -884,7 +907,7 @@ PARENT_UPGRADE = NodePath("../Stage0")
 Cost = SubResource("Resource_nyedo")
 
 [node name="MovementMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE", "INVERSE_DEPENDENT_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(-352, -128)
+position = Vector2(-112, -32)
 NAME = "Movement Relative to Ship"
 DESCRIPTION = "If on, rotating will move the digital cursor about the ship.
 If off, manual rotations are disabled and the
@@ -900,7 +923,7 @@ PRE_BOUGHT = true
 Cost = SubResource("Resource_gjcie")
 
 [node name="CameraMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("INCLUDE_UPGRADES", "INVERSE_DEPENDENT_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(0, -192)
+position = Vector2(0, -64)
 NAME = "Camera Relative to World"
 DESCRIPTION = "If on, the camera will not rotate.
 If off, the camera will rotate with the ship,
@@ -914,7 +937,7 @@ PRE_BOUGHT = true
 Cost = SubResource("Resource_y2qk2")
 
 [node name="ShipBattery" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-192, -320)
+position = Vector2(-64, -96)
 NAME = "On-Board Battery"
 DESCRIPTION = "Start every run with an additonal energy."
 INTERNAL_NAME = "ShipBattery"
@@ -924,7 +947,7 @@ MAX_LEVEL = 3
 Cost = SubResource("Resource_unk4j")
 
 [node name="Stage0" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-512, -320)
+position = Vector2(-160, -96)
 NAME = "Combustion ARCS"
 DESCRIPTION = "Acceleration is further increased by 2 u/s².
 Max speed is increased by 1 u/s (x1.25)."
@@ -934,7 +957,7 @@ PARENT_UPGRADE = NodePath("../AdvancedRCS")
 Cost = SubResource("Resource_daqij")
 
 [node name="Solar" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-192, -480)
+position = Vector2(-64, -160)
 NAME = "Solar Cell"
 DESCRIPTION = "Reduces energy drain by 30% while above 70% energy."
 INTERNAL_NAME = "SolarPanel"
@@ -943,7 +966,7 @@ PARENT_UPGRADE = NodePath("../ShipBattery")
 Cost = SubResource("Resource_msins")
 
 [node name="Overclocking" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-352, -640)
+position = Vector2(-128, -224)
 NAME = "Overclocking"
 DESCRIPTION = "The closer you get to max speed, the
 slower energy drains."
@@ -953,7 +976,7 @@ PARENT_UPGRADE = NodePath("../Booster")
 Cost = SubResource("Resource_hbo26")
 
 [node name="Idling" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-192, -640)
+position = Vector2(-64, -224)
 NAME = "Idle Process"
 DESCRIPTION = "The slower you go, the slower energy drains."
 INTERNAL_NAME = "Idling"
@@ -962,7 +985,7 @@ PARENT_UPGRADE = NodePath("../Solar")
 Cost = SubResource("Resource_148e4")
 
 [node name="IonDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-512, -832)
+position = Vector2(-192, -288)
 NAME = "Ion Engine"
 DESCRIPTION = "Increases max speed by 16 u/s.
 Decreases acceleration by 1 u/s²."
@@ -972,7 +995,7 @@ PARENT_UPGRADE = NodePath("../Overclocking")
 Cost = SubResource("Resource_xxs1w")
 
 [node name="LinearDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-192, -832)
+position = Vector2(-64, -288)
 NAME = "Linear Drive"
 DESCRIPTION = "Significantly reduces drifting."
 INTERNAL_NAME = "LinearDrive"
@@ -981,19 +1004,20 @@ PARENT_UPGRADE = NodePath("../Idling")
 Cost = SubResource("Resource_2htjq")
 
 [node name="GimbalDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-352, -832)
+position = Vector2(-128, -288)
 NAME = "Gimbal Drive"
-DESCRIPTION = "Maintains speed through turns."
+DESCRIPTION = "Maintains speed through turns.
+Speed is still not retained from 180's."
 INTERNAL_NAME = "GimbalDrive"
 SPRITE = ExtResource("24_6huye")
 PARENT_UPGRADE = NodePath("../LinearDrive")
 Cost = SubResource("Resource_54xce")
 
 [node name="BlackHoleDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-352, -992)
+position = Vector2(-128, -352)
 NAME = "Gravity Well"
-DESCRIPTION = "Doubles power of Linear Drive and doubles
-acceleration of ship thrusters."
+DESCRIPTION = "Doubles power of Linear Drive and Gimbal Drive and
+doubles acceleration of ship thrusters."
 INTERNAL_NAME = "GravityWell"
 SPRITE = ExtResource("25_12ib6")
 PARENT_UPGRADE = NodePath("../GimbalDrive")
@@ -1002,7 +1026,7 @@ Cost = SubResource("Resource_8h8fd")
 [node name="TopRight" type="Node2D" parent="Camera2D/TechTree"]
 
 [node name="ResourceHook" parent="Camera2D/TechTree/TopRight" instance=ExtResource("4_r883k")]
-position = Vector2(192, -128)
+position = Vector2(64, -32)
 NAME = "Resource Hook"
 DESCRIPTION = "Hooks in materials within 2 units.
 Extends at 3u/s.
@@ -1013,7 +1037,7 @@ PRE_BOUGHT = true
 Cost = SubResource("Resource_0idft")
 
 [node name="LongResourceHook" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(352, -288)
+position = Vector2(128, -96)
 NAME = "Extra Spoolage"
 DESCRIPTION = "Increases range of hook by +0.5u."
 INTERNAL_NAME = "BigSpool"
@@ -1023,7 +1047,7 @@ MAX_LEVEL = 4
 Cost = SubResource("Resource_ruk6o")
 
 [node name="HookPropel" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(352, -128)
+position = Vector2(128, -32)
 NAME = "Compact Propellant"
 DESCRIPTION = "Increases extension speed by +2u/s."
 INTERNAL_NAME = "HookPropel"
@@ -1033,7 +1057,7 @@ MAX_LEVEL = 3
 Cost = SubResource("Resource_iqxgi")
 
 [node name="RapidWinch" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -288)
+position = Vector2(64, -96)
 NAME = "Rapid Winch"
 DESCRIPTION = "Increases retraction speed by +2u/s"
 INTERNAL_NAME = "RapidWinch"
@@ -1043,7 +1067,7 @@ MAX_LEVEL = 2
 Cost = SubResource("Resource_bjsy7")
 
 [node name="Magnet" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(544, -480)
+position = Vector2(192, -160)
 NAME = "Electromagnet"
 DESCRIPTION = "The ship now has an electromagnet that attempts to
 attract resources and repel asteroids.
@@ -1059,7 +1083,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_w1q67")
 
 [node name="StasisBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(384, -480)
+position = Vector2(128, -160)
 NAME = "Stasis Bay"
 DESCRIPTION = "Applies a constant stabilizing force to
 resources in range.
@@ -1071,7 +1095,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_d7mx3")
 
 [node name="TractorBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(384, -640)
+position = Vector2(128, -224)
 NAME = "Tractor Bay"
 DESCRIPTION = "All resources in the stasis bay are attracted
 inward.
@@ -1083,7 +1107,7 @@ PARENT_UPGRADE = NodePath("../StasisBay")
 Cost = SubResource("Resource_lo3s5")
 
 [node name="Quasar" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(544, -640)
+position = Vector2(192, -224)
 NAME = "Quasar"
 DESCRIPTION = "2 rotating cones in a 45 degree spread and 5 unit range selectively pull in
 resources."
@@ -1094,7 +1118,7 @@ HIDE = true
 Cost = SubResource("Resource_1lseg")
 
 [node name="ElectronSpin" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(704, -800)
+position = Vector2(224, -288)
 NAME = "Electron Spin"
 DESCRIPTION = "Increases cone of Pulsar and Quasar to
 90 degrees and 6 units."
@@ -1106,7 +1130,7 @@ HIDE = true
 Cost = SubResource("Resource_ysqkb")
 
 [node name="MiningLaser" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(192, -480)
+position = Vector2(64, -160)
 NAME = "Precision Prospector"
 DESCRIPTION = "The needle laser can now bite off resources from asteroids.
 Time per resource varies with the target."
@@ -1117,7 +1141,7 @@ REQUIRED_UPGRADES = [NodePath("../../BottomLeft/Laser/PhotonCannon")]
 Cost = SubResource("Resource_yighi")
 
 [node name="TractorNeedle" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -640)
+position = Vector2(64, -224)
 NAME = "Attractor Beam"
 DESCRIPTION = "The needle laser can now target and attract resources,
 but is only half as effective at pushing away asteroids.
@@ -1129,7 +1153,7 @@ PARENT_UPGRADE = NodePath("../MiningLaser")
 Cost = SubResource("Resource_lfgh2")
 
 [node name="TractorBeam" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -800)
+position = Vector2(64, -288)
 NAME = "Juniper Beam"
 DESCRIPTION = "The needle laser applies a resistance to
 avoid gravity-assisting resources.
@@ -1141,7 +1165,7 @@ PARENT_UPGRADE = NodePath("../TractorNeedle")
 Cost = SubResource("Resource_fd43s")
 
 [node name="BiggerCoils" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(704, -640)
+position = Vector2(256, -224)
 NAME = "Bigger Coils"
 DESCRIPTION = "Increases range by +1 unit."
 INTERNAL_NAME = "BiggerCoil"
@@ -1150,7 +1174,7 @@ PARENT_UPGRADE = NodePath("../Magnet")
 Cost = SubResource("Resource_oudbb")
 
 [node name="StrongerCoil" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(704, -480)
+position = Vector2(256, -160)
 NAME = "Fine Wire"
 DESCRIPTION = "Doubles the force behind the magnet and
 related functions."
@@ -1164,7 +1188,7 @@ Cost = SubResource("Resource_4su56")
 [node name="Laser" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
 
 [node name="PhotonCannon" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-320, 320)
+position = Vector2(-160, 96)
 NAME = "Needle Laser"
 DESCRIPTION = "Okay for asteroid persuasion, but not much else.
 Aimed with mouse. LMB to fire.
@@ -1175,7 +1199,7 @@ PARENT_UPGRADE = NodePath("../../BluntRes")
 Cost = SubResource("Resource_cber5")
 
 [node name="AutoPhoton" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-480, 320)
+position = Vector2(-224, 96)
 NAME = "LiDAR Auto-Targetting"
 DESCRIPTION = "Automatically aims and fires the needle laser at the
 nearest applicable object in range.
@@ -1186,7 +1210,7 @@ PARENT_UPGRADE = NodePath("../PhotonCannon")
 Cost = SubResource("Resource_vsrkx")
 
 [node name="HeavyLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-288, 512)
+position = Vector2(-96, 160)
 NAME = "Heavy-Duty Laser"
 DESCRIPTION = "Triples the knockback effects of the needle laser."
 INTERNAL_NAME = "HeavyLaser"
@@ -1195,7 +1219,7 @@ PARENT_UPGRADE = NodePath("../PhotonCannon")
 Cost = SubResource("Resource_pmmu6")
 
 [node name="DoubleLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-640, 512)
+position = Vector2(-224, 160)
 NAME = "Akimbo"
 DESCRIPTION = "Double the lasers, double the power!
 The second laser aims at the farthest object."
@@ -1205,7 +1229,7 @@ PARENT_UPGRADE = NodePath("../AutoPhoton")
 Cost = SubResource("Resource_7kw8l")
 
 [node name="LaserArray" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-640, 672)
+position = Vector2(-224, 224)
 NAME = "Laser Array"
 DESCRIPTION = "Refracts 2 lasers into 4!
 Targets the closest, farthest, slowest, and fastest objects in range.
@@ -1218,7 +1242,7 @@ PARENT_UPGRADE = NodePath("../DoubleLaser")
 Cost = SubResource("Resource_fiaa4")
 
 [node name="StrongLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-288, 672)
+position = Vector2(-96, 224)
 NAME = "Military-Grade Laser"
 DESCRIPTION = "Quadruples the damage output.
 The knockback of the laser is doubled in strength.
@@ -1229,7 +1253,7 @@ PARENT_UPGRADE = NodePath("../HeavyLaser")
 Cost = SubResource("Resource_tyodo")
 
 [node name="SpareBattery" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-640, 320)
+position = Vector2(-288, 96)
 NAME = "Spare Battery"
 DESCRIPTION = "Increases laser range by +1 unit."
 INTERNAL_NAME = "SpareBattery"
@@ -1239,7 +1263,7 @@ MAX_LEVEL = 2
 Cost = SubResource("Resource_4ho7x")
 
 [node name="Artemis" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-480, 672)
+position = Vector2(-160, 224)
 NAME = "Artemis"
 DESCRIPTION = "Doubles the knockback of the laser.
 Doubles the damage of the laser.
@@ -1257,7 +1281,7 @@ HIDE_WITHOUT_PARENT = true
 Cost = SubResource("Resource_8c7rl")
 
 [node name="Apollo" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(-800, 672)
+position = Vector2(-288, 224)
 NAME = "Apollo"
 DESCRIPTION = "Replaces lasers with an area of effect.
 Reduces range by 3u.
@@ -1274,7 +1298,7 @@ HIDE_WITHOUT_PARENT = true
 Cost = SubResource("Resource_uuedo")
 
 [node name="ExtraLaser" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-480, 512)
+position = Vector2(-224, 288)
 NAME = "Godrays"
 DESCRIPTION = "+1 laser."
 INTERNAL_NAME = "ExtraLaser"
@@ -1287,7 +1311,7 @@ Cost = SubResource("Resource_q1x2r")
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
 
 [node name="EnergyShield" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-832, 288)
+position = Vector2(-352, 96)
 NAME = "Shield Projector"
 DESCRIPTION = "When dangerous objects enter an area within 1.5
 units of your ship, they get deflected at the cost of
@@ -1301,7 +1325,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_u04gs")
 
 [node name="BackupPower" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-832, 128)
+position = Vector2(-416, 32)
 NAME = "Backup Power"
 DESCRIPTION = "The shield first draws from a dedicated backup
 power reserve, for 15 extra energy."
@@ -1311,7 +1335,7 @@ PARENT_UPGRADE = NodePath("../EnergyShield")
 Cost = SubResource("Resource_7lodx")
 
 [node name="ChargedShield" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-832, 448)
+position = Vector2(-416, 160)
 NAME = "Charged Shield"
 DESCRIPTION = "Deflected bodies take 25% of their max health
 as damage."
@@ -1321,7 +1345,7 @@ PARENT_UPGRADE = NodePath("../EnergyShield")
 Cost = SubResource("Resource_lf1nv")
 
 [node name="Fuse" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-992, 128)
+position = Vector2(-480, 32)
 NAME = "Industrial Fuse"
 DESCRIPTION = "The energy consumed by the shield is capped at
 5 (-1 per level) energy per hit."
@@ -1332,7 +1356,7 @@ MAX_LEVEL = 3
 Cost = SubResource("Resource_ndgfn")
 
 [node name="ReverseCharger" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-1152, 128)
+position = Vector2(-544, 32)
 NAME = "Alternating Charger"
 DESCRIPTION = "If Solar Cell is active, the backup battery
 recharges at 1e/s, up to 20 energy.
@@ -1345,7 +1369,7 @@ PARENT_UPGRADE = NodePath("../Fuse")
 Cost = SubResource("Resource_hk1ki")
 
 [node name="AbrResistance" parent="Camera2D/TechTree/BottomLeft" instance=ExtResource("4_r883k")]
-position = Vector2(-128, 128)
+position = Vector2(-32, 32)
 NAME = "Abrasive-Resistant Hull"
 DESCRIPTION = "Damage taken from opposing rotation is halved."
 INTERNAL_NAME = "AbrResistance"
@@ -1353,7 +1377,7 @@ SPRITE = ExtResource("12_sjd7r")
 Cost = SubResource("Resource_7f0nr")
 
 [node name="BluntRes" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-288, 128)
+position = Vector2(-96, 32)
 NAME = "Impact-Resistant Hull"
 DESCRIPTION = "Damage taken from opposing motion is halved."
 INTERNAL_NAME = "BluntRes"
@@ -1362,7 +1386,7 @@ PARENT_UPGRADE = NodePath("../AbrResistance")
 Cost = SubResource("Resource_it780")
 
 [node name="ReflectHull" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-96, 672)
+position = Vector2(-32, 288)
 NAME = "Retroreflective"
 DESCRIPTION = "+25% of oncoming laser damage is reflected."
 INTERNAL_NAME = "ReflectHull"
@@ -1373,7 +1397,7 @@ HIDE = true
 Cost = SubResource("Resource_pab5s")
 
 [node name="Pulsar" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(-288, 864)
+position = Vector2(-96, 288)
 NAME = "Pulsar"
 DESCRIPTION = "2 rotating cones in a 45 degree spread and 5 unit range selectively push away
 threats."
@@ -1387,17 +1411,18 @@ Cost = SubResource("Resource_kyaou")
 [node name="BottomRight" type="Node2D" parent="Camera2D/TechTree"]
 
 [node name="Dish" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, 288)
+position = Vector2(96, 96)
 NAME = "Basic Radar Dish"
 DESCRIPTION = "Unlocks the ability to zoom out 1.5x, then 2x."
 INTERNAL_NAME = "Dish"
 SPRITE = ExtResource("21_5xmpu")
 PARENT_UPGRADE = NodePath("../StatusMonitor")
 MAX_LEVEL = 2
+HIDE = true
 Cost = SubResource("Resource_d2k57")
 
 [node name="LookAhead" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, 128)
+position = Vector2(96, 32)
 NAME = "Research Network"
 DESCRIPTION = "Increases look-ahead by 1."
 INTERNAL_NAME = "LookAhead"
@@ -1406,16 +1431,17 @@ PARENT_UPGRADE = NodePath("../StatusMonitor")
 Cost = SubResource("Resource_ewipx")
 
 [node name="Radar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, 448)
+position = Vector2(96, 160)
 NAME = "Radar"
 DESCRIPTION = "Allows you to zoom out to 2.5x."
 INTERNAL_NAME = "Radar"
 SPRITE = ExtResource("37_52wf2")
 PARENT_UPGRADE = NodePath("../Dish")
+HIDE = true
 Cost = SubResource("Resource_lid5j")
 
 [node name="BetterRadar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, 608)
+position = Vector2(96, 224)
 NAME = "Core Keeper"
 DESCRIPTION = "Pings the nearest core."
 INTERNAL_NAME = "KeeperOfTheCore"
@@ -1427,7 +1453,7 @@ Cost = SubResource("Resource_wwfe1")
 [node name="Farming" type="Node2D" parent="Camera2D/TechTree/BottomRight"]
 
 [node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(512, 128)
+position = Vector2(160, 32)
 NAME = "Core Assembler"
 DESCRIPTION = "Every 3 minutes spent in a run assembles
 a core."
@@ -1437,7 +1463,7 @@ PARENT_UPGRADE = NodePath("../../LookAhead")
 Cost = SubResource("Resource_dfjfp")
 
 [node name="Hydroponics" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(672, 128)
+position = Vector2(224, 32)
 NAME = "Hydroponics Pod"
 DESCRIPTION = "Every 7 seconds in a run grows an organic nearby,
 at the cost of 0.25 energy."
@@ -1447,7 +1473,7 @@ PARENT_UPGRADE = NodePath("../CoreAssembler")
 Cost = SubResource("Resource_ukqjc")
 
 [node name="Synthesizer" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 320)
+position = Vector2(288, 96)
 NAME = "Synthesizer"
 DESCRIPTION = "Every other organic collected is converted into
 a synthetic."
@@ -1457,7 +1483,7 @@ PARENT_UPGRADE = NodePath("../Composter")
 Cost = SubResource("Resource_v0aau")
 
 [node name="Furnace" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(640, 320)
+position = Vector2(224, 96)
 NAME = "Furnace"
 DESCRIPTION = "Every other organic collected
 is burned for 1 energy."
@@ -1467,7 +1493,7 @@ PARENT_UPGRADE = NodePath("../Hydroponics")
 Cost = SubResource("Resource_l28ra")
 
 [node name="Composter" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 128)
+position = Vector2(288, 32)
 NAME = "Composter"
 DESCRIPTION = "Every other synthetic collected is converted into
 an organic."
@@ -1477,7 +1503,7 @@ PARENT_UPGRADE = NodePath("../Hydroponics")
 Cost = SubResource("Resource_vk4mf")
 
 [node name="Recycler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(992, 128)
+position = Vector2(352, 32)
 NAME = "Recycler"
 DESCRIPTION = "Every 4th resource collected is converted
 into the resource you have the least of in
@@ -1489,7 +1515,7 @@ PARENT_UPGRADE = NodePath("../Composter")
 Cost = SubResource("Resource_k56g5")
 
 [node name="Upcycler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(1152, 128)
+position = Vector2(416, 32)
 NAME = "Upcycler"
 DESCRIPTION = "Every 7th resource collected also collects
 a copy of the resource you have the least
@@ -1502,7 +1528,7 @@ PARENT_UPGRADE = NodePath("../Recycler")
 Cost = SubResource("Resource_4e528")
 
 [node name="Dynamo" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(640, 480)
+position = Vector2(224, 160)
 NAME = "Dynamo"
 DESCRIPTION = "Every resource collected grants energy
 based on ship velocity, but slightly slows
@@ -1513,7 +1539,7 @@ PARENT_UPGRADE = NodePath("../Furnace")
 Cost = SubResource("Resource_710cu")
 
 [node name="Kiln" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 480)
+position = Vector2(288, 160)
 NAME = "Kiln"
 DESCRIPTION = "Every other metal collected is converted into
 a ceramic."
@@ -1523,7 +1549,7 @@ PARENT_UPGRADE = NodePath("../Synthesizer")
 Cost = SubResource("Resource_ckjas")
 
 [node name="Demeter" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(1312, 128)
+position = Vector2(480, 32)
 NAME = "Demeter"
 DESCRIPTION = "Hydroponics Pod no longer consumes
 energy.
@@ -1535,7 +1561,7 @@ HIDE = true
 Cost = SubResource("Resource_xd0i2")
 
 [node name="Hephaestus" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 800)
+position = Vector2(288, 288)
 NAME = "Hephaestus"
 DESCRIPTION = "Kiln operates at no metal cost.
 Upcycler grants either an extra metal,
@@ -1547,7 +1573,7 @@ HIDE = true
 Cost = SubResource("Resource_gji7u")
 
 [node name="Scrapper" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(992, 480)
+position = Vector2(352, 160)
 NAME = "Scrapper"
 DESCRIPTION = "Every other ceramic collected is converted into
 a synthetic."
@@ -1557,7 +1583,7 @@ PARENT_UPGRADE = NodePath("../Kiln")
 Cost = SubResource("Resource_qa8vc")
 
 [node name="Forge" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(832, 640)
+position = Vector2(288, 224)
 NAME = "Foundry"
 DESCRIPTION = "Every other ceramic collected is converted into
 a metal."
@@ -1567,7 +1593,7 @@ PARENT_UPGRADE = NodePath("../Kiln")
 Cost = SubResource("Resource_pcp64")
 
 [node name="StatusMonitor" parent="Camera2D/TechTree/BottomRight" instance=ExtResource("4_r883k")]
-position = Vector2(128, 128)
+position = Vector2(32, 32)
 NAME = "Status Monitor"
 DESCRIPTION = "Displays energy levels in-run."
 INTERNAL_NAME = "StatusMonitor"
@@ -1576,7 +1602,7 @@ PRE_BOUGHT = true
 Cost = SubResource("Resource_qruf7")
 
 [node name="ResourceChangelog" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(128, 448)
+position = Vector2(32, 160)
 NAME = "Inventory Audit"
 DESCRIPTION = "Displays recent resource actions,
 and the source of such action."
@@ -1586,7 +1612,7 @@ PARENT_UPGRADE = NodePath("../ResourceMonitor")
 Cost = SubResource("Resource_15g7d")
 
 [node name="GreenBeam" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(128, 640)
+position = Vector2(32, 224)
 NAME = "Auxiliary Beam"
 DESCRIPTION = "Provides a beam that automatically
 targets and attracts resources in a
@@ -1598,7 +1624,7 @@ HIDE = true
 Cost = SubResource("Resource_sv8w4")
 
 [node name="ResourceMonitor" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(128, 288)
+position = Vector2(32, 96)
 NAME = "Inventory Monitor"
 DESCRIPTION = "Displays the hangar's resources in-run.
 Displays the current run's obtained resources."

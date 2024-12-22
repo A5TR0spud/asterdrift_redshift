@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1di7dmmit5sr"
-path="res://.godot/imported/Highlights_Left.png-fa9b7dc2e1bd131950f51414596358bc.ctex"
+uid="uid://cs5sstr58w78w"
+path="res://.godot/imported/ShiftWASD.png-165e01f5c695949ff6d569e707897d0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Ships/LEGACY PLAYER HAULER/Highlights_Left.png"
-dest_files=["res://.godot/imported/Highlights_Left.png-fa9b7dc2e1bd131950f51414596358bc.ctex"]
+source_file="res://Assets/Hints/ShiftWASD.png"
+dest_files=["res://.godot/imported/ShiftWASD.png-165e01f5c695949ff6d569e707897d0b.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dl5fg1ej0bimi"]
+[gd_scene load_steps=13 format=3 uid="uid://dl5fg1ej0bimi"]
 
 [ext_resource type="Script" path="res://Scenes/Utilities/ResourceScore/resource_counter.gd" id="1_eu6hn"]
 [ext_resource type="Texture2D" uid="uid://dammmehqsgv04" path="res://Assets/Hangar/Resources/Metal.png" id="2_20p5i"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b321u615h6m3g" path="res://Assets/Hangar/Resources/Synthetics.png" id="4_od0f1"]
 [ext_resource type="Script" path="res://Scenes/Utilities/ResourceScore/score.gd" id="4_pclhx"]
 [ext_resource type="Texture2D" uid="uid://6tvchvpt787c" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconFalse.png" id="4_w001y"]
+[ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="5_0m28d"]
 [ext_resource type="Texture2D" uid="uid://ull3cjkjlkth" path="res://Assets/Hangar/Resources/Organics.png" id="5_625v2"]
 [ext_resource type="Texture2D" uid="uid://c6mm1u1jwviw6" path="res://Assets/Hangar/Resources/Component.png" id="6_uhf2u"]
 
@@ -21,6 +22,7 @@ Components = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_vm8o0"]
 resource_local_to_scene = true
+font = ExtResource("5_0m28d")
 
 [node name="ResourceCounter" type="GridContainer"]
 offset_right = 120.0
@@ -32,10 +34,11 @@ Display = SubResource("Resource_eytic")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Components"]
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("6_uhf2u")
-expand_mode = 2
-stretch_mode = 6
+stretch_mode = 2
 
 [node name="Bool" type="TextureRect" parent="Components"]
 visible = false
@@ -55,9 +58,9 @@ script = ExtResource("4_pclhx")
 
 [node name="TextureRect" type="TextureRect" parent="Ceramics"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("3_v12se")
-expand_mode = 2
-stretch_mode = 6
+stretch_mode = 2
 
 [node name="Bool" type="TextureRect" parent="Ceramics"]
 visible = false
@@ -77,9 +80,9 @@ script = ExtResource("4_pclhx")
 
 [node name="TextureRect" type="TextureRect" parent="Organics"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("5_625v2")
-expand_mode = 2
-stretch_mode = 6
+stretch_mode = 2
 
 [node name="Bool" type="TextureRect" parent="Organics"]
 visible = false
@@ -99,9 +102,9 @@ script = ExtResource("4_pclhx")
 
 [node name="TextureRect" type="TextureRect" parent="Metals"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("2_20p5i")
-expand_mode = 2
-stretch_mode = 6
+stretch_mode = 2
 
 [node name="Bool" type="TextureRect" parent="Metals"]
 visible = false
@@ -122,9 +125,9 @@ script = ExtResource("4_pclhx")
 
 [node name="TextureRect" type="TextureRect" parent="Synthetic"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("4_od0f1")
-expand_mode = 2
-stretch_mode = 6
+stretch_mode = 2
 
 [node name="Bool" type="TextureRect" parent="Synthetic"]
 visible = false
