@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://b0lh5xscj34ew"]
+[gd_scene load_steps=29 format=3 uid="uid://b0lh5xscj34ew"]
 
 [ext_resource type="PackedScene" uid="uid://d08pheagteker" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.tscn" id="1_af53s"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_ihjlj"]
 [ext_resource type="Script" path="res://Scenes/Garage/garage.gd" id="1_jna1t"]
+[ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_ei8vl"]
 [ext_resource type="Script" path="res://Scenes/Garage/accent_type_selector.gd" id="3_kw7r4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0efh"]
@@ -20,6 +21,24 @@ expand_margin_right = 5.0
 [sub_resource type="Theme" id="Theme_4ai3c"]
 Label/font_sizes/font_size = 20
 Label/styles/normal = SubResource("StyleBoxFlat_w0efh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_oof0n"]
+font = ExtResource("2_ei8vl")
+
+[sub_resource type="LabelSettings" id="LabelSettings_frs3n"]
+font = ExtResource("2_ei8vl")
+
+[sub_resource type="LabelSettings" id="LabelSettings_pog4x"]
+font = ExtResource("2_ei8vl")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jy7gq"]
+font = ExtResource("2_ei8vl")
+
+[sub_resource type="LabelSettings" id="LabelSettings_amw83"]
+font = ExtResource("2_ei8vl")
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmqox"]
+font = ExtResource("2_ei8vl")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q8yns"]
 
@@ -60,6 +79,7 @@ Button/colors/font_focus_color = Color(0.815686, 0.87451, 0.898039, 1)
 Button/colors/font_hover_color = Color(0.815686, 0.87451, 0.898039, 1)
 Button/colors/font_hover_pressed_color = Color(0.815686, 0.87451, 0.898039, 1)
 Button/colors/font_pressed_color = Color(0.815686, 0.87451, 0.898039, 1)
+Button/fonts/font = ExtResource("2_ei8vl")
 Button/styles/focus = SubResource("StyleBoxEmpty_q8yns")
 Button/styles/hover = SubResource("StyleBoxFlat_dso61")
 Button/styles/normal = SubResource("StyleBoxFlat_1j07a")
@@ -99,6 +119,7 @@ corner_radius_bottom_left = 5
 corner_detail = 1
 
 [sub_resource type="Theme" id="Theme_m1jm0"]
+Button/fonts/font = ExtResource("2_ei8vl")
 Button/styles/focus = SubResource("StyleBoxEmpty_ltkbd")
 Button/styles/hover = SubResource("StyleBoxFlat_dxjwl")
 Button/styles/normal = SubResource("StyleBoxFlat_74a5j")
@@ -143,6 +164,7 @@ Button/colors/font_focus_color = Color(1, 0.470588, 0.478431, 1)
 Button/colors/font_hover_color = Color(1, 0.470588, 0.478431, 1)
 Button/colors/font_hover_pressed_color = Color(1, 0.470588, 0.478431, 1)
 Button/colors/font_pressed_color = Color(1, 0.470588, 0.478431, 1)
+Button/fonts/font = ExtResource("2_ei8vl")
 Button/styles/focus = SubResource("StyleBoxEmpty_a5lxq")
 Button/styles/hover = SubResource("StyleBoxFlat_nlvtr")
 Button/styles/normal = SubResource("StyleBoxFlat_tjt65")
@@ -171,6 +193,8 @@ offset_top = -51.0
 offset_right = 152.0
 offset_bottom = -13.0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_ei8vl")
+theme_override_font_sizes/font_size = 16
 text = "Back"
 
 [node name="ShipEditorVH" type="VBoxContainer" parent="CanvasLayer/Control"]
@@ -189,6 +213,7 @@ grow_horizontal = 0
 layout_mode = 2
 theme = SubResource("Theme_4ai3c")
 text = "Hull"
+label_settings = SubResource("LabelSettings_oof0n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -202,6 +227,7 @@ Selected = 4
 layout_mode = 2
 theme = SubResource("Theme_4ai3c")
 text = "Cockpit"
+label_settings = SubResource("LabelSettings_frs3n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -214,11 +240,14 @@ Colors = Array[Color]([Color(0.00392157, 0, 0.121569, 1), Color(0.129412, 0.1450
 layout_mode = 2
 theme = SubResource("Theme_4ai3c")
 text = "Accents"
+label_settings = SubResource("LabelSettings_pog4x")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AccentTypeSelector" type="OptionButton" parent="CanvasLayer/Control/ShipEditorVH"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ei8vl")
+theme_override_font_sizes/font_size = 16
 selected = 1
 item_count = 4
 popup/item_0/text = "None"
@@ -240,6 +269,7 @@ Selected = 1
 layout_mode = 2
 theme = SubResource("Theme_4ai3c")
 text = "Blinkers"
+label_settings = SubResource("LabelSettings_jy7gq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -266,12 +296,15 @@ ticks_on_borders = true
 
 [node name="BlinkerInterp" type="CheckButton" parent="CanvasLayer/Control/ShipEditorVH"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ei8vl")
+theme_override_font_sizes/font_size = 16
 text = "Interpolation"
 
 [node name="InlineLabel" type="Label" parent="CanvasLayer/Control/ShipEditorVH"]
 layout_mode = 2
 theme = SubResource("Theme_4ai3c")
 text = "Inline"
+label_settings = SubResource("LabelSettings_amw83")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -286,6 +319,7 @@ layout_mode = 2
 theme = SubResource("Theme_4ai3c")
 text = "Outline
 "
+label_settings = SubResource("LabelSettings_rmqox")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -348,6 +382,9 @@ zoom = Vector2(10, 10)
 
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
 IS_IN_GARAGE = true
+
+[node name="Blinkers" parent="Player/ShipVisuals" index="5"]
+self_modulate = Color(0, 0, 0, 1)
 
 [node name="MagnetArea" parent="Player" index="8"]
 visible = true

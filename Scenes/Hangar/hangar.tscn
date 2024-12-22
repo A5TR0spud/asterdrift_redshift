@@ -1325,7 +1325,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_u04gs")
 
 [node name="BackupPower" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-416, 32)
+position = Vector2(-416, 64)
 NAME = "Backup Power"
 DESCRIPTION = "The shield first draws from a dedicated backup
 power reserve, for 15 extra energy."
@@ -1335,7 +1335,7 @@ PARENT_UPGRADE = NodePath("../EnergyShield")
 Cost = SubResource("Resource_7lodx")
 
 [node name="ChargedShield" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-416, 160)
+position = Vector2(-416, 128)
 NAME = "Charged Shield"
 DESCRIPTION = "Deflected bodies take 25% of their max health
 as damage."
@@ -1345,7 +1345,7 @@ PARENT_UPGRADE = NodePath("../EnergyShield")
 Cost = SubResource("Resource_lf1nv")
 
 [node name="Fuse" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-480, 32)
+position = Vector2(-480, 64)
 NAME = "Industrial Fuse"
 DESCRIPTION = "The energy consumed by the shield is capped at
 5 (-1 per level) energy per hit."
@@ -1356,7 +1356,7 @@ MAX_LEVEL = 3
 Cost = SubResource("Resource_ndgfn")
 
 [node name="ReverseCharger" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-544, 32)
+position = Vector2(-544, 64)
 NAME = "Alternating Charger"
 DESCRIPTION = "If Solar Cell is active, the backup battery
 recharges at 1e/s, up to 20 energy.

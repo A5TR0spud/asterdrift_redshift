@@ -1,8 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=43 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
-[ext_resource type="Script" path="res://Scenes/Player/camera.gd" id="3_jlwng"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_op3xx"]
 [ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
 [ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="7_7w45e"]
@@ -163,11 +162,9 @@ remote_path = NodePath("../../WorldBounds")
 update_rotation = false
 update_scale = false
 
-[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Camera" type="Camera2D" parent="."]
 ignore_rotation = false
 rotation_smoothing_enabled = true
-script = ExtResource("3_jlwng")
-Player = NodePath("../Player")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1

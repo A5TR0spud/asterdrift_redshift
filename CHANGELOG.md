@@ -7,6 +7,9 @@
 	- Ceramics: 8 -> 4
 	- Synthetics: 8 -> 4
 	- Metals: 4 -> 2
+- Adjusted resolution of game window
+- Game now starts in exclusive fullscreen
+- Overhauled hangar visuals
 
 ## indev build 11
 
