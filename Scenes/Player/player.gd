@@ -32,7 +32,6 @@ func _ready():
 	
 	linear_velocity = Vector2(0.0, 0.0)
 	angular_velocity = 0.0
-	rotation_degrees = -90
 	if FileAccess.file_exists(Garage.SHIP_PATH):
 		var data : ShipData = load(Garage.SHIP_PATH)
 		Garage.CachedShip.copy(data)

@@ -29,7 +29,7 @@ func _ready():
 	MaxTime += UpgradesManager.Load("ShipBattery")
 	RunHandler.TimeLeft = MaxTime
 	TimeBar.max_value = MaxTime
-	TimeBar.size.x = MaxTime * 16
+	TimeBar.size.x = MaxTime * 8
 	FarmedOrganics = 0
 	_updateDisplay()
 	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0

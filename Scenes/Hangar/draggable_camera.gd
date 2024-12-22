@@ -6,6 +6,7 @@ extends Camera2D
 var _clickPos: Vector2 = Vector2(0, 0)
 var _clicked: bool = false
 var _isGraced: bool = false
+var _fakePos: Vector2 = Vector2(0, 0)
 
 func _process(delta):
 	var dir: Vector2 = Vector2(0, 0)
@@ -31,31 +32,30 @@ func _process(delta):
 	#zoom.x = _zoom
 	#zoom.y = _zoom
 	
-	#if Input.is_action_pressed("drag"):
-	#	position_smoothing_enabled = false
-	#	if !_clicked:
-	#		_clickPos = get_global_mouse_position()
-	#		_clicked = true
-	#		_isGraced = false
-	#	if _isGraced || _clickPos.distance_to(get_global_mouse_position()) > grace:
-	#		for child: Node in get_children():
-	#			if child is not Node2D:
-	#				continue
-	#			child.position -= (_clickPos - get_global_mouse_position())
-	#			_clickPos = get_global_mouse_position()
-	#			#position -= position
-	#		#position += (_clickPos - get_global_mouse_position())
-	#		#_clickPos = get_global_mouse_position()
-	#		_isGraced = true
-	#else:
-	#	position_smoothing_enabled = true
-	#	_clicked = false
-		#position += dir * speed * delta / _zoom
-	position += dir * speed * delta
+	if Input.is_action_pressed("drag"):
+		position_smoothing_enabled = false
+		var _newClickPos: Vector2 = get_global_mouse_position()
+		if !_clicked:
+			_clickPos = _newClickPos
+			_clicked = true
+			_isGraced = false
+		if _isGraced || _clickPos.distance_to(_newClickPos) > grace:
+			var child := $TechTree
+			child.position -= (_clickPos - _newClickPos)
+			_fakePos += (_clickPos - _newClickPos)
+			_clickPos = _newClickPos
+			_isGraced = true
+	else:
+		position += dir * speed * delta
+		position += _fakePos
+		_fakePos = Vector2(0, 0)
+		_clicked = false
+		var child := $TechTree
+		child.position = Vector2(0, 0)
 	position = Vector2(roundi(position.x), roundi(position.y))
 	
-	$Background/TextureRect.position.x = -32 - int(position.x) % 32
-	$Background/TextureRect.position.y = -32 - int(position.y) % 32
+	$Background/TextureRect.position.x = -32 - int(position.x + _fakePos.x) % 32
+	$Background/TextureRect.position.y = -32 - int(position.y + _fakePos.y) % 32
 
 #func zoomIn():
 	#_zoom += 0.1 * _zoom

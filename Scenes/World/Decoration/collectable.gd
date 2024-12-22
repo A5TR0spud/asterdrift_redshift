@@ -106,10 +106,12 @@ func _tryRecycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> 
 func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:
 	if UpgradesManager.Load("Upcycler") < 1:
 		return false
+	UpcyclerCount += 1
 	if UpcyclerCount % 7 == 0:
 		if randi_range(1, 250) == 1 && type != Materials.Mats.Components:
 			RunHandler.Mats.Components += 1
-			NotificationsManager.SendTransformNotification(type, Materials.Mats.Components, [TransformNotification.Sources.UPCYCLER])
+			Sources.append(TransformNotification.Sources.UPCYCLER)
+			NotificationsManager.SendTransformNotification(type, Materials.Mats.Components, Sources)
 			return true
 		var target := _getLowestResourceFromMaterials(RunHandler.Mats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
 		var upcycleCopy: Array[Notification.Sources] = [Notification.Sources.UPCYCLER]

@@ -708,6 +708,7 @@ Components = 0
 script = ExtResource("1_pl6hy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("42_h2q48")
 
 [node name="Control" type="Control" parent="CanvasLayer"]

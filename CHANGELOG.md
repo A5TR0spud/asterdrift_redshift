@@ -10,6 +10,7 @@
 - Adjusted resolution of game window
 - Game now starts in exclusive fullscreen
 - Overhauled hangar visuals
+- Temporarily removed all zoom and zoom upgrades
 
 ## indev build 11
 
