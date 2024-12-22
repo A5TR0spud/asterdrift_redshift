@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dloxvgj0o0aas"]
+[gd_scene load_steps=20 format=3 uid="uid://dloxvgj0o0aas"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
 [ext_resource type="Texture2D" uid="uid://ccgxfu1vo0nw5" path="res://Assets/UI/Icons/Play.png" id="2_i8p1f"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="8_no7lg"]
 [ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="9_i2j4x"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_rbhsv"]
+[ext_resource type="Script" path="res://Scenes/Menus/velocityapplyer.gd" id="11_fn0l6"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="11_ro5i2"]
 [ext_resource type="PackedScene" uid="uid://ctcwf45fx53pw" path="res://Scenes/World/Decoration/asteroid.tscn" id="12_eyusu"]
 
@@ -46,6 +47,9 @@ shader_parameter/XSpeed = -0.002
 shader_parameter/YSpeed = -0.003
 shader_parameter/XOffset = 2.23
 shader_parameter/YOffset = 0.18
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43iub"]
+size = Vector2(1287, 847)
 
 [node name="MainMenu" type="Node2D"]
 
@@ -156,16 +160,28 @@ expand_mode = 2
 stretch_mode = 1
 flip_h = true
 
-[node name="Player" parent="." instance=ExtResource("11_ro5i2")]
+[node name="velocityapplyer" type="Node2D" parent="."]
+script = ExtResource("11_fn0l6")
+
+[node name="Area2D" type="Area2D" parent="velocityapplyer"]
+collision_layer = 0
+collision_mask = 7
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="velocityapplyer/Area2D"]
+position = Vector2(475.5, 270.5)
+shape = SubResource("RectangleShape2D_43iub")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="List" type="Node2D" parent="velocityapplyer"]
+
+[node name="Player" parent="velocityapplyer/List" instance=ExtResource("11_ro5i2")]
 position = Vector2(578, 244)
 rotation = -1.99685
 IS_IN_GARAGE = true
 CAN_MOVE = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(480, 270)
-
-[node name="Asteroid" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(219, 128)
 mass = 3.0
 SIZE = 1
@@ -177,7 +193,7 @@ MaxHealth = 20.0
 Health = 20.0
 Radius = 15.0
 
-[node name="Asteroid7" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid7" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(901, 88)
 mass = 3.0
 SIZE = 1
@@ -189,7 +205,7 @@ MaxHealth = 20.0
 Health = 20.0
 Radius = 15.0
 
-[node name="Asteroid8" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid8" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(344, 507)
 mass = 3.0
 SIZE = 1
@@ -201,7 +217,7 @@ MaxHealth = 20.0
 Health = 20.0
 Radius = 15.0
 
-[node name="Asteroid9" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid9" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(5, 53)
 mass = 3.0
 SIZE = 1
@@ -213,7 +229,7 @@ MaxHealth = 20.0
 Health = 20.0
 Radius = 15.0
 
-[node name="Asteroid2" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid2" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(497, 410)
 mass = 260.0
 SIZE = 9
@@ -225,7 +241,7 @@ MaxHealth = 260.0
 Health = 260.0
 Radius = 71.0
 
-[node name="Asteroid3" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid3" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(728, 191)
 mass = 81.0
 SIZE = 4
@@ -237,10 +253,10 @@ MaxHealth = 110.0
 Health = 110.0
 Radius = 36.0
 
-[node name="Asteroid4" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid4" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(520, -1)
 
-[node name="Asteroid5" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid5" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(96, 526)
 mass = 350.0
 SIZE = 12
@@ -252,7 +268,7 @@ MaxHealth = 350.0
 Health = 350.0
 Radius = 92.0
 
-[node name="Asteroid6" parent="." instance=ExtResource("12_eyusu")]
+[node name="Asteroid6" parent="velocityapplyer/List" instance=ExtResource("12_eyusu")]
 position = Vector2(957, 284)
 mass = 200.0
 SIZE = 7
@@ -264,7 +280,14 @@ MaxHealth = 200.0
 Health = 200.0
 Radius = 57.0
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-2, 546)
+
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Play" to="CanvasLayer/Control" method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Garage" to="CanvasLayer/Control" method="_on_garage_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Options" to="CanvasLayer/Control" method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Quit" to="CanvasLayer/Control" method="_on_quit_pressed"]
+[connection signal="body_exited" from="velocityapplyer/Area2D" to="velocityapplyer" method="_on_area_2d_body_exited"]

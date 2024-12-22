@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=45 format=3 uid="uid://depkd23s70wtg"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
@@ -106,9 +106,6 @@ font = ExtResource("18_daekn")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_eki5u"]
-font = ExtResource("18_daekn")
-
-[sub_resource type="LabelSettings" id="LabelSettings_gvyva"]
 font = ExtResource("18_daekn")
 
 [sub_resource type="LabelSettings" id="LabelSettings_740c2"]
@@ -243,9 +240,11 @@ text = "terminate run"
 [node name="EnergyMeter" type="ProgressBar" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 122.0
+anchor_left = 0.015
+anchor_right = 0.395
+offset_left = 107.6
 offset_top = 14.0
-offset_right = 383.6
+offset_right = 4.39999
 offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_0nqut")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y5hp0")
@@ -295,7 +294,7 @@ show_percentage = false
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 40.0
+offset_right = 80.0
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_insix")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mdm81")
@@ -439,16 +438,12 @@ layout_mode = 2
 text = "Time Spent:"
 label_settings = SubResource("LabelSettings_eki5u")
 
-[node name="Distance" type="Label" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/StatsPanel/StatsContainer"]
-layout_mode = 2
-text = "Distance Covered:
-"
-label_settings = SubResource("LabelSettings_gvyva")
-
 [node name="ResourcesLabel" type="Label" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/StatsPanel/StatsContainer"]
 layout_mode = 2
 text = "Resources Gathered:"
 label_settings = SubResource("LabelSettings_740c2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ResourceCounter" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/StatsPanel/StatsContainer" instance=ExtResource("5_op3xx")]
 layout_mode = 2
@@ -501,6 +496,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 8
 Display = SubResource("Resource_b8x27")
+SORT = true
 SHOW_TEXT = false
 FLIPPED = true
 

@@ -139,8 +139,8 @@ func _physics_process(delta):
 		elif Stats.Has_RCS && !Input.is_action_pressed("boost"):
 			#decceleration when no input (it's actually just inputting opposite your velocity)
 			_inputDir = -linear_velocity.normalized()
-			if _inputDir.length() > linear_velocity.length():
-				_inputDir = -linear_velocity
+			if _inputDir.length() > 2.0 * linear_velocity.length() / ACCEL_FORCE:
+				_inputDir = 2.0 * -linear_velocity / ACCEL_FORCE
 		
 		targetLinearAccel = _inputDir * ACCEL_FORCE
 	
@@ -187,6 +187,8 @@ func _physics_process(delta):
 		$ThrusterParticles/Main.size.x = 10
 		$ThrusterParticles/Main.position.x = -5
 	ThrustVector *= 0.5
+	if UpgradesManager.Load("GravityWell") > 0:
+		ThrustVector *= 0.5
 	ThrustRotate += targetAngularAccel
 	ThrustRotate *= 0.9
 	var tR: float = ThrustRotate * 10
@@ -256,6 +258,7 @@ func _handleStats():
 		if UpgradesManager.Load("StrongLaser") > 0:
 			x -= 32
 		if HasArtemis:
+			x += 16
 			x += 32 * LaserCount
 		if HasApollo:
 			x -= 32
@@ -266,7 +269,7 @@ func _handleStats():
 			y *= 2
 		if HasArtemis:
 			y *= 2
-			y += 0.6 * LaserCount
+			y += 0.8 * LaserCount
 		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			y *= 0.75
 		Laser.KNOCKBACK_COEF = y
@@ -274,7 +277,7 @@ func _handleStats():
 		y += 3 * UpgradesManager.Load("StrongLaser")
 		if HasArtemis:
 			y *= 2.0
-			y += 0.6 * LaserCount
+			y += 0.8 * LaserCount
 		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			y *= 0.6
 		Laser.DAMAGE_COEF = y
@@ -283,7 +286,7 @@ func _handleStats():
 		if UpgradesManager.Load("TractorNeedle") > 0:
 			y *= 1.2
 		if HasArtemis:
-			y += 0.6 * LaserCount
+			y += 0.8 * LaserCount
 		if UpgradesManager.Load("LaserArray") > 0 && !CancelLaserArrayBad:
 			y *= 0.6
 		if UpgradesManager.Load("BetterTractorNeedle") > 0:

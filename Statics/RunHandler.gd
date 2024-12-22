@@ -5,7 +5,18 @@ static var Mats: Materials
 static var _is_running : bool = false
 static var TimeLeft : float = 30.0
 static var TimeSpent: float = 0
-static var BackupBattery: float = 15
+static var BackupBattery: float = 15:
+	get:
+		return BackupBattery
+	set(value):
+		if IsInRun():
+			BackupBattery = value
+static var DistanceTravelled: float = 0.0:
+	get:
+		return DistanceTravelled
+	set(value):
+		if IsInRun():
+			DistanceTravelled = value
 
 static func IsInRun() -> bool:
 	return _is_running
@@ -15,6 +26,7 @@ static func StartRun() -> void:
 		return
 	_is_running = true
 	TimeSpent = 0.0
+	DistanceTravelled = 0.0
 	if UpgradesManager.Load("BackupShield"):
 		BackupBattery = 15
 	else:

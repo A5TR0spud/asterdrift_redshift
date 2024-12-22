@@ -17,5 +17,4 @@ enum Mats {
 	# Energy (For Notifications)
 	Energy,
 	BackupEnergy,
-	Danger,
 }

@@ -22,6 +22,7 @@ var PowerDrain : float = 1.0
 @onready var HangarInventory := $CanvasLayer/Control/Resources/Inventory/Hangar/ResourceCounter
 
 var FarmedOrganics: int = 0
+var _oldPos: Vector2 = Vector2(0, 0)
 
 func _ready():
 	RunHandler.StartRun()
@@ -32,12 +33,16 @@ func _ready():
 	TimeBar.size.x = MaxTime * 8
 	FarmedOrganics = 0
 	_updateDisplay()
+	_oldPos = Player.global_position
 	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0
 	HangarInventory.Display = MaterialsManager.Mats
 
 var _shouldReverseCharge: bool = false
 func _physics_process(delta):
 	PowerDrain = 1.0
+	
+	RunHandler.DistanceTravelled += _oldPos.distance_to(Player.global_position)
+	_oldPos = Player.global_position
 	
 	if UpgradesManager.Load("Idling") > 0:
 		var idleDrain: float = 0.625
@@ -142,7 +147,9 @@ func _on_player_bounds_body_exited(body):
 	if body is PlayerClass:
 		for child: Entity in DecorationSpawner.get_children():
 			child.global_position = child.global_position - Player.global_position
+		_oldPos -= Player.global_position
 		Player.global_position = Vector2.ZERO
+		
 
 func _on_world_bounds_body_exited(body):
 	if body is Entity:

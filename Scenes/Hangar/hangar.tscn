@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=154 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -79,6 +79,8 @@
 [ext_resource type="Texture2D" uid="uid://bv450k00ppwgd" path="res://Assets/Hangar/Upgrades/Anvil.png" id="71_o21ao"]
 [ext_resource type="Texture2D" uid="uid://81nu82cqlylw" path="res://Assets/Hangar/Upgrades/Scrapper.png" id="72_qsqx7"]
 [ext_resource type="Texture2D" uid="uid://cu8ms7ebsdoxm" path="res://Assets/Hangar/Upgrades/Forge.png" id="73_4ydo1"]
+[ext_resource type="Texture2D" uid="uid://bh25gstmcr01g" path="res://Assets/Hangar/Upgrades/SwiftAssembler.png" id="76_1obe8"]
+[ext_resource type="Texture2D" uid="uid://cdn0o53tq707s" path="res://Assets/Hangar/Upgrades/Press.png" id="77_x60do"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -104,9 +106,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_km3c3"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 2
-Ceramics = 6
-Synthetics = 4
+Metals = 1
+Ceramics = 3
+Synthetics = 0
 Organics = 0
 Components = 0
 
@@ -329,9 +331,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_oudbb"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 24
+Metals = 12
 Ceramics = 0
-Synthetics = 48
+Synthetics = 24
 Organics = 0
 Components = 0
 
@@ -340,7 +342,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 12
 Ceramics = 0
-Synthetics = 64
+Synthetics = 58
 Organics = 0
 Components = 0
 
@@ -375,9 +377,9 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 32
-Ceramics = 4
-Synthetics = 16
-Organics = 8
+Ceramics = 8
+Synthetics = 8
+Organics = 0
 Components = 1
 
 [sub_resource type="Resource" id="Resource_fiaa4"]
@@ -392,19 +394,19 @@ Components = 2
 [sub_resource type="Resource" id="Resource_tyodo"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 15
-Ceramics = 10
-Synthetics = 10
+Metals = 30
+Ceramics = 12
+Synthetics = 0
 Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_4ho7x"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 4
+Metals = 8
 Ceramics = 0
 Synthetics = 0
-Organics = 2
+Organics = 8
 Components = 0
 
 [sub_resource type="Resource" id="Resource_8c7rl"]
@@ -414,7 +416,7 @@ Metals = 64
 Ceramics = 32
 Synthetics = 0
 Organics = 0
-Components = 1
+Components = 2
 
 [sub_resource type="Resource" id="Resource_uuedo"]
 resource_local_to_scene = true
@@ -437,7 +439,7 @@ Components = 2
 [sub_resource type="Resource" id="Resource_u04gs"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 16
+Metals = 32
 Ceramics = 0
 Synthetics = 8
 Organics = 0
@@ -566,7 +568,7 @@ script = ExtResource("4_fiej8")
 Metals = 2
 Ceramics = 0
 Synthetics = 0
-Organics = 12
+Organics = 8
 Components = 0
 
 [sub_resource type="Resource" id="Resource_v0aau"]
@@ -608,10 +610,10 @@ Components = 0
 [sub_resource type="Resource" id="Resource_4e528"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
+Metals = 8
 Ceramics = 8
-Synthetics = 0
-Organics = 32
+Synthetics = 8
+Organics = 48
 Components = 1
 
 [sub_resource type="Resource" id="Resource_710cu"]
@@ -644,11 +646,11 @@ Components = 1
 [sub_resource type="Resource" id="Resource_gji7u"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 64
-Ceramics = 48
-Synthetics = 32
-Organics = 0
-Components = 1
+Metals = 128
+Ceramics = 128
+Synthetics = 0
+Organics = 32
+Components = 3
 
 [sub_resource type="Resource" id="Resource_qa8vc"]
 resource_local_to_scene = true
@@ -666,6 +668,24 @@ Metals = 16
 Ceramics = 8
 Synthetics = 0
 Organics = 8
+Components = 0
+
+[sub_resource type="Resource" id="Resource_8n286"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 16
+Organics = 0
+Components = 1
+
+[sub_resource type="Resource" id="Resource_iqmyo"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_qruf7"]
@@ -1268,11 +1288,12 @@ position = Vector2(-160, 224)
 NAME = "Artemis"
 DESCRIPTION = "Doubles the knockback of the laser.
 Doubles the damage of the laser.
+Increases range by 1 unit.
 Reduces the amount of beams to 1.
 Increases range by 2 units per laser discarded.
-Increases mining speed by 60% per laser discarded.
-Increases damage by 60% per laser discarded.
-Increases knockback by 60% per laser discarded.
+Increases mining speed by 80% per laser discarded.
+Increases damage by 80% per laser discarded.
+Increases knockback by 80% per laser discarded.
 Negates reductive modifiers of Laser Array.
 See Apollo for compatibility effects."
 INTERNAL_NAME = "Artemis"
@@ -1289,8 +1310,12 @@ Reduces range by 3u.
 Starts at 60% efficiency per beam, but splits
 effect between all objects in the area.
 Negates reductive modifiers of Laser Array.
-Weaker but longer-ranged if used
-alongside Artemis."
+When combined with Artemis:
+Inherits 60% of Artemis' strength rather
+than 60% of normal strength.
+This weakens efficiency overall, as there's
+only one beam.
+Range grows with Artemis."
 INTERNAL_NAME = "Apollo"
 SPRITE = ExtResource("34_o3wij")
 PARENT_UPGRADE = NodePath("../DoubleLaser")
@@ -1474,7 +1499,7 @@ PARENT_UPGRADE = NodePath("../CoreAssembler")
 Cost = SubResource("Resource_ukqjc")
 
 [node name="Synthesizer" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(288, 96)
+position = Vector2(320, -32)
 NAME = "Synthesizer"
 DESCRIPTION = "Every other organic collected is converted into
 a synthetic."
@@ -1529,7 +1554,7 @@ PARENT_UPGRADE = NodePath("../Recycler")
 Cost = SubResource("Resource_4e528")
 
 [node name="Dynamo" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(224, 160)
+position = Vector2(160, 128)
 NAME = "Dynamo"
 DESCRIPTION = "Every resource collected grants energy
 based on ship velocity, but slightly slows
@@ -1540,13 +1565,13 @@ PARENT_UPGRADE = NodePath("../Furnace")
 Cost = SubResource("Resource_710cu")
 
 [node name="Kiln" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(288, 160)
+position = Vector2(288, 96)
 NAME = "Kiln"
 DESCRIPTION = "Every other metal collected is converted into
 a ceramic."
 INTERNAL_NAME = "Kiln"
 SPRITE = ExtResource("70_3jmie")
-PARENT_UPGRADE = NodePath("../Synthesizer")
+PARENT_UPGRADE = NodePath("../Composter")
 Cost = SubResource("Resource_ckjas")
 
 [node name="Demeter" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -1562,19 +1587,17 @@ HIDE = true
 Cost = SubResource("Resource_xd0i2")
 
 [node name="Hephaestus" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(288, 288)
+position = Vector2(160, 224)
 NAME = "Hephaestus"
 DESCRIPTION = "Kiln operates at no metal cost.
-Upcycler grants either an extra metal,
-ceramic, or synthetic."
+Foundry operates at no ceramic cost."
 INTERNAL_NAME = "Hephaestus"
 SPRITE = ExtResource("71_o21ao")
 PARENT_UPGRADE = NodePath("../Forge")
-HIDE = true
 Cost = SubResource("Resource_gji7u")
 
 [node name="Scrapper" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(352, 160)
+position = Vector2(352, 96)
 NAME = "Scrapper"
 DESCRIPTION = "Every other ceramic collected is converted into
 a synthetic."
@@ -1584,7 +1607,7 @@ PARENT_UPGRADE = NodePath("../Kiln")
 Cost = SubResource("Resource_qa8vc")
 
 [node name="Forge" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(288, 224)
+position = Vector2(224, 160)
 NAME = "Foundry"
 DESCRIPTION = "Every other ceramic collected is converted into
 a metal."
@@ -1592,6 +1615,28 @@ INTERNAL_NAME = "Forge"
 SPRITE = ExtResource("73_4ydo1")
 PARENT_UPGRADE = NodePath("../Kiln")
 Cost = SubResource("Resource_pcp64")
+
+[node name="SwiftAssembly" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(384, -32)
+NAME = "Swift Assembly"
+DESCRIPTION = "Quickens time per core of Core Assembler by
+-30 seconds."
+INTERNAL_NAME = "SwiftAssembly"
+SPRITE = ExtResource("76_1obe8")
+PARENT_UPGRADE = NodePath("../Synthesizer")
+MAX_LEVEL = 2
+Cost = SubResource("Resource_8n286")
+
+[node name="Press" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(416, 96)
+NAME = "Press"
+DESCRIPTION = "Every other organic collected is converted into
+a ceramic."
+INTERNAL_NAME = "Press"
+SPRITE = ExtResource("77_x60do")
+PARENT_UPGRADE = NodePath("../Scrapper")
+HIDE = true
+Cost = SubResource("Resource_iqmyo")
 
 [node name="StatusMonitor" parent="Camera2D/TechTree/BottomRight" instance=ExtResource("4_r883k")]
 position = Vector2(32, 32)

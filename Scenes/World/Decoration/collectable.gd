@@ -156,18 +156,21 @@ func _getLowestResourceFromMaterials(mat: Materials, tiebreaker: Materials.Mats 
 	return tiebreaker
 
 func _onMetalCollected(Sources: Array[Notification.Sources] = []):
-	if UpgradesManager.Load("Kiln") > 0:
+	if UpgradesManager.Load("Kiln") > 0 && !Sources.has(Notification.Sources.KILN):
 		KilnCount += 1
 		if KilnCount % 2 == 0:
-			RunHandler.Mats.Ceramics += 1
-			Sources.append(Notification.Sources.KILN)
-			NotificationsManager.SendTransformNotification(Materials.Mats.Metals, Materials.Mats.Ceramics, Sources)
-			return
+			if UpgradesManager.Load("Hephaestus") > 0 && !Sources.has(Notification.Sources.HEPHAESTUS):
+				_onCeramicCollected([Notification.Sources.HEPHAESTUS, Notification.Sources.KILN])
+			else:
+				RunHandler.Mats.Ceramics += 1
+				Sources.append(Notification.Sources.KILN)
+				NotificationsManager.SendTransformNotification(Materials.Mats.Metals, Materials.Mats.Ceramics, Sources)
+				return
 	RunHandler.Mats.Metals += 1
 	NotificationsManager.SendPickupNotification(Materials.Mats.Metals, Sources)
 
 func _onCeramicCollected(Sources: Array[Notification.Sources] = []):
-	if UpgradesManager.Load("Scrapper") > 0:
+	if UpgradesManager.Load("Scrapper") > 0 && !Sources.has(Notification.Sources.SCRAPPER):
 		ScrapperCount += 1
 		if ScrapperCount % 2 == 0:
 			RunHandler.Mats.Synthetics += 1
@@ -177,15 +180,18 @@ func _onCeramicCollected(Sources: Array[Notification.Sources] = []):
 	if UpgradesManager.Load("Forge") > 0:
 		ForgeCount += 1
 		if ForgeCount % 2 == 0:
-			RunHandler.Mats.Metals += 1
-			Sources.append(Notification.Sources.FORGE)
-			NotificationsManager.SendTransformNotification(Materials.Mats.Ceramics, Materials.Mats.Metals, Sources)
-			return
+			if UpgradesManager.Load("Hephaestus") > 0 && !Sources.has(Notification.Sources.HEPHAESTUS):
+				_onMetalCollected([Notification.Sources.HEPHAESTUS, Notification.Sources.FORGE])
+			else:
+				RunHandler.Mats.Metals += 1
+				Sources.append(Notification.Sources.FORGE)
+				NotificationsManager.SendTransformNotification(Materials.Mats.Ceramics, Materials.Mats.Metals, Sources)
+				return
 	RunHandler.Mats.Ceramics += 1
 	NotificationsManager.SendPickupNotification(Materials.Mats.Ceramics, Sources)
 
 func _onSyntheticCollected(Sources: Array[Notification.Sources] = []):
-	if UpgradesManager.Load("Composter") > 0:
+	if UpgradesManager.Load("Composter") > 0 && !Sources.has(Notification.Sources.COMPOSTER):
 		ComposterCount += 1
 		if ComposterCount % 2 == 0:
 			RunHandler.Mats.Organics += 1
@@ -197,7 +203,7 @@ func _onSyntheticCollected(Sources: Array[Notification.Sources] = []):
 
 func _onOrganicCollected(Sources: Array[Notification.Sources] = []):
 	#synthesizer
-	if UpgradesManager.Load("Processor") > 0:
+	if UpgradesManager.Load("Processor") > 0 && !Sources.has(Notification.Sources.SYNTHESIZER):
 		ProcessorCount += 1
 		if ProcessorCount % 2 == 0:
 			RunHandler.Mats.Synthetics += 1
@@ -205,7 +211,7 @@ func _onOrganicCollected(Sources: Array[Notification.Sources] = []):
 			NotificationsManager.SendTransformNotification(Materials.Mats.Organics, Materials.Mats.Synthetics, Sources)
 			return
 	#furnace
-	if UpgradesManager.Load("Combustor") > 0:
+	if UpgradesManager.Load("Combustor") > 0 && !Sources.has(Notification.Sources.FURNACE):
 		FurnaceCount += 1
 		if FurnaceCount % 2 == 0:
 			RunHandler.TimeLeft += 1

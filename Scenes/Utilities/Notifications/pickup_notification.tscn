@@ -14,6 +14,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m5uno")
 script = ExtResource("1_ow7fi")
+Duration = 1.0
 
 [node name="Control" type="Control" parent="."]
 clip_contents = true

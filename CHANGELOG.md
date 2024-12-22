@@ -1,16 +1,57 @@
 ## indev build 12
 
+- Added Swift Assembly upgrade to Synthesizer
+- Added Hephaestus upgrade to Foundry
+- Buffed Artemis modifiers from 60% to 80%
+- Artemis now grants an additional unit of range regardless of discarded lasers
+	- Discarded lasers still buff range by +2u
+- Nerfed Artemis core cost: 1 -> 2
+- Kiln is now a child of Composter
 - Fixed Upcycler having a 1/200 chance to convert *every* resource rather than every *seventh* resource
-- Nerfed Upcycler chance from 1/200 to 1/250
+- Nerfed Upcycler core chance from 1/200 to 1/250
+- Adjusted resolution of game window
+- Game now starts in exclusive fullscreen
+- Overhauled hangar visuals
+- Temporarily removed all zoom and zoom upgrades
+- Fixed RCS with very high acceleration values causing flashing thrust when stopping
+ 	- As a result, RCS's decceleration has been slightly worsened
+- Gravity Well no longer doubles thrust *visuals*, it still doubles everything that matters
+- Added Time Spent to Run Overview
+- Added Distance Covered to Run Overview
+- Fixed Backup Battery charging or being damaged while the run is over
+- Touched-up main menu a bit
+- Implemented custom font
+- Inventory Monitor no longer sorts Hangar's resources
+- Buffed ARCS cost:
+	- Ceramics: 6 -> 3
+	- Metals: 2 -> 1
+	- Synthetics: 4 -> 0
 - Buffed Core Assembler costs:
 	- Organics: 16 -> 6
 	- Ceramics: 8 -> 4
 	- Synthetics: 8 -> 4
 	- Metals: 4 -> 2
-- Adjusted resolution of game window
-- Game now starts in exclusive fullscreen
-- Overhauled hangar visuals
-- Temporarily removed all zoom and zoom upgrades
+- Buffed Hydroponics Pod organic cost: 12 -> 8
+- Buffed Fine Wire synthetic cost: 64 -> 58
+- Buffed Bigger Coils costs:
+	- Metals: 24 -> 12
+	- Synthetics: 48 -> 24
+- Adjusted Military-Grade Laser costs:
+	- Metals: 15 -> 30
+	- Ceramics: 10 -> 12
+	- Synthetics: 10 -> 0
+- Adjusted Akimbo costs:
+	- Ceramics: 4 -> 8
+	- Synthetics: 16 -> 8
+	- Organics: 8 -> 0
+- Nerfed Spare Battery costs:
+	- Metals: 4 -> 8
+	- Organics: 2 -> 8
+- Nerfed Shield Projector metal cost: 16 -> 32
+- Nerfed Upcycler costs:
+	- Metals: 0 -> 8
+	- Synthetics: 0 -> 8
+	- Organics: 32 -> 48
 
 ## indev build 11
 
