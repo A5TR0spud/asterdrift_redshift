@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=52 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -28,6 +28,7 @@
 [ext_resource type="Shader" path="res://Shaders/PixelCircle.gdshader" id="23_743qs"]
 [ext_resource type="Texture2D" uid="uid://xgkoxrkco1x6" path="res://Assets/Ships/Upgrades/ShieldDeflection.png" id="23_p2wwt"]
 [ext_resource type="Shader" path="res://Shaders/TractorBay.gdshader" id="25_8rbcp"]
+[ext_resource type="Shader" path="res://Shaders/Tesla.gdshader" id="29_g5u7d"]
 [ext_resource type="Script" path="res://Scenes/Player/radar.gd" id="29_xcgy5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
@@ -145,6 +146,9 @@ shader_parameter/StepInfuence = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7d02"]
 radius = 24.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rid5"]
+shader = ExtResource("29_g5u7d")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qliv8"]
 radius = 768.0
@@ -458,6 +462,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MagnetArea" type="Area2D" parent="."]
+visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708
@@ -518,7 +523,6 @@ offset_bottom = -64.0
 scale = Vector2(10, 10)
 
 [node name="ShieldProjector" type="Area2D" parent="."]
-visible = false
 top_level = true
 rotation = -1.5708
 collision_layer = 0
@@ -531,6 +535,7 @@ shape = SubResource("CircleShape2D_m7d02")
 debug_color = Color(0, 0.595, 0.7, 0)
 
 [node name="BounceShield" type="Sprite2D" parent="ShieldProjector"]
+visible = false
 top_level = true
 texture = ExtResource("23_p2wwt")
 
@@ -538,7 +543,16 @@ texture = ExtResource("23_p2wwt")
 remote_path = NodePath("../BounceShield")
 update_rotation = false
 
+[node name="TeslaRect" type="ColorRect" parent="ShieldProjector"]
+visible = false
+material = SubResource("ShaderMaterial_5rid5")
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+
 [node name="Radar" type="Area2D" parent="."]
+visible = false
 top_level = true
 rotation = -1.5708
 collision_layer = 0

@@ -8,7 +8,7 @@ static var RadarArrowPrefab := preload("res://Scenes/Player/radar_arrow.tscn")
 @onready var Player := $".."
 
 func _ready():
-	if UpgradesManager.Load("Dish") < 1 || !Player.CAN_MOVE || Player.IS_IN_GARAGE:
+	if UpgradesManager.Load("Dish") + UpgradesManager.Load("Radar") < 1 || !Player.CAN_MOVE || Player.IS_IN_GARAGE:
 		queue_free()
 		hide()
 	else:
@@ -34,7 +34,10 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body is Entity:
-		TrackedBodies.append(body)
+		if UpgradesManager.Load("Dish") > 0 && body.isAsteroid:
+			TrackedBodies.append(body)
+		elif UpgradesManager.Load("Radar") > 0 && body is Collectable:
+			TrackedBodies.append(body)
 		_reload_child_count()
 
 func _on_body_exited(body):

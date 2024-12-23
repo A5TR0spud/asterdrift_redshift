@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://cujhuogujxuo5"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/options.gd" id="1_ysgo7"]
+
+[node name="Options" type="Node2D"]
+script = ExtResource("1_ysgo7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -509.0
+offset_top = 257.0
+offset_right = -404.0
+offset_bottom = 288.0
+grow_horizontal = 0
+selected = 2
+item_count = 3
+popup/item_0/text = "960x540"
+popup/item_1/text = "1024x576"
+popup/item_1/id = 1
+popup/item_2/text = "Adapt"
+popup/item_2/id = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -20.0
+offset_right = 25.0
+offset_bottom = -12.0
+grow_vertical = 0
+text = "BACK
+"
+
+[connection signal="item_selected" from="CanvasLayer/Control/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]

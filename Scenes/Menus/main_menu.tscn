@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://dloxvgj0o0aas"]
+[gd_scene load_steps=21 format=3 uid="uid://dloxvgj0o0aas"]
 
+[ext_resource type="Script" path="res://Scenes/Menus/main_menu.gd" id="1_7n6q0"]
 [ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
 [ext_resource type="Texture2D" uid="uid://ccgxfu1vo0nw5" path="res://Assets/UI/Icons/Play.png" id="2_i8p1f"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_utqbt"]
@@ -52,6 +53,7 @@ shader_parameter/YOffset = 0.18
 size = Vector2(970, 550)
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_7n6q0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -94,9 +96,10 @@ icon = ExtResource("3_i2niw")
 alignment = 0
 
 [node name="Options" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_utqbt")
+theme_override_font_sizes/font_size = 32
 text = "Options
 "
 icon = ExtResource("4_ino3e")

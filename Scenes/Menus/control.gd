@@ -9,7 +9,7 @@ func _on_garage_pressed():
 
 
 func _on_options_pressed():
-	pass
+	get_tree().change_scene_to_file("res://Scenes/Menus/options.tscn")
 
 
 func _on_quit_pressed():

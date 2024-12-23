@@ -6,6 +6,7 @@
 - Upcycler's core transformation is now guaranteed every 250th, instead of chance-based
 - Added Production Line upgrade to Synthesizer
 - Adjusted thruster VFX
+- Added very basic resolution setting in options menu and options button in main menu
 
 ## indev build 12
 
