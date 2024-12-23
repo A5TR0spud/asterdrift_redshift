@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n4wac5jj3rjk"
-path="res://.godot/imported/PointDefense.png-5c48bcf9856f2b52230b6b164e7c4c30.ctex"
+uid="uid://d2bgho5pxcpjj"
+path="res://.godot/imported/CursorOverride.png-2683a2532346a1d781b772cd97702d2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/PointDefense.png"
-dest_files=["res://.godot/imported/PointDefense.png-5c48bcf9856f2b52230b6b164e7c4c30.ctex"]
+source_file="res://Assets/Hangar/Upgrades/CursorOverride.png"
+dest_files=["res://.godot/imported/CursorOverride.png-2683a2532346a1d781b772cd97702d2e.ctex"]
 
 [params]
 

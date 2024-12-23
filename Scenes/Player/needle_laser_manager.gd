@@ -150,6 +150,10 @@ var _closestEntity: Entity = null
 var _farthestEntity: Entity = null
 var _fastestEntity: Entity = null
 var _slowestEntity: Entity = null
+var _arbitraryEntity: Entity = null
+var _closestCollectable: Entity = null
+var _farthestCollectable: Entity = null
+var _closestThreat: Entity = null
 
 static var Instance: NeedleLaserManager
 
@@ -164,6 +168,10 @@ func _physics_process(delta) -> void:
 	_farthestEntity = _tryNullifyTarget(_farthestEntity)
 	_fastestEntity = _tryNullifyTarget(_fastestEntity)
 	_slowestEntity = _tryNullifyTarget(_slowestEntity)
+	_arbitraryEntity = _tryNullifyTarget(_arbitraryEntity)
+	_closestCollectable = _tryNullifyTarget(_closestCollectable)
+	_farthestCollectable = _tryNullifyTarget(_farthestCollectable)
+	_closestThreat = _tryNullifyTarget(_closestThreat)
 	
 	if AUTO_LASER && !APOLLO:
 		for col in Entities:
@@ -184,15 +192,23 @@ func _physics_process(delta) -> void:
 				_fastestEntity = col
 			if _slowestEntity == null:
 				_slowestEntity = col
+			if _arbitraryEntity == null:
+				_arbitraryEntity = col
 			#close
 			var test1: float = col.global_position.distance_to(global_position) - col.Radius
 			var test2: float = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
 			if test1 < test2:
 				_closestEntity = col
+				if col.isResource:
+					_closestCollectable = col
+				if col.DangerousCollision:
+					_closestThreat = col
 			#far
 			test2 = _farthestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
 			if test1 > test2:
 				_farthestEntity = col
+				if col.isResource:
+					_farthestCollectable = col
 			#fast
 			test1 = col.linear_velocity.length()
 			test2 = _fastestEntity.linear_velocity.length()
@@ -202,6 +218,12 @@ func _physics_process(delta) -> void:
 			test2 = _slowestEntity.linear_velocity.length()
 			if test1 < test2:
 				_slowestEntity = col
+		if _closestCollectable == null:
+			_closestCollectable = _closestEntity
+		if _farthestCollectable == null:
+			_farthestCollectable = _farthestEntity
+		if _closestThreat == null:
+			_closestThreat = _fastestEntity
 	
 	if APOLLO:
 		for ent: Entity in Entities:
@@ -219,28 +241,35 @@ func _physics_process(delta) -> void:
 				child._laserFiring = false
 				if !child.is_node_ready():
 					continue
-				if Input.is_action_pressed("fire"):
+				if Input.is_action_pressed("fire") && UpgradesManager.LoadIsEnabled("CursorOverride"):
 					child._laserFiring = true
 					child.Target.global_position = get_global_mouse_position()
 					continue
 				if !AUTO_LASER:
 					continue
-				if i % 4 == 0:
-					if _closestEntity != null:
-						child._laserFiring = true
-						child.Target.global_position = _closestEntity.global_position
-				elif i % 4 == 1:
-					if _farthestEntity != null:
-						child._laserFiring = true
-						child.Target.global_position = _farthestEntity.global_position
-				elif i % 4 == 2:
-					if _fastestEntity != null:
-						child._laserFiring = true
-						child.Target.global_position = _fastestEntity.global_position
-				elif i % 4 == 3:
-					if _slowestEntity != null:
-						child._laserFiring = true
-						child.Target.global_position = _slowestEntity.global_position
+				if i % 8 == 0:
+					_tryTarget(child, _closestEntity)
+				elif i % 8 == 1:
+					_tryTarget(child, _farthestEntity)
+				elif i % 8 == 2:
+					_tryTarget(child, _fastestEntity)
+				elif i % 8 == 3:
+					_tryTarget(child, _slowestEntity)
+				elif i % 8 == 4:
+					_tryTarget(child, _arbitraryEntity)
+				elif i % 8 == 5:
+					_tryTarget(child, _closestCollectable)
+				elif i % 8 == 6:
+					_tryTarget(child, _farthestCollectable)
+				elif i % 8 == 7:
+					_tryTarget(child, _closestThreat)
+
+func _tryTarget(child: NeedleLaserClass, target: Entity) -> void:
+	if target != null:
+		child.Target.global_position = target.global_position
+		child._laserFiring = true
+	else:
+		child._laserFiring = false
 
 func _on_ship_visuals_firemalasar():
 	_reloadVisuals()

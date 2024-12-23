@@ -11,3 +11,6 @@ func _ready():
 	
 	var root = get_tree().root
 	root.content_scale_size = newSize
+		#ResourceLoader.load_threaded_request("res://Scenes/World/World.tscn")
+	#ResourceLoader.load_threaded_request("res://Scenes/Menus/options.tscn")
+	#ResourceLoader.load_threaded_request("res://Scenes/Garage/Garage.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=28 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
@@ -86,6 +86,10 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_1jsna")
 
 [sub_resource type="LabelSettings" id="LabelSettings_qemxh"]
 font = ExtResource("10_sd7c2")
+
+[sub_resource type="Curve" id="Curve_76xhg"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
 
 [node name="Upgrade" type="Node2D"]
 script = ExtResource("1_le4ru")
@@ -194,12 +198,12 @@ SORT = true
 SHOW_TEXT = false
 
 [node name="ParentLine" type="Line2D" parent="."]
-visible = false
 show_behind_parent = true
 z_index = -5
 z_as_relative = false
 points = PackedVector2Array(0, 0, 64, 64)
-width = 2.0
+width = 5.0
+width_curve = SubResource("Curve_76xhg")
 default_color = Color(0.666, 0.777, 0.888, 1)
 joint_mode = 2
 begin_cap_mode = 2

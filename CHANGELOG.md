@@ -7,6 +7,11 @@
 - Added Production Line upgrade to Synthesizer
 - Adjusted thruster VFX
 - Added very basic resolution setting in options menu and options button in main menu
+- Rearranged tech tree a bit to better fit categories
+	- Ceramic: Utility
+	- Synthetic: Resources
+	- Metal: Defense and Offense
+	- Organics: Dynamic Systems
 
 ## indev build 12
 
