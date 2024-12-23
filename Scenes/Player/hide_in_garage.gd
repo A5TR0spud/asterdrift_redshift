@@ -1,6 +1,10 @@
 extends Node2D
 
-@onready var Player: PlayerClass = $".."
+@onready var Player: PlayerClass = $"../.."
+
+const COMBUSTION_COLOR: String = "ffffb7";
+const RCS_COLOR: String = "ffffb7";
+const ION_COLOR: String = "7bffff";
 
 func _ready():
 	if Player.IS_IN_GARAGE:
@@ -9,20 +13,20 @@ func _ready():
 	else:
 		show()
 		if UpgradesManager.Load("Stage0") > 0:
-			$TopRight.color = Color("ffffb7")
-			$BottomRight.color = Color("ffffb7")
-			$TopLeft.color = Color("ffffb7")
-			$BottomLeft.color = Color("ffffb7")
-			$ReverseLeft.color = Color("ffffb7")
-			$ReverseRight.color = Color("ffffb7")
+			$TopRight.color = Color(COMBUSTION_COLOR)
+			$BottomRight.color = Color(COMBUSTION_COLOR)
+			$TopLeft.color = Color(COMBUSTION_COLOR)
+			$BottomLeft.color = Color(COMBUSTION_COLOR)
+			$ReverseLeft.color = Color(COMBUSTION_COLOR)
+			$ReverseRight.color = Color(COMBUSTION_COLOR)
 		else:
-			$TopRight.color = Color("bfdfff")
-			$BottomRight.color = Color("bfdfff")
-			$TopLeft.color = Color("bfdfff")
-			$BottomLeft.color = Color("bfdfff")
-			$ReverseLeft.color = Color("bfdfff")
-			$ReverseRight.color = Color("bfdfff")
+			$TopRight.color = Color(RCS_COLOR)
+			$BottomRight.color = Color(RCS_COLOR)
+			$TopLeft.color = Color(RCS_COLOR)
+			$BottomLeft.color = Color(RCS_COLOR)
+			$ReverseLeft.color = Color(RCS_COLOR)
+			$ReverseRight.color = Color(RCS_COLOR)
 		if UpgradesManager.Load("IonDrive") > 0:
-			$Main.color = Color("bfdfff")
+			$Main.color = Color(ION_COLOR)
 		else:
-			$Main.color = Color("ffffb7")
+			$Main.color = Color(COMBUSTION_COLOR)

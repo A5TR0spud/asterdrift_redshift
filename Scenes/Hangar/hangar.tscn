@@ -501,8 +501,8 @@ Components = 1
 [sub_resource type="Resource" id="Resource_d2k57"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 2
-Ceramics = 2
+Metals = 4
+Ceramics = 4
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -520,9 +520,9 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 32
+Ceramics = 16
 Synthetics = 8
-Organics = 16
+Organics = 32
 Components = 0
 
 [sub_resource type="Resource" id="Resource_wwfe1"]
@@ -663,11 +663,11 @@ Components = 1
 [sub_resource type="Resource" id="Resource_iqmyo"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
-Organics = 0
-Components = 0
+Metals = 24
+Ceramics = 24
+Synthetics = 24
+Organics = 64
+Components = 1
 
 [sub_resource type="Resource" id="Resource_8de2h"]
 resource_local_to_scene = true
@@ -1405,12 +1405,10 @@ Cost = SubResource("Resource_kyaou")
 [node name="Dish" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(96, 96)
 NAME = "Basic Radar Dish"
-DESCRIPTION = "Unlocks the ability to zoom out 1.5x, then 2x."
+DESCRIPTION = "Shows all asteroids in a 48 unit radius."
 INTERNAL_NAME = "Dish"
 SPRITE = ExtResource("21_5xmpu")
 PARENT_UPGRADE = NodePath("../StatusMonitor")
-MAX_LEVEL = 2
-HIDE = true
 Cost = SubResource("Resource_d2k57")
 
 [node name="LookAhead" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -1425,11 +1423,10 @@ Cost = SubResource("Resource_ewipx")
 [node name="Radar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(96, 160)
 NAME = "Radar"
-DESCRIPTION = "Allows you to zoom out to 2.5x."
+DESCRIPTION = "Shows all resources in range."
 INTERNAL_NAME = "Radar"
 SPRITE = ExtResource("37_52wf2")
 PARENT_UPGRADE = NodePath("../Dish")
-HIDE = true
 Cost = SubResource("Resource_lid5j")
 
 [node name="BetterRadar" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -1467,8 +1464,8 @@ Cost = SubResource("Resource_ukqjc")
 [node name="Synthesizer" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(256, 96)
 NAME = "Synthesizer"
-DESCRIPTION = "Every other organic collected is converted into
-a synthetic."
+DESCRIPTION = "If the bay holds more organics than synthetics,
+every organic collected is converted into a synthetic."
 INTERNAL_NAME = "Processor"
 SPRITE = ExtResource("52_8wr0w")
 PARENT_UPGRADE = NodePath("../Composter")
@@ -1511,9 +1508,9 @@ position = Vector2(352, 160)
 NAME = "Upcycler"
 DESCRIPTION = "Every 7th resource collected also collects
 a copy of the resource you have the least
-of from the current run.
-Has a 0.5% chance to instead convert
-the resource to a core."
+of in the bay.
+Every 250th activation instead converts the
+resource into a core."
 INTERNAL_NAME = "Upcycler"
 SPRITE = ExtResource("59_vay1v")
 PARENT_UPGRADE = NodePath("../Recycler")
@@ -1595,15 +1592,14 @@ PARENT_UPGRADE = NodePath("../Synthesizer")
 MAX_LEVEL = 2
 Cost = SubResource("Resource_8n286")
 
-[node name="Press" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(288, 224)
-NAME = "Press"
-DESCRIPTION = "Every other organic collected is converted into
-a ceramic."
-INTERNAL_NAME = "Press"
+[node name="ProdLine" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(320, 96)
+NAME = "Production Line"
+DESCRIPTION = "Every transformation can trigger other
+transformations."
+INTERNAL_NAME = "ProdLine"
 SPRITE = ExtResource("77_x60do")
-PARENT_UPGRADE = NodePath("../Scrapper")
-HIDE = true
+PARENT_UPGRADE = NodePath("../Synthesizer")
 Cost = SubResource("Resource_iqmyo")
 
 [node name="CoreForge" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]

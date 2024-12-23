@@ -2,11 +2,6 @@ extends Node
 class_name MaterialsManager
 
 static var Mats: Materials = Materials.new()
-#static var Metals : int = 0
-#static var Ceramics : int = 0
-#static var Synthetics : int = 0
-#static var Organics : int = 0
-#static var Components : int = 0
 
 const RESOURCE_PATH : String = "user://resources.json"
 

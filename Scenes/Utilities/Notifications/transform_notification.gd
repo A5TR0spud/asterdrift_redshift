@@ -33,8 +33,8 @@ func _ready():
 func _reload():
 	size.x = 1
 	_timeLeft = Duration
-	VictimSprite.texture = TurnMatEnumToSprite(Victim)
-	ResultSprite.texture = TurnMatEnumToSprite(Result)
+	VictimSprite.texture = Materials.TurnMatEnumToSprite(Victim)
+	ResultSprite.texture = Materials.TurnMatEnumToSprite(Result)
 	for child in SourcesNode.get_children():
 		child.queue_free()
 	for source: Sources in Source:

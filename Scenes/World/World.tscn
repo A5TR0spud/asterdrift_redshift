@@ -510,8 +510,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Resources/Inventory/Run"]
 layout_mode = 2
-text = "Run
-"
+text = "Bay"
 label_settings = SubResource("LabelSettings_lvjjx")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -373,11 +373,9 @@ zoom = Vector2(8, 8)
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
 IS_IN_GARAGE = true
 
-[node name="MagnetArea" parent="Player" index="8"]
-visible = true
-
-[node name="TractorBay" parent="Player/MagnetArea" index="4"]
-visible = false
+[node name="RadarArrow" parent="Player/Radar/ArrowList" index="0"]
+Offset = null
+Type = null
 
 [connection signal="pressed" from="CanvasLayer/Control/Back" to="." method="_on_back_pressed"]
 [connection signal="colorChanged" from="CanvasLayer/Control/ShipEditorVH/HullColor" to="." method="_on_hull_color_color_changed"]

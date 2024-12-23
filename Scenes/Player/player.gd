@@ -181,11 +181,11 @@ func _physics_process(delta):
 	ThrustVector += targetLinearAccel.rotated(-rotation) * 0.4
 	if CAN_MOVE && Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
 		ThrustVector.x += 16
-		$ThrusterParticles/Main.size.x = 12
-		$ThrusterParticles/Main.position.x = -6
+		$ShipVisuals/ThrusterParticles/Main.size.x = 12
+		$ShipVisuals/ThrusterParticles/Main.position.x = -6
 	else:
-		$ThrusterParticles/Main.size.x = 10
-		$ThrusterParticles/Main.position.x = -5
+		$ShipVisuals/ThrusterParticles/Main.size.x = 10
+		$ShipVisuals/ThrusterParticles/Main.position.x = -5
 	ThrustVector *= 0.5
 	if UpgradesManager.Load("GravityWell") > 0:
 		ThrustVector *= 0.5
@@ -194,13 +194,13 @@ func _physics_process(delta):
 	var tR: float = ThrustRotate * 10
 	var tLHS: float = maxf(tR, 0)
 	var tRHS: float = maxf(-tR, 0)
-	$ThrusterParticles/Main.size.y = maxf(ThrustVector.x, 0)
-	$ThrusterParticles/ReverseLeft.size.y = maxf(-ThrustVector.x * 0.7, 0)
-	$ThrusterParticles/ReverseRight.size.y = maxf(-ThrustVector.x * 0.7, 0)
-	$ThrusterParticles/TopRight.size.y = maxf(-ThrustVector.y, 0) * 0.4 + tRHS
-	$ThrusterParticles/BottomRight.size.y = maxf(-ThrustVector.y, 0) * 0.4 + tLHS
-	$ThrusterParticles/TopLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tLHS
-	$ThrusterParticles/BottomLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tRHS
+	$ShipVisuals/ThrusterParticles/Main.size.y = maxf(ThrustVector.x, 0)
+	$ShipVisuals/ThrusterParticles/ReverseLeft.size.y = maxf(-ThrustVector.x * 0.7, 0)
+	$ShipVisuals/ThrusterParticles/ReverseRight.size.y = maxf(-ThrustVector.x * 0.7, 0)
+	$ShipVisuals/ThrusterParticles/TopRight.size.y = maxf(-ThrustVector.y, 0) * 0.4 + tRHS
+	$ShipVisuals/ThrusterParticles/BottomRight.size.y = maxf(-ThrustVector.y, 0) * 0.4 + tLHS
+	$ShipVisuals/ThrusterParticles/TopLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tLHS
+	$ShipVisuals/ThrusterParticles/BottomLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tRHS
 
 func GetCurrentMaxSpeed() -> float:
 	return MAX_SPEED + _BonusMaxSpeedFromBoost

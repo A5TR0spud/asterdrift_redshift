@@ -17,6 +17,7 @@ static var DistanceTravelled: float = 0.0:
 	set(value):
 		if IsInRun():
 			DistanceTravelled = value
+static var UpcyclerCount: int = 0
 
 static func IsInRun() -> bool:
 	return _is_running
@@ -38,6 +39,7 @@ static func StartRun() -> void:
 	Mats.Synthetics = 0
 	Mats.Organics = 0
 	Mats.Components = 0
+	UpcyclerCount = DataManager.Load("UpcyclerCount", 0)
 
 static func EndRun() -> void:
 	if !_is_running:
@@ -52,6 +54,7 @@ static func EndRun() -> void:
 	MaterialsManager.Mats.Organics += Mats.Organics
 	MaterialsManager.Mats.Components += Mats.Components
 	MaterialsManager.Save()
+	DataManager.Save("UpcyclerCount", UpcyclerCount)
 
 static func DamageBackup(damage: float) -> void:
 	var fuseLevel: int = UpgradesManager.Load("Fuse")
