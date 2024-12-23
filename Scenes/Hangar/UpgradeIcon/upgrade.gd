@@ -257,7 +257,7 @@ func _can_buy() -> bool:
 			return false
 		if PARENT_UPGRADE.CurrentLevel == 0:
 			return false
-		ParentLine.default_color = Color(1, 1, 1, 1)
+		ParentLine.default_color = Color(0.666, 0.777, 0.888, 1)
 	if !REQUIRED_UPGRADES.is_empty():
 		for requirement: Upgrade in REQUIRED_UPGRADES:
 			if requirement.CurrentLevel < 1:

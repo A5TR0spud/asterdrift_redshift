@@ -50,15 +50,13 @@ func Collect():
 	_onCollected(COLLECTION)
 	queue_free()
 
-const DYNAMO_COEFFICIENT: float = 1.3 / 2048.0
-const DYNAMO_SLOW: float = 0.85
-
 func _onCollected(type: Materials.Mats, Sources: Array[Notification.Sources] = []) -> void:
 	if UpgradesManager.Load("Dynamo") > 0:
 		# energy += 1/518 * velocity
 		# velocity = velocity * 517/518
-		RunHandler.TimeLeft += PlayerClass.Instance.linear_velocity.length() * DYNAMO_COEFFICIENT
-		PlayerClass.Instance.linear_velocity *= DYNAMO_SLOW
+		var percent: float = PlayerClass.Instance.linear_velocity.length() / PlayerClass.Instance.GetCurrentMaxSpeed()
+		RunHandler.TimeLeft += percent * 0.125
+		PlayerClass.Instance.linear_velocity *= 0.85
 	
 	if _tryUpcycle(type, Sources):
 		return

@@ -2,6 +2,8 @@
 
 - Added Swift Assembly upgrade to Synthesizer
 - Added Hephaestus upgrade to Foundry
+- Added Core Forge upgrade to Foundry
+- Added Godrays upgrade to Laser Array
 - Buffed Artemis modifiers from 60% to 80%
 - Artemis now grants an additional unit of range regardless of discarded lasers
 	- Discarded lasers still buff range by +2u
@@ -9,6 +11,8 @@
 - Kiln is now a child of Composter
 - Fixed Upcycler having a 1/200 chance to convert *every* resource rather than every *seventh* resource
 - Nerfed Upcycler core chance from 1/200 to 1/250
+- Dynamo now scales with speed out of max speed, instead of total speed
+	- This shouldn't affect early-game much but nerfs Dynamo late-game
 - Adjusted resolution of game window
 - Game now starts in exclusive fullscreen
 - Overhauled hangar visuals

@@ -17,11 +17,11 @@ func _on_area_2d_body_exited(body: Node2D):
 	if body is Entity:
 		rad = body.Radius
 	
-	if body.global_position.y < -128:
-		body.global_position.y += 540 + 256 + rad
-	elif body.global_position.y > 540 + 128:
-		body.global_position.y -= 540 + 256 + rad
-	if body.global_position.x < -128:
-		body.global_position.x += 960 + 256 + rad
-	elif body.global_position.x > 960 + 128:
-		body.global_position.x -= 960 + 256 + rad
+	if body.global_position.y < 0:
+		body.global_position.y += 540 + rad * 2 + 5
+	elif body.global_position.y > 540:
+		body.global_position.y -= 540 + rad * 2 + 5
+	if body.global_position.x < 0:
+		body.global_position.x += 960 + rad * 2 + 5
+	elif body.global_position.x > 960:
+		body.global_position.x -= 960 + rad * 2 + 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b0lh5xscj34ew"]
+[gd_scene load_steps=30 format=3 uid="uid://b0lh5xscj34ew"]
 
 [ext_resource type="PackedScene" uid="uid://d08pheagteker" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.tscn" id="1_af53s"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_ihjlj"]
@@ -30,6 +30,16 @@ font = ExtResource("2_ei8vl")
 
 [sub_resource type="LabelSettings" id="LabelSettings_pog4x"]
 font = ExtResource("2_ei8vl")
+
+[sub_resource type="Theme" id="Theme_yvgr8"]
+OptionButton/font_sizes/font_size = 16
+OptionButton/fonts/font = ExtResource("2_ei8vl")
+PopupMenu/font_sizes/font_separator_size = 16
+PopupMenu/font_sizes/font_size = 16
+PopupMenu/font_sizes/title_font_size = 16
+PopupMenu/fonts/font = ExtResource("2_ei8vl")
+PopupMenu/fonts/font_separator = ExtResource("2_ei8vl")
+PopupMenu/fonts/title_font = ExtResource("2_ei8vl")
 
 [sub_resource type="LabelSettings" id="LabelSettings_jy7gq"]
 font = ExtResource("2_ei8vl")
@@ -246,8 +256,7 @@ vertical_alignment = 1
 
 [node name="AccentTypeSelector" type="OptionButton" parent="CanvasLayer/Control/ShipEditorVH"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ei8vl")
-theme_override_font_sizes/font_size = 16
+theme = SubResource("Theme_yvgr8")
 selected = 1
 item_count = 4
 popup/item_0/text = "None"

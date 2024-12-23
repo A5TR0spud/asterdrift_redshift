@@ -19,6 +19,7 @@ points = PackedVector2Array(0, 0, 40.4781, -121.431)
 width = 1.0
 default_color = Color(nan, nan, nan, nan)
 begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="LaserTarget" type="Marker2D" parent="."]
 position = Vector2(40.4781, -121.431)

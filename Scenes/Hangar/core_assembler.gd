@@ -26,4 +26,6 @@ func _reload():
 static func GetTimePerCore() -> float:
 	var x: float = INITIAL_TIME_PER_CORE
 	x -= 30.0 * UpgradesManager.Load("SwiftAssembly")
+	if UpgradesManager.Load("CoreForge") > 0:
+		x *= 0.75
 	return x
