@@ -3,7 +3,9 @@
 - Added Basic Radar Dish and Radar back
 	- They now have pointers instead of zoom
 - Added Radioisotope Thermoelectric Generator upgrade to On-Board Battery
-- Solar Cell is now a child of RTG
+- Solar Cell now costs a core
+- Ion Engine is now a child of Combustion ARCS
+- Idle Process is now a child of On-Board Battery
 - Upcycler's core transformation is now guaranteed every 250th, instead of chance-based
 - Added Production Line upgrade to Synthesizer
 - Adjusted thruster VFX
@@ -13,6 +15,7 @@
 	- Synthetic: Resources
 	- Metal: Defense and Offense
 	- Organics: Dynamic Systems
+- Slightly adjusted font, and added the squared (²) symbol.
 
 ## indev build 12
 

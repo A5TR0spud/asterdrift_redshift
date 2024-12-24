@@ -111,7 +111,7 @@ shader_parameter/rotationSpeed = 2.0
 shader_parameter/rotationPulse = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nf5yv"]
-radius = 80.0
+radius = 112.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_837mv"]
 shader = ExtResource("16_requx")
@@ -462,7 +462,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MagnetArea" type="Area2D" parent="."]
-visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708
@@ -470,6 +469,8 @@ collision_layer = 0
 collision_mask = 5
 monitorable = false
 script = ExtResource("15_8a6ob")
+RANGE = 96
+FORCE_COEF = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 shape = SubResource("CircleShape2D_nf5yv")
@@ -482,13 +483,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -80.0
-offset_right = -64.0
-offset_bottom = -64.0
+offset_left = -96.0
+offset_top = -96.0
+offset_right = -80.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(10, 10)
+scale = Vector2(12, 12)
 
 [node name="Repel" type="ColorRect" parent="MagnetArea"]
 material = SubResource("ShaderMaterial_ostx6")
@@ -497,30 +498,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -80.0
-offset_right = -64.0
-offset_bottom = -64.0
+offset_left = -96.0
+offset_top = -96.0
+offset_right = -80.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(10, 10)
+scale = Vector2(12, 12)
 
 [node name="StasisBay" type="ColorRect" parent="MagnetArea"]
 material = SubResource("ShaderMaterial_lrr8l")
-offset_left = -80.0
-offset_top = -80.0
-offset_right = -64.0
-offset_bottom = -64.0
-scale = Vector2(10, 10)
+offset_left = -96.0
+offset_top = -96.0
+offset_right = -80.0
+offset_bottom = -80.0
+scale = Vector2(12, 12)
 
 [node name="TractorBay" type="ColorRect" parent="MagnetArea"]
 visible = false
 material = SubResource("ShaderMaterial_aon4f")
-offset_left = -80.0
-offset_top = -80.0
-offset_right = -64.0
-offset_bottom = -64.0
-scale = Vector2(10, 10)
+offset_left = -96.0
+offset_top = -96.0
+offset_right = -80.0
+offset_bottom = -80.0
+scale = Vector2(12, 12)
 
 [node name="ShieldProjector" type="Area2D" parent="."]
 top_level = true

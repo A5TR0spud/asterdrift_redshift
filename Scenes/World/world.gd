@@ -79,8 +79,11 @@ func _physics_process(delta):
 		var pos : Vector2 = Vector2(0, 64).rotated(randf_range(0, deg_to_rad(360)))
 		instance.global_position = Player.global_position + pos
 		DecorationSpawner.add_child(instance)
-		RunHandler.TimeLeft -= 0.25
-		NotificationsManager.SendTransformNotification(Materials.Mats.Energy, Materials.Mats.Organics, [Notification.Sources.HYDROPONIC])
+		if UpgradesManager.Load("Demeter") < 1:
+			RunHandler.TimeLeft -= 0.25
+			NotificationsManager.SendTransformNotification(Materials.Mats.Energy, Materials.Mats.Organics, [Notification.Sources.HYDROPONIC])
+		else:
+			NotificationsManager.SendTransformNotification(Materials.Mats.Clock, Materials.Mats.Organics, [Notification.Sources.DEMETER, Notification.Sources.HYDROPONIC])
 	
 	if RunHandler.TimeLeft > MaxTime * 0.7 && UpgradesManager.Load("SolarPanel") > 0:
 		PowerDrain *= 0.7

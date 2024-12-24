@@ -104,6 +104,7 @@ func _tryRecycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> 
 func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:
 	if UpgradesManager.Load("Upcycler") < 1:
 		return false
+	var toReturn: bool = false
 	UpcyclerCount += 1
 	if UpcyclerCount % 7 == 0:
 		RunHandler.UpcyclerCount += 1
@@ -112,20 +113,23 @@ func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> 
 			RunHandler.UpcyclerCount -= 250
 			Sources.append(TransformNotification.Sources.UPCYCLER)
 			NotificationsManager.SendTransformNotification(type, Materials.Mats.Components, Sources)
-			return true
-		var target := _getLowestResourceFromMaterials(RunHandler.Mats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
-		var upcycleCopy: Array[Notification.Sources] = [Notification.Sources.UPCYCLER]
-		if target == Materials.Mats.Metals:
-			_onMetalCollected(target, upcycleCopy)
-		elif target == Materials.Mats.Organics:
-			_onOrganicCollected(target, upcycleCopy)
-		elif target == Materials.Mats.Synthetics:
-			_onSyntheticCollected(target, upcycleCopy)
-		elif target == Materials.Mats.Ceramics:
-			_onCeramicCollected(target, upcycleCopy)
+			toReturn = true
 		else:
-			_onSyntheticCollected(target, upcycleCopy)
-	return false
+			var target := _getLowestResourceFromMaterials(RunHandler.Mats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
+			var upcycleCopy: Array[Notification.Sources] = [Notification.Sources.UPCYCLER]
+			if target == Materials.Mats.Metals:
+				_onMetalCollected(target, upcycleCopy)
+			elif target == Materials.Mats.Organics:
+				_onOrganicCollected(target, upcycleCopy)
+			elif target == Materials.Mats.Synthetics:
+				_onSyntheticCollected(target, upcycleCopy)
+			elif target == Materials.Mats.Ceramics:
+				_onCeramicCollected(target, upcycleCopy)
+			else:
+				_onSyntheticCollected(target, upcycleCopy)
+		if UpgradesManager.Load("Demeter") > 0:
+			_onOrganicCollected(Materials.Mats.Organics, [Notification.Sources.DEMETER])
+	return toReturn
 
 func _getLowestResourceFromMaterials(mat: Materials, tiebreaker: Materials.Mats = Materials.Mats.Metals) -> Materials.Mats:
 	var metal: int = mat.Metals

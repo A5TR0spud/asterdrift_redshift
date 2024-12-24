@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=30 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
@@ -30,19 +30,36 @@ texture = ExtResource("3_pw2ue")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hn16"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7snbq"]
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxhix"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.666667, 0.776471, 0.886275, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 corner_detail = 1
 expand_margin_left = 10.0
 expand_margin_top = 2.0
 expand_margin_right = 20.0
 expand_margin_bottom = 2.0
-anti_aliasing = false
 
-[sub_resource type="Theme" id="Theme_bkje1"]
-Label/styles/normal = SubResource("StyleBoxFlat_7snbq")
+[sub_resource type="Theme" id="Theme_jmrqy"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_wxhix")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tcnu"]
+bg_color = Color(0.333333, 0.384314, 0.419608, 1)
+corner_detail = 1
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 20.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_dwsbi"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_7tcnu")
 
 [sub_resource type="LabelSettings" id="LabelSettings_lpjot"]
 font = ExtResource("10_sd7c2")
@@ -51,9 +68,10 @@ font = ExtResource("10_sd7c2")
 font = ExtResource("10_sd7c2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54xy4"]
-bg_color = Color(0.32549, 0.32549, 0.32549, 1)
-border_width_left = 4
-border_width_right = 4
+bg_color = Color(0.333333, 0.384314, 0.419608, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.666667, 0.776471, 0.886275, 1)
 corner_detail = 1
 expand_margin_left = 10.0
 expand_margin_top = 2.0
@@ -70,10 +88,7 @@ font = ExtResource("10_sd7c2")
 font = ExtResource("10_sd7c2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
-bg_color = Color(0.20871, 0.20871, 0.20871, 1)
-border_width_left = 4
-border_width_right = 4
-border_width_bottom = 4
+bg_color = Color(0.109804, 0.227451, 0.294118, 1)
 corner_detail = 1
 expand_margin_left = 10.0
 expand_margin_top = 2.0
@@ -135,61 +150,67 @@ z_index = 1
 z_as_relative = false
 position = Vector2(0, 17)
 
-[node name="Tooltip" type="VBoxContainer" parent="."]
-visible = false
+[node name="TooltipContainer" type="PanelContainer" parent="."]
+z_index = 200
+z_as_relative = false
+offset_left = 32.0
+offset_top = -32.0
+offset_right = 208.0
+offset_bottom = 22.0
+theme = SubResource("Theme_jmrqy")
+
+[node name="Tooltip" type="VBoxContainer" parent="TooltipContainer"]
 z_index = 10
-offset_left = 48.0
-offset_top = -72.0
-offset_right = 232.0
-offset_bottom = 74.0
+layout_mode = 2
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="Top" type="PanelContainer" parent="Tooltip"]
+[node name="Top" type="PanelContainer" parent="TooltipContainer/Tooltip"]
 layout_mode = 2
+theme = SubResource("Theme_dwsbi")
 
-[node name="Nameplate" type="Label" parent="Tooltip/Top"]
+[node name="Nameplate" type="Label" parent="TooltipContainer/Tooltip/Top"]
 layout_mode = 2
-theme = SubResource("Theme_bkje1")
 text = "NAME"
 label_settings = SubResource("LabelSettings_lpjot")
 
-[node name="Levels" type="Label" parent="Tooltip/Top"]
+[node name="Levels" type="Label" parent="TooltipContainer/Tooltip/Top"]
 visible = false
 layout_mode = 2
 text = "0/1"
 label_settings = SubResource("LabelSettings_annhj")
 horizontal_alignment = 2
 
-[node name="Middle" type="PanelContainer" parent="Tooltip"]
+[node name="Middle" type="PanelContainer" parent="TooltipContainer/Tooltip"]
 layout_mode = 2
 theme = SubResource("Theme_r2qfw")
 
-[node name="Middleman" type="VBoxContainer" parent="Tooltip/Middle"]
+[node name="Middleman" type="VBoxContainer" parent="TooltipContainer/Tooltip/Middle"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Description" type="Label" parent="Tooltip/Middle/Middleman"]
+[node name="Description" type="Label" parent="TooltipContainer/Tooltip/Middle/Middleman"]
 layout_mode = 2
 text = "DESC"
 label_settings = SubResource("LabelSettings_y1hpi")
 
-[node name="Requirements" type="Label" parent="Tooltip/Middle/Middleman"]
+[node name="Requirements" type="Label" parent="TooltipContainer/Tooltip/Middle/Middleman"]
 visible = false
 layout_mode = 2
 text = "Requires:"
 label_settings = SubResource("LabelSettings_uohsn")
 
-[node name="Bottom" type="PanelContainer" parent="Tooltip"]
+[node name="Bottom" type="PanelContainer" parent="TooltipContainer/Tooltip"]
 layout_mode = 2
 theme = SubResource("Theme_3w4wk")
 
-[node name="ToggleLabel" type="Label" parent="Tooltip/Bottom"]
+[node name="ToggleLabel" type="Label" parent="TooltipContainer/Tooltip/Bottom"]
 visible = false
 layout_mode = 2
 text = "Click to toggle on and off."
 label_settings = SubResource("LabelSettings_qemxh")
 
-[node name="Costs" parent="Tooltip/Bottom" instance=ExtResource("5_g1xj2")]
+[node name="Costs" parent="TooltipContainer/Tooltip/Bottom" instance=ExtResource("5_g1xj2")]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 columns = 5
@@ -198,6 +219,7 @@ SORT = true
 SHOW_TEXT = false
 
 [node name="ParentLine" type="Line2D" parent="."]
+visible = false
 show_behind_parent = true
 z_index = -5
 z_as_relative = false

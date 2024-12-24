@@ -15,6 +15,7 @@ static var ScrapperTex := preload("res://Assets/Hangar/Upgrades/Scrapper.png")
 static var ForgeTex := preload("res://Assets/Hangar/Upgrades/Forge.png")
 static var HephaestusTex := preload("res://Assets/Hangar/Upgrades/Anvil.png")
 static var RTGTex := preload("res://Assets/Hangar/Upgrades/RTG.png")
+static var DemeterTex := preload("res://Assets/Hangar/Upgrades/Demeter.png")
 
 enum Sources {
 	HYDROPONIC,
@@ -28,6 +29,7 @@ enum Sources {
 	FORGE,
 	HEPHAESTUS,
 	RTG,
+	DEMETER,
 }
 
 func _ready():
@@ -60,4 +62,6 @@ func TurnSourceEnumToSprite(input: Sources) -> Texture2D:
 		return HephaestusTex
 	elif input == Sources.RTG:
 		return RTGTex
+	elif input == Sources.DEMETER:
+		return DemeterTex
 	return HydroponicTex

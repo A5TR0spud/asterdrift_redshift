@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=153 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -75,6 +75,7 @@
 [ext_resource type="Texture2D" uid="uid://drd4f73hvwudq" path="res://Assets/Hangar/Upgrades/ResourceMonitor.png" id="61_1lmmb"]
 [ext_resource type="Texture2D" uid="uid://dv68arsrmso82" path="res://Assets/Hangar/Upgrades/Kiln.png" id="70_3jmie"]
 [ext_resource type="Texture2D" uid="uid://bv450k00ppwgd" path="res://Assets/Hangar/Upgrades/Anvil.png" id="71_o21ao"]
+[ext_resource type="Texture2D" uid="uid://y7v7rhgcoxgc" path="res://Assets/Hangar/Upgrades/Demeter.png" id="72_q3grg"]
 [ext_resource type="Texture2D" uid="uid://81nu82cqlylw" path="res://Assets/Hangar/Upgrades/Scrapper.png" id="72_qsqx7"]
 [ext_resource type="Texture2D" uid="uid://cu8ms7ebsdoxm" path="res://Assets/Hangar/Upgrades/Forge.png" id="73_4ydo1"]
 [ext_resource type="Texture2D" uid="uid://bh25gstmcr01g" path="res://Assets/Hangar/Upgrades/SwiftAssembler.png" id="76_1obe8"]
@@ -908,7 +909,7 @@ PARENT_UPGRADE = NodePath("../RCSThrust")
 Cost = SubResource("Resource_km3c3")
 
 [node name="Stage2" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-160, -160)
+position = Vector2(-288, -128)
 NAME = "Stage 2"
 DESCRIPTION = "While holding shift, the ship accelerates forward at
 4 u/s² and max speed is increased by 12 u/s."
@@ -948,7 +949,7 @@ PRE_BOUGHT = true
 Cost = SubResource("Resource_y2qk2")
 
 [node name="ShipBattery" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-64, -96)
+position = Vector2(-128, -96)
 NAME = "On-Board Battery"
 DESCRIPTION = "Start every run with an additonal energy."
 INTERNAL_NAME = "ShipBattery"
@@ -958,7 +959,7 @@ MAX_LEVEL = 3
 Cost = SubResource("Resource_unk4j")
 
 [node name="CombustionARCS" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-192, -96)
+position = Vector2(-224, -64)
 NAME = "Combustion ARCS"
 DESCRIPTION = "Acceleration is further increased by 2 u/s².
 Max speed is increased by 1 u/s (x1.25)."
@@ -968,16 +969,16 @@ PARENT_UPGRADE = NodePath("../AdvancedRCS")
 Cost = SubResource("Resource_daqij")
 
 [node name="Solar" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-64, -224)
+position = Vector2(-128, -160)
 NAME = "Solar Cell"
 DESCRIPTION = "Reduces energy drain by 30% while above 70% energy."
 INTERNAL_NAME = "SolarPanel"
 SPRITE = ExtResource("19_u4yan")
-PARENT_UPGRADE = NodePath("../RTG")
+PARENT_UPGRADE = NodePath("../ShipBattery")
 Cost = SubResource("Resource_msins")
 
 [node name="Overclocking" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-224, -224)
+position = Vector2(-352, -128)
 NAME = "Overclocking"
 DESCRIPTION = "The closer you get to max speed, the
 slower energy drains."
@@ -987,26 +988,26 @@ PARENT_UPGRADE = NodePath("../Stage2")
 Cost = SubResource("Resource_hbo26")
 
 [node name="Idling" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-160, -224)
+position = Vector2(-192, -128)
 NAME = "Idle Process"
 DESCRIPTION = "The slower you go, the slower energy drains."
 INTERNAL_NAME = "Idling"
 SPRITE = ExtResource("21_wec62")
-PARENT_UPGRADE = NodePath("../Stage2")
+PARENT_UPGRADE = NodePath("../ShipBattery")
 Cost = SubResource("Resource_148e4")
 
 [node name="IonDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-288, -288)
+position = Vector2(-288, -64)
 NAME = "Ion Engine"
 DESCRIPTION = "Increases max speed by 16 u/s.
 Decreases acceleration by 1 u/s²."
 INTERNAL_NAME = "IonDrive"
 SPRITE = ExtResource("22_lnnfh")
-PARENT_UPGRADE = NodePath("../Overclocking")
+PARENT_UPGRADE = NodePath("../CombustionARCS")
 Cost = SubResource("Resource_xxs1w")
 
 [node name="LinearDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-160, -288)
+position = Vector2(-224, -192)
 NAME = "Linear Drive"
 DESCRIPTION = "Significantly reduces drifting."
 INTERNAL_NAME = "LinearDrive"
@@ -1015,7 +1016,7 @@ PARENT_UPGRADE = NodePath("../Idling")
 Cost = SubResource("Resource_2htjq")
 
 [node name="GimbalDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-224, -288)
+position = Vector2(-288, -192)
 NAME = "Gimbal Drive"
 DESCRIPTION = "Maintains speed through turns.
 Speed is still not retained from 180's."
@@ -1025,7 +1026,7 @@ PARENT_UPGRADE = NodePath("../LinearDrive")
 Cost = SubResource("Resource_54xce")
 
 [node name="BlackHoleDrive" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-224, -352)
+position = Vector2(-352, -256)
 NAME = "Gravity Well"
 DESCRIPTION = "Doubles power of Linear Drive and Gimbal Drive and
 doubles acceleration of ship thrusters."
@@ -1035,7 +1036,7 @@ PARENT_UPGRADE = NodePath("../GimbalDrive")
 Cost = SubResource("Resource_8h8fd")
 
 [node name="Dish" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-128, -96)
+position = Vector2(-64, -96)
 NAME = "Asteroid Radar"
 DESCRIPTION = "Shows all asteroids in a 48 unit radius."
 INTERNAL_NAME = "Dish"
@@ -1559,11 +1560,11 @@ position = Vector2(416, 160)
 NAME = "Demeter"
 DESCRIPTION = "Hydroponics Pod no longer consumes
 energy.
-Upcycler grants an extra gauranteed
-organic."
+Grants an extra organic every time Upcycler
+triggers."
 INTERNAL_NAME = "Demeter"
+SPRITE = ExtResource("72_q3grg")
 PARENT_UPGRADE = NodePath("../Upcycler")
-HIDE = true
 Cost = SubResource("Resource_xd0i2")
 
 [node name="Hephaestus" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]

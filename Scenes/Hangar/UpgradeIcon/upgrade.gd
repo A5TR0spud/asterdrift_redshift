@@ -22,16 +22,16 @@ signal notify_children(propogation : int)
 @onready var Butt := $MainIcon/Button
 @onready var AvailableIcon := $MainIcon/IsAvailableIcon
 @onready var BoolIcon := $MainIcon/BooleanIcon
-@onready var Tooltip := $Tooltip
-@onready var NameT := $Tooltip/Top/Nameplate
-@onready var LeveT := $Tooltip/Top/Levels
-@onready var DescT := $Tooltip/Middle/Middleman/Description
-@onready var CostT := $Tooltip/Bottom/Costs
-@onready var Bottom := $Tooltip/Bottom
-@onready var ToggleT := $Tooltip/Bottom/ToggleLabel
+@onready var Tooltip := $TooltipContainer
+@onready var NameT := $TooltipContainer/Tooltip/Top/Nameplate
+@onready var LeveT := $TooltipContainer/Tooltip/Top/Levels
+@onready var DescT := $TooltipContainer/Tooltip/Middle/Middleman/Description
+@onready var CostT := $TooltipContainer/Tooltip/Bottom/Costs
+@onready var Bottom := $TooltipContainer/Tooltip/Bottom
+@onready var ToggleT := $TooltipContainer/Tooltip/Bottom/ToggleLabel
 @onready var ParentLine := $ParentLine
 @onready var LevelBar := $MainIcon/LevelBar
-@onready var RequirementT := $Tooltip/Middle/Middleman/Requirements
+@onready var RequirementT := $TooltipContainer/Tooltip/Middle/Middleman/Requirements
 
 @export_group("Main")
 ## The name to be displayed in-game.
