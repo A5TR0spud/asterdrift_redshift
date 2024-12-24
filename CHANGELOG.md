@@ -15,6 +15,7 @@
 - Slightly adjusted font, and added the squared (²) symbol.
 - Arrow keys can be used to control the ship now
 - Added High-Visibility Asteroids option
+- Added background to Garage
 - Buffed Inventory Audit costs:
 	- Metal: 5 -> 2
 	- Ceramic: 5 -> 2

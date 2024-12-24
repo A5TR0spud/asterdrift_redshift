@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://b0lh5xscj34ew"]
+[gd_scene load_steps=31 format=3 uid="uid://b0lh5xscj34ew"]
 
 [ext_resource type="PackedScene" uid="uid://d08pheagteker" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.tscn" id="1_af53s"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_ihjlj"]
 [ext_resource type="Script" path="res://Scenes/Garage/garage.gd" id="1_jna1t"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_ei8vl"]
 [ext_resource type="Script" path="res://Scenes/Garage/accent_type_selector.gd" id="3_kw7r4"]
+[ext_resource type="Texture2D" uid="uid://bbshh6i8k4xsk" path="res://Assets/Backdrops/GarageTile.png" id="6_t481h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0efh"]
 bg_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -373,74 +374,58 @@ zoom = Vector2(8, 8)
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
 IS_IN_GARAGE = true
 
-[node name="Hull" parent="Player/ShipVisuals" index="0"]
-modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="Cockpit" parent="Player/ShipVisuals" index="1"]
-modulate = Color(0.00392157, 0, 0.121569, 1)
-
-[node name="Accents" parent="Player/ShipVisuals" index="2"]
-modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="Inline" parent="Player/ShipVisuals" index="3"]
-modulate = Color(0.129412, 0.145098, 0.196078, 1)
-
-[node name="Outline" parent="Player/ShipVisuals" index="4"]
-modulate = Color(0.2, 0.545098, 1, 1)
-
-[node name="ArmSprite" parent="Player/Manipulator/BaseSprite" index="0"]
-self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="ArmAccent" parent="Player/Manipulator/BaseSprite/ArmSprite" index="0"]
-self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="RHSGrabber" parent="Player/Manipulator/BaseSprite/ArmSprite" index="1"]
-self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="RHSGAccent" parent="Player/Manipulator/BaseSprite/ArmSprite/RHSGrabber" index="0"]
-self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="LHSGrabber" parent="Player/Manipulator/BaseSprite/ArmSprite" index="2"]
-self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="LHSGAccent" parent="Player/Manipulator/BaseSprite/ArmSprite/LHSGrabber" index="0"]
-self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="Extendo" parent="Player/Manipulator/BaseSprite" index="1"]
-default_color = Color(0.129412, 0.145098, 0.196078, 1)
+[node name="Blinkers" parent="Player/ShipVisuals" index="5"]
+self_modulate = Color(0, 0, 0, 1)
 
 [node name="MagnetArea" parent="Player" index="7"]
-visible = true
-RANGE = 96
-FORCE_COEF = 2.0
+RANGE = 128
+FORCE_COEF = 4.0
 
 [node name="Attract" parent="Player/MagnetArea" index="1"]
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
-scale = Vector2(12, 12)
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -112.0
+offset_bottom = -112.0
+scale = Vector2(16, 16)
 
 [node name="Repel" parent="Player/MagnetArea" index="2"]
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
-scale = Vector2(12, 12)
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -112.0
+offset_bottom = -112.0
+scale = Vector2(16, 16)
 
 [node name="StasisBay" parent="Player/MagnetArea" index="3"]
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
-scale = Vector2(12, 12)
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -112.0
+offset_bottom = -112.0
+scale = Vector2(16, 16)
 
 [node name="TractorBay" parent="Player/MagnetArea" index="4"]
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
-scale = Vector2(12, 12)
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -112.0
+offset_bottom = -112.0
+scale = Vector2(16, 16)
+
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Backdrop"]
+modulate = Color(0.29219, 0.29219, 0.29219, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -64.0
+offset_right = -32.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+texture = ExtResource("6_t481h")
+stretch_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/Back" to="." method="_on_back_pressed"]
 [connection signal="colorChanged" from="CanvasLayer/Control/ShipEditorVH/HullColor" to="." method="_on_hull_color_color_changed"]
