@@ -29,8 +29,19 @@ static var Asteroid12 := preload("res://Assets/Asteroids/Asteroid12.png")
 @onready var Sprite := $Icon
 @onready var Collider := $CollisionShape2D
 
+static var ShaderSet: bool = false
+
 func _ready():
 	_reload()
+	if !ShaderSet:
+		var Mat: ShaderMaterial = $Icon.material
+		if DataManager.Load("HighVisAsteroids", false):
+			Mat.set_shader_parameter("inline", true)
+			Mat.set_shader_parameter("outline_color", Color("d23c3c"))
+		else:
+			Mat.set_shader_parameter("inline", false)
+			Mat.set_shader_parameter("outline_color", Color("732424"))
+		ShaderSet = true
 
 func _reload():
 	MaxHealth = SIZE * 30 - 10

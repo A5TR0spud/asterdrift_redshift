@@ -3,7 +3,7 @@ extends Node2D
 @onready var Player: PlayerClass = $"../.."
 
 const COMBUSTION_COLOR: String = "ffffb7";
-const RCS_COLOR: String = "ffffb7";
+const RCS_COLOR: String = "b7ffff";
 const ION_COLOR: String = "7bffff";
 
 func _ready():

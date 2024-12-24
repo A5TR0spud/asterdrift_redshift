@@ -100,8 +100,7 @@ custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_utqbt")
 theme_override_font_sizes/font_size = 32
-text = "Options
-"
+text = "Settings"
 icon = ExtResource("4_ino3e")
 alignment = 0
 

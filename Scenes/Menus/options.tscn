@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cujhuogujxuo5"]
+[gd_scene load_steps=3 format=3 uid="uid://cujhuogujxuo5"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/options.gd" id="1_ysgo7"]
+[ext_resource type="Theme" uid="uid://7a1a7ukee0i3" path="res://Scenes/Menus/thme.tres" id="2_dn6sj"]
 
 [node name="Options" type="Node2D"]
 script = ExtResource("1_ysgo7")
@@ -14,24 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -509.0
-offset_top = 257.0
-offset_right = -404.0
-offset_bottom = 288.0
-grow_horizontal = 0
-selected = 2
-item_count = 3
-popup/item_0/text = "960x540"
-popup/item_1/text = "1024x576"
-popup/item_1/id = 1
-popup/item_2/text = "Adapt"
-popup/item_2/id = 2
+theme = ExtResource("2_dn6sj")
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -46,5 +30,49 @@ grow_vertical = 0
 text = "BACK
 "
 
-[connection signal="item_selected" from="CanvasLayer/Control/OptionButton" to="." method="_on_option_button_item_selected"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -33.0
+offset_right = 115.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resolution" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/Resolution"]
+layout_mode = 2
+text = "Base Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 10
+selected = 2
+item_count = 3
+popup/item_0/text = "960x540"
+popup/item_1/text = "1024x576"
+popup/item_1/id = 1
+popup/item_2/text = "Adapt"
+popup/item_2/id = 2
+
+[node name="VisibleAsteroids" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/VisibleAsteroids"]
+layout_mode = 2
+text = "High-Visibility Asteroids"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer/VisibleAsteroids"]
+layout_mode = 2
+size_flags_horizontal = 10
+
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Control/VBoxContainer/Resolution/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer/VisibleAsteroids/CheckButton" to="." method="_on_check_button_toggled"]

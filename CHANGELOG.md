@@ -1,23 +1,27 @@
-## indev build 13
+## indev Build Unlucky 13
 
 - Added Basic Radar Dish and Radar back
-	- They now have pointers instead of zoom
+	- They now showcase nearby things instead of allow zoom out
 - Added Radioisotope Thermoelectric Generator upgrade to On-Board Battery
 - Solar Cell now costs a core
 - Ion Engine is now a child of Combustion ARCS
 - Idle Process is now a child of On-Board Battery
+- Inventory Monitor is now a child of Extra Spoolage
+- Inventory Audit is now a child of Status Monitor
 - Upcycler's core transformation is now guaranteed every 250th, instead of chance-based
 - Added Production Line upgrade to Synthesizer
 - Adjusted thruster VFX
-- Added very basic resolution setting in options menu and options button in main menu
-- Rearranged tech tree a bit to better fit categories
-	- Ceramic: Utility
-	- Synthetic: Resources
-	- Metal: Defense and Offense
-	- Organics: Dynamic Systems
+- Added *very* basic resolution setting in options menu and options button in main menu
 - Slightly adjusted font, and added the squared (²) symbol.
+- Arrow keys can be used to control the ship now
+- Added High-Visibility Asteroids option
+- Buffed Inventory Audit costs:
+	- Metal: 5 -> 2
+	- Ceramic: 5 -> 2
+	- Synthetic: 5 -> 2
+	- Organic: 10 -> 6
 
-## indev build 12
+## indev Build 12
 
 - Added Swift Assembly upgrade to Synthesizer
 - Added Hephaestus upgrade to Foundry
@@ -76,7 +80,7 @@
 	- Synthetics: 0 -> 8
 	- Organics: 32 -> 48
 
-## indev build 11
+## indev Build 11
 
 - Precision Prospector is now a child of Rapid Winch, and costs of that path have been adjusted to be more synthetic-focused
 - Adjusted Electromagnet costs:
@@ -112,7 +116,7 @@
 - Figured out and fixed the seconds issue for Core Assembler's timer
 - Adjusted zoom and scaling in the hangar in hopes of making text more legible
 
-## indev build 10
+## indev Build 10
 
 - Added Apollo upgrade to Akimbo
 - Added Artemis upgrade to Akimbo
@@ -148,7 +152,7 @@
 		- Resources mined no longer cause a burst of damage to the asteroid
 		- Cores can no longer be obtained from mining
 
-## indev build 9
+## indev Build 9
 
 - Adjusted/refurbished various sprites
 - Fixed Dynamo not having a parent (Furnace)
@@ -156,7 +160,7 @@
 - Fixed Upcycler functioning even if it wasn't bought
 - Flipped a layer of Starry Night to prevent obviously identical stars from overlapping
 
-## indev build 8
+## indev Build 8
 
 - Added Stasis Bay upgrade to Rapid Winch
 - Added Tractor Bay upgrade to Stasis Bay
@@ -195,7 +199,7 @@
 	- Asteroids: 180 -> 720
 - Updated "Starry Night" background of runs
 
-## indev build 7
+## indev Build 7
 
 - Implemented and nerfed Core Assembler
 - Re-added Stage 2 from v4 with some changes:

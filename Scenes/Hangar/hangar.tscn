@@ -350,9 +350,9 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 16
-Synthetics = 32
-Organics = 8
+Ceramics = 8
+Synthetics = 12
+Organics = 4
 Components = 0
 
 [sub_resource type="Resource" id="Resource_kk1ec"]
@@ -709,10 +709,10 @@ Components = 0
 [sub_resource type="Resource" id="Resource_15g7d"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 5
-Ceramics = 5
-Synthetics = 5
-Organics = 10
+Metals = 2
+Ceramics = 2
+Synthetics = 2
+Organics = 6
 Components = 0
 
 [node name="Hangar" type="Node2D"]

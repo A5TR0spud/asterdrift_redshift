@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://7a1a7ukee0i3"]
+
+[ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="1_yb4do"]
+
+[resource]
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_yb4do")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_yb4do")
+OptionButton/font_sizes/font_size = 32
+OptionButton/fonts/font = ExtResource("1_yb4do")
+PopupMenu/font_sizes/font_separator_size = 32
+PopupMenu/font_sizes/font_size = 32
+PopupMenu/font_sizes/title_font_size = 32
+PopupMenu/fonts/font = ExtResource("1_yb4do")
+PopupMenu/fonts/font_separator = ExtResource("1_yb4do")
+PopupMenu/fonts/title_font = ExtResource("1_yb4do")

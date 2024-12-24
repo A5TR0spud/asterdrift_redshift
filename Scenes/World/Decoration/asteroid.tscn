@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ctcwf45fx53pw"]
 
 [ext_resource type="Script" path="res://Scenes/World/Decoration/asteroid.gd" id="1_4rkgv"]
-[ext_resource type="Shader" path="res://Shaders/BasicOutliner.gdshader" id="1_6cy2n"]
+[ext_resource type="Shader" path="res://Shaders/Asteroid.gdshader" id="1_6cy2n"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="2_pami1"]
 [ext_resource type="Texture2D" uid="uid://cmx3d58fp5gv" path="res://Assets/Asteroids/Asteroid5.png" id="4_qbeo8"]
 
@@ -15,8 +15,10 @@ Components = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfgvo"]
 shader = ExtResource("1_6cy2n")
-shader_parameter/outline_color = Color(0.45, 0.1395, 0.1395, 1)
+shader_parameter/outline_color = Color(0.823529, 0.235294, 0.235294, 1)
 shader_parameter/fill_corners = true
+shader_parameter/outline = true
+shader_parameter/inline = true
 
 [sub_resource type="Curve" id="Curve_cvq1m"]
 max_value = 100.0
@@ -37,7 +39,7 @@ damping_min = 2.0
 damping_max = 2.0
 damping_curve = SubResource("CurveTexture_d5t0r")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mbcja"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrq1k"]
 radius = 43.0
 
 [node name="Asteroid" type="RigidBody2D"]
@@ -74,7 +76,7 @@ explosiveness = 0.8
 randomness = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_mbcja")
+shape = SubResource("CircleShape2D_mrq1k")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="damaged" from="." to="." method="_on_damaged"]
