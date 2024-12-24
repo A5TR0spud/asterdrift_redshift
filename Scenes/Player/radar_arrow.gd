@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Control
 class_name RadarArrow
 
 static var RadarMetalTex := preload("res://Assets/Ships/Upgrades/RadarMetal.png")
@@ -9,13 +9,6 @@ static var RadarOrganicTex := preload("res://Assets/Ships/Upgrades/RadarOrganic.
 static var RadarCoreTex := preload("res://Assets/Ships/Upgrades/RadarCore.png")
 static var RadarSyntheticTex := preload("res://Assets/Ships/Upgrades/RadarSynthetic.png")
 
-@export var Offset: float = 0.0:
-	get:
-		return Offset
-	set(value):
-		Offset = value
-		if is_node_ready():
-			_reload()
 @export var Type: Materials.Mats:
 	get:
 		return Type
@@ -28,8 +21,7 @@ func _ready():
 	_reload()
 
 func _reload():
-	$Offset.position.y = Offset
-	$Offset/Sprite.texture = _matToRadar(Type)
+	$Sprite.texture = _matToRadar(Type)
 
 func _matToRadar(input: Materials.Mats) -> Texture2D:
 	if input == Materials.Mats.Metals:

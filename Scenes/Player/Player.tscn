@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=54 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -30,6 +30,7 @@
 [ext_resource type="Shader" path="res://Shaders/TractorBay.gdshader" id="25_8rbcp"]
 [ext_resource type="Shader" path="res://Shaders/Tesla.gdshader" id="29_g5u7d"]
 [ext_resource type="Script" path="res://Scenes/Player/radar.gd" id="29_xcgy5"]
+[ext_resource type="Texture2D" uid="uid://beqealwbd0ggh" path="res://Assets/Ships/Upgrades/RadarPlayer.png" id="31_yphpt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
 radius = 13.0
@@ -111,7 +112,7 @@ shader_parameter/rotationSpeed = 2.0
 shader_parameter/rotationPulse = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nf5yv"]
-radius = 112.0
+radius = 80.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_837mv"]
 shader = ExtResource("16_requx")
@@ -152,6 +153,11 @@ shader = ExtResource("29_g5u7d")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qliv8"]
 radius = 768.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nm70t"]
+shader = ExtResource("23_743qs")
+shader_parameter/color = Color(0, 1, 0, 0.25098)
+shader_parameter/threshold = 0.497
 
 [node name="Player" type="RigidBody2D"]
 rotation = -1.5708
@@ -214,7 +220,7 @@ z_index = 6
 texture = ExtResource("12_m2iy2")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(1, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 z_index = 6
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -462,6 +468,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MagnetArea" type="Area2D" parent="."]
+visible = false
 z_index = -200
 z_as_relative = false
 rotation = 1.5708
@@ -469,8 +476,6 @@ collision_layer = 0
 collision_mask = 5
 monitorable = false
 script = ExtResource("15_8a6ob")
-RANGE = 96
-FORCE_COEF = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 shape = SubResource("CircleShape2D_nf5yv")
@@ -483,13 +488,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(12, 12)
+scale = Vector2(10, 10)
 
 [node name="Repel" type="ColorRect" parent="MagnetArea"]
 material = SubResource("ShaderMaterial_ostx6")
@@ -498,32 +503,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(12, 12)
+scale = Vector2(10, 10)
 
 [node name="StasisBay" type="ColorRect" parent="MagnetArea"]
 material = SubResource("ShaderMaterial_lrr8l")
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
-scale = Vector2(12, 12)
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
+scale = Vector2(10, 10)
 
 [node name="TractorBay" type="ColorRect" parent="MagnetArea"]
 visible = false
 material = SubResource("ShaderMaterial_aon4f")
-offset_left = -96.0
-offset_top = -96.0
-offset_right = -80.0
-offset_bottom = -80.0
-scale = Vector2(12, 12)
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -64.0
+scale = Vector2(10, 10)
 
 [node name="ShieldProjector" type="Area2D" parent="."]
+visible = false
 top_level = true
 rotation = -1.5708
 collision_layer = 0
@@ -553,7 +559,6 @@ offset_right = 60.0
 offset_bottom = 60.0
 
 [node name="Radar" type="Area2D" parent="."]
-visible = false
 top_level = true
 rotation = -1.5708
 collision_layer = 0
@@ -565,7 +570,53 @@ script = ExtResource("29_xcgy5")
 shape = SubResource("CircleShape2D_qliv8")
 debug_color = Color(0.164, 0.644, 0, 0)
 
-[node name="ArrowList" type="Node2D" parent="Radar"]
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="PlayerUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Radar" type="Control" parent="PlayerUI/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -156.0
+offset_right = -79.0
+offset_bottom = -156.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="List" type="Control" parent="PlayerUI/Control/Radar"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerIndicator" type="TextureRect" parent="PlayerUI/Control/Radar"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 5.0
+offset_bottom = 5.0
+pivot_offset = Vector2(4.5, 4.5)
+texture = ExtResource("31_yphpt")
+stretch_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PlayerUI/Control/Radar"]
+material = SubResource("ShaderMaterial_nm70t")
+layout_mode = 0
+offset_left = -63.5
+offset_top = -63.5
+offset_right = 64.5
+offset_bottom = 64.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="firemalasar" from="ShipVisuals" to="NeedleLaserManager" method="_on_ship_visuals_firemalasar"]

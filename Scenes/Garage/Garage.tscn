@@ -374,8 +374,41 @@ zoom = Vector2(8, 8)
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
 IS_IN_GARAGE = true
 
-[node name="Blinkers" parent="Player/ShipVisuals" index="5"]
-self_modulate = Color(0, 0, 0, 1)
+[node name="Hull" parent="Player/ShipVisuals" index="0"]
+modulate = Color(0.211765, 0.239216, 0.321569, 1)
+
+[node name="Cockpit" parent="Player/ShipVisuals" index="1"]
+modulate = Color(0.00392157, 0, 0.121569, 1)
+
+[node name="Accents" parent="Player/ShipVisuals" index="2"]
+modulate = Color(0.278431, 0.54902, 0.74902, 1)
+
+[node name="Inline" parent="Player/ShipVisuals" index="3"]
+modulate = Color(0.129412, 0.145098, 0.196078, 1)
+
+[node name="Outline" parent="Player/ShipVisuals" index="4"]
+modulate = Color(0.2, 0.545098, 1, 1)
+
+[node name="ArmSprite" parent="Player/Manipulator/BaseSprite" index="0"]
+self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
+
+[node name="ArmAccent" parent="Player/Manipulator/BaseSprite/ArmSprite" index="0"]
+self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
+
+[node name="RHSGrabber" parent="Player/Manipulator/BaseSprite/ArmSprite" index="1"]
+self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
+
+[node name="RHSGAccent" parent="Player/Manipulator/BaseSprite/ArmSprite/RHSGrabber" index="0"]
+self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
+
+[node name="LHSGrabber" parent="Player/Manipulator/BaseSprite/ArmSprite" index="2"]
+self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
+
+[node name="LHSGAccent" parent="Player/Manipulator/BaseSprite/ArmSprite/LHSGrabber" index="0"]
+self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
+
+[node name="Extendo" parent="Player/Manipulator/BaseSprite" index="1"]
+default_color = Color(0.129412, 0.145098, 0.196078, 1)
 
 [node name="MagnetArea" parent="Player" index="7"]
 RANGE = 128

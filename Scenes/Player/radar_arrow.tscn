@@ -1,19 +1,28 @@
 [gd_scene load_steps=3 format=3 uid="uid://chf01luc0al34"]
 
 [ext_resource type="Script" path="res://Scenes/Player/radar_arrow.gd" id="1_0kkv0"]
-[ext_resource type="Texture2D" uid="uid://b3c6oqvblqxm0" path="res://Assets/Ships/Upgrades/RadarFill.png" id="2_mv4vp"]
+[ext_resource type="Texture2D" uid="uid://dyes2nqcoarcw" path="res://Assets/Ships/Upgrades/RadarMetal.png" id="2_iurab"]
 
-[node name="RadarArrow" type="Node2D"]
+[node name="RadarArrow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_0kkv0")
-Type = null
 
-[node name="Offset" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite2D" parent="Offset"]
-top_level = true
-z_as_relative = false
-texture = ExtResource("2_mv4vp")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Offset"]
-remote_path = NodePath("../Sprite")
-update_rotation = false
+[node name="Sprite" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_iurab")
+expand_mode = 2
+stretch_mode = 2

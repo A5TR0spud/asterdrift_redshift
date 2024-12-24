@@ -21,7 +21,7 @@ const MAGNET_STRENGTH: float = 200
 func _ready():
 	if !Engine.is_editor_hint() && UpgradesManager.Load("Magnet") < 1:
 		queue_free()
-	else:
+	elif !Engine.is_editor_hint():
 		RANGE += 16 * UpgradesManager.Load("BiggerCoil")
 		FORCE_COEF += UpgradesManager.Load("StrongerCoil")
 		_reload()

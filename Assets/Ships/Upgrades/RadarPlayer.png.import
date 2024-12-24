@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3cb8f8b1drpd"
-path="res://.godot/imported/RadarLine.png-b01455c32e646f66421564dbc18a8436.ctex"
+uid="uid://beqealwbd0ggh"
+path="res://.godot/imported/RadarPlayer.png-810f0dbfa5fefbb337d080a77e935445.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Ships/Upgrades/RadarLine.png"
-dest_files=["res://.godot/imported/RadarLine.png-b01455c32e646f66421564dbc18a8436.ctex"]
+source_file="res://Assets/Ships/Upgrades/RadarPlayer.png"
+dest_files=["res://.godot/imported/RadarPlayer.png-810f0dbfa5fefbb337d080a77e935445.ctex"]
 
 [params]
 

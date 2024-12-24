@@ -4,13 +4,17 @@ class_name RadarClass
 var TrackedBodies: Array[Entity] = []
 static var RadarArrowPrefab := preload("res://Scenes/Player/radar_arrow.tscn")
 
-@onready var List := $ArrowList
+@onready var List := $"../PlayerUI/Control/Radar/List"
+@onready var Radar := $"../PlayerUI/Control/Radar"
+@onready var RadarPlayer := $"../PlayerUI/Control/Radar/PlayerIndicator"
 @onready var Player := $".."
 
 func _ready():
 	if UpgradesManager.Load("Dish") + UpgradesManager.Load("Radar") < 1 || !Player.CAN_MOVE || Player.IS_IN_GARAGE:
 		queue_free()
 		hide()
+		Radar.hide()
+		Radar.queue_free()
 	else:
 		show()
 		TrackedBodies = []
@@ -19,17 +23,23 @@ func _physics_process(delta):
 	if !Player.CAN_MOVE:
 		hide()
 		queue_free()
+		Radar.hide()
+		Radar.queue_free()
 		return
 	
 	var i: int = 0
+	RadarPlayer.rotation_degrees = Player.rotation_degrees + 90
 	for arrow: RadarArrow in List.get_children():
 		var tracked: Entity = TrackedBodies[i]
-		arrow.rotation = global_position.angle_to_point(tracked.global_position)
-		arrow.Offset = global_position.distance_to(tracked.global_position) * 0.125
+		arrow.position = (tracked.global_position - global_position) / 768.0 * 64.0
 		if tracked.isAsteroid:
 			arrow.Type = Materials.Mats.Danger
+			arrow.scale.x = tracked.Radius / 16.0 / 2.0
+			arrow.scale.y = tracked.Radius / 16.0 / 2.0
 		if tracked is Collectable:
 			arrow.Type = tracked.COLLECTION
+			arrow.scale.x = 1.0
+			arrow.scale.y = 1.0
 		i += 1
 
 func _on_body_entered(body):
