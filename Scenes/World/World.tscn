@@ -163,6 +163,7 @@ Synthetics = 404
 Organics = 300
 Cores = 1
 InitialAsteroids = 720
+InitialComets = 0
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
 z_index = 100

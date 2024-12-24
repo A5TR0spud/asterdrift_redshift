@@ -1,6 +1,8 @@
 extends Entity
 class_name Mineable
 
+static var CollectablePrefab := preload("res://Scenes/World/Decoration/collectable.tscn")
+
 @export var MaxMiningHealth: float = 100
 @export_storage var MiningHealth: float = 100
 @export var MaxResources: int = 20
@@ -37,6 +39,11 @@ func RollMineable() -> Materials.Mats:
 func Mine(global_pos: Vector2, mining_damage: float) -> void:
 	MiningHealth -= mining_damage
 	var shouldBeLeft = ceili(float(MaxResources) * (MiningHealth / MaxMiningHealth))
-	if ResourcesLeft > shouldBeLeft:
+	while ResourcesLeft > shouldBeLeft:
 		ResourcesLeft -= 1
+		var col: Collectable = CollectablePrefab.instantiate()
+		col.COLLECTION = RollMineable()
+		col.global_position = global_pos
+		col.linear_velocity = linear_velocity
+		add_sibling(col)
 		emit_signal("resource_mined", global_pos) 

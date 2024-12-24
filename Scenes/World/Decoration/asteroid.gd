@@ -125,11 +125,6 @@ func _spawn(p: Node2D):
 	get_parent().add_child(p)
 
 func _on_resource_mined(global_pos):
-	var col: Collectable = CollectableScene.instantiate()
-	col.COLLECTION = RollMineable()
-	col.global_position = global_pos
-	col.linear_velocity = linear_velocity
-	get_parent().add_child(col)
 	if ResourcesLeft < 1:
 		if SIZE > 1:
 			SIZE -= 1

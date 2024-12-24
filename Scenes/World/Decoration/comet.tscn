@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://buatxs7pmxk6m"]
+
+[ext_resource type="Script" path="res://Scenes/World/Decoration/comet.gd" id="1_3hrfi"]
+[ext_resource type="Texture2D" uid="uid://k0qwxqtxhm46" path="res://Assets/Asteroids/Comet.png" id="1_cd0f3"]
+[ext_resource type="Script" path="res://Statics/Materials.gd" id="2_5fwga"]
+[ext_resource type="Shader" path="res://Shaders/BasicOutliner.gdshader" id="3_svhnw"]
+
+[sub_resource type="Resource" id="Resource_tjk88"]
+script = ExtResource("2_5fwga")
+Metals = 75
+Ceramics = 25
+Synthetics = 25
+Organics = 1000
+Components = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2imwi"]
+radius = 19.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2ina"]
+shader = ExtResource("3_svhnw")
+shader_parameter/outline_color = Color(0.45098, 0.141176, 0.141176, 1)
+shader_parameter/fill_corners = true
+
+[node name="Comet" type="RigidBody2D"]
+collision_mask = 7
+mass = 3.0
+script = ExtResource("1_3hrfi")
+MaxMiningHealth = 1.0
+MineWeights = SubResource("Resource_tjk88")
+DangerousCollision = true
+isAsteroid = true
+hasHealth = true
+MaxHealth = 1.0
+Radius = 19.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+shape = SubResource("CircleShape2D_2imwi")
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_t2ina")
+texture = ExtResource("1_cd0f3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="killed" from="." to="." method="_on_killed"]
+[connection signal="resource_mined" from="." to="." method="_on_resource_mined"]
