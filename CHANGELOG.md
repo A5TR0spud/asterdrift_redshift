@@ -2,6 +2,7 @@
 
 - Added Basic Radar Dish and Radar back
 	- They now showcase nearby things instead of allow zoom out
+	- UI is in bottom left
 - Added Radioisotope Thermoelectric Generator upgrade to On-Board Battery
 - Solar Cell now costs a core
 - Ion Engine is now a child of Combustion ARCS
