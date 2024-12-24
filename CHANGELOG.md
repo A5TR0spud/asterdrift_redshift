@@ -2,7 +2,8 @@
 
 - Added Basic Radar Dish and Radar back
 	- They now have pointers instead of zoom
-- Synthesizer now happens 100% of the time, but only if the bay has more organics than synthetics
+- Added Radioisotope Thermoelectric Generator upgrade to On-Board Battery
+- Solar Cell is now a child of RTG
 - Upcycler's core transformation is now guaranteed every 250th, instead of chance-based
 - Added Production Line upgrade to Synthesizer
 - Adjusted thruster VFX

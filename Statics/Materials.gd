@@ -15,6 +15,7 @@ static var CoreTex := preload("res://Assets/Hangar/Resources/Component.png")
 static var EnergyTex := preload("res://Assets/Hangar/Resources/Energy.png")
 static var BackupEnergyTex := preload("res://Assets/Hangar/Resources/Backup.png")
 static var DangerTex := preload("res://Assets/Hangar/Resources/Danger.png")
+static var ClockTex := preload("res://Assets/Hangar/Resources/Clock.png")
 
 enum Mats {
 	# Materials
@@ -26,6 +27,7 @@ enum Mats {
 	# Notifications
 	Energy,
 	BackupEnergy,
+	Clock,
 	# Radar
 	Danger,
 }
@@ -33,16 +35,18 @@ enum Mats {
 static func TurnMatEnumToSprite(input: Mats) -> Texture2D:
 	if input == Materials.Mats.Metals:
 		return MetalTex
-	elif input == Materials.Mats.Synthetics:
+	elif input == Mats.Synthetics:
 		return SyntheticTex
-	elif input == Materials.Mats.Ceramics:
+	elif input == Mats.Ceramics:
 		return CeramicTex
-	elif input == Materials.Mats.Organics:
+	elif input == Mats.Organics:
 		return OrganicTex
-	elif input == Materials.Mats.Components:
+	elif input == Mats.Components:
 		return CoreTex
-	elif input == Materials.Mats.Energy:
+	elif input == Mats.Energy:
 		return EnergyTex
-	elif input == Materials.Mats.BackupEnergy:
+	elif input == Mats.BackupEnergy:
 		return BackupEnergyTex
+	elif input == Mats.Clock:
+		return ClockTex
 	return MetalTex

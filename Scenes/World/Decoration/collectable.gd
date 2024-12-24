@@ -44,6 +44,7 @@ static var UpcyclerCount: int = 0
 static var KilnCount: int = 0
 static var ScrapperCount: int = 0
 static var ForgeCount: int = 0
+static var ProcessorCount: int = 0
 
 func Collect():
 	_onCollected(COLLECTION)
@@ -186,7 +187,7 @@ func _onCeramicCollected(type: Materials.Mats = Materials.Mats.Ceramics, Sources
 		ForgeCount += 1
 		if ForgeCount % 2 == 0:
 			if UpgradesManager.Load("Hephaestus") > 0 && !Sources.has(Notification.Sources.HEPHAESTUS):
-				_onMetalCollected(type, [Notification.Sources.HEPHAESTUS, Notification.Sources.FORGE])
+				_onMetalCollected(Materials.Mats.Metals, [Notification.Sources.HEPHAESTUS, Notification.Sources.FORGE])
 			else:
 				Sources.append(Notification.Sources.FORGE)
 				if UpgradesManager.Load("ProdLine") > 0:
@@ -214,14 +215,16 @@ func _onSyntheticCollected(type: Materials.Mats = Materials.Mats.Synthetics, Sou
 
 func _onOrganicCollected(type: Materials.Mats = Materials.Mats.Organics, Sources: Array[Notification.Sources] = []):
 	#synthesizer
-	if UpgradesManager.Load("Processor") > 0 && !Sources.has(Notification.Sources.SYNTHESIZER) && RunHandler.Mats.Organics > RunHandler.Mats.Synthetics:
-		Sources.append(Notification.Sources.SYNTHESIZER)
-		if UpgradesManager.Load("ProdLine") > 0:
-			_onSyntheticCollected(type, Sources)
-		else:
-			RunHandler.Mats.Synthetics += 1
-			NotificationsManager.SendTransformNotification(type, Materials.Mats.Synthetics, Sources)
-		return
+	if UpgradesManager.Load("Processor") > 0 && !Sources.has(Notification.Sources.SYNTHESIZER):
+		ProcessorCount += 1
+		if ProcessorCount % 2 == 0:
+			Sources.append(Notification.Sources.SYNTHESIZER)
+			if UpgradesManager.Load("ProdLine") > 0:
+				_onSyntheticCollected(type, Sources)
+			else:
+				RunHandler.Mats.Synthetics += 1
+				NotificationsManager.SendTransformNotification(type, Materials.Mats.Synthetics, Sources)
+			return
 	#furnace
 	if UpgradesManager.Load("Combustor") > 0 && !Sources.has(Notification.Sources.FURNACE):
 		FurnaceCount += 1

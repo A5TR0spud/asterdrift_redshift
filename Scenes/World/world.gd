@@ -22,6 +22,7 @@ var PowerDrain : float = 1.0
 @onready var HangarInventory := $CanvasLayer/Control/Resources/Inventory/Hangar/ResourceCounter
 
 var FarmedOrganics: int = 0
+var RTGEnergy: int = 0
 var _oldPos: Vector2 = Vector2(0, 0)
 
 func _ready():
@@ -32,6 +33,7 @@ func _ready():
 	TimeBar.max_value = MaxTime
 	TimeBar.size.x = MaxTime * 8
 	FarmedOrganics = 0
+	RTGEnergy = 0
 	_updateDisplay()
 	_oldPos = Player.global_position
 	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0
@@ -64,6 +66,11 @@ func _physics_process(delta):
 	
 	if UpgradesManager.Load("ResourceMonitor") > 0:
 		ResourceMonitor.Display = RunHandler.Mats
+	
+	if UpgradesManager.Load("RTG") > 0 && RTGEnergy < RunHandler.TimeSpent / 8.0 - 1:
+		RTGEnergy += 1
+		RunHandler.TimeLeft += 1
+		NotificationsManager.SendTransformNotification(Materials.Mats.Clock, Materials.Mats.Energy, [Notification.Sources.RTG])
 	
 	if UpgradesManager.Load("Farm") > 0 && FarmedOrganics < RunHandler.TimeSpent / 7.0 - 1:
 		FarmedOrganics += 1
