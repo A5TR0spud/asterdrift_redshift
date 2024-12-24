@@ -28,18 +28,24 @@ func _physics_process(delta):
 		return
 	
 	var i: int = 0
-	RadarPlayer.rotation_degrees = Player.rotation_degrees + 90
+	if UpgradesManager.LoadIsEnabled("CameraMode"):
+		RadarPlayer.rotation_degrees = Player.rotation_degrees + 90
 	for arrow: RadarArrow in List.get_children():
 		var tracked: Entity = TrackedBodies[i]
-		arrow.position = (tracked.global_position - global_position) / 768.0 * 64.0
+		var pos: Vector2 = (tracked.global_position - global_position) / 768.0 * 64.0
+		if !UpgradesManager.LoadIsEnabled("CameraMode"):
+			pos = pos.rotated(-Player.rotation - deg_to_rad(90))
+		arrow.position = pos
 		if tracked.isAsteroid:
 			arrow.Type = Materials.Mats.Danger
 			arrow.scale.x = tracked.Radius / 16.0 / 2.0
 			arrow.scale.y = tracked.Radius / 16.0 / 2.0
+			arrow.z_index = 4
 		if tracked is Collectable:
 			arrow.Type = tracked.COLLECTION
 			arrow.scale.x = 1.0
 			arrow.scale.y = 1.0
+			arrow.z_index = 5
 		i += 1
 
 func _on_body_entered(body):

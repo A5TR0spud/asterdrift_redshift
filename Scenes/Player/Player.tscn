@@ -583,24 +583,24 @@ mouse_filter = 2
 
 [node name="Radar" type="Control" parent="PlayerUI/Control"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -79.0
-offset_top = -156.0
-offset_right = -79.0
-offset_bottom = -156.0
-grow_horizontal = 0
+offset_left = 82.0
+offset_top = -83.0
+offset_right = 82.0
+offset_bottom = -83.0
 grow_vertical = 0
 
 [node name="List" type="Control" parent="PlayerUI/Control/Radar"]
+z_index = 5
+z_as_relative = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PlayerIndicator" type="TextureRect" parent="PlayerUI/Control/Radar"]
+z_as_relative = false
 layout_mode = 0
 offset_left = -4.0
 offset_top = -4.0
@@ -611,6 +611,7 @@ texture = ExtResource("31_yphpt")
 stretch_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="PlayerUI/Control/Radar"]
+z_as_relative = false
 material = SubResource("ShaderMaterial_nm70t")
 layout_mode = 0
 offset_left = -63.5
