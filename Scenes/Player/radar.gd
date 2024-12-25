@@ -17,6 +17,7 @@ func _ready():
 		Radar.queue_free()
 	else:
 		show()
+		Radar.show()
 		TrackedBodies = []
 
 func _physics_process(delta):

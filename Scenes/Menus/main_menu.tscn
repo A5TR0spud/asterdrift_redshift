@@ -68,15 +68,15 @@ script = ExtResource("1_mr2mu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 28.0
-offset_top = -243.0
-offset_right = 238.0
-offset_bottom = -28.0
+anchors_preset = -1
+anchor_left = 0.0291667
+anchor_top = 0.527778
+anchor_right = 0.247917
+anchor_bottom = 0.948148
+offset_top = 12.0
 grow_vertical = 0
 alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Play" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
@@ -113,18 +113,15 @@ text = "Quit"
 
 [node name="Godot" type="TextureRect" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -50.0
-offset_right = -12.0
-offset_bottom = -12.0
+anchors_preset = -1
+anchor_left = 0.947917
+anchor_top = 0.907407
+anchor_right = 0.9875
+anchor_bottom = 0.977778
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("6_1rrf4")
+metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1

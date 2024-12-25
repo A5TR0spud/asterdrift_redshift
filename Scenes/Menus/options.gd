@@ -25,7 +25,7 @@ func _on_option_button_item_selected(index):
 	if index == 0:
 		newSize = Vector2(960, 540)
 	elif index == 1:
-		newSize = Vector2(1024, 576)
+		newSize = Vector2(1280, 720)
 	elif index == 2:
 		newSize = AdaptScreen()
 	root.content_scale_size = newSize
@@ -40,6 +40,6 @@ func _on_check_button_toggled(toggled_on: bool):
 
 static func AdaptScreen() -> Vector2:
 	var newSize: Vector2 = DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())
-	while newSize.length_squared() > Vector2(1024, 576).length_squared():
+	while newSize.length_squared() > Vector2(1280, 720).length_squared():
 		newSize *= 0.5
 	return newSize

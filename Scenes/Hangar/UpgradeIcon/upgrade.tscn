@@ -151,6 +151,7 @@ z_as_relative = false
 position = Vector2(0, 17)
 
 [node name="TooltipContainer" type="PanelContainer" parent="."]
+visible = false
 z_index = 200
 z_as_relative = false
 offset_left = 32.0

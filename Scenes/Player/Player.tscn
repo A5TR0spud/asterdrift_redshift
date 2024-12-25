@@ -150,6 +150,9 @@ radius = 24.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rid5"]
 shader = ExtResource("29_g5u7d")
+shader_parameter/TIME_COEFFICIENT = 1.0
+shader_parameter/GLOW_COLOR = Color(0.6, 0.3, 1, 1)
+shader_parameter/LIGHTNING_COLOR = Color(0.8, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qliv8"]
 radius = 768.0
@@ -418,7 +421,6 @@ width = 1.0
 default_color = Color(0.129412, 0.145098, 0.196078, 1)
 
 [node name="NeedleLaserManager" type="Node2D" parent="."]
-visible = false
 top_level = true
 z_index = -50
 script = ExtResource("18_yrk6l")
@@ -559,6 +561,7 @@ offset_right = 60.0
 offset_bottom = 60.0
 
 [node name="Radar" type="Area2D" parent="."]
+visible = false
 top_level = true
 rotation = -1.5708
 collision_layer = 0

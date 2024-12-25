@@ -26,7 +26,7 @@ void fragment() {
 	angle += 0.5 * dist;
 	float a = badMod(angle + 0.5 + TIME * TIME_COEFFICIENT, ANGLE_STEP);
 	a -= dist;
-	
+
 	a = sign(a);
 	a = clamp(a, 0.0, 1.0);
 	COLOR.a = a;

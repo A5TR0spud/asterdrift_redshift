@@ -1,3 +1,9 @@
+## indev Build 14
+
+- Fixed RCS's drag not actually ever stopping the player
+- Fixed Reset button in Hangar not resetting Upcycler core counter
+- Fixed resolution options
+
 ## indev Build Unlucky 13
 
 - Added Basic Radar Dish and Radar back

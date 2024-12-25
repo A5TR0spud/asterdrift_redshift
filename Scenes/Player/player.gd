@@ -134,16 +134,35 @@ func _physics_process(delta):
 				var reduceDrift := linear_velocity.normalized().rotated(-thrustDirection)
 				_inputDir.x -= sign(reduceDrift.x) if absf(reduceDrift.x) > 0.1 else 0
 			_inputDir = _inputDir.normalized().rotated(thrustDirection)
-
-		#if not inputting, apply opposite velocity
-		elif Stats.Has_RCS && !Input.is_action_pressed("boost"):
-			#decceleration when no input (it's actually just inputting opposite your velocity)
-			_inputDir = -linear_velocity.normalized()
-			if _inputDir.length() > 2.0 * linear_velocity.length() / ACCEL_FORCE:
-				_inputDir = 2.0 * -linear_velocity / ACCEL_FORCE
 		
 		targetLinearAccel = _inputDir * ACCEL_FORCE
-	
+		
+		#if not inputting, apply opposite velocity
+		if _inputDir.length() < 0.5 && Stats.Has_RCS && !Input.is_action_pressed("boost"):
+			#decceleration when no input (it's actually just inputting opposite your velocity)
+			var fakeVel: float = linear_velocity.x
+			var sig: int = sign(fakeVel)
+			var force: float = -sig * ACCEL_FORCE
+			fakeVel += force * delta
+			if fakeVel == 0 || sign(fakeVel) != sig:
+				force = -linear_velocity.x
+				linear_velocity.x = 0
+				apply_force(Vector2(-force, 0))
+			targetLinearAccel.x = force
+			
+			fakeVel = linear_velocity.y
+			sig = sign(fakeVel)
+			force = -sig * ACCEL_FORCE
+			fakeVel += force * delta
+			if fakeVel == 0 || sign(fakeVel) != sig:
+				force = -linear_velocity.y
+				linear_velocity.y = 0
+				apply_force(Vector2(0, -force))
+			targetLinearAccel.y = force
+			
+			print(linear_velocity)
+		
+		
 		if Stats.Has_RCS:
 			var angleToCursor : float = get_angle_to(RCSCursor.global_position)
 			var x := deg_to_rad(TURN_ACCEL_DEGREES)

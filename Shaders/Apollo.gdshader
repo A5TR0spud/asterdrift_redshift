@@ -35,14 +35,14 @@ void fragment() {
 	}
 	float variance = minAlpha + (1.0 - minAlpha) * (0.5 + 0.5 * sin(distCoefficient * dist - timeCoefficient * TIME));
 	variance *= clamp(dist / distFade - 1.0, 0.0, 1.0);
-	
+
 	vec2 tanner = atan(localCoord);
 	tanner = vec2(tanner.x * cos(rotationSpeed * TIME) + tanner.y * sin(rotationSpeed * TIME));
 	float rotPulse = 0.5 + 0.5 * sin(rotationPulse * TIME);
-	
+
 	variance += tanner.x * rotationCoefficient * rotPulse;
 	variance += tanner.y * rotationCoefficient * rotPulse;
-	
+
 	if (coronaDist >= 0.0) {
 		variance *= 1.0 - coronaDist;
 		float angle = atan(localCoord.y, localCoord.x) * 0.159154570919;
@@ -53,8 +53,7 @@ void fragment() {
 			variance = 0.0;
 		}
 	}
-	
+
 	variance = clamp(variance, 0.0, 1.0);
 	COLOR *= (variance) * Color1 + (1.0 - variance) * Color2;
 }
-
