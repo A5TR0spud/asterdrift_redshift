@@ -1,7 +1,10 @@
 ## indev Build 14
 
+- Nerfed Charged Shield: now uses +1 energy
+- Added Plasma Bubble upgrade to Charged Shield
 - Fixed RCS's drag not actually ever stopping the player
-- Fixed Reset button in Hangar not resetting Upcycler core counter
+	- This also fixed drag not working as well as v11, due to a fix in v12
+- Fixed Reset button in Hangar not resetting Upcycler's incrementer for core conversions
 - Fixed resolution options
 
 ## indev Build Unlucky 13

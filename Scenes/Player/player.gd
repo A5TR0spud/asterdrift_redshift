@@ -159,8 +159,6 @@ func _physics_process(delta):
 				linear_velocity.y = 0
 				apply_force(Vector2(0, -force))
 			targetLinearAccel.y = force
-			
-			print(linear_velocity)
 		
 		
 		if Stats.Has_RCS:

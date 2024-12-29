@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=156 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -72,6 +72,7 @@
 [ext_resource type="Texture2D" uid="uid://kv5qlp478v4p" path="res://Assets/Hangar/Upgrades/Upcycler.png" id="59_vay1v"]
 [ext_resource type="Texture2D" uid="uid://8j0iubm5lynj" path="res://Assets/Hangar/Upgrades/ResourceChangelog.png" id="60_4i2hb"]
 [ext_resource type="Texture2D" uid="uid://djx5k7qt0x2rs" path="res://Assets/Hangar/Upgrades/Dynamo.png" id="60_l6rli"]
+[ext_resource type="Texture2D" uid="uid://bx02d6tpqgpqc" path="res://Assets/Hangar/Upgrades/Tesla.png" id="60_tyfau"]
 [ext_resource type="Texture2D" uid="uid://drd4f73hvwudq" path="res://Assets/Hangar/Upgrades/ResourceMonitor.png" id="61_1lmmb"]
 [ext_resource type="Texture2D" uid="uid://dv68arsrmso82" path="res://Assets/Hangar/Upgrades/Kiln.png" id="70_3jmie"]
 [ext_resource type="Texture2D" uid="uid://bv450k00ppwgd" path="res://Assets/Hangar/Upgrades/Anvil.png" id="71_o21ao"]
@@ -234,6 +235,15 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 16
 Ceramics = 16
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_yy566"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -507,6 +517,15 @@ Ceramics = 28
 Synthetics = 32
 Organics = 0
 Components = 1
+
+[sub_resource type="Resource" id="Resource_j08se"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 30
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
 
 [sub_resource type="Resource" id="Resource_7f0nr"]
 resource_local_to_scene = true
@@ -1053,6 +1072,13 @@ SPRITE = ExtResource("29_y2n1i")
 PARENT_UPGRADE = NodePath("../ShipBattery")
 Cost = SubResource("Resource_y8gh4")
 
+[node name="Upgrade" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-416, -192)
+DESCRIPTION = "Max speed is increased by 1 unit per 10
+energy remaining."
+PARENT_UPGRADE = NodePath("../Overclocking")
+Cost = SubResource("Resource_yy566")
+
 [node name="TopRight" type="Node2D" parent="Camera2D/TechTree"]
 
 [node name="ResourceHook" parent="Camera2D/TechTree/TopRight" instance=ExtResource("4_r883k")]
@@ -1359,7 +1385,7 @@ Cost = SubResource("Resource_tp4ul")
 [node name="EnergyShield" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-352, 96)
 NAME = "Shield Projector"
-DESCRIPTION = "When dangerous objects enter an area within 1.5
+DESCRIPTION = "When asteroids enter an area within 1.5
 units of your ship, they get deflected at the cost of
 energy based on force required to deflect.
 Bodies cannot be deflected again if they stay within
@@ -1384,7 +1410,8 @@ Cost = SubResource("Resource_7lodx")
 position = Vector2(-416, 128)
 NAME = "Charged Shield"
 DESCRIPTION = "Deflected bodies take 25% of their max health
-as damage."
+as damage, but deflections take an additional
+1 energy."
 INTERNAL_NAME = "ChargedShield"
 SPRITE = ExtResource("34_h0tj1")
 PARENT_UPGRADE = NodePath("../EnergyShield")
@@ -1413,6 +1440,18 @@ INTERNAL_NAME = "ReverseCharger"
 SPRITE = ExtResource("43_qb64a")
 PARENT_UPGRADE = NodePath("../Fuse")
 Cost = SubResource("Resource_hk1ki")
+
+[node name="Tesla" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-480, 128)
+NAME = "Plasma Bubble"
+DESCRIPTION = "Zaps threats in a radius of 4u for 5% of
+their max health per second.
+Enemies that get zapped have their
+acceleration halved for 2 seconds."
+INTERNAL_NAME = "Tesla"
+SPRITE = ExtResource("60_tyfau")
+PARENT_UPGRADE = NodePath("../ChargedShield")
+Cost = SubResource("Resource_j08se")
 
 [node name="AbrResistance" parent="Camera2D/TechTree/BottomLeft" instance=ExtResource("4_r883k")]
 position = Vector2(-32, 32)

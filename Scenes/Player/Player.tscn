@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=60 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://xgkoxrkco1x6" path="res://Assets/Ships/Upgrades/ShieldDeflection.png" id="23_p2wwt"]
 [ext_resource type="Shader" path="res://Shaders/TractorBay.gdshader" id="25_8rbcp"]
 [ext_resource type="Shader" path="res://Shaders/Tesla.gdshader" id="29_g5u7d"]
+[ext_resource type="Script" path="res://Scenes/Player/tesla.gd" id="29_mfagm"]
 [ext_resource type="Script" path="res://Scenes/Player/radar.gd" id="29_xcgy5"]
 [ext_resource type="Texture2D" uid="uid://beqealwbd0ggh" path="res://Assets/Ships/Upgrades/RadarPlayer.png" id="31_yphpt"]
 
@@ -148,11 +149,41 @@ shader_parameter/StepInfuence = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7d02"]
 radius = 24.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_822u3"]
+radius = 64.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rid5"]
 shader = ExtResource("29_g5u7d")
-shader_parameter/TIME_COEFFICIENT = 1.0
-shader_parameter/GLOW_COLOR = Color(0.6, 0.3, 1, 1)
+shader_parameter/TIME_COEFFICIENT = 5.0
+shader_parameter/TIME_OFFSET = 0.0
+shader_parameter/GLOW_COLOR = Color(0.6, 0.513726, 1, 1)
 shader_parameter/LIGHTNING_COLOR = Color(0.8, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgn05"]
+shader = ExtResource("29_g5u7d")
+shader_parameter/TIME_COEFFICIENT = 10.0
+shader_parameter/TIME_OFFSET = 0.5
+shader_parameter/GLOW_COLOR = Color(0.6, 0.513726, 1, 1)
+shader_parameter/LIGHTNING_COLOR = Color(0.8, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1lg0r"]
+shader = ExtResource("29_g5u7d")
+shader_parameter/TIME_COEFFICIENT = 15.0
+shader_parameter/TIME_OFFSET = 0.75
+shader_parameter/GLOW_COLOR = Color(0.6, 0.513726, 1, 1)
+shader_parameter/LIGHTNING_COLOR = Color(0.8, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ameip"]
+shader = ExtResource("29_g5u7d")
+shader_parameter/TIME_COEFFICIENT = 1.0
+shader_parameter/TIME_OFFSET = 0.25
+shader_parameter/GLOW_COLOR = Color(0.6, 0.513726, 1, 1)
+shader_parameter/LIGHTNING_COLOR = Color(0.8, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krmg3"]
+shader = ExtResource("23_743qs")
+shader_parameter/color = Color(0.6, 0.513726, 1, 0.25098)
+shader_parameter/threshold = 0.495
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qliv8"]
 radius = 768.0
@@ -223,7 +254,7 @@ z_index = 6
 texture = ExtResource("12_m2iy2")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 6
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -332,6 +363,10 @@ update_rotation = false
 remote_path = NodePath("../../Radar")
 update_rotation = false
 
+[node name="TeslaTransform" type="RemoteTransform2D" parent="RemoteTransforms"]
+remote_path = NodePath("../../Tesla")
+update_rotation = false
+
 [node name="Manipulator" type="Node2D" parent="."]
 visible = false
 top_level = true
@@ -421,6 +456,7 @@ width = 1.0
 default_color = Color(0.129412, 0.145098, 0.196078, 1)
 
 [node name="NeedleLaserManager" type="Node2D" parent="."]
+visible = false
 top_level = true
 z_index = -50
 script = ExtResource("18_yrk6l")
@@ -552,13 +588,49 @@ texture = ExtResource("23_p2wwt")
 remote_path = NodePath("../BounceShield")
 update_rotation = false
 
-[node name="TeslaRect" type="ColorRect" parent="ShieldProjector"]
+[node name="Tesla" type="Area2D" parent="."]
 visible = false
+top_level = true
+rotation = -1.5708
+collision_layer = 0
+monitorable = false
+script = ExtResource("29_mfagm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tesla"]
+shape = SubResource("CircleShape2D_822u3")
+debug_color = Color(0.445997, 0.452332, 1, 0)
+
+[node name="TeslaRect" type="ColorRect" parent="Tesla"]
 material = SubResource("ShaderMaterial_5rid5")
-offset_left = -60.0
-offset_top = -60.0
-offset_right = 60.0
-offset_bottom = 60.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -48.0
+scale = Vector2(8, 8)
+
+[node name="TeslaRect2" type="ColorRect" parent="Tesla/TeslaRect"]
+material = SubResource("ShaderMaterial_cgn05")
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="TeslaRect3" type="ColorRect" parent="Tesla/TeslaRect"]
+material = SubResource("ShaderMaterial_1lg0r")
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="TeslaRect4" type="ColorRect" parent="Tesla/TeslaRect"]
+material = SubResource("ShaderMaterial_ameip")
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="ColorRect" type="ColorRect" parent="Tesla/TeslaRect"]
+material = SubResource("ShaderMaterial_krmg3")
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
 
 [node name="Radar" type="Area2D" parent="."]
 visible = false
@@ -631,5 +703,7 @@ offset_bottom = 64.5
 [connection signal="body_entered" from="MagnetArea" to="MagnetArea" method="_on_body_entered"]
 [connection signal="body_exited" from="MagnetArea" to="MagnetArea" method="_on_body_exited"]
 [connection signal="body_entered" from="ShieldProjector" to="ShieldProjector" method="_on_body_entered"]
+[connection signal="body_entered" from="Tesla" to="Tesla" method="_on_body_entered"]
+[connection signal="body_exited" from="Tesla" to="Tesla" method="_on_body_exited"]
 [connection signal="body_entered" from="Radar" to="Radar" method="_on_body_entered"]
 [connection signal="body_exited" from="Radar" to="Radar" method="_on_body_exited"]

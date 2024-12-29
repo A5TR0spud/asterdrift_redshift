@@ -86,7 +86,7 @@ func _physics_process(delta):
 			bod.apply_force(dir * strength)
 	
 	if closest != null:
-		isRepelling = closest.isAsteroid || closest.DangerousCollision
+		isRepelling = closest.isAsteroid || closest.DangerousCollision || closest.isEnemy
 	elif !Engine.is_editor_hint():
 		$Attract.hide()
 		$Repel.hide()

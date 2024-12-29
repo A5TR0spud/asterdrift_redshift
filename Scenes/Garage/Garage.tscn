@@ -442,6 +442,15 @@ offset_right = -112.0
 offset_bottom = -112.0
 scale = Vector2(16, 16)
 
+[node name="TeslaRect2" parent="Player/Tesla/TeslaRect" index="0"]
+layout_mode = 0
+
+[node name="TeslaRect3" parent="Player/Tesla/TeslaRect" index="1"]
+layout_mode = 0
+
+[node name="TeslaRect4" parent="Player/Tesla/TeslaRect" index="2"]
+layout_mode = 0
+
 [node name="Backdrop" type="CanvasLayer" parent="."]
 layer = -1
 

@@ -8,7 +8,7 @@ var _Duration: float = 0.2
 var _trackedObjects: Array[Entity] = []
 
 func _ready():
-	if UpgradesManager.Load("EnergyShield") < 1:
+	if UpgradesManager.Load("EnergyShield") < 1 || Player.IS_IN_GARAGE:
 		queue_free()
 		return
 	else:
@@ -33,6 +33,7 @@ func _on_body_entered(body):
 			_time = 0.0
 			if body.hasHealth && UpgradesManager.Load("ChargedShield") > 0:
 				body.Damage(body.MaxHealth * 0.25)
+				RunHandler.DamageBackup(1.0)
 
 func _process(delta):
 	if _time < _Duration:

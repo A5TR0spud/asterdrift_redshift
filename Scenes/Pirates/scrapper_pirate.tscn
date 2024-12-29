@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb8aw6rcpeji2"]
+
+[ext_resource type="Script" path="res://Scenes/Pirates/scrapper_pirate.gd" id="1_hof76"]
+[ext_resource type="Texture2D" uid="uid://cs8f3awd320o1" path="res://Assets/Ships/Pirates/Scrapper.png" id="2_d4ip5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amyc5"]
+size = Vector2(26, 19)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4ty2"]
+radius = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2h7dq"]
+radius = 256.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4cjq"]
+radius = 96.0
+
+[node name="ScrapperPirate" type="RigidBody2D" node_paths=PackedStringArray("TrackingArea", "FactionArea")]
+collision_mask = 7
+mass = 2.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_hof76")
+TrackingArea = NodePath("TrackerArea")
+FactionArea = NodePath("FactionArea")
+Aggression = 0.3
+Fear = 0.5
+isEnemy = true
+hasHealth = true
+MaxHealth = 30.0
+Magnetism = 0.5
+Radius = 18.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_amyc5")
+debug_color = Color(1, 0, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d4ip5")
+
+[node name="TrackerAreaTransform" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../TrackerArea")
+update_rotation = false
+
+[node name="TrackerArea" type="Area2D" parent="."]
+top_level = true
+collision_layer = 0
+collision_mask = 7
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrackerArea"]
+visible = false
+position = Vector2(0, -64)
+shape = SubResource("CircleShape2D_n4ty2")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="FactionArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FactionArea"]
+visible = false
+shape = SubResource("CircleShape2D_2h7dq")
+debug_color = Color(1, 0, 0, 0)
+
+[node name="LaserArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 7
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserArea"]
+visible = false
+shape = SubResource("CircleShape2D_n4cjq")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
