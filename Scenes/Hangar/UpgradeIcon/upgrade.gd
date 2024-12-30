@@ -63,6 +63,8 @@ signal notify_children(propogation : int)
 @export_subgroup("Parent")
 ## The parent upgrade determining tree-ism, if any.
 @export var PARENT_UPGRADE : Upgrade = null
+## Whether to even show the parent line.
+@export var SHOW_PARENT_LINE: bool = true
 ## Any additional prerequisite upgrades.
 @export var REQUIRED_UPGRADES: Array[Upgrade] = []
 ## Does this upgrade require the parent to be maxed out?
@@ -179,7 +181,6 @@ func ChildIsNotified(propogation : int):
 func ReloadVisible(_ignored: int = 0):
 	if !is_readied:
 		return
-	ParentLine.hide()
 	if UpgradesManager.LoadIsEnabled(INTERNAL_NAME):
 		BoolIcon.texture = BoolOn
 	else:
@@ -190,7 +191,7 @@ func ReloadVisible(_ignored: int = 0):
 	else:
 		CostT.show()
 		ToggleT.hide()
-	if PARENT_UPGRADE:
+	if PARENT_UPGRADE && SHOW_PARENT_LINE:
 		ParentLine.show()
 		var dir : Vector2 = PARENT_UPGRADE.global_position - global_position
 		ParentLine.points[1] = dir
@@ -199,6 +200,8 @@ func ReloadVisible(_ignored: int = 0):
 			ParentLine.self_modulate = Color(1,1,1,1)
 		else:
 			ParentLine.self_modulate = Color(0.5, 0.5, 0.5, 1)
+	else:
+		ParentLine.hide()
 	if !PARENT_UPGRADE || CurrentLevel > 0:
 		emit_signal("notify_children", 0)
 	MainIcon.modulate = Color(1, 1, 1, 1)

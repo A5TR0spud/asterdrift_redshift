@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=61 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" path="res://Scenes/Player/tesla.gd" id="29_mfagm"]
 [ext_resource type="Script" path="res://Scenes/Player/radar.gd" id="29_xcgy5"]
 [ext_resource type="Texture2D" uid="uid://beqealwbd0ggh" path="res://Assets/Ships/Upgrades/RadarPlayer.png" id="31_yphpt"]
+[ext_resource type="Script" path="res://Scenes/Player/player_ui.gd" id="32_1fp14"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl7m2"]
 radius = 13.0
@@ -276,11 +277,12 @@ color = Color(1, 1, 0.717647, 1)
 
 [node name="TopRight" type="ColorRect" parent="ShipVisuals/ThrusterParticles"]
 use_parent_material = true
-offset_left = 12.0
-offset_top = -2.0
-offset_right = 14.0
-offset_bottom = 28.0
-rotation = -1.57079
+offset_left = 10.0
+offset_top = -4.0
+offset_right = 12.0
+offset_bottom = 26.0
+rotation = -1.52716
+pivot_offset = Vector2(2, 0)
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="BottomRight" type="ColorRect" parent="ShipVisuals/ThrusterParticles"]
@@ -289,7 +291,7 @@ offset_left = 6.0
 offset_top = 10.0
 offset_right = 8.0
 offset_bottom = 37.0
-rotation = -1.57079
+rotation = -1.61443
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="TopLeft" type="ColorRect" parent="ShipVisuals/ThrusterParticles"]
@@ -298,16 +300,17 @@ offset_left = -12.0
 offset_top = -4.0
 offset_right = -10.0
 offset_bottom = 23.0
-rotation = 1.57079
+rotation = 1.52716
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="BottomLeft" type="ColorRect" parent="ShipVisuals/ThrusterParticles"]
 use_parent_material = true
-offset_left = -6.0
-offset_top = 8.0
-offset_right = -4.0
-offset_bottom = 35.0
-rotation = 1.57079
+offset_left = -8.0
+offset_top = 10.0
+offset_right = -6.0
+offset_bottom = 37.0
+rotation = 1.61443
+pivot_offset = Vector2(2, 0)
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="ReverseLeft" type="ColorRect" parent="ShipVisuals/ThrusterParticles"]
@@ -316,16 +319,17 @@ offset_left = -7.0
 offset_top = -7.0
 offset_right = -5.0
 offset_bottom = 20.0
-rotation = 3.14159
+rotation = 2.96706
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="ReverseRight" type="ColorRect" parent="ShipVisuals/ThrusterParticles"]
 use_parent_material = true
-offset_left = 9.0
+offset_left = 5.0
 offset_top = -7.0
-offset_right = 11.0
+offset_right = 7.0
 offset_bottom = 20.0
-rotation = 3.14159
+rotation = 3.31613
+pivot_offset = Vector2(2, 0)
 color = Color(0.74902, 0.87451, 1, 1)
 
 [node name="RCS" type="Node2D" parent="."]
@@ -646,6 +650,8 @@ shape = SubResource("CircleShape2D_qliv8")
 debug_color = Color(0.164, 0.644, 0, 0)
 
 [node name="PlayerUI" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("32_1fp14")
 
 [node name="Control" type="Control" parent="PlayerUI"]
 layout_mode = 3

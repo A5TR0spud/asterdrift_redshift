@@ -2,10 +2,19 @@
 
 - Nerfed Charged Shield: now uses +1 energy
 - Added Plasma Bubble upgrade to Charged Shield
+- Solar Cell is now a child of RTG
+- Inventory Audit is once again a child of Inventory Monitor
+- Added Overcharge upgrade to Overclocking
+- Added Calibration upgrade to Idle Process
+- "Buffed" Stage 2 acceleration: 4 -> 8
+- Fixed Stage 2 boost VFX not working when turning around
+- Thruster VFX acceleration length is now capped by max speed
 - Fixed RCS's drag not actually ever stopping the player
 	- This also fixed drag not working as well as v11, due to a fix in v12
+- Fixed RCS only ever rotating you within 5 degrees of the RCS cursor
 - Fixed Reset button in Hangar not resetting Upcycler's incrementer for core conversions
 - Fixed resolution options
+- Added WIP title icon to main menu
 
 ## indev Build Unlucky 13
 

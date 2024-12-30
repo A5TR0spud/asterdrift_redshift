@@ -1,14 +1,16 @@
-[gd_scene load_steps=21 format=3 uid="uid://dloxvgj0o0aas"]
+[gd_scene load_steps=23 format=3 uid="uid://dloxvgj0o0aas"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/main_menu.gd" id="1_7n6q0"]
 [ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
 [ext_resource type="Texture2D" uid="uid://ccgxfu1vo0nw5" path="res://Assets/UI/Icons/Play.png" id="2_i8p1f"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_utqbt"]
+[ext_resource type="Texture2D" uid="uid://8on70d34ghqp" path="res://Assets/Icon.png" id="3_adjsq"]
 [ext_resource type="Texture2D" uid="uid://c77dhg0rwkgb1" path="res://Assets/UI/Icons/Garage.png" id="3_i2niw"]
 [ext_resource type="Texture2D" uid="uid://dtvfmeith420a" path="res://Assets/UI/Icons/Settings.png" id="4_ino3e"]
 [ext_resource type="Texture2D" uid="uid://c1g8uqg6pp7qo" path="res://Assets/GodotIcon.png" id="6_1rrf4"]
 [ext_resource type="Shader" uid="uid://chvdu88j36ex3" path="res://Shaders/StarryNight.tres" id="7_3fpcd"]
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="8_no7lg"]
+[ext_resource type="Script" path="res://Scenes/Menus/background.gd" id="9_7xhjc"]
 [ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="9_i2j4x"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_rbhsv"]
 [ext_resource type="Script" path="res://Scenes/Menus/velocityapplyer.gd" id="11_fn0l6"]
@@ -66,14 +68,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mr2mu")
 
+[node name="Title" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.472
+anchor_right = 0.016
+anchor_bottom = 0.472
+offset_left = -0.360001
+offset_top = -125.88
+offset_right = 281.64
+offset_bottom = 0.11998
+texture = ExtResource("3_adjsq")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0291667
-anchor_top = 0.527778
-anchor_right = 0.247917
+anchor_top = 0.948148
+anchor_right = 0.0291667
 anchor_bottom = 0.948148
-offset_top = 12.0
+offset_top = -215.0
+offset_right = 210.0
 grow_vertical = 0
 alignment = 2
 metadata/_edit_use_anchors_ = true
@@ -114,10 +130,12 @@ text = "Quit"
 [node name="Godot" type="TextureRect" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.947917
-anchor_top = 0.907407
+anchor_left = 0.9875
+anchor_top = 0.977778
 anchor_right = 0.9875
 anchor_bottom = 0.977778
+offset_left = -37.9997
+offset_top = -38.0003
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("6_1rrf4")
@@ -125,6 +143,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
+visible = false
+script = ExtResource("9_7xhjc")
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 material = SubResource("ShaderMaterial_sokok")
@@ -160,6 +180,7 @@ stretch_mode = 1
 flip_h = true
 
 [node name="velocityapplyer" type="Node2D" parent="."]
+visible = false
 script = ExtResource("11_fn0l6")
 
 [node name="Area2D" type="Area2D" parent="velocityapplyer"]

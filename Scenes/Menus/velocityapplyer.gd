@@ -2,6 +2,7 @@ extends Node2D
 
 
 func _ready():
+	show()
 	for child in $List.get_children():
 		if child is RigidBody2D:
 			var dir: Vector2 = Vector2.RIGHT.rotated(deg_to_rad(360) * randf())

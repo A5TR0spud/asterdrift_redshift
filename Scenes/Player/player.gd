@@ -135,14 +135,14 @@ func _physics_process(delta):
 				_inputDir.x -= sign(reduceDrift.x) if absf(reduceDrift.x) > 0.1 else 0
 			_inputDir = _inputDir.normalized().rotated(thrustDirection)
 		
-		targetLinearAccel = _inputDir * ACCEL_FORCE
+		targetLinearAccel = _inputDir * GetCurrentMaxAcceleration()
 		
 		#if not inputting, apply opposite velocity
 		if _inputDir.length() < 0.5 && Stats.Has_RCS && !Input.is_action_pressed("boost"):
 			#decceleration when no input (it's actually just inputting opposite your velocity)
 			var fakeVel: float = linear_velocity.x
 			var sig: int = sign(fakeVel)
-			var force: float = -sig * ACCEL_FORCE
+			var force: float = -sig * GetCurrentMaxAcceleration()
 			fakeVel += force * delta
 			if fakeVel == 0 || sign(fakeVel) != sig:
 				force = -linear_velocity.x
@@ -152,7 +152,7 @@ func _physics_process(delta):
 			
 			fakeVel = linear_velocity.y
 			sig = sign(fakeVel)
-			force = -sig * ACCEL_FORCE
+			force = -sig * GetCurrentMaxAcceleration()
 			fakeVel += force * delta
 			if fakeVel == 0 || sign(fakeVel) != sig:
 				force = -linear_velocity.y
@@ -162,30 +162,39 @@ func _physics_process(delta):
 		
 		
 		if Stats.Has_RCS:
-			var angleToCursor : float = get_angle_to(RCSCursor.global_position)
+			var angleToCursor: float = get_angle_to(RCSCursor.global_position)
 			var x := deg_to_rad(TURN_ACCEL_DEGREES)
 			var coef := 4.5 if Stats.Has_Better_RCS else 3.5
 			var angle_landing_if_deccel_now := angular_velocity / coef
 			var dif := angle_difference(angleToCursor, angle_landing_if_deccel_now)
-			if absf(dif) < deg_to_rad(5):
-				targetAngularAccel = -angular_velocity * delta * coef
-			elif dif < 0:
-				targetAngularAccel += coef * x * delta
-			elif dif > 0:
-				targetAngularAccel -= coef * x * delta
+			
+			#if absf(dif) < deg_to_rad(coef * TURN_ACCEL_DEGREES):
+			#	rotate(dif)
+			#	targetAngularAccel = -dif
+			var fakeT: float = coef * x * -sign(dif)
+			#if dif < 0:
+			#	fakeT = 
+			#elif dif > 0:
+			#	fakeT = -coef * x * delta
+			if absf(coef * x * delta * delta) >= absf(angleToCursor) + absf(angular_velocity * delta):
+				rotate(angleToCursor)
+				fakeT = 0
+				angular_velocity = 0 #-fakeT * delta
+			targetAngularAccel = fakeT * delta
+			
 		
 		if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
 			_BonusMaxSpeedFromBoost += 64 * delta
 			if _BonusMaxSpeedFromBoost > 192:
 				_BonusMaxSpeedFromBoost = 192
-			apply_force(Vector2(64, 0).rotated(rotation))
+			apply_force(Vector2(128, 0).rotated(rotation))
 		elif _BonusMaxSpeedFromBoost > 0:
 			_BonusMaxSpeedFromBoost -= 64 * delta
 			if _BonusMaxSpeedFromBoost < 0:
 				_BonusMaxSpeedFromBoost = 0
 
-		if targetLinearAccel.length() > ACCEL_FORCE:
-			targetLinearAccel = targetLinearAccel.normalized() * ACCEL_FORCE
+		if targetLinearAccel.length() > GetCurrentMaxAcceleration():
+			targetLinearAccel = targetLinearAccel.normalized() * GetCurrentMaxAcceleration()
 		
 		apply_force(targetLinearAccel)
 		
@@ -195,17 +204,21 @@ func _physics_process(delta):
 		if linear_velocity.length() > GetCurrentMaxSpeed():
 			linear_velocity = linear_velocity.normalized() * GetCurrentMaxSpeed()
 	
-	ThrustVector += targetLinearAccel.rotated(-rotation) * 0.4
+	var thrustxy: Vector2 = targetLinearAccel.rotated(-rotation) * 0.4
+	if UpgradesManager.Load("GravityWell") > 0:
+		thrustxy *= 0.5
+	ThrustVector += thrustxy
 	if CAN_MOVE && Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
-		ThrustVector.x += 16
+		ThrustVector.x = maxf(ThrustVector.x + 51.2, 51.2)
 		$ShipVisuals/ThrusterParticles/Main.size.x = 12
 		$ShipVisuals/ThrusterParticles/Main.position.x = -6
 	else:
 		$ShipVisuals/ThrusterParticles/Main.size.x = 10
 		$ShipVisuals/ThrusterParticles/Main.position.x = -5
 	ThrustVector *= 0.5
-	if UpgradesManager.Load("GravityWell") > 0:
-		ThrustVector *= 0.5
+	
+	if ThrustVector.length() > GetCurrentMaxSpeed() * 0.3:
+		ThrustVector = ThrustVector.normalized() * GetCurrentMaxSpeed() * 0.3
 	ThrustRotate += targetAngularAccel
 	ThrustRotate *= 0.9
 	var tR: float = ThrustRotate * 10
@@ -219,8 +232,17 @@ func _physics_process(delta):
 	$ShipVisuals/ThrusterParticles/TopLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tLHS
 	$ShipVisuals/ThrusterParticles/BottomLeft.size.y = maxf(ThrustVector.y, 0) * 0.4 + tRHS
 
+func GetCurrentMaxAcceleration() -> float:
+	var _bonus_accel_from_time: float = 0.0
+	if UpgradesManager.Load("Calibration") > 0:
+		_bonus_accel_from_time = minf(RunHandler.TimeSpent * 16.0, 160.0)
+	return ACCEL_FORCE + _bonus_accel_from_time
+
 func GetCurrentMaxSpeed() -> float:
-	return MAX_SPEED + _BonusMaxSpeedFromBoost
+	var _bonus_speed_from_energy: float = 0.0
+	if UpgradesManager.Load("Overcharge") > 0:
+		_bonus_speed_from_energy = RunHandler.TimeLeft * 0.2 * 16.0
+	return MAX_SPEED + _BonusMaxSpeedFromBoost + _bonus_speed_from_energy
 
 func _handleStats():
 	var x: int

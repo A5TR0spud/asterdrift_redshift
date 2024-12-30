@@ -13,6 +13,10 @@ func _ready():
 		Entities = []
 
 func _physics_process(delta):
+	if !Player.CAN_MOVE:
+		hide()
+		return
+	
 	hide()
 	for ent: Entity in Entities:
 		if !is_instance_valid(ent):
