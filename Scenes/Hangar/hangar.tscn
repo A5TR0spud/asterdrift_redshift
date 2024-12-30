@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=162 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -69,6 +69,7 @@
 [ext_resource type="Texture2D" uid="uid://d2bgho5pxcpjj" path="res://Assets/Hangar/Upgrades/CursorOverride.png" id="53_3ch7m"]
 [ext_resource type="Texture2D" uid="uid://cc5r121ta6sp3" path="res://Assets/Hangar/Upgrades/Combustor.png" id="53_hxchu"]
 [ext_resource type="Texture2D" uid="uid://d3co77d71fwlt" path="res://Assets/Hangar/Upgrades/Composter.png" id="54_lrwy8"]
+[ext_resource type="Texture2D" uid="uid://cpody4d87hiwm" path="res://Assets/Hangar/Upgrades/FocusFire.png" id="58_4ay4i"]
 [ext_resource type="Texture2D" uid="uid://c6ndxo4borumr" path="res://Assets/Hangar/Upgrades/Recycler.png" id="58_dxmc4"]
 [ext_resource type="Texture2D" uid="uid://bysegj7pu72rm" path="res://Assets/Hangar/Upgrades/StatusMonitor.png" id="59_4b4q2"]
 [ext_resource type="Texture2D" uid="uid://kv5qlp478v4p" path="res://Assets/Hangar/Upgrades/Upcycler.png" id="59_vay1v"]
@@ -494,6 +495,15 @@ Organics = 0
 Components = 2
 
 [sub_resource type="Resource" id="Resource_tp4ul"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_irfwe"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
@@ -1429,7 +1439,7 @@ PARENT_UPGRADE = NodePath("../LaserArray")
 MAX_LEVEL = 4
 Cost = SubResource("Resource_q1x2r")
 
-[node name="CursorOverride" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="CursorOverride" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "DEPENDENT_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(-224, 48)
 NAME = "Cursor Override"
 DESCRIPTION = "If on, the laser can be taken control of by holding LMB.
@@ -1439,8 +1449,27 @@ SPRITE = ExtResource("53_3ch7m")
 PARENT_UPGRADE = NodePath("../AutoPhoton")
 SHOW_PARENT_LINE = false
 HIDE_WITHOUT_PARENT = true
+DEPENDENT_UPGRADES = [NodePath("../FocusFire")]
 PRE_BOUGHT = true
 Cost = SubResource("Resource_tp4ul")
+
+[node name="FocusFire" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "INCLUDE_UPGRADES") instance=ExtResource("4_r883k")]
+position = Vector2(-160, 272)
+NAME = "Focus Fire"
+DESCRIPTION = "When manually controlling the laser, if
+the laser connects with something, then
+it will continue to target that object after
+you release manual control.
+Remembers target after leaving range,
+and will retarget back if range is entered."
+INTERNAL_NAME = "FocusFire"
+SPRITE = ExtResource("58_4ay4i")
+PARENT_UPGRADE = NodePath("../Artemis")
+SHOW_PARENT_LINE = false
+HIDE_WITHOUT_PARENT = true
+INCLUDE_UPGRADES = [NodePath("../CursorOverride")]
+PRE_BOUGHT = true
+Cost = SubResource("Resource_irfwe")
 
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
 

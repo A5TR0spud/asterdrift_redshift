@@ -14,7 +14,7 @@ class_name ShipData
 @export var accent_color_int : int = 4
 @export var accent_type : AccentTypes = AccentTypes.STANDARD
 @export var accent_type_int : int = 1
-@export var blinker_on : Color = Color(1, 0, 0, 1)
+@export var blinker_on : Color = Color("ff3344")
 @export var blinker_on_int : int = 0
 @export var blinker_off : Color = Color(0, 0, 0, 1)
 @export var blinker_off_int : int = 7
@@ -40,7 +40,7 @@ func new():
 	#rhs_highlight = Color("7e0094")
 	accent_color = Color("478cbf")
 	accent_type = AccentTypes.STANDARD
-	blinker_on = Color(1, 0, 0, 1)
+	blinker_on = Color("ff3344")
 	blinker_off = Color(1, 1, 1, 0)
 	blinker_interval = 1
 	blinker_interp = false

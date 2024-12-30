@@ -375,9 +375,6 @@ zoom = Vector2(8, 8)
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
 IS_IN_GARAGE = true
 
-[node name="Blinkers" parent="Player/ShipVisuals" index="5"]
-self_modulate = Color(0, 0, 0, 1)
-
 [node name="MagnetArea" parent="Player" index="7"]
 RANGE = 128
 FORCE_COEF = 4.0

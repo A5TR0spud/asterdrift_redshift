@@ -63,7 +63,7 @@ func _process(delta):
 	_laserTime = _laserTime - 2.0 * floori(_laserTime * 0.5)
 	var x = absf(1.0 - _laserTime)
 	var c: Color = lerp(_laserColorOff, _laserColorOn, x)
-	$LaserLine.default_color = c
+	Line.default_color = c
 	$Endpoint/Color.modulate = c
 
 @export var orbitTime: float = 0

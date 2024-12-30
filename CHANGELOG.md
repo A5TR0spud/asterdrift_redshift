@@ -6,6 +6,7 @@
 - Inventory Audit is once again a child of Inventory Monitor
 - Added Overcharge upgrade to Overclocking
 - Added Calibration upgrade to Idle Process
+- Added Focus Fire setting to Artemis (does not require Artemis enabled)
 - "Buffed" Stage 2 acceleration: 4 -> 8
 - Fixed Stage 2 boost VFX not working when turning around
 - Thruster VFX acceleration length is now capped by max speed

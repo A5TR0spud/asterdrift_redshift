@@ -155,6 +155,8 @@ var _closestCollectable: Entity = null
 var _farthestCollectable: Entity = null
 var _closestThreat: Entity = null
 
+var _artemisTarget: Entity = null
+
 static var Instance: NeedleLaserManager
 
 func _physics_process(delta) -> void:
@@ -173,16 +175,16 @@ func _physics_process(delta) -> void:
 	_farthestCollectable = _tryNullifyTarget(_farthestCollectable)
 	_closestThreat = _tryNullifyTarget(_closestThreat)
 	
+	if !_isLaserTargetable(_artemisTarget):
+		_artemisTarget = null
+	
 	if AUTO_LASER && !APOLLO:
 		for col in Entities:
 			if !is_instance_valid(col):
 				Entities.erase(col)
 		for col: Entity in Entities:
-			if col.IgnoredByLaser:
+			if !_isLaserTargetable(col):
 				continue
-			if !col.isAsteroid && !col.DangerousCollision:
-				if col.isResource && !CAN_ATTRACT:
-					continue
 			
 			if _closestEntity == null:
 				_closestEntity = col
@@ -244,8 +246,21 @@ func _physics_process(delta) -> void:
 				if Input.is_action_pressed("fire") && UpgradesManager.LoadIsEnabled("CursorOverride"):
 					child._laserFiring = true
 					child.Target.global_position = get_global_mouse_position()
+					if UpgradesManager.Load("FocusFire"):
+						var ray: RayCast2D = child.Ray
+						child.Target.position = child.Target.position.normalized() * child.RANGE
+						ray.target_position = child.Target.position
+						ray.force_update_transform()
+						ray.force_raycast_update()
+						if ray.is_colliding():
+							var col := ray.get_collider()
+							if col is Entity:
+								if _isLaserTargetable(col):
+									_artemisTarget = col
 					continue
 				if !AUTO_LASER:
+					continue
+				if UpgradesManager.Load("FocusFire") > 0 && _tryTarget(child, _artemisTarget):
 					continue
 				if i % 8 == 0:
 					_tryTarget(child, _closestEntity)
@@ -264,28 +279,49 @@ func _physics_process(delta) -> void:
 				elif i % 8 == 7:
 					_tryTarget(child, _closestThreat)
 
-func _tryTarget(child: NeedleLaserClass, target: Entity) -> void:
-	if target != null:
+func _tryTarget(child: NeedleLaserClass, target: Entity) -> bool:
+	if target != null && _isTargetInRange(target):
 		child.Target.global_position = target.global_position
 		child._laserFiring = true
+		return true
 	else:
 		child._laserFiring = false
+	return false
 
 func _on_ship_visuals_firemalasar():
 	_reloadVisuals()
 
-func _tryNullifyTarget(target) -> Entity:
+func _isLaserTargetable(target) -> bool:
+	if _tryNullifyTarget(target, true) == null:
+		return false
+	if target.IgnoredByLaser:
+		return false
+	if target.DangerousCollision || target.isAsteroid:
+		return true
+	if target.isResource && CAN_ATTRACT:
+		return true
+	return false
+
+func _isTargetInRange(target) -> bool:
+	if _tryNullifyTarget(target, true) == null:
+		return false
+	return target.global_position.distance_to(global_position) <= RANGE + target.Radius
+
+func _tryNullifyTarget(target, ignoreDistance: bool = false) -> Entity:
+	if target == null:
+		return null
+	
 	if !is_instance_valid(target):
-		target = null
+		return null
 	
-	if target != null && target is not Entity:
-		target = null
-	
-	if target != null && target is Entity:
-		if target.global_position.distance_to(global_position) > RANGE + target.Radius:
-			target = null
+	if target is Entity:
+		if !ignoreDistance && _isTargetInRange(target):
+			return null
 		elif target.IgnoredByLaser:
-			target = null
+			return null
+	else:
+		return null
+	
 	return target
 
 static func ApplyLaserEffects(target: Entity, global_pos: Vector2, laser_direction: Vector2, normal: Vector2, delta: float = 1.0, potency: float = 1.0) -> void:
