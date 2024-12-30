@@ -1437,6 +1437,7 @@ Otherwise, LiDAR Auto-Targetting always has control."
 INTERNAL_NAME = "CursorOverride"
 SPRITE = ExtResource("53_3ch7m")
 PARENT_UPGRADE = NodePath("../AutoPhoton")
+SHOW_PARENT_LINE = false
 HIDE_WITHOUT_PARENT = true
 PRE_BOUGHT = true
 Cost = SubResource("Resource_tp4ul")

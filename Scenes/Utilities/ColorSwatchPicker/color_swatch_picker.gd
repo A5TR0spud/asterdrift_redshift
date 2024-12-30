@@ -10,9 +10,9 @@ var Swatch : PackedScene = preload("res://Scenes/Utilities/ColorSwatchPicker/col
 		_reload()
 @export var Selected : int = 0 :
 	get:
-		return Selected
+		return clampi(Selected, 0, Colors.size() - 1)
 	set(value):
-		Selected = value
+		Selected = clampi(value, 0, Colors.size() - 1)
 		_select()
 var color := Color.MAGENTA
 var is_readied := false

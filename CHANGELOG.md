@@ -15,6 +15,7 @@
 - Fixed Reset button in Hangar not resetting Upcycler's incrementer for core conversions
 - Fixed resolution options
 - Added WIP title icon to main menu
+- Made adjustments to Garage colors
 
 ## indev Build Unlucky 13
 

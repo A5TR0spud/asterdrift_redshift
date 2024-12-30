@@ -138,8 +138,8 @@ func _laserifyColor(col: Color, on: bool) -> Color:
 			col = Color(0.5, 0.8, 1, 1)
 		return col
 	
-	if col.r + col.g + col.b < 0.5:
-		col = Color.WHITE
+	#if col.r + col.g + col.b < 0.5:
+		#col = Color.WHITE
 	col.r = col.r * 0.5 + 0.5
 	col.g = col.g * 0.5 + 0.5
 	col.b = col.b * 0.5 + 0.5

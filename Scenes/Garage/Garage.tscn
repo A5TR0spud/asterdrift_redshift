@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://b0lh5xscj34ew"]
+[gd_scene load_steps=32 format=3 uid="uid://b0lh5xscj34ew"]
 
 [ext_resource type="PackedScene" uid="uid://d08pheagteker" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.tscn" id="1_af53s"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_ihjlj"]
 [ext_resource type="Script" path="res://Scenes/Garage/garage.gd" id="1_jna1t"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_ei8vl"]
 [ext_resource type="Script" path="res://Scenes/Garage/accent_type_selector.gd" id="3_kw7r4"]
+[ext_resource type="Script" path="res://Scenes/Garage/backdrop.gd" id="6_smmod"]
 [ext_resource type="Texture2D" uid="uid://bbshh6i8k4xsk" path="res://Assets/Backdrops/GarageTile.png" id="6_t481h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0efh"]
@@ -231,7 +232,7 @@ vertical_alignment = 1
 [node name="HullColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 399
-Colors = Array[Color]([Color(0.211765, 0.239216, 0.321569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.00392157, 0, 0.121569, 1), Color(0.46, 0.1702, 0.1702, 1), Color(0.58, 0.37903, 0.2146, 1), Color(0.59396, 0.62, 0.2294, 1), Color(0.1924, 0.52, 0.20332, 1), Color(0.1924, 0.37804, 0.52, 1), Color(0.4114, 0.2035, 0.55, 1), Color(1, 1, 1, 1)])
+Colors = Array[Color]([Color(0.211765, 0.239216, 0.321569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.00392157, 0, 0.121569, 1), Color(0.15, 0.0555, 0.0555, 1), Color(0.17, 0.13073, 0.0986, 1), Color(0.0925, 0.100375, 0.25, 1), Color(1, 1, 1, 1)])
 Selected = 4
 
 [node name="CockpitLabel" type="Label" parent="CanvasLayer/Control/ShipEditorVH"]
@@ -245,7 +246,7 @@ vertical_alignment = 1
 [node name="CockpitColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 929
-Colors = Array[Color]([Color(0.00392157, 0, 0.121569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.211765, 0.239216, 0.321569, 1), Color(1, 0.2, 0.266667, 1), Color(0.893333, 1, 0.2, 1), Color(0.2, 1, 0.386667, 1), Color(0.2, 0.545098, 1, 1), Color(1, 1, 1, 1)])
+Colors = Array[Color]([Color(0.00392157, 0, 0.121569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.211765, 0.239216, 0.321569, 1), Color(1, 0.2, 0.266667, 1), Color(1, 1, 0.2, 1), Color(0.2, 1, 0.386667, 1), Color(0.2, 0.545098, 1, 1), Color(0.724, 0.28, 1, 1), Color(1, 1, 1, 1)])
 
 [node name="AccentsLabel" type="Label" parent="CanvasLayer/Control/ShipEditorVH"]
 layout_mode = 2
@@ -272,7 +273,7 @@ script = ExtResource("3_kw7r4")
 [node name="AccentColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 429
-Colors = Array[Color]([Color(0.71, 0.2627, 0.2627, 1), Color(0.83, 0.542405, 0.3071, 1), Color(0.79514, 0.83, 0.3071, 1), Color(0.259, 0.7, 0.2737, 1), Color(0.278431, 0.54902, 0.74902, 1), Color(0.58344, 0.2886, 0.78, 1), Color(0.211765, 0.239216, 0.321569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.00392157, 0, 0.121569, 1)])
+Colors = Array[Color]([Color(0.81, 0.2268, 0.2268, 1), Color(0.89, 0.581615, 0.3293, 1), Color(0.93, 0.842115, 0.3441, 1), Color(0.3696, 0.77, 0.382947, 1), Color(0.3034, 0.60475, 0.82, 1), Color(0.6396, 0.369, 0.82, 1), Color(1, 1, 1, 1), Color(0.211765, 0.239216, 0.321569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.00392157, 0, 0.121569, 1)])
 Selected = 1
 
 [node name="BlinkersLabel" type="Label" parent="CanvasLayer/Control/ShipEditorVH"]
@@ -286,12 +287,12 @@ vertical_alignment = 1
 [node name="BlinkerOnColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 9
-Colors = Array[Color]([Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)])
+Colors = Array[Color]([Color(1, 0.2, 0.266667, 1), Color(1, 1, 0.2, 1), Color(0.2, 1, 0.388235, 1), Color(0.2, 0.545098, 1, 1), Color(0.72549, 0.278431, 1, 1), Color(1, 1, 1, 1), Color(0.00392157, 0, 0.121569, 1), Color(1, 1, 1, 0)])
 
 [node name="BlinkerOffColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 9
-Colors = Array[Color]([Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)])
+Colors = Array[Color]([Color(1, 0.2, 0.266667, 1), Color(1, 1, 0.2, 1), Color(0.2, 1, 0.388235, 1), Color(0.2, 0.545098, 1, 1), Color(0.72549, 0.278431, 1, 1), Color(1, 1, 1, 1), Color(0.00392157, 0, 0.121569, 1), Color(1, 1, 1, 0)])
 Selected = 7
 
 [node name="BlinkerInterval" type="HSlider" parent="CanvasLayer/Control/ShipEditorVH"]
@@ -321,7 +322,7 @@ vertical_alignment = 1
 [node name="InlineColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 469
-Colors = Array[Color]([Color(0.00392157, 0, 0.121569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.211765, 0.239216, 0.321569, 1), Color(0.33, 0.1221, 0.1221, 1), Color(0.43, 0.281005, 0.1591, 1), Color(0.4311, 0.45, 0.1665, 1), Color(0.1332, 0.36, 0.14076, 1), Color(0.1443, 0.28353, 0.39, 1), Color(0.28424, 0.1406, 0.38, 1), Color(0.2, 0.545098, 1, 1), Color(1, 1, 1, 1)])
+Colors = Array[Color]([Color(0.00392157, 0, 0.121569, 1), Color(0.129412, 0.145098, 0.196078, 1), Color(0.211765, 0.239216, 0.321569, 1), Color(0.33, 0.1221, 0.1221, 1), Color(0.43, 0.281005, 0.1591, 1), Color(0.4311, 0.45, 0.1665, 1), Color(0.1332, 0.36, 0.14076, 1), Color(0.1443, 0.28353, 0.39, 1), Color(0.28424, 0.1406, 0.38, 1)])
 Selected = 4
 
 [node name="OutlineLabel" type="Label" parent="CanvasLayer/Control/ShipEditorVH"]
@@ -336,7 +337,7 @@ vertical_alignment = 1
 [node name="OutlineColor" parent="CanvasLayer/Control/ShipEditorVH" instance=ExtResource("1_af53s")]
 layout_mode = 2
 columns = 9
-Colors = Array[Color]([Color(0.2, 0.545098, 1, 1), Color(1, 1, 1, 1), Color(0.00392157, 0, 0.121569, 1)])
+Colors = Array[Color]([Color(0.2, 0.545098, 1, 1), Color(1, 1, 1, 1), Color(0.00392157, 0, 0.121569, 1), Color(1, 0.541176, 0.541176, 1), Color(1, 0.941176, 0.541176, 1), Color(0.541176, 1, 0.545098, 1), Color(0.541176, 0.760784, 1, 1), Color(0.878431, 0.541176, 1, 1)])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -374,41 +375,8 @@ zoom = Vector2(8, 8)
 [node name="Player" parent="." instance=ExtResource("1_ihjlj")]
 IS_IN_GARAGE = true
 
-[node name="Hull" parent="Player/ShipVisuals" index="0"]
-modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="Cockpit" parent="Player/ShipVisuals" index="1"]
-modulate = Color(0.00392157, 0, 0.121569, 1)
-
-[node name="Accents" parent="Player/ShipVisuals" index="2"]
-modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="Inline" parent="Player/ShipVisuals" index="3"]
-modulate = Color(0.129412, 0.145098, 0.196078, 1)
-
-[node name="Outline" parent="Player/ShipVisuals" index="4"]
-modulate = Color(0.2, 0.545098, 1, 1)
-
-[node name="ArmSprite" parent="Player/Manipulator/BaseSprite" index="0"]
-self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="ArmAccent" parent="Player/Manipulator/BaseSprite/ArmSprite" index="0"]
-self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="RHSGrabber" parent="Player/Manipulator/BaseSprite/ArmSprite" index="1"]
-self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="RHSGAccent" parent="Player/Manipulator/BaseSprite/ArmSprite/RHSGrabber" index="0"]
-self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="LHSGrabber" parent="Player/Manipulator/BaseSprite/ArmSprite" index="2"]
-self_modulate = Color(0.211765, 0.239216, 0.321569, 1)
-
-[node name="LHSGAccent" parent="Player/Manipulator/BaseSprite/ArmSprite/LHSGrabber" index="0"]
-self_modulate = Color(0.278431, 0.54902, 0.74902, 1)
-
-[node name="Extendo" parent="Player/Manipulator/BaseSprite" index="1"]
-default_color = Color(0.129412, 0.145098, 0.196078, 1)
+[node name="Blinkers" parent="Player/ShipVisuals" index="5"]
+self_modulate = Color(0, 0, 0, 1)
 
 [node name="MagnetArea" parent="Player" index="7"]
 RANGE = 128
@@ -442,17 +410,10 @@ offset_right = -112.0
 offset_bottom = -112.0
 scale = Vector2(16, 16)
 
-[node name="TeslaRect2" parent="Player/Tesla/TeslaRect" index="0"]
-layout_mode = 0
-
-[node name="TeslaRect3" parent="Player/Tesla/TeslaRect" index="1"]
-layout_mode = 0
-
-[node name="TeslaRect4" parent="Player/Tesla/TeslaRect" index="2"]
-layout_mode = 0
-
 [node name="Backdrop" type="CanvasLayer" parent="."]
 layer = -1
+visible = false
+script = ExtResource("6_smmod")
 
 [node name="TextureRect" type="TextureRect" parent="Backdrop"]
 modulate = Color(0.29219, 0.29219, 0.29219, 1)

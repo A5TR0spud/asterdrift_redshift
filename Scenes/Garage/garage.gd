@@ -42,17 +42,17 @@ func LoadShip():
 		CachedShip = ShipData.new()
 
 func _ReloadFromCached():
-	HullColor.Selected = CachedShip.hull_int
-	CockpitColor.Selected = CachedShip.cockpit_int
-	AccentColor.Selected = CachedShip.accent_color_int
-	AccentTypeSelector.select(CachedShip.accent_type_int)
+	HullColor.Selected = mini(CachedShip.hull_int, HullColor.Colors.size())
+	CockpitColor.Selected = mini(CachedShip.cockpit_int, CockpitColor.Colors.size())
+	AccentColor.Selected = mini(CachedShip.accent_color_int, AccentColor.Colors.size())
+	AccentTypeSelector.select(mini(CachedShip.accent_type_int, AccentTypeSelector.item_count))
 	Visuals.ACCENT_TYPE = _indexToAccent(CachedShip.accent_type_int)
-	BlinkerOnColor.Selected = CachedShip.blinker_on_int
-	BlinkerOffColor.Selected = CachedShip.blinker_off_int
+	BlinkerOnColor.Selected = mini(CachedShip.blinker_on_int, BlinkerOnColor.Colors.size())
+	BlinkerOffColor.Selected = mini(CachedShip.blinker_off_int, BlinkerOffColor.Colors.size())
 	BlinkerInterval.value = CachedShip.blinker_interval
 	BlinkerInterp.button_pressed = CachedShip.blinker_interp
-	InlineColor.Selected = CachedShip.inline_int
-	OutlineColor.Selected = CachedShip.outline_int
+	InlineColor.Selected = mini(CachedShip.inline_int, InlineColor.Colors.size())
+	OutlineColor.Selected = mini(CachedShip.outline_int, OutlineColor.Colors.size())
 	# The colors are explicitly set so that manually edited save data displays correctly
 	#Visuals.HULL_COLOR = CachedShip.hull_color
 	#Visuals.COCKPIT_COLOR = CachedShip.cockpit_color
