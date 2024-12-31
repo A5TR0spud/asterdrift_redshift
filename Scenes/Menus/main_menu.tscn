@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
 [ext_resource type="Texture2D" uid="uid://ccgxfu1vo0nw5" path="res://Assets/UI/Icons/Play.png" id="2_i8p1f"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_utqbt"]
-[ext_resource type="Texture2D" uid="uid://8on70d34ghqp" path="res://Assets/Icon.png" id="3_adjsq"]
+[ext_resource type="Texture2D" uid="uid://8on70d34ghqp" path="res://Assets/Title.png" id="3_adjsq"]
 [ext_resource type="Texture2D" uid="uid://c77dhg0rwkgb1" path="res://Assets/UI/Icons/Garage.png" id="3_i2niw"]
 [ext_resource type="Texture2D" uid="uid://dtvfmeith420a" path="res://Assets/UI/Icons/Settings.png" id="4_ino3e"]
 [ext_resource type="Texture2D" uid="uid://c1g8uqg6pp7qo" path="res://Assets/GodotIcon.png" id="6_1rrf4"]
@@ -71,13 +71,13 @@ script = ExtResource("1_mr2mu")
 [node name="Title" type="TextureRect" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.016
+anchor_left = 0.017
 anchor_top = 0.472
-anchor_right = 0.016
+anchor_right = 0.017
 anchor_bottom = 0.472
-offset_left = -0.360001
+offset_left = -0.320002
 offset_top = -125.88
-offset_right = 281.64
+offset_right = 281.68
 offset_bottom = 0.11998
 texture = ExtResource("3_adjsq")
 

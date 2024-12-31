@@ -1,9 +1,8 @@
 ## indev Build 14
 
-- !IMPORTANT!: Hangar now uses threads per upgrade to help mitigate lag on buying
+- !IMPORTANT!: Hangar now uses a thread per upgrade to help mitigate lag on buying
 	- !IMPORTANT!: PLEASE let me know if this causes ANY issues
 	- Optimized upgrade's propogation function a bit to further reduce latency
-- Nerfed Charged Shield: now uses +1 energy
 - Added Plasma Bubble upgrade to Charged Shield
 - Solar Cell is now a child of RTG
 - Inventory Audit is once again a child of Inventory Monitor
@@ -12,10 +11,11 @@
 - Added Focus Fire setting to Artemis (does not require Artemis enabled)
 - Added Prioritize Resources setting to Attractor Beam
 - "Buffed" Stage 2 acceleration: 4 -> 8
-- Fixed Stage 2 boost VFX not working when turning around
+- Nerfed Charged Shield: now uses +1 energy
 - Thruster VFX acceleration length is now capped by max speed
 - Added WIP title icon to main menu
 - Made adjustments to available Garage colors
+- Fixed Stage 2 boost VFX not working when turning around
 - Fixed RCS's drag not actually ever stopping the player
 	- This also fixed drag not working as well as v11, due to a fix in v12
 - Fixed RCS only ever rotating you within 5 degrees of the RCS cursor
