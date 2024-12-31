@@ -26,7 +26,7 @@
 - Fixed RCS only ever rotating you within 5 degrees of the RCS cursor
 - Fixed Reset button in Hangar not resetting Upcycler's incrementer for core conversions
 - Fixed resolution options
-- Fixed Juniper Beam not applying any force to stationary resources
+- Fixed Juniper Beam not applying any force to stationary resources when the ship is not moving
 
 ## indev Build Unlucky 13
 
