@@ -7,16 +7,18 @@
 - Added Overcharge upgrade to Overclocking
 - Added Calibration upgrade to Idle Process
 - Added Focus Fire setting to Artemis (does not require Artemis enabled)
+- Added Prioritize Resources setting to Attractor Beam
 - "Buffed" Stage 2 acceleration: 4 -> 8
 - Fixed Stage 2 boost VFX not working when turning around
 - Thruster VFX acceleration length is now capped by max speed
+- Added WIP title icon to main menu
+- Made adjustments to available Garage colors
 - Fixed RCS's drag not actually ever stopping the player
 	- This also fixed drag not working as well as v11, due to a fix in v12
 - Fixed RCS only ever rotating you within 5 degrees of the RCS cursor
 - Fixed Reset button in Hangar not resetting Upcycler's incrementer for core conversions
 - Fixed resolution options
-- Added WIP title icon to main menu
-- Made adjustments to Garage colors
+- Fixed Juniper Beam not applying any force to stationary resources
 
 ## indev Build Unlucky 13
 

@@ -179,47 +179,64 @@ func _physics_process(delta) -> void:
 		_artemisTarget = null
 	
 	if AUTO_LASER && !APOLLO:
+		var priRes: bool = UpgradesManager.LoadIsEnabled("PriorityResource")
+		var targetOnlyRes: bool = false
 		for col in Entities:
 			if !is_instance_valid(col):
 				Entities.erase(col)
+				continue
+			if priRes && col.isResource && _isLaserTargetable(col):
+				targetOnlyRes = true
 		for col: Entity in Entities:
 			if !_isLaserTargetable(col):
 				continue
 			
-			if _closestEntity == null:
-				_closestEntity = col
-			if _farthestEntity == null:
-				_farthestEntity = col
-			if _fastestEntity == null:
-				_fastestEntity = col
-			if _slowestEntity == null:
-				_slowestEntity = col
-			if _arbitraryEntity == null:
-				_arbitraryEntity = col
-			#close
+			#near
 			var test1: float = col.global_position.distance_to(global_position) - col.Radius
-			var test2: float = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
-			if test1 < test2:
-				_closestEntity = col
+			var test2: float = -1
+			if _closestEntity != null:
+				test2 = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
+			if test1 < test2 || _closestEntity == null:
+				if targetOnlyRes:
+					if col.isResource:
+						_closestEntity = col
+						_closestThreat = col
+				else:
+					_closestEntity = col
+					if col.DangerousCollision:
+						_closestThreat = col
 				if col.isResource:
 					_closestCollectable = col
-				if col.DangerousCollision:
-					_closestThreat = col
 			#far
-			test2 = _farthestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
-			if test1 > test2:
-				_farthestEntity = col
+			if _farthestEntity != null:
+				test2 = _farthestEntity.global_position.distance_to(global_position)
+			if test1 > test2 || _farthestEntity == null:
+				if targetOnlyRes:
+					if col.isResource:
+						_farthestEntity = col
+				else:
+					_farthestEntity = col
 				if col.isResource:
 					_farthestCollectable = col
 			#fast
 			test1 = col.linear_velocity.length()
-			test2 = _fastestEntity.linear_velocity.length()
-			if test1 > test2:
-				_fastestEntity = col
+			if _fastestEntity != null:
+				test2 = _fastestEntity.linear_velocity.length()
+			if test1 > test2 || _fastestEntity == null:
+				if targetOnlyRes:
+					if col.isResource:
+						_fastestEntity = col
+				else:
+					_fastestEntity = col
 			#slow
-			test2 = _slowestEntity.linear_velocity.length()
-			if test1 < test2:
-				_slowestEntity = col
+			if _slowestEntity != null:
+				test2 = _slowestEntity.linear_velocity.length()
+			if test1 < test2 || _slowestEntity == null:
+				if targetOnlyRes:
+					if col.isResource:
+						_slowestEntity = col
+				else:
+					_slowestEntity = col
 		if _closestCollectable == null:
 			_closestCollectable = _closestEntity
 		if _farthestCollectable == null:
@@ -338,9 +355,10 @@ static func ApplyLaserEffects(target: Entity, global_pos: Vector2, laser_directi
 		if UpgradesManager.Load("BetterTractorNeedle") > 0:
 			extraPower *= 2
 			var antiOrbit: Vector2 = Instance.Player.linear_velocity - target.linear_velocity
-			var coe: float = absf((-laser_direction + Instance.Player.linear_velocity).dot(target.linear_velocity + Instance.Player.linear_velocity))
-			antiOrbit = antiOrbit.normalized()
-			kbDir = kbDir * (coe) - antiOrbit * (1.0 - coe) * 2.0
+			if antiOrbit.length_squared() > 0.1:
+				var coe: float = absf((-laser_direction + Instance.Player.linear_velocity).dot(target.linear_velocity + Instance.Player.linear_velocity))
+				antiOrbit = antiOrbit.normalized()
+				kbDir = kbDir * (coe) - antiOrbit * (1.0 - coe) * 2.0
 		target.apply_force(potency * extraPower * Instance.FORCE * kbDir.normalized() * 0.08 * Instance.KNOCKBACK_COEF, global_pos - target.global_position)
 	if target is Mineable && Instance.MINING_COEF > 0:
 		target.Mine(global_pos + normal * 4, potency * Instance.MINING_COEF * delta)

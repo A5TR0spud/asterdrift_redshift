@@ -87,6 +87,8 @@ signal notify_children(propogation : int)
 @export var HIDE : bool = false
 ## If true, upgrade will always be bought automatically and for free. Also hides the level counter in the tooltip.
 @export var PRE_BOUGHT : bool = false
+## If pre-bought, starts enabled.
+@export var START_ENABLED: bool = true
 ## What it costs to buy this upgrade.
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Materials") var Cost: Materials:
 	get:
@@ -159,14 +161,17 @@ func _updateTooltip():
 				RequirementT.text += ", "
 			i += 1
 
-func ChildIsNotified(propogation : int):
+func ChildIsNotified(propogation: int):
 	if CurrentLevel > 0 || PARENT_UPGRADE.CurrentLevel > 0:
 		propogation = 0
 	else:
 		propogation += 1
 	emit_signal("notify_children", propogation)
 	if PRE_BOUGHT:
+		var before: bool = UpgradesManager.Load(INTERNAL_NAME, false) > 0
 		_try_buy()
+		if !before:
+			SetEnabled(START_ENABLED, true, false)
 	ReloadVisible()
 	if !Engine.is_editor_hint():
 		hide()
@@ -242,6 +247,7 @@ func _try_buy() -> void:
 		MaterialsManager.Mats.Components -= Cost.Components
 	if PRE_BOUGHT:
 		CurrentLevel = MAX_LEVEL
+		
 	else:
 		CurrentLevel += 1
 	
@@ -291,7 +297,7 @@ func _on_button_pressed():
 	else:
 		toggle()
 
-func SetEnabled(enabled: bool, triggerIncludes: bool = true) -> void:
+func SetEnabled(enabled: bool, triggerIncludes: bool = true, propogate: bool = true) -> void:
 	if CurrentLevel != MAX_LEVEL:
 		return
 	UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, enabled)
@@ -314,7 +320,8 @@ func SetEnabled(enabled: bool, triggerIncludes: bool = true) -> void:
 			dependent.SetEnabled(false, false)
 		for inverse_dependent: Upgrade in INVERSE_DEPENDENT_UPGRADES:
 			inverse_dependent.SetEnabled(true, false)
-	emit_signal("upgrade_successfully_bought", CurrentLevel if enabled else 0)
+	if propogate:
+		emit_signal("upgrade_successfully_bought", CurrentLevel if enabled else 0)
 
 func toggle() -> void:
 	if CurrentLevel != MAX_LEVEL:
