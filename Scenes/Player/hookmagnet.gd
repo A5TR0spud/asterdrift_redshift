@@ -35,7 +35,7 @@ func _ready():
 		#else:
 		$TractorBay.hide()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !Player.CAN_MOVE:
 		hide()
 		return

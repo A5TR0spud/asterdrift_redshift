@@ -1,5 +1,8 @@
 ## indev Build 14
 
+- !IMPORTANT!: Hangar now uses threads per upgrade to help mitigate lag on buying
+	- !IMPORTANT!: PLEASE let me know if this causes ANY issues
+	- Optimized upgrade's propogation function a bit to further reduce latency
 - Nerfed Charged Shield: now uses +1 energy
 - Added Plasma Bubble upgrade to Charged Shield
 - Solar Cell is now a child of RTG

@@ -2,7 +2,11 @@ extends Node2D
 @warning_ignore("unused_signal")
 signal reload_display
 
+const UPGRADES_PER_THREAD: int = 5
+var _Threads: Array[Thread]
+
 func _ready():
+	_Threads = []
 	_reloadChildren(0)
 	_onAllUpgradeChildren(self, _connect)
 	_onAllUpgradeChildren(self, _propo)
@@ -11,11 +15,25 @@ func _connect(child: Upgrade) -> void:
 	child.upgrade_successfully_bought.connect(_reloadChildren)
 
 func _onAllUpgradeChildren(parent: Node, toRun: Callable) -> void:
+	var i: int = 0
 	for child : Node2D in parent.get_children():
+		i += 1
+		if _Threads.size() < i:
+			_Threads.append(Thread.new())
 		if child is Upgrade:
-			toRun.call(child)
+			if _Threads[i - 1].is_started():
+				_threadFunction(child, toRun)
+			else:
+				_Threads[i - 1].start(_threadFunction.bind(child, toRun))
 		elif child is Node:
 			_onAllUpgradeChildren(child, toRun)
+
+	for _thread: Thread in _Threads:
+		if _thread.is_started():
+			_thread.wait_to_finish()
+
+func _threadFunction(child: Node, toRun: Callable) -> void:
+	call_thread_safe(toRun.get_method(), child)
 
 func _relVis(child: Upgrade):
 	child.ReloadVisible()

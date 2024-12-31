@@ -135,7 +135,7 @@ func _on_killed():
 func _spawn(p: Node2D):
 	get_parent().add_child(p)
 
-func _on_resource_mined(global_pos):
+func _on_resource_mined(_global_pos):
 	if ResourcesLeft < 1:
 		if SIZE > 1:
 			SIZE -= 1

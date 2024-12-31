@@ -167,6 +167,8 @@ func ChildIsNotified(propogation: int):
 	else:
 		propogation += 1
 	emit_signal("notify_children", propogation)
+	if CurrentLevel > 0:
+		return
 	if PRE_BOUGHT:
 		var before: bool = UpgradesManager.Load(INTERNAL_NAME, false) > 0
 		_try_buy()

@@ -20,7 +20,7 @@ func _ready():
 		Radar.show()
 		TrackedBodies = []
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !Player.CAN_MOVE:
 		hide()
 		queue_free()
