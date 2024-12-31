@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1cei46gju2mb"
-path="res://.godot/imported/BackgroundOutline.png-ae73a75e22384d485089e806686780a6.ctex"
+uid="uid://bqj864gt1n8gd"
+path="res://.godot/imported/TargetPriorityApproaching.png-d36b970f609d8e5c7fc48d3ff2b8e83b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/Meta/BackgroundOutline.png"
-dest_files=["res://.godot/imported/BackgroundOutline.png-ae73a75e22384d485089e806686780a6.ctex"]
+source_file="res://Assets/Hangar/Upgrades/TargetPriorityApproaching.png"
+dest_files=["res://.godot/imported/TargetPriorityApproaching.png-d36b970f609d8e5c7fc48d3ff2b8e83b.ctex"]
 
 [params]
 

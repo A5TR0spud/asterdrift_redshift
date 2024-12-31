@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=166 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -73,13 +73,12 @@
 [ext_resource type="Texture2D" uid="uid://c6ndxo4borumr" path="res://Assets/Hangar/Upgrades/Recycler.png" id="58_dxmc4"]
 [ext_resource type="Texture2D" uid="uid://bysegj7pu72rm" path="res://Assets/Hangar/Upgrades/StatusMonitor.png" id="59_4b4q2"]
 [ext_resource type="Texture2D" uid="uid://kv5qlp478v4p" path="res://Assets/Hangar/Upgrades/Upcycler.png" id="59_vay1v"]
-[ext_resource type="Texture2D" uid="uid://bx3bvxtnceipi" path="res://Assets/Hangar/Upgrades/TargetPriorityFirst.png" id="59_vcc1g"]
 [ext_resource type="Texture2D" uid="uid://8j0iubm5lynj" path="res://Assets/Hangar/Upgrades/ResourceChangelog.png" id="60_4i2hb"]
 [ext_resource type="Texture2D" uid="uid://djx5k7qt0x2rs" path="res://Assets/Hangar/Upgrades/Dynamo.png" id="60_l6rli"]
-[ext_resource type="Texture2D" uid="uid://kv7174bd1s2" path="res://Assets/Hangar/Upgrades/TargetPriorityLast.png" id="60_ps1a3"]
 [ext_resource type="Texture2D" uid="uid://bx02d6tpqgpqc" path="res://Assets/Hangar/Upgrades/Tesla.png" id="60_tyfau"]
 [ext_resource type="Texture2D" uid="uid://drd4f73hvwudq" path="res://Assets/Hangar/Upgrades/ResourceMonitor.png" id="61_1lmmb"]
 [ext_resource type="Texture2D" uid="uid://ddj5s2ecivi1d" path="res://Assets/Hangar/Upgrades/ResourcePriority.png" id="61_iog5w"]
+[ext_resource type="Texture2D" uid="uid://buk3ggom1v5tj" path="res://Assets/Hangar/Upgrades/TargetPrioritySmart.png" id="66_egsts"]
 [ext_resource type="Texture2D" uid="uid://dv68arsrmso82" path="res://Assets/Hangar/Upgrades/Kiln.png" id="70_3jmie"]
 [ext_resource type="Texture2D" uid="uid://bv450k00ppwgd" path="res://Assets/Hangar/Upgrades/Anvil.png" id="71_o21ao"]
 [ext_resource type="Texture2D" uid="uid://y7v7rhgcoxgc" path="res://Assets/Hangar/Upgrades/Demeter.png" id="72_q3grg"]
@@ -515,25 +514,16 @@ Synthetics = 0
 Organics = 0
 Components = 0
 
-[sub_resource type="Resource" id="Resource_r1s7n"]
-resource_local_to_scene = true
-script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
-Organics = 0
-Components = 0
-
-[sub_resource type="Resource" id="Resource_e0vr8"]
-resource_local_to_scene = true
-script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 0
-Organics = 0
-Components = 0
-
 [sub_resource type="Resource" id="Resource_54sj4"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 0
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_r1s7n"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
@@ -1501,34 +1491,6 @@ INCLUDE_UPGRADES = [NodePath("../CursorOverride")]
 PRE_BOUGHT = true
 Cost = SubResource("Resource_irfwe")
 
-[node name="PriorityFirst" parent="Camera2D/TechTree/BottomLeft/Laser" instance=ExtResource("4_r883k")]
-position = Vector2(-128, 368)
-NAME = "Artemis Priority: First"
-DESCRIPTION = "Targets the first object that entered
-range, until it's invalid, then targets the
-second object."
-INTERNAL_NAME = "PriorityFirst"
-SPRITE = ExtResource("59_vcc1g")
-SHOW_PARENT_LINE = false
-HIDE_WITHOUT_PARENT = true
-HIDE = true
-PRE_BOUGHT = true
-Cost = SubResource("Resource_r1s7n")
-
-[node name="PriorityLast" parent="Camera2D/TechTree/BottomLeft/Laser" instance=ExtResource("4_r883k")]
-position = Vector2(-160, 336)
-NAME = "Artemis Priority: Last"
-DESCRIPTION = "Targets the object that most recently
-entered range, until it's invalid, then
-targets the next most recent object."
-INTERNAL_NAME = "PriorityLast"
-SPRITE = ExtResource("60_ps1a3")
-SHOW_PARENT_LINE = false
-HIDE_WITHOUT_PARENT = true
-HIDE = true
-PRE_BOUGHT = true
-Cost = SubResource("Resource_e0vr8")
-
 [node name="PriorityResource" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(-272, 48)
 NAME = "Prioritize Resources"
@@ -1543,6 +1505,44 @@ HIDE_WITHOUT_PARENT = true
 PRE_BOUGHT = true
 START_ENABLED = false
 Cost = SubResource("Resource_54sj4")
+
+[node name="ArtemisSetting" parent="Camera2D/TechTree/BottomLeft/Laser" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(-160, 272)
+NAME = "ARTEMIS SETTING"
+DESCRIPTION = "ARTEMIS SETTING DESCRIPTION"
+INTERNAL_NAME = "ArtemisSetting"
+SPRITE = ExtResource("66_egsts")
+PARENT_UPGRADE = NodePath("../Artemis")
+SHOW_PARENT_LINE = false
+HIDE_WITHOUT_PARENT = true
+MAX_LEVEL = 7
+PRE_BOUGHT = true
+START_ENABLED = false
+CYCLE = true
+CYCLE_NAMES = Array[String](["Artemis Priority: Smart", "Artemis Priority: First", "Artemis Priority: Last", "Artemis Priority: Near", "Artemis Priority: Far", "Artemis Priority: Approaching", "Artemis Priority: Diverging"])
+CYCLE_DESCRIPTIONS = Array[String](["Targets diverging resources and
+approaching threats.
+Remember: target priority has
+no effect if Artemis is disabled.", "Targets the first object that
+entered range, until it's invalid,
+then targets the second object.
+Remember: target priority has
+no effect if Artemis is disabled.", "Targets the last object that
+entered range, until it's invalid,
+then targets the next last object.
+Remember: target priority has
+no effect if Artemis is disabled.", "Targets the closest object.
+Remember: target priority has
+no effect if Artemis is disabled.", "Targets the farthest object.
+Remember: target priority has
+no effect if Artemis is disabled.", "Targets the most rapidly approaching
+object.
+Remember: target priority has
+no effect if Artemis is disabled.", "Targets the most rapidly diverging
+object.
+Remember: target priority has
+no effect if Artemis is disabled."])
+Cost = SubResource("Resource_r1s7n")
 
 [node name="Shield" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
 

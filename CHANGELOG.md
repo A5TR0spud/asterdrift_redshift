@@ -9,6 +9,11 @@
 - Added Overcharge upgrade to Overclocking
 - Added Calibration upgrade to Idle Process
 - Added Focus Fire setting to Artemis (does not require Artemis enabled)
+- Added target priority settings to Artemis (requires Artemis be enabled)
+- Optimized laser targeting:
+	- Will now only run retarget code every 0.25s instead of every physics frame
+	- Will additionally run if Artemis loses its target
+	- Will also run if an object enters or exits the laser's range
 - Added Prioritize Resources setting to Attractor Beam
 - "Buffed" Stage 2 acceleration: 4 -> 8
 - Nerfed Charged Shield: now uses +1 energy

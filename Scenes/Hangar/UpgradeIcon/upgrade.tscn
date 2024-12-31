@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=31 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
 [ext_resource type="Texture2D" uid="uid://mudilooehc3w" path="res://Assets/Hangar/Upgrades/Meta/Disabled.png" id="3_pw2ue"]
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/Meta/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
+[ext_resource type="Texture2D" uid="uid://b7jakho75cv5" path="res://Assets/Hangar/Upgrades/Meta/BackgroundFrame.png" id="5_hjdey"]
 [ext_resource type="Texture2D" uid="uid://bavifds8ksa17" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png" id="6_pugof"]
 [ext_resource type="Texture2D" uid="uid://c2yjrmcysqnsd" path="res://Assets/Hangar/Upgrades/Meta/Background.png" id="8_djbwo"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="8_nu5sk"]
@@ -116,6 +117,10 @@ z_index = -4
 z_as_relative = false
 texture = ExtResource("8_djbwo")
 
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+z_index = 1
+texture = ExtResource("5_hjdey")
+
 [node name="MainIcon" type="Sprite2D" parent="."]
 modulate = Color(0.5, 0.5, 0.5, 1)
 texture = ExtResource("2_wk4es")
@@ -139,7 +144,6 @@ visible = false
 texture = ExtResource("3_yu8kn")
 
 [node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
-visible = false
 z_index = 1
 z_as_relative = false
 position = Vector2(0, 17)
@@ -151,7 +155,6 @@ z_as_relative = false
 position = Vector2(0, 17)
 
 [node name="TooltipContainer" type="PanelContainer" parent="."]
-visible = false
 z_index = 200
 z_as_relative = false
 offset_left = 32.0
@@ -209,6 +212,12 @@ theme = SubResource("Theme_3w4wk")
 visible = false
 layout_mode = 2
 text = "Click to toggle on and off."
+label_settings = SubResource("LabelSettings_qemxh")
+
+[node name="CycleLabel" type="Label" parent="TooltipContainer/Tooltip/Bottom"]
+visible = false
+layout_mode = 2
+text = "Click to cycle."
 label_settings = SubResource("LabelSettings_qemxh")
 
 [node name="Costs" parent="TooltipContainer/Tooltip/Bottom" instance=ExtResource("5_g1xj2")]

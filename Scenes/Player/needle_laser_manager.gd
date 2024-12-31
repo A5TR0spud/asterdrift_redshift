@@ -47,6 +47,7 @@ class_name NeedleLaserManager
 			_reloadVisuals()
 
 @export var APOLLO: bool = false
+@export var ARTEMIS: bool = false
 
 @onready var LaserPrefab := preload("res://Scenes/Player/needle_laser.tscn")
 
@@ -92,7 +93,7 @@ func _reloadVisuals() -> void:
 		$ApolloCorona.position.x = -RANGE
 		$ApolloCorona.position.y = -RANGE
 		$ApolloCorona.modulate.a = 0.9
-		if UpgradesManager.Load("Artemis") > 0:
+		if ARTEMIS:
 			var x: ShaderMaterial = $ApolloCorona.material
 			var c1: Color = _laserifyColor(Visuals.BLINKER_ON_COLOR, true)
 			var c2: Color = _laserifyColor(Visuals.BLINKER_OFF_COLOR, false)
@@ -125,7 +126,7 @@ func _reloadVisuals() -> void:
 			child.WIDTH = WIDTH
 
 func _laserifyColor(col: Color, on: bool) -> Color:
-	if UpgradesManager.Load("Artemis") > 0:
+	if ARTEMIS:
 		if UpgradesManager.Load("Apollo") > 0:
 			if on:
 				col = Color(1, 0.5, 1, 1)
@@ -146,6 +147,7 @@ func _laserifyColor(col: Color, on: bool) -> Color:
 	col.a = 1
 	return col
 
+#auto
 var _closestEntity: Entity = null
 var _farthestEntity: Entity = null
 var _fastestEntity: Entity = null
@@ -155,9 +157,25 @@ var _closestCollectable: Entity = null
 var _farthestCollectable: Entity = null
 var _closestThreat: Entity = null
 
+#artemis
+var _focusFireTarget: Entity = null
 var _artemisTarget: Entity = null
+var _firstTarget: Entity = null
+var _lastTarget: Entity = null
+var _approachingTarget: Entity = null
+var _divergingTarget: Entity = null
+
+#smart
+var _divergingResource: Entity = null
+var _divergingResourceWeight: float = 0
+var _approachingThreat: Entity = null
+var _approachingThreatWeight: float = 0
 
 static var Instance: NeedleLaserManager
+
+const RETARGET_INTERVAL: float = 0.25
+var _retarget_timer: float = 0
+var _force_retarget: bool = true
 
 func _physics_process(delta) -> void:
 	if !Player.CAN_MOVE:
@@ -174,28 +192,46 @@ func _physics_process(delta) -> void:
 	_closestCollectable = _tryNullifyTarget(_closestCollectable)
 	_farthestCollectable = _tryNullifyTarget(_farthestCollectable)
 	_closestThreat = _tryNullifyTarget(_closestThreat)
+	if ARTEMIS:
+		_firstTarget = _tryNullifyTarget(_firstTarget)
+		_lastTarget = _tryNullifyTarget(_lastTarget)
+		_approachingTarget = _tryNullifyTarget(_approachingTarget)
+		_divergingTarget = _tryNullifyTarget(_divergingTarget)
+		_approachingThreat = _tryNullifyTarget(_approachingThreat)
+		_divergingResource = _tryNullifyTarget(_divergingResource)
+		
+		_artemisTarget = _tryNullifyTarget(_artemisTarget)
+		if _artemisTarget == null:
+			_force_retarget = true
 	
-	if !_isLaserTargetable(_artemisTarget):
-		_artemisTarget = null
+	if !_isLaserTargetable(_focusFireTarget):
+		_focusFireTarget = null
 	
-	if AUTO_LASER && !APOLLO:
+	_retarget_timer -= delta
+	
+	if AUTO_LASER && !APOLLO && (_retarget_timer <= 0 || _force_retarget):
+		_retarget_timer = RETARGET_INTERVAL
+		_force_retarget = false
 		var priRes: bool = UpgradesManager.LoadIsEnabled("PriorityResource")
 		var targetOnlyRes: bool = false
 		for col in Entities:
-			if !is_instance_valid(col):
+			if !is_instance_valid(col):# || _tryNullifyTarget(col) == null || !_isLaserTargetable(col):
 				Entities.erase(col)
 				continue
-			if priRes && col.isResource && _isLaserTargetable(col):
-				targetOnlyRes = true
+			if _isLaserTargetable(col):
+				if priRes && col.isResource:
+					targetOnlyRes = true
 		for col: Entity in Entities:
 			if !_isLaserTargetable(col):
 				continue
-			
+			if _firstTarget == null:
+				_firstTarget = col
+			_lastTarget = col
 			#near
-			var test1: float = col.global_position.distance_to(global_position) - col.Radius
+			var test1: float = col.global_position.distance_squared_to(global_position) - col.Radius
 			var test2: float = -1
 			if _closestEntity != null:
-				test2 = _closestEntity.global_position.distance_to(global_position) - _closestEntity.Radius
+				test2 = _closestEntity.global_position.distance_squared_to(global_position) - _closestEntity.Radius
 			if test1 < test2 || _closestEntity == null:
 				if targetOnlyRes:
 					if col.isResource:
@@ -209,7 +245,7 @@ func _physics_process(delta) -> void:
 					_closestCollectable = col
 			#far
 			if _farthestEntity != null:
-				test2 = _farthestEntity.global_position.distance_to(global_position)
+				test2 = _farthestEntity.global_position.distance_squared_to(global_position)
 			if test1 > test2 || _farthestEntity == null:
 				if targetOnlyRes:
 					if col.isResource:
@@ -219,9 +255,9 @@ func _physics_process(delta) -> void:
 				if col.isResource:
 					_farthestCollectable = col
 			#fast
-			test1 = col.linear_velocity.length()
+			test1 = col.linear_velocity.length_squared()
 			if _fastestEntity != null:
-				test2 = _fastestEntity.linear_velocity.length()
+				test2 = _fastestEntity.linear_velocity.length_squared()
 			if test1 > test2 || _fastestEntity == null:
 				if targetOnlyRes:
 					if col.isResource:
@@ -230,19 +266,85 @@ func _physics_process(delta) -> void:
 					_fastestEntity = col
 			#slow
 			if _slowestEntity != null:
-				test2 = _slowestEntity.linear_velocity.length()
+				test2 = _slowestEntity.linear_velocity.length_squared()
 			if test1 < test2 || _slowestEntity == null:
 				if targetOnlyRes:
 					if col.isResource:
 						_slowestEntity = col
 				else:
 					_slowestEntity = col
+			
+			#artemis-exclusives beyond this point
+			if !ARTEMIS:
+				continue
+			#approaching
+			var dir: Vector2 = col.global_position - global_position
+			var vdr: Vector2 = col.linear_velocity - Player.linear_velocity
+			var coe: float = dir.dot(vdr)
+			test1 = vdr.length_squared() * coe
+			if _approachingTarget != null:
+				dir = _approachingTarget.global_position - global_position
+				vdr = _approachingTarget.linear_velocity - Player.linear_velocity
+				coe = dir.dot(vdr)
+				test2 = vdr.length_squared() * coe
+			if test1 < test2 || _approachingTarget == null:
+				if col.DangerousCollision || col.isAsteroid || col.isEnemy:
+					_approachingThreat = col
+					_approachingThreatWeight = -test2 / dir.length()
+				
+				if targetOnlyRes:
+					if col.isResource:
+						_approachingTarget = col
+				else:
+					_approachingTarget = col
+			#diverging
+			if _divergingTarget != null:
+				dir = _divergingTarget.global_position - global_position
+				vdr = _divergingTarget.linear_velocity - Player.linear_velocity
+				coe = dir.dot(vdr)
+				test2 = vdr.length_squared() * coe
+			if test1 > test2 || _divergingTarget == null:
+				if col.isResource:
+					_divergingResource = col
+					_divergingResourceWeight = test2 * 0.5
+				
+				if targetOnlyRes:
+					if col.isResource:
+						_divergingTarget = col
+				else:
+					_divergingTarget = col
 		if _closestCollectable == null:
 			_closestCollectable = _closestEntity
 		if _farthestCollectable == null:
 			_farthestCollectable = _farthestEntity
 		if _closestThreat == null:
 			_closestThreat = _fastestEntity
+		if ARTEMIS:
+			var artSetting: int = UpgradesManager.Load("ArtemisSetting")
+			if artSetting == 2:
+				#first
+				_artemisTarget = _firstTarget
+			elif artSetting == 3:
+				#last
+				_artemisTarget = _lastTarget
+			elif artSetting == 4:
+				#near
+				_artemisTarget = _closestEntity
+			elif artSetting == 5:
+				#far
+				_artemisTarget = _farthestEntity
+			elif artSetting == 6:
+				#approaching
+				_artemisTarget = _approachingTarget
+			elif artSetting == 7:
+				#diverging
+				_artemisTarget = _divergingTarget
+			else:
+				#smart
+				if _approachingThreatWeight > _divergingResourceWeight:
+					_artemisTarget = _approachingThreat
+				else:
+					_artemisTarget = _divergingResource
 	
 	if APOLLO:
 		for ent: Entity in Entities:
@@ -273,11 +375,13 @@ func _physics_process(delta) -> void:
 							var col := ray.get_collider()
 							if col is Entity:
 								if _isLaserTargetable(col):
-									_artemisTarget = col
+									_focusFireTarget = col
 					continue
 				if !AUTO_LASER:
 					continue
-				if UpgradesManager.Load("FocusFire") > 0 && _tryTarget(child, _artemisTarget):
+				if UpgradesManager.Load("FocusFire") > 0 && _tryTarget(child, _focusFireTarget):
+					continue
+				if ARTEMIS && _tryTarget(child, _artemisTarget):
 					continue
 				if i % 8 == 0:
 					_tryTarget(child, _closestEntity)
@@ -297,7 +401,7 @@ func _physics_process(delta) -> void:
 					_tryTarget(child, _closestThreat)
 
 func _tryTarget(child: NeedleLaserClass, target: Entity) -> bool:
-	if target != null && _isTargetInRange(target):
+	if is_instance_valid(target) && target != null && _isTargetInRange(target):
 		child.Target.global_position = target.global_position
 		child._laserFiring = true
 		return true
@@ -310,6 +414,8 @@ func _on_ship_visuals_firemalasar():
 
 func _isLaserTargetable(target) -> bool:
 	if _tryNullifyTarget(target, true) == null:
+		return false
+	if target is not Entity:
 		return false
 	if target.IgnoredByLaser:
 		return false
@@ -332,9 +438,9 @@ func _tryNullifyTarget(target, ignoreDistance: bool = false) -> Entity:
 		return null
 	
 	if target is Entity:
-		if !ignoreDistance && _isTargetInRange(target):
+		if !ignoreDistance && !_isTargetInRange(target):
 			return null
-		elif target.IgnoredByLaser:
+		if target.IgnoredByLaser:
 			return null
 	else:
 		return null
@@ -369,8 +475,10 @@ static func ApplyLaserEffects(target: Entity, global_pos: Vector2, laser_directi
 func _on_laser_area_body_entered(body):
 	if body is Entity:
 		Entities.append(body)
+		_force_retarget = true
 
 
 func _on_laser_area_body_exited(body):
 	if Entities.has(body):
 		Entities.erase(body)
+		_force_retarget = true

@@ -29,6 +29,7 @@ signal notify_children(propogation : int)
 @onready var CostT := $TooltipContainer/Tooltip/Bottom/Costs
 @onready var Bottom := $TooltipContainer/Tooltip/Bottom
 @onready var ToggleT := $TooltipContainer/Tooltip/Bottom/ToggleLabel
+@onready var CycleT := $TooltipContainer/Tooltip/Bottom/CycleLabel
 @onready var ParentLine := $ParentLine
 @onready var LevelBar := $MainIcon/LevelBar
 @onready var RequirementT := $TooltipContainer/Tooltip/Middle/Middleman/Requirements
@@ -89,6 +90,12 @@ signal notify_children(propogation : int)
 @export var PRE_BOUGHT : bool = false
 ## If pre-bought, starts enabled.
 @export var START_ENABLED: bool = true
+## If true, then levels are actually settings.
+@export var CYCLE: bool = false
+## Setting names for cycle.
+@export var CYCLE_NAMES: Array[String] = []
+## Setting descriptions for cycle.
+@export_multiline var CYCLE_DESCRIPTIONS: Array[String] = []
 ## What it costs to buy this upgrade.
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Materials") var Cost: Materials:
 	get:
@@ -134,18 +141,23 @@ func _ready():
 	_updateTooltip()
 	if PARENT_UPGRADE != null:
 		PARENT_UPGRADE.notify_children.connect(ChildIsNotified)
-	if PRE_BOUGHT:
+	if PRE_BOUGHT && (!CYCLE || (CYCLE && CurrentLevel == 0)):
 		_try_buy()
 	
 
 func _updateTooltip():
-	NameT.text = NAME
-	DescT.text = DESCRIPTION
-	if PRE_BOUGHT || MAX_LEVEL <= 1:
+	if CYCLE:
+		NameT.text = CYCLE_NAMES[CurrentLevel - 1]
+		DescT.text = CYCLE_DESCRIPTIONS[CurrentLevel - 1]
+	else:
+		NameT.text = NAME
+		DescT.text = DESCRIPTION
+	if (PRE_BOUGHT || MAX_LEVEL <= 1) && !CYCLE:
 		LeveT.hide()
 	else:
 		LeveT.show()
 		LeveT.text = String.num(CurrentLevel) + "/" + String.num(MAX_LEVEL)
+	CycleT.visible = CYCLE
 	CostT.Display = Cost
 	RequirementT.hide()
 	if !REQUIRED_UPGRADES.is_empty():
@@ -192,11 +204,11 @@ func ReloadVisible(_ignored: int = 0):
 		BoolIcon.texture = BoolOn
 	else:
 		BoolIcon.texture = BoolOff
-	if CurrentLevel == MAX_LEVEL:
+	if CurrentLevel == MAX_LEVEL && !CYCLE:
 		CostT.hide()
 		ToggleT.show()
 	else:
-		CostT.show()
+		CostT.visible = !CYCLE
 		ToggleT.hide()
 	if PARENT_UPGRADE && SHOW_PARENT_LINE:
 		ParentLine.show()
@@ -214,11 +226,11 @@ func ReloadVisible(_ignored: int = 0):
 	MainIcon.modulate = Color(1, 1, 1, 1)
 	BoolIcon.hide()
 	AvailableIcon.hide()
-	if _can_buy():
+	if _can_buy() && !CYCLE:
 		AvailableIcon.show()
 	elif CurrentLevel == 0:
 		MainIcon.modulate = Color(0.5, 0.5, 0.5, 1)
-	if CurrentLevel == MAX_LEVEL:
+	if CurrentLevel == MAX_LEVEL && !CYCLE:
 		BoolIcon.show()
 		LevelBar.hide()
 	else:
@@ -236,7 +248,10 @@ func _updateLevelBar():
 			sprite2d.position.x = (MAX_LEVEL - 1) * -1.5 + 3 * (i)
 	for i: int in MAX_LEVEL:
 		var b: Sprite2D = LevelBar.get_child(i)
-		b.texture = LevelAccent if i < CurrentLevel else EmptyLevel
+		if CYCLE:
+			b.texture = LevelAccent if i == CurrentLevel - 1 else EmptyLevel
+		else:
+			b.texture = LevelAccent if i < CurrentLevel else EmptyLevel
 
 func _try_buy() -> void:
 	if !_can_buy():
@@ -247,11 +262,20 @@ func _try_buy() -> void:
 		MaterialsManager.Mats.Synthetics -= Cost.Synthetics
 		MaterialsManager.Mats.Organics -= Cost.Organics
 		MaterialsManager.Mats.Components -= Cost.Components
-	if PRE_BOUGHT:
+	if PRE_BOUGHT && !CYCLE:
 		CurrentLevel = MAX_LEVEL
-		
+	elif PRE_BOUGHT && CYCLE && CurrentLevel == 0:
+		CurrentLevel = 1
 	else:
-		CurrentLevel += 1
+		if CYCLE:
+			var fakeLevel: int = CurrentLevel
+			fakeLevel += 1
+			fakeLevel = fakeLevel % (MAX_LEVEL + 1)
+			if fakeLevel == 0:
+				fakeLevel = 1
+			CurrentLevel = fakeLevel
+		else:
+			CurrentLevel += 1
 	
 	MaterialsManager.Save()
 	SetEnabled(true)
@@ -285,6 +309,8 @@ func _can_buy() -> bool:
 			return false
 		if MaterialsManager.Mats.Components < Cost.Components:
 			return false
+	if CYCLE:
+		return true
 	return CurrentLevel < MAX_LEVEL
 
 func _on_button_mouse_entered():
@@ -294,7 +320,7 @@ func _on_button_mouse_exited():
 	Tooltip.hide()
 
 func _on_button_pressed():
-	if CurrentLevel < MAX_LEVEL:
+	if CurrentLevel < MAX_LEVEL || CYCLE:
 		_try_buy()
 	else:
 		toggle()

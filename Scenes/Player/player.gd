@@ -291,6 +291,7 @@ func _handleStats():
 			HasArtemis = true
 		else:
 			Laser.LASER_COUNT = LaserCount
+		Laser.ARTEMIS = HasArtemis
 		
 		x = Laser.RANGE
 		x += 16 * UpgradesManager.Load("SpareBattery")

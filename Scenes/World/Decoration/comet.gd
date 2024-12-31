@@ -5,7 +5,7 @@ class_name Comet
 func _ready():
 	Health = MaxHealth
 
-func _on_resource_mined(global_pos):
+func _on_resource_mined(_global_pos):
 	if ResourcesLeft < 1:
 		Kill()
 
