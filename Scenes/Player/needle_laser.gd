@@ -77,6 +77,7 @@ func _process(delta):
 @export var doesOrbit: bool = false
 @export var ARTEMIS: bool = false
 @export var artemisEntity: Entity = null
+@export var beingManuallyControlled: bool = false
 
 func _physics_process(delta) -> void:
 	if Player == null:
@@ -92,11 +93,11 @@ func _physics_process(delta) -> void:
 	
 	Target.position = Target.position.normalized() * RANGE
 	
-	if ARTEMIS && is_instance_valid(artemisEntity):
+	if ARTEMIS && is_instance_valid(artemisEntity) && !beingManuallyControlled:
 		var dir: Vector2 = artemisEntity.global_position - global_position
 		Ray.position = dir - dir.normalized() * (artemisEntity.Radius + 1)
 		#Ray.hit_from_inside = true
-		Ray.target_position = Target.position
+		Ray.target_position = dir.normalized() * RANGE - dir
 	else:
 		Ray.position = Vector2.ZERO
 		#Ray.hit_from_inside = false

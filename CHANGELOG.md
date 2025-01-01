@@ -13,6 +13,7 @@
 - Costs of Calibration and Overcharge have been nerfed from 32 to 48 ceramic
 - Dynamo has been buffed back to total velocity
 - Artemis now goes through things in the way of its target, if that obstruction is far away enough.
+- Focus Fire now loses target if you manually fire and hit nothing
 
 todo: pirates
 todo: comets

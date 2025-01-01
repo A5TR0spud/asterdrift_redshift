@@ -372,6 +372,7 @@ func _physics_process(delta) -> void:
 					continue
 				if Input.is_action_pressed("fire") && UpgradesManager.LoadIsEnabled("CursorOverride"):
 					child._laserFiring = true
+					child.beingManuallyControlled = true
 					child.Target.global_position = get_global_mouse_position()
 					if UpgradesManager.Load("FocusFire"):
 						var ray: RayCast2D = child.Ray
@@ -385,10 +386,11 @@ func _physics_process(delta) -> void:
 							if col is Entity:
 								if _isLaserTargetable(col):
 									_focusFireTarget = col
-									child.artemisEntity = null
+						else:
+							_focusFireTarget = null
 					continue
-				if _isLaserTargetable(_focusFireTarget) && _isTargetInRange(_focusFireTarget):
-					child.artemisEntity = _focusFireTarget
+				else:
+					child.beingManuallyControlled = false
 				if !AUTO_LASER:
 					continue
 				if UpgradesManager.Load("FocusFire") > 0 && _tryTarget(child, _focusFireTarget):
@@ -416,10 +418,8 @@ func _tryTarget(child: NeedleLaserClass, target: Entity) -> bool:
 	if is_instance_valid(target) && target != null && _isTargetInRange(target):
 		child.Target.global_position = target.global_position
 		child._laserFiring = true
-		if ARTEMIS:
+		if child.ARTEMIS:
 			child.artemisEntity = target
-		else:
-			child.artemisEntity = null
 		return true
 	else:
 		child._laserFiring = false

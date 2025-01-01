@@ -15,7 +15,7 @@ region = Rect2(19, 14, 4, 4)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dupgu"]
 shader = ExtResource("3_bh5u1")
 shader_parameter/Color1 = Color(1, 1, 1, 1)
-shader_parameter/Color2 = Color(1, 0, 0, 0)
+shader_parameter/Color2 = Color(1, 0.5, 0.5, 0)
 shader_parameter/threshold = 1.505
 shader_parameter/distFadeOffset = 5.16
 shader_parameter/distFadePerLayer = 0.2
@@ -28,6 +28,7 @@ shader_parameter/sharpness = 7.07107
 [node name="NeedleLaser" type="Node2D"]
 script = ExtResource("1_dsf08")
 ARTEMIS = null
+beingManuallyControlled = null
 
 [node name="LaserLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 40.4781, -121.431)
