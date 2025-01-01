@@ -1,8 +1,27 @@
+## indev Build 15
+
+- Added flare shader to Apollo (replaces inner ring)
+- Reduced rotation speed of Apollo, and edges no longer fade
+- Power drain now ramps at 0.1/s beginning at 30 seconds
+	- Starting energy upgrades increase it by 1 second per energy
+	- Calibration increases time by 15s
+	- Solar Cell increases time by 3s
+	- RTG increases time by 1s
+- On-Board Battery cost has been slightly buffed (4's -> 3's)
+- Energy is now capped to starting energy
+	- Overcharge increases cap by 30
+- Costs of Calibration and Overcharge have been nerfed from 32 to 48 ceramic
+- Dynamo has been buffed back to total velocity
+- Artemis now goes through things in the way of its target, if that obstruction is far away enough.
+
+todo: pirates
+todo: comets
+
 ## indev Build 14
 
 - !IMPORTANT!: Hangar now uses a thread per upgrade to help mitigate lag on buying
 	- !IMPORTANT!: PLEASE let me know if this causes ANY issues
-	- Optimized upgrade's propogation function a bit to further reduce latency
+	- Optimized upgrade's propagation function a bit to further reduce latency
 - Added Plasma Bubble upgrade to Charged Shield
 - Solar Cell is now a child of RTG
 - Inventory Audit is once again a child of Inventory Monitor
@@ -24,7 +43,7 @@
 - Fixed RCS's drag not actually ever stopping the player
 	- This also fixed drag not working as well as v11, due to a fix in v12
 - Fixed RCS only ever rotating you within 5 degrees of the RCS cursor
-- Fixed Reset button in Hangar not resetting Upcycler's incrementer for core conversions
+- Fixed Reset button in Hangar not resetting Upcycler's incrementor for core conversions
 - Fixed resolution options
 - Fixed Juniper Beam not applying any force to stationary resources when the ship is not moving
 

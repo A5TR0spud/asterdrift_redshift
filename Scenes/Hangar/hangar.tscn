@@ -149,7 +149,7 @@ Components = 2
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 32
+Ceramics = 48
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -193,10 +193,10 @@ Components = 1
 [sub_resource type="Resource" id="Resource_unk4j"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 4
+Metals = 3
 Ceramics = 6
-Synthetics = 4
-Organics = 4
+Synthetics = 3
+Organics = 3
 Components = 0
 
 [sub_resource type="Resource" id="Resource_msins"]
@@ -230,7 +230,7 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 32
+Ceramics = 48
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -1013,7 +1013,9 @@ Cost = SubResource("Resource_xxs1w")
 position = Vector2(-416, -176)
 NAME = "Overcharge"
 DESCRIPTION = "Max speed is increased by 1 unit per 5
-energy remaining."
+energy remaining.
+Energy can be charged to 30 past
+maximum."
 INTERNAL_NAME = "Overcharge"
 SPRITE = ExtResource("19_pp0li")
 PARENT_UPGRADE = NodePath("../../Power/Overclocking")
@@ -1075,7 +1077,10 @@ Cost = SubResource("Resource_unk4j")
 [node name="Solar" parent="Camera2D/TechTree/TopLeft/Power" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-64, -224)
 NAME = "Solar Cell"
-DESCRIPTION = "Reduces energy drain by 30% while above 70% energy."
+DESCRIPTION = "Reduces energy drain by 30% while
+above 70% energy.
+Power drain begins to ramp 3 seconds
+slower than usual."
 INTERNAL_NAME = "SolarPanel"
 SPRITE = ExtResource("19_u4yan")
 PARENT_UPGRADE = NodePath("../RTG")
@@ -1093,7 +1098,9 @@ Cost = SubResource("Resource_148e4")
 [node name="RTG" parent="Camera2D/TechTree/TopLeft/Power" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-64, -160)
 NAME = "Radioisotope Thermoelectric Generator"
-DESCRIPTION = "Every 8 seconds, gain 1 energy."
+DESCRIPTION = "Every 8 seconds, gain 1 energy.
+Power drain begins to ramp 1 second
+slower than usual."
 INTERNAL_NAME = "RTG"
 SPRITE = ExtResource("29_y2n1i")
 PARENT_UPGRADE = NodePath("../ShipBattery")
@@ -1103,7 +1110,9 @@ Cost = SubResource("Resource_y8gh4")
 position = Vector2(-192, -192)
 NAME = "Calibration"
 DESCRIPTION = "Acceleration is increased by 1 unit per
-second spent in run, up to +10 u/s²."
+second spent in run, up to +10 u/s².
+Power drain begins to ramp 15
+slower than usual."
 INTERNAL_NAME = "Calibration"
 SPRITE = ExtResource("28_eud44")
 PARENT_UPGRADE = NodePath("../Idling")
@@ -1738,9 +1747,7 @@ position = Vector2(96, 192)
 NAME = "Dynamo"
 DESCRIPTION = "Every resource collected grants energy
 based on ship velocity, but slightly slows
-the ship.
-Grants 0.125 energy per resource at
-max speed."
+the ship."
 INTERNAL_NAME = "Dynamo"
 SPRITE = ExtResource("60_l6rli")
 PARENT_UPGRADE = NodePath("../Furnace")

@@ -10,7 +10,7 @@ const GRACE : int = 4
 @warning_ignore("unused_signal")
 
 signal upgrade_successfully_bought(level : int)
-signal notify_children(propogation : int)
+signal notify_children(propagation : int)
 
 @onready var BoolOn := preload("res://Assets/Hangar/Upgrades/Meta/BooleanIconTrue.png")
 @onready var BoolOff := preload("res://Assets/Hangar/Upgrades/Meta/BooleanIconFalse.png")
@@ -173,13 +173,16 @@ func _updateTooltip():
 				RequirementT.text += ", "
 			i += 1
 
-func ChildIsNotified(propogation: int):
+func ChildIsNotified(propagation: int):
 	if CurrentLevel > 0 || PARENT_UPGRADE.CurrentLevel > 0:
-		propogation = 0
+		propagation = 0
 	else:
-		propogation += 1
-	emit_signal("notify_children", propogation)
+		propagation += 1
+	emit_signal("notify_children", propagation)
+	if CurrentLevel == MAX_LEVEL:
+		return
 	if CurrentLevel > 0:
+		ReloadVisible()
 		return
 	if PRE_BOUGHT:
 		var before: bool = UpgradesManager.Load(INTERNAL_NAME, false) > 0
@@ -190,7 +193,7 @@ func ChildIsNotified(propogation: int):
 	if !Engine.is_editor_hint():
 		hide()
 	var b: int = LOOK_AHEAD + UpgradesManager.Load("LookAhead")
-	if propogation < b:
+	if propagation < b:
 		if HIDE_WITHOUT_PARENT:
 			if PARENT_UPGRADE.CurrentLevel > 0:
 				show()
@@ -325,7 +328,7 @@ func _on_button_pressed():
 	else:
 		toggle()
 
-func SetEnabled(enabled: bool, triggerIncludes: bool = true, propogate: bool = true) -> void:
+func SetEnabled(enabled: bool, triggerIncludes: bool = true, propagate: bool = true) -> void:
 	if CurrentLevel != MAX_LEVEL:
 		return
 	UpgradesManager.Save(INTERNAL_NAME, MAX_LEVEL, enabled)
@@ -348,7 +351,7 @@ func SetEnabled(enabled: bool, triggerIncludes: bool = true, propogate: bool = t
 			dependent.SetEnabled(false, false)
 		for inverse_dependent: Upgrade in INVERSE_DEPENDENT_UPGRADES:
 			inverse_dependent.SetEnabled(true, false)
-	if propogate:
+	if propagate:
 		emit_signal("upgrade_successfully_bought", CurrentLevel if enabled else 0)
 
 func toggle() -> void:

@@ -88,8 +88,8 @@ func _reloadVisuals() -> void:
 		return
 	if APOLLO:
 		$ApolloCorona.show()
-		$ApolloCorona.size.x = RANGE * 2.0
-		$ApolloCorona.size.y = RANGE * 2.0
+		$ApolloCorona.scale.x = RANGE / 8.0
+		$ApolloCorona.scale.y = RANGE / 8.0
 		$ApolloCorona.position.x = -RANGE
 		$ApolloCorona.position.y = -RANGE
 		$ApolloCorona.modulate.a = 0.9
@@ -101,10 +101,17 @@ func _reloadVisuals() -> void:
 			x.set_shader_parameter("Color1", c1)
 			x.set_shader_parameter("Color2", c2)
 			x.set_shader_parameter("coronaCount", 6)
+			x.set_shader_parameter("coronaSpeed", 0.3)
+			x.set_shader_parameter("coronaPercent", 0.01)
+			x.set_shader_parameter("coronaPercentPulse", 0.005)
+			x.set_shader_parameter("coronaPercentPulseSpeed", 1.0)
+			x.set_shader_parameter("coronaFadeOut", true)
 			var y: ShaderMaterial = $ApolloCorona/ApolloFlare.material
 			y.set_shader_parameter("Color1", c1)
 			y.set_shader_parameter("Color2", c2)
-			y.set_shader_parameter("coronaCount", 6)
+			y.set_shader_parameter("layers", 3)
+			y.set_shader_parameter("sharpness", 27)
+			#y.set_shader_parameter("coronaCount", 6)
 			$ApolloCorona.modulate.a = 0.5
 	else:
 		$ApolloCorona.hide()
@@ -124,6 +131,7 @@ func _reloadVisuals() -> void:
 			child.CAN_ATTRACT = CAN_ATTRACT
 			child.DAMAGE_COEF = DAMAGE_COEF
 			child.WIDTH = WIDTH
+			child.ARTEMIS = ARTEMIS
 
 func _laserifyColor(col: Color, on: bool) -> Color:
 	if ARTEMIS:
@@ -404,6 +412,10 @@ func _tryTarget(child: NeedleLaserClass, target: Entity) -> bool:
 	if is_instance_valid(target) && target != null && _isTargetInRange(target):
 		child.Target.global_position = target.global_position
 		child._laserFiring = true
+		if ARTEMIS:
+			child.artemisEntity = target
+		else:
+			child.artemisEntity = null
 		return true
 	else:
 		child._laserFiring = false

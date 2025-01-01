@@ -13,6 +13,7 @@ region = Rect2(19, 14, 4, 4)
 
 [node name="NeedleLaser" type="Node2D"]
 script = ExtResource("1_dsf08")
+ARTEMIS = null
 
 [node name="LaserLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 40.4781, -121.431)

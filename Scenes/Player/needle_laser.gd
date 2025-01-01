@@ -68,6 +68,8 @@ func _process(delta):
 
 @export var orbitTime: float = 0
 @export var doesOrbit: bool = false
+@export var ARTEMIS: bool = false
+@export var artemisEntity: Entity = null
 
 func _physics_process(delta) -> void:
 	if Player == null:
@@ -83,8 +85,15 @@ func _physics_process(delta) -> void:
 	
 	Target.position = Target.position.normalized() * RANGE
 	
-	Ray.position = Vector2.ZERO
-	Ray.target_position = Target.position
+	if ARTEMIS && is_instance_valid(artemisEntity):
+		var dir: Vector2 = artemisEntity.global_position - global_position
+		Ray.position = dir - dir.normalized() * (artemisEntity.Radius + 1)
+		#Ray.hit_from_inside = true
+		Ray.target_position = Target.position
+	else:
+		Ray.position = Vector2.ZERO
+		#Ray.hit_from_inside = false
+		Ray.target_position = Target.position
 	Endpoint.position = Target.position
 	
 	if _laserFiring:

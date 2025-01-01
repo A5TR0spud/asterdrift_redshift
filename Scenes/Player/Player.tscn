@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dkounxxjgekmy"]
+[gd_scene load_steps=62 format=3 uid="uid://dkounxxjgekmy"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_wd8h7"]
 [ext_resource type="Script" path="res://Scenes/Player/hide_in_garage.gd" id="2_3ujnm"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://Scenes/Player/needle_laser_manager.gd" id="18_yrk6l"]
 [ext_resource type="Shader" path="res://Shaders/Apollo.gdshader" id="21_jcrno"]
 [ext_resource type="Script" path="res://Scenes/Player/shield_projector.gd" id="22_himiw"]
+[ext_resource type="Shader" path="res://Shaders/Flare.gdshader" id="23_4sop8"]
 [ext_resource type="Shader" path="res://Shaders/PixelCircle.gdshader" id="23_743qs"]
 [ext_resource type="Texture2D" uid="uid://xgkoxrkco1x6" path="res://Assets/Ships/Upgrades/ShieldDeflection.png" id="23_p2wwt"]
 [ext_resource type="Shader" path="res://Shaders/TractorBay.gdshader" id="25_8rbcp"]
@@ -77,7 +78,7 @@ atlas = ExtResource("14_sk8mm")
 region = Rect2(4, 0, 4, 6)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kk0yk"]
-radius = 144.0
+radius = 128.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eptyk"]
 shader = ExtResource("21_jcrno")
@@ -87,7 +88,8 @@ shader_parameter/coronaPercent = 0.0625
 shader_parameter/coronaPercentPulse = 0.025
 shader_parameter/coronaPercentPulseSpeed = 1.0
 shader_parameter/coronaCount = 50
-shader_parameter/coronaSpeed = 0.3
+shader_parameter/coronaSpeed = 0.005
+shader_parameter/coronaFadeOut = false
 shader_parameter/minAlpha = 0.543
 shader_parameter/distCoefficient = 18.0
 shader_parameter/timeCoefficient = 2.0
@@ -97,21 +99,17 @@ shader_parameter/rotationSpeed = 2.0
 shader_parameter/rotationPulse = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1q01y"]
-shader = ExtResource("21_jcrno")
-shader_parameter/Color1 = Color(1, 1, 0.5, 1)
+shader = ExtResource("23_4sop8")
+shader_parameter/Color1 = Color(1, 1, 0.501961, 1)
 shader_parameter/Color2 = Color(1, 0, 0, 0)
-shader_parameter/coronaPercent = 1.0
-shader_parameter/coronaPercentPulse = 0.074627
-shader_parameter/coronaPercentPulseSpeed = 1.0
-shader_parameter/coronaCount = 16
-shader_parameter/coronaSpeed = -0.065
-shader_parameter/minAlpha = 1.0
-shader_parameter/distCoefficient = 18.0
-shader_parameter/timeCoefficient = 2.0
-shader_parameter/distFade = 0.0
-shader_parameter/rotationCoefficient = 0.0
-shader_parameter/rotationSpeed = 2.0
-shader_parameter/rotationPulse = 5.0
+shader_parameter/threshold = 1.0
+shader_parameter/distFadeOffset = 4.0
+shader_parameter/distFadePerLayer = 0.2
+shader_parameter/layers = 6
+shader_parameter/seedOffset = 16.19
+shader_parameter/speed = 1.0
+shader_parameter/lenCoef = 0.965
+shader_parameter/sharpness = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nf5yv"]
 radius = 80.0
@@ -255,7 +253,7 @@ z_index = 6
 texture = ExtResource("12_m2iy2")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 z_index = 6
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -460,11 +458,9 @@ width = 1.0
 default_color = Color(0.129412, 0.145098, 0.196078, 1)
 
 [node name="NeedleLaserManager" type="Node2D" parent="."]
-visible = false
 top_level = true
 z_index = -50
 script = ExtResource("18_yrk6l")
-ARTEMIS = null
 
 [node name="LaserArea" type="Area2D" parent="NeedleLaserManager"]
 collision_layer = 0
@@ -479,7 +475,6 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
 [node name="ApolloCorona" type="ColorRect" parent="NeedleLaserManager"]
-visible = false
 modulate = Color(1, 1, 1, 0.74902)
 material = SubResource("ShaderMaterial_eptyk")
 anchors_preset = 8
@@ -487,15 +482,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -144.0
-offset_top = -144.0
-offset_right = 144.0
-offset_bottom = 144.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -112.0
+offset_bottom = -112.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(16, 16)
 
 [node name="ApolloFlare" type="ColorRect" parent="NeedleLaserManager/ApolloCorona"]
-modulate = Color(1, 1, 1, 0.501961)
 material = SubResource("ShaderMaterial_1q01y")
 layout_mode = 1
 anchors_preset = 8
@@ -503,10 +498,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -72.0
-offset_top = -72.0
-offset_right = 72.0
-offset_bottom = 72.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 

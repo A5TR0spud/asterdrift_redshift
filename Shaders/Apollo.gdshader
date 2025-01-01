@@ -7,6 +7,7 @@ uniform float coronaPercentPulse: hint_range(0.0, 1.0, 0.000001) = 0.025;
 uniform float coronaPercentPulseSpeed = 1.0;
 uniform int coronaCount: hint_range(2, 100, 1) = 50;
 uniform float coronaSpeed = 0.3;
+uniform bool coronaFadeOut = false;
 uniform float minAlpha: hint_range(0.0, 1.0, 0.00390625) = 0.543;
 uniform float distCoefficient = 18.0;
 uniform float timeCoefficient = 2.0;
@@ -44,7 +45,9 @@ void fragment() {
 	variance += tanner.y * rotationCoefficient * rotPulse;
 
 	if (coronaDist >= 0.0) {
-		variance *= 1.0 - coronaDist;
+		if (coronaFadeOut) {
+			variance *= 1.0 - coronaDist;
+		}
 		float angle = atan(localCoord.y, localCoord.x) * 0.159154570919;
 		angle -= TIME * coronaSpeed;
 		float moddedAngle = badMod(angle + 1.0, 1.0 / float(coronaCount));

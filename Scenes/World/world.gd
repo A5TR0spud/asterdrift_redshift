@@ -28,7 +28,7 @@ var _oldPos: Vector2 = Vector2(0, 0)
 func _ready():
 	RunHandler.StartRun()
 	EndScreen.hide()
-	MaxTime += UpgradesManager.Load("ShipBattery")
+	MaxTime = _getStartingEnergy()
 	RunHandler.TimeLeft = MaxTime
 	TimeBar.max_value = MaxTime
 	TimeBar.size.x = MaxTime * 8
@@ -38,6 +38,23 @@ func _ready():
 	_oldPos = Player.global_position
 	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0
 	HangarInventory.Display = MaterialsManager.Mats
+
+func _getStartingEnergy() -> float:
+	var s: float = 30
+	s += UpgradesManager.Load("ShipBattery")
+	return s
+
+func _getMaxEnergy() -> float:
+	var s: float = _getStartingEnergy()
+	s += 30.0 * UpgradesManager.Load("Overcharge")
+	return s
+
+func _getPowerDrainRampTime() -> float:
+	var s: float = _getStartingEnergy()
+	s += UpgradesManager.Load("Calibration") * 15.0
+	s += UpgradesManager.Load("SolarPanel") * 3.0
+	s += UpgradesManager.Load("RTG")
+	return s
 
 var _shouldReverseCharge: bool = false
 func _physics_process(delta):
@@ -117,6 +134,10 @@ func _physics_process(delta):
 	if !_shouldReverseCharge:
 		ChargeStatus.hide()
 	if RunHandler.IsInRun():
+		if RunHandler.TimeLeft > _getMaxEnergy():
+			RunHandler.TimeLeft = _getMaxEnergy()
+		if RunHandler.TimeSpent > _getPowerDrainRampTime():
+			PowerDrain += 0.1 * (RunHandler.TimeSpent - _getPowerDrainRampTime())
 		RunHandler.TimeLeft -= delta * PowerDrain
 		RunHandler.TimeSpent += delta
 	else:
