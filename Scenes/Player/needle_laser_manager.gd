@@ -376,6 +376,7 @@ func _physics_process(delta) -> void:
 					if UpgradesManager.Load("FocusFire"):
 						var ray: RayCast2D = child.Ray
 						child.Target.position = child.Target.position.normalized() * child.RANGE
+						ray.position = Vector2.ZERO
 						ray.target_position = child.Target.position
 						ray.force_update_transform()
 						ray.force_raycast_update()
@@ -384,7 +385,10 @@ func _physics_process(delta) -> void:
 							if col is Entity:
 								if _isLaserTargetable(col):
 									_focusFireTarget = col
+									child.artemisEntity = null
 					continue
+				if _isLaserTargetable(_focusFireTarget) && _isTargetInRange(_focusFireTarget):
+					child.artemisEntity = _focusFireTarget
 				if !AUTO_LASER:
 					continue
 				if UpgradesManager.Load("FocusFire") > 0 && _tryTarget(child, _focusFireTarget):

@@ -6,6 +6,7 @@ class_name NeedleLaserClass
 @onready var Target := $LaserTarget
 @onready var Ray := $LaserRay
 @onready var Endpoint := $Endpoint
+@onready var ArtemisReticle := $Endpoint/ArtemisReticle
 @export var Player: PlayerClass
 @export var VisLaserInterval: float
 
@@ -57,6 +58,12 @@ func _reloadVisuals() -> void:
 	if !is_node_ready():
 		return
 	Line.width = WIDTH
+	ArtemisReticle.visible = ARTEMIS
+	var x: ShaderMaterial = ArtemisReticle.material
+	x.set_shader_parameter("Color1", Color(1.0, 1.0, 1.0, 1.0))
+	var c2: Color = _laserColorOn
+	c2.a = 0.0
+	x.set_shader_parameter("Color2", c2)
 
 func _process(delta):
 	_laserTime += delta / (VisLaserInterval * 0.5)
