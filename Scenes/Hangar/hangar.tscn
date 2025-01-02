@@ -1490,7 +1490,9 @@ the laser connects with something, then
 it will continue to target that object after
 you release manual control.
 Remembers target after leaving range,
-and will retarget back if range is entered."
+and will retarget back if range is entered.
+Manually targeting nothing resets the
+focus to none."
 INTERNAL_NAME = "FocusFire"
 SPRITE = ExtResource("58_4ay4i")
 PARENT_UPGRADE = NodePath("../Artemis")
