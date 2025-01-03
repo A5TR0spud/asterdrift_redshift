@@ -1,5 +1,8 @@
-## indev Build 15 - Scaling Balance
+## indev Build 15 - Nameswap, Scaling Balance
 
+- Notice: old userdata is still stored under old name
+	- If you would like to remove the old data, or transfer it to the new file:
+		- On Windows: C:\Users\[USER]\AppData\Roaming\Godot\app_userdata\[Astershift/Aurora Transit]
 - Bay resources are now capped at 10
 - Added Bigger Bay upgrade to Compact Propellant
 - Added BERTHA upgrade to Bigger Bay
