@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dloxvgj0o0aas"]
+[gd_scene load_steps=25 format=3 uid="uid://dloxvgj0o0aas"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/main_menu.gd" id="1_7n6q0"]
 [ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="8_no7lg"]
 [ext_resource type="Script" path="res://Scenes/Menus/background.gd" id="9_7xhjc"]
 [ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="9_i2j4x"]
+[ext_resource type="Script" path="res://Scenes/Menus/version_label.gd" id="9_nks45"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_rbhsv"]
 [ext_resource type="Script" path="res://Scenes/Menus/velocityapplyer.gd" id="11_fn0l6"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="11_ro5i2"]
@@ -30,6 +31,9 @@ Button/constants/h_separation = 25
 Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("2_utqbt")
 Button/styles/normal = SubResource("StyleBoxFlat_hhixk")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jqqev"]
+font = ExtResource("2_utqbt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sokok"]
 shader = ExtResource("7_3fpcd")
@@ -140,6 +144,18 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("6_1rrf4")
 metadata/_edit_use_anchors_ = true
+
+[node name="VersionLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -23.0
+offset_right = 76.0
+grow_vertical = 0
+text = "indev Build v15"
+label_settings = SubResource("LabelSettings_jqqev")
+script = ExtResource("9_nks45")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1

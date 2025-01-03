@@ -122,6 +122,7 @@ z_index = 1
 texture = ExtResource("5_hjdey")
 
 [node name="MainIcon" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
 texture = ExtResource("2_wk4es")
 
 [node name="Button" type="Button" parent="MainIcon"]
@@ -143,13 +144,13 @@ visible = false
 texture = ExtResource("3_yu8kn")
 
 [node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
+visible = false
 z_index = 1
 z_as_relative = false
 position = Vector2(0, 17)
 texture = ExtResource("8_wx1m0")
 
 [node name="LevelBar" type="Marker2D" parent="MainIcon"]
-visible = false
 z_index = 1
 z_as_relative = false
 position = Vector2(0, 17)
@@ -210,6 +211,7 @@ layout_mode = 2
 theme = SubResource("Theme_3w4wk")
 
 [node name="ToggleLabel" type="Label" parent="TooltipContainer/Tooltip/Bottom"]
+visible = false
 layout_mode = 2
 text = "Click to toggle on and off."
 label_settings = SubResource("LabelSettings_qemxh")
@@ -221,7 +223,6 @@ text = "Click to cycle."
 label_settings = SubResource("LabelSettings_qemxh")
 
 [node name="Costs" parent="TooltipContainer/Tooltip/Bottom" instance=ExtResource("5_g1xj2")]
-visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 20
 columns = 5

@@ -1,7 +1,7 @@
 extends Node2D
 class_name Options
 
-var resIndex: int = 1
+var resIndex: int = 2
 var Resolution: Vector2i = Vector2i(960, 540)
 
 @onready var ResButton := $CanvasLayer/Control/VBoxContainer/Resolution/OptionButton

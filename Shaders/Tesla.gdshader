@@ -20,17 +20,17 @@ vec2 rotate(vec2 input, float angle) {
 	float y = input.y;
 	float cs = cos(angle);
 	float sn = sin(angle);
-	
+
 	input.x = cs * x - sn * y;
 	input.y = sn * x + cs * y;
-	
+
 	return input;
 }
 
 void fragment() {
 	vec2 localCoord = UV * 2.0 - 1.0;
 	float dist = length(localCoord);
-	if (dist > 1.0) { 
+	if (dist > 1.0) {
 		discard;
 	}
 	float angle = atan(localCoord.y, localCoord.x) * 0.159154570919;
@@ -56,7 +56,7 @@ void fragment() {
 	a -= 1.0 - dist;
 	a *= 2.0;
 	a *= 1.0 - timeVariance;
-	
+
 	float tar = 0.1;
 	vec2 angledCoord = rotate(localCoord, -targetAngle * 3.14159265 * 2.0);
 	a = clamp(a * 0.5, 0.0, 1.0);
