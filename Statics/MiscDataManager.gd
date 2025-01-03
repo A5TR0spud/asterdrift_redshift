@@ -24,7 +24,7 @@ static func Save(internalName : String, data : Variant) -> void:
 static func Load(internalName : String, default: Variant) -> Variant:
 	if !_isLoaded:
 		if not FileAccess.file_exists(RESOURCE_PATH):
-			return 0
+			return default
 		var file_access := FileAccess.open(RESOURCE_PATH, FileAccess.READ)
 		var json_string := FileAccess.get_file_as_string(RESOURCE_PATH)
 		file_access.close()
@@ -33,7 +33,7 @@ static func Load(internalName : String, default: Variant) -> Variant:
 		var error := json.parse(json_string)
 		if error:
 			print("JSON Parse Error: ", error)
-			return 0
+			return default
 		_data = json.data
 	_isLoaded = true
 	return _data.get(internalName, default)

@@ -57,13 +57,16 @@ static func AddResource(mat: Materials.Mats, amount: int = 1) -> bool:
 		return false
 	
 	if mat == Materials.Mats.Metals:
-		Mats.Metals += amount
+		Mats.Metals += 1
 	elif mat == Materials.Mats.Ceramics:
-		Mats.Ceramics += amount
+		Mats.Ceramics += 1
 	elif mat == Materials.Mats.Synthetics:
-		Mats.Synthetics += amount
+		Mats.Synthetics += 1
 	elif mat == Materials.Mats.Organics:
-		Mats.Organics += amount
+		Mats.Organics += 1
+	amount -= 1
+	if amount > 0:
+		AddResource(mat, amount)
 	return true
 
 static func StartRun() -> void:

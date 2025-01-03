@@ -1390,8 +1390,7 @@ Cost = SubResource("Resource_qbfjt")
 position = Vector2(256, -16)
 NAME = "Compartmentalization"
 DESCRIPTION = "All resources can individually reach the cap.
-Halves the amount of resources the bay
-can hold."
+Halves the cap of resources."
 INTERNAL_NAME = "SplitBay"
 SPRITE = ExtResource("49_05lkl")
 PARENT_UPGRADE = NodePath("../BiggerBay")

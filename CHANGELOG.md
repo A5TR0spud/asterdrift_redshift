@@ -1,4 +1,4 @@
-## indev Build 15
+## indev Build 15 - Scaling Balance
 
 - Bay resources are now capped at 10
 - Added Bigger Bay upgrade to Compact Propellant
@@ -21,10 +21,11 @@
 - Temp Name Change: Astershift -> Aurora Transit
 - Fixed no save data causing garage to show "selected" arrow on every color
 	- Not 100% sure fixed, and not 100% sure from a previous version
+- Fixed a data storage system not properly defaulting, most notably fixing resolution on launch if not set in settings
+- Adjusted Adapt setting for resolution
 
 todo: pirates
 todo: comets
-todo: fix no save data launching with wrong resolution
 
 ## indev Build 14
 

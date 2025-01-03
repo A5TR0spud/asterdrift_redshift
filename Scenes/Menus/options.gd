@@ -2,7 +2,7 @@ extends Node2D
 class_name Options
 
 var resIndex: int = 1
-var Resolution: Vector2 = Vector2(960, 540)
+var Resolution: Vector2i = Vector2i(960, 540)
 
 @onready var ResButton := $CanvasLayer/Control/VBoxContainer/Resolution/OptionButton
 @onready var VisAster := $CanvasLayer/Control/VBoxContainer/VisibleAsteroids/CheckButton
@@ -21,11 +21,11 @@ func _on_button_pressed():
 
 func _on_option_button_item_selected(index):
 	var root = get_tree().root
-	var newSize: Vector2 = Vector2(960, 540)
+	var newSize: Vector2i = Vector2i(960, 540)
 	if index == 0:
-		newSize = Vector2(960, 540)
+		newSize = Vector2i(960, 540)
 	elif index == 1:
-		newSize = Vector2(1280, 720)
+		newSize = Vector2i(1280, 720)
 	elif index == 2:
 		newSize = AdaptScreen()
 	root.content_scale_size = newSize
@@ -38,8 +38,19 @@ func _on_check_button_toggled(toggled_on: bool):
 	DataManager.Save("HighVisAsteroids", toggled_on)
 	Asteroid.ShaderSet = false
 
-static func AdaptScreen() -> Vector2:
-	var newSize: Vector2 = DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())
-	while newSize.length_squared() > Vector2(1280, 720).length_squared():
-		newSize *= 0.5
+static func AdaptScreen() -> Vector2i:
+	var newSize: Vector2i = DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())
+	#if newSize == Vector2i(1920, 1080) || newSize == Vector2i(2560, 1440):
+	#	newSize /= 2
+	#	return newSize
+	var i: int = 2
+	var fakeSize: Vector2 = newSize
+	while fakeSize.x > 1280:
+		fakeSize.x = newSize.x / i
+		i += 1
+	i = 2
+	while fakeSize.y > 720:
+		fakeSize.y = newSize.y / i
+		i += 1
+	newSize = fakeSize
 	return newSize

@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	var newSize: Vector2 = Vector2(960, 540)
+	var newSize: Vector2i = Vector2i(960, 540)
 	newSize.x = DataManager.Load("ResolutionX", newSize.x)
 	newSize.y = DataManager.Load("ResolutionY", newSize.y)
 	
@@ -11,6 +11,3 @@ func _ready():
 	
 	var root = get_tree().root
 	root.content_scale_size = newSize
-	#ResourceLoader.load_threaded_request("res://Scenes/World/World.tscn")
-	#ResourceLoader.load_threaded_request("res://Scenes/Menus/options.tscn")
-	#ResourceLoader.load_threaded_request("res://Scenes/Garage/Garage.tscn")
