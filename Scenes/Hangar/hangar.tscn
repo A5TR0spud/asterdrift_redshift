@@ -421,9 +421,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_qbfjt"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 10
+Metals = 16
 Ceramics = 0
-Synthetics = 30
+Synthetics = 40
 Organics = 0
 Components = 0
 
@@ -432,7 +432,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
-Synthetics = 40
+Synthetics = 58
 Organics = 20
 Components = 0
 
@@ -1242,7 +1242,7 @@ MAX_LEVEL = 2
 Cost = SubResource("Resource_bjsy7")
 
 [node name="Magnet" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(176, -160)
+position = Vector2(192, -160)
 NAME = "Electromagnet"
 DESCRIPTION = "The ship now has an electromagnet that attempts to
 attract resources and repel asteroids.
@@ -1258,7 +1258,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_w1q67")
 
 [node name="StasisBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(176, -224)
+position = Vector2(160, -224)
 NAME = "Stasis Bay"
 DESCRIPTION = "Applies a constant stabilizing force to
 resources in range.
@@ -1270,7 +1270,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_d7mx3")
 
 [node name="TractorBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(208, -288)
+position = Vector2(160, -288)
 NAME = "Tractor Bay"
 DESCRIPTION = "All resources in the stasis bay are attracted
 inward.
@@ -1294,7 +1294,7 @@ REQUIRED_UPGRADES = [NodePath("../../BottomLeft/Laser/PhotonCannon")]
 Cost = SubResource("Resource_yighi")
 
 [node name="TractorNeedle" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(96, -224)
+position = Vector2(64, -224)
 NAME = "Attractor Beam"
 DESCRIPTION = "The needle laser can now target and attract resources,
 but is only half as effective at pushing away asteroids.
@@ -1306,7 +1306,7 @@ PARENT_UPGRADE = NodePath("../MiningLaser")
 Cost = SubResource("Resource_lfgh2")
 
 [node name="TractorBeam" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(128, -288)
+position = Vector2(64, -288)
 NAME = "Juniper Beam"
 DESCRIPTION = "The needle laser applies a resistance to
 avoid gravity-assisting resources.
@@ -1318,7 +1318,7 @@ PARENT_UPGRADE = NodePath("../TractorNeedle")
 Cost = SubResource("Resource_fd43s")
 
 [node name="BiggerCoils" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(240, -176)
+position = Vector2(256, -160)
 NAME = "Bigger Coils"
 DESCRIPTION = "Increases range by +1 unit."
 INTERNAL_NAME = "BiggerCoil"
@@ -1327,7 +1327,7 @@ PARENT_UPGRADE = NodePath("../Magnet")
 Cost = SubResource("Resource_oudbb")
 
 [node name="StrongerCoil" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(240, -224)
+position = Vector2(224, -224)
 NAME = "Fine Wire"
 DESCRIPTION = "Doubles the force behind the magnet and
 related functions."
@@ -1357,7 +1357,7 @@ PARENT_UPGRADE = NodePath("../LongResourceHook")
 Cost = SubResource("Resource_kk1ec")
 
 [node name="ResourceChangelog" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -112)
+position = Vector2(192, -32)
 NAME = "Inventory Audit"
 DESCRIPTION = "Displays recent resource actions,
 and the source of such action."
@@ -1367,18 +1367,18 @@ PARENT_UPGRADE = NodePath("../ResourceMonitor")
 Cost = SubResource("Resource_15g7d")
 
 [node name="BiggerBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -32)
+position = Vector2(256, -96)
 NAME = "Bigger Bay"
 DESCRIPTION = "Increases maximum bay resources from
 10 to 30."
 INTERNAL_NAME = "BiggerBay"
 SPRITE = ExtResource("47_2jjq7")
-PARENT_UPGRADE = NodePath("../HookPropel")
+PARENT_UPGRADE = NodePath("../ResourceMonitor")
 Cost = SubResource("Resource_1t1pc")
 
 [node name="BERTHA" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -64)
-NAME = "BERTHA"
+position = Vector2(320, -128)
+NAME = "B.E.R.T.H.A."
 DESCRIPTION = "Further increases maximum bay resources
 by +30."
 INTERNAL_NAME = "BERTHA"
@@ -1387,7 +1387,7 @@ PARENT_UPGRADE = NodePath("../BiggerBay")
 Cost = SubResource("Resource_qbfjt")
 
 [node name="SplitBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -16)
+position = Vector2(320, -80)
 NAME = "Compartmentalization"
 DESCRIPTION = "All resources can individually reach the cap.
 Halves the cap of resources."

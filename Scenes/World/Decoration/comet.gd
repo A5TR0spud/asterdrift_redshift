@@ -11,8 +11,8 @@ func _on_resource_mined(_global_pos):
 
 
 func _on_killed():
-	if ResourcesLeft > 1:
-		Mine(global_position, 1)
+	while ResourcesLeft > 1:
+		Mine(global_position + Vector2.RIGHT.rotated(randf() * 3.14159265) * Radius * (randf() * 0.5 + 0.5), 1)
 	queue_free()
 
 

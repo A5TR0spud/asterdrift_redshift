@@ -21,7 +21,7 @@ shader = ExtResource("3_svhnw")
 shader_parameter/outline_color = Color(0.45098, 0.141176, 0.141176, 1)
 shader_parameter/fill_corners = true
 shader_parameter/outline = true
-shader_parameter/inline = true
+shader_parameter/inline = false
 
 [node name="Comet" type="RigidBody2D"]
 collision_mask = 7

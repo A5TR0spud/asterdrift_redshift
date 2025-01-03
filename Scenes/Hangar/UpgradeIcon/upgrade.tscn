@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=33 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/Meta/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
 [ext_resource type="Texture2D" uid="uid://b7jakho75cv5" path="res://Assets/Hangar/Upgrades/Meta/BackgroundFrame.png" id="5_hjdey"]
+[ext_resource type="Texture2D" uid="uid://t2dy8guaquev" path="res://Assets/Hangar/Upgrades/Meta/AvailableOverlay.png" id="8_biqq0"]
 [ext_resource type="Texture2D" uid="uid://c2yjrmcysqnsd" path="res://Assets/Hangar/Upgrades/Meta/Background.png" id="8_djbwo"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="8_nu5sk"]
 [ext_resource type="Texture2D" uid="uid://6tvchvpt787c" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconFalse.png" id="8_wx1m0"]
+[ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/is_available_icon.gd" id="9_oe046"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="10_sd7c2"]
 
 [sub_resource type="Resource" id="Resource_0h8lx"]
@@ -87,6 +89,7 @@ font = ExtResource("10_sd7c2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font = ExtResource("10_sd7c2")
+font_color = Color(1, 0.7, 0.7, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.109804, 0.227451, 0.294118, 1)
@@ -104,7 +107,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_1jsna")
 font = ExtResource("10_sd7c2")
 
 [sub_resource type="Curve" id="Curve_76xhg"]
-_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, nan, 1, 1]
 point_count = 2
 
 [node name="Upgrade" type="Node2D"]
@@ -140,8 +143,14 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_oab7k")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
-visible = false
 texture = ExtResource("3_yu8kn")
+
+[node name="IsAvailableOverlay" type="Sprite2D" parent="MainIcon/IsAvailableIcon"]
+z_index = -1
+rotation = -0.0140311
+scale = Vector2(1.03234, 1.03234)
+texture = ExtResource("8_biqq0")
+script = ExtResource("9_oe046")
 
 [node name="BooleanIcon" type="Sprite2D" parent="MainIcon"]
 visible = false
@@ -231,12 +240,11 @@ SORT = true
 SHOW_TEXT = false
 
 [node name="ParentLine" type="Line2D" parent="."]
-visible = false
 show_behind_parent = true
 z_index = -5
 z_as_relative = false
 points = PackedVector2Array(0, 0, 64, 64)
-width = 5.0
+width = 8.0
 width_curve = SubResource("Curve_76xhg")
 default_color = Color(0.666, 0.777, 0.888, 1)
 joint_mode = 2
