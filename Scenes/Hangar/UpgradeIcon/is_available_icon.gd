@@ -1,4 +1,3 @@
-@tool
 extends Sprite2D
 
 var time : float = 0.0

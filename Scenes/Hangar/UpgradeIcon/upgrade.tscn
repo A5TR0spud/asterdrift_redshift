@@ -143,12 +143,11 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_oab7k")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6hn16")
 
 [node name="IsAvailableIcon" type="Sprite2D" parent="MainIcon"]
+visible = false
 texture = ExtResource("3_yu8kn")
 
 [node name="IsAvailableOverlay" type="Sprite2D" parent="MainIcon/IsAvailableIcon"]
 z_index = -1
-rotation = -0.0140311
-scale = Vector2(1.03234, 1.03234)
 texture = ExtResource("8_biqq0")
 script = ExtResource("9_oe046")
 
@@ -240,11 +239,12 @@ SORT = true
 SHOW_TEXT = false
 
 [node name="ParentLine" type="Line2D" parent="."]
+visible = false
 show_behind_parent = true
 z_index = -5
 z_as_relative = false
 points = PackedVector2Array(0, 0, 64, 64)
-width = 8.0
+width = 6.0
 width_curve = SubResource("Curve_76xhg")
 default_color = Color(0.666, 0.777, 0.888, 1)
 joint_mode = 2
