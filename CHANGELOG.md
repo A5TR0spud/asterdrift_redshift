@@ -3,7 +3,7 @@
 - Temp Name Change: Astershift -> Aurora Transit
 - Notice: old userdata is still stored under old name
 	- If you would like to remove the old data, or transfer it to the new file:
-		- On Windows: C:\Users\[USER]\AppData\Roaming\Godot\app_userdata\[Astershift/Aurora Transit]
+		- On Windows: C:\\Users\\\[USER\]\\AppData\\Roaming\\Godot\\app_userdata\\\[Astershift/Aurora Transit\]
 - Bay resources are now capped at 10
 - Added Bigger Bay upgrade to Inventory Monitor
 - Added BERTHA upgrade to Bigger Bay
