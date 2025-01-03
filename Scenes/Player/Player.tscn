@@ -253,7 +253,7 @@ z_index = 6
 texture = ExtResource("12_m2iy2")
 
 [node name="Blinkers" type="Sprite2D" parent="ShipVisuals"]
-self_modulate = Color(1, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 z_index = 6
 texture = ExtResource("9_mirtk")
 script = ExtResource("4_tpib4")
@@ -476,6 +476,7 @@ debug_color = Color(0.15, 0.546667, 1, 0)
 [node name="LaserList" type="Node2D" parent="NeedleLaserManager"]
 
 [node name="ApolloCorona" type="ColorRect" parent="NeedleLaserManager"]
+visible = false
 modulate = Color(1, 1, 1, 0.74902)
 material = SubResource("ShaderMaterial_eptyk")
 anchors_preset = 8

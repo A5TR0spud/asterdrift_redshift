@@ -22,6 +22,50 @@ static var UpcyclerCount: int = 0
 static func IsInRun() -> bool:
 	return _is_running
 
+static func GetBayResourceCount() -> int:
+	return Mats.Synthetics + Mats.Ceramics + Mats.Metals + Mats.Organics
+
+static func GetMaxBayResourceCount() -> int:
+	var r: int = 10
+	r += UpgradesManager.Load("BiggerBay") * 20
+	r += UpgradesManager.Load("BERTHA") * 30
+	if UpgradesManager.LoadIsEnabled("SplitBay"):
+		r = maxi(r / 2, 5)
+	return r
+
+static func CanCollect(mat: Materials.Mats) -> bool:
+	if mat == Materials.Mats.Components:
+		return true
+	if UpgradesManager.Load("SplitBay") > 0:
+		if mat == Materials.Mats.Metals:
+			return Mats.Metals < GetMaxBayResourceCount()
+		if mat == Materials.Mats.Ceramics:
+			return Mats.Ceramics < GetMaxBayResourceCount()
+		if mat == Materials.Mats.Synthetics:
+			return Mats.Synthetics < GetMaxBayResourceCount()
+		if mat == Materials.Mats.Organics:
+			return Mats.Organics < GetMaxBayResourceCount()
+		return true
+	return GetBayResourceCount() < GetMaxBayResourceCount()
+
+static func AddResource(mat: Materials.Mats, amount: int = 1) -> bool:
+	if mat == Materials.Mats.Components:
+		Mats.Components += amount
+		return true
+	
+	if !CanCollect(mat):
+		return false
+	
+	if mat == Materials.Mats.Metals:
+		Mats.Metals += amount
+	elif mat == Materials.Mats.Ceramics:
+		Mats.Ceramics += amount
+	elif mat == Materials.Mats.Synthetics:
+		Mats.Synthetics += amount
+	elif mat == Materials.Mats.Organics:
+		Mats.Organics += amount
+	return true
+
 static func StartRun() -> void:
 	if _is_running:
 		return

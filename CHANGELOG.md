@@ -1,5 +1,9 @@
 ## indev Build 15
 
+- Bay resources are now capped at 10
+- Added Bigger Bay upgrade to Compact Propellant
+- Added BERTHA upgrade to Bigger Bay
+- Added Compartmentalization upgrade to Bigger Bay
 - Added flare shader to Apollo (replaces inner ring)
 - Reduced rotation speed of Apollo, and edges no longer fade
 - Power drain now ramps at 0.1/s beginning at 30 seconds
@@ -14,9 +18,13 @@
 - Dynamo has been buffed back to total velocity
 - Artemis now goes through things in the way of its target, if that obstruction is far away enough (outside a 1px range)
 - Focus Fire now loses target if you manually fire and hit nothing
+- Temp Name Change: Astershift -> Aurora Transit
+- Fixed no save data causing garage to show "selected" arrow on every color
+	- Not 100% sure fixed, and not 100% sure from a previous version
 
 todo: pirates
 todo: comets
+todo: fix no save data launching with wrong resolution
 
 ## indev Build 14
 

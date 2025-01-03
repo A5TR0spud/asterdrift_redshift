@@ -20,6 +20,10 @@ var PowerDrain : float = 1.0
 @onready var ResourceMonitor := $CanvasLayer/Control/Resources/Inventory/Run/ResourceCounter
 @onready var ResourceInventory := $CanvasLayer/Control/Resources/Inventory
 @onready var HangarInventory := $CanvasLayer/Control/Resources/Inventory/Hangar/ResourceCounter
+@onready var BaySynthBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/SynthCap
+@onready var BayMetalBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/MetalCap
+@onready var BayOrganBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/OrganCap
+@onready var BayCeramBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/CeramCap
 
 var FarmedOrganics: int = 0
 var RTGEnergy: int = 0
@@ -38,6 +42,11 @@ func _ready():
 	_oldPos = Player.global_position
 	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0
 	HangarInventory.Display = MaterialsManager.Mats
+	var coef: int = UpgradesManager.Load("SplitBay") * 3 + 1
+	BaySynthBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
+	BayMetalBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
+	BayOrganBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
+	BayCeramBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
 
 func _getStartingEnergy() -> float:
 	var s: float = 30
@@ -154,6 +163,10 @@ func _updateDisplay():
 	if !toDisplay.contains("."):
 		toDisplay += ".0"
 	TimeLabel.text = toDisplay
+	BayCeramBar.value = RunHandler.Mats.Ceramics
+	BayOrganBar.value = RunHandler.Mats.Organics + BayCeramBar.value
+	BayMetalBar.value = RunHandler.Mats.Metals + BayOrganBar.value
+	BaySynthBar.value = RunHandler.Mats.Synthetics + BayMetalBar.value
 
 func _on_end_run_button_pressed():
 	StopRun()

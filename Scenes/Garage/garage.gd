@@ -36,10 +36,10 @@ func LoadShip():
 	if FileAccess.file_exists(SHIP_PATH):
 		var data : ShipData = load(SHIP_PATH) #ResourceLoader.load also works
 		CachedShip.copy(data)
-		_ReloadFromCached()
 	else:
 		print(SHIP_PATH, " does not exist! Defaulting.")
 		CachedShip = ShipData.new()
+	_ReloadFromCached()
 
 func _ReloadFromCached():
 	HullColor.Selected = mini(CachedShip.hull_int, HullColor.Colors.size())

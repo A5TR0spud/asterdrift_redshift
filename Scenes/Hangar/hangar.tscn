@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=172 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -64,6 +64,9 @@
 [ext_resource type="Texture2D" uid="uid://d4e1bkjul6amk" path="res://Assets/Hangar/Upgrades/Fuse.png" id="42_whiub"]
 [ext_resource type="Texture2D" uid="uid://cev52xxb50l2v" path="res://Assets/Hangar/Upgrades/ExtraLaser.png" id="43_hkvbo"]
 [ext_resource type="Texture2D" uid="uid://cley641x2bt1r" path="res://Assets/Hangar/Upgrades/ReverseCharger.png" id="43_qb64a"]
+[ext_resource type="Texture2D" uid="uid://d28bg46e76hyd" path="res://Assets/Hangar/Upgrades/BiggerBay.png" id="47_2jjq7"]
+[ext_resource type="Texture2D" uid="uid://c6ij8htsqiq6t" path="res://Assets/Hangar/Upgrades/BERTHA.png" id="48_h3qmq"]
+[ext_resource type="Texture2D" uid="uid://b5f6s2l1gbwj1" path="res://Assets/Hangar/Upgrades/SplitBay.png" id="49_05lkl"]
 [ext_resource type="Texture2D" uid="uid://cuj3o7e7acbec" path="res://Assets/Hangar/Upgrades/Hydroponics.png" id="49_ygbwp"]
 [ext_resource type="Texture2D" uid="uid://dij5wogx1t380" path="res://Assets/Hangar/Upgrades/Processor.png" id="52_8wr0w"]
 [ext_resource type="Texture2D" uid="uid://d2bgho5pxcpjj" path="res://Assets/Hangar/Upgrades/CursorOverride.png" id="53_3ch7m"]
@@ -404,6 +407,33 @@ Metals = 2
 Ceramics = 2
 Synthetics = 4
 Organics = 4
+Components = 0
+
+[sub_resource type="Resource" id="Resource_1t1pc"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 10
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_qbfjt"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 10
+Ceramics = 0
+Synthetics = 30
+Organics = 0
+Components = 0
+
+[sub_resource type="Resource" id="Resource_5sb37"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 40
+Organics = 20
 Components = 0
 
 [sub_resource type="Resource" id="Resource_cber5"]
@@ -1212,7 +1242,7 @@ MAX_LEVEL = 2
 Cost = SubResource("Resource_bjsy7")
 
 [node name="Magnet" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -160)
+position = Vector2(176, -160)
 NAME = "Electromagnet"
 DESCRIPTION = "The ship now has an electromagnet that attempts to
 attract resources and repel asteroids.
@@ -1228,7 +1258,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_w1q67")
 
 [node name="StasisBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -224)
+position = Vector2(176, -224)
 NAME = "Stasis Bay"
 DESCRIPTION = "Applies a constant stabilizing force to
 resources in range.
@@ -1240,7 +1270,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_d7mx3")
 
 [node name="TractorBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -256)
+position = Vector2(208, -288)
 NAME = "Tractor Bay"
 DESCRIPTION = "All resources in the stasis bay are attracted
 inward.
@@ -1288,7 +1318,7 @@ PARENT_UPGRADE = NodePath("../TractorNeedle")
 Cost = SubResource("Resource_fd43s")
 
 [node name="BiggerCoils" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -128)
+position = Vector2(240, -176)
 NAME = "Bigger Coils"
 DESCRIPTION = "Increases range by +1 unit."
 INTERNAL_NAME = "BiggerCoil"
@@ -1297,7 +1327,7 @@ PARENT_UPGRADE = NodePath("../Magnet")
 Cost = SubResource("Resource_oudbb")
 
 [node name="StrongerCoil" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -192)
+position = Vector2(240, -224)
 NAME = "Fine Wire"
 DESCRIPTION = "Doubles the force behind the magnet and
 related functions."
@@ -1317,7 +1347,7 @@ REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_lid5j")
 
 [node name="ResourceMonitor" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, -64)
+position = Vector2(192, -96)
 NAME = "Inventory Monitor"
 DESCRIPTION = "Displays the hangar's resources in-run.
 Displays the current run's obtained resources."
@@ -1327,7 +1357,7 @@ PARENT_UPGRADE = NodePath("../LongResourceHook")
 Cost = SubResource("Resource_kk1ec")
 
 [node name="ResourceChangelog" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, -64)
+position = Vector2(256, -112)
 NAME = "Inventory Audit"
 DESCRIPTION = "Displays recent resource actions,
 and the source of such action."
@@ -1335,6 +1365,37 @@ INTERNAL_NAME = "ResourceChangelog"
 SPRITE = ExtResource("60_4i2hb")
 PARENT_UPGRADE = NodePath("../ResourceMonitor")
 Cost = SubResource("Resource_15g7d")
+
+[node name="BiggerBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(192, -32)
+NAME = "Bigger Bay"
+DESCRIPTION = "Increases maximum bay resources from
+10 to 30."
+INTERNAL_NAME = "BiggerBay"
+SPRITE = ExtResource("47_2jjq7")
+PARENT_UPGRADE = NodePath("../HookPropel")
+Cost = SubResource("Resource_1t1pc")
+
+[node name="BERTHA" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(256, -64)
+NAME = "BERTHA"
+DESCRIPTION = "Further increases maximum bay resources
+by +30."
+INTERNAL_NAME = "BERTHA"
+SPRITE = ExtResource("48_h3qmq")
+PARENT_UPGRADE = NodePath("../BiggerBay")
+Cost = SubResource("Resource_qbfjt")
+
+[node name="SplitBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(256, -16)
+NAME = "Compartmentalization"
+DESCRIPTION = "All resources can individually reach the cap.
+Halves the amount of resources the bay
+can hold."
+INTERNAL_NAME = "SplitBay"
+SPRITE = ExtResource("49_05lkl")
+PARENT_UPGRADE = NodePath("../BiggerBay")
+Cost = SubResource("Resource_5sb37")
 
 [node name="BottomLeft" type="Node2D" parent="Camera2D/TechTree"]
 
@@ -1680,7 +1741,7 @@ Cost = SubResource("Resource_ewipx")
 [node name="Farming" type="Node2D" parent="Camera2D/TechTree/BottomRight"]
 
 [node name="CoreAssembler" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(160, 32)
+position = Vector2(160, 47)
 NAME = "Core Assembler"
 DESCRIPTION = "Every 3 minutes spent in a run assembles
 a core."
@@ -1690,7 +1751,7 @@ PARENT_UPGRADE = NodePath("../../LookAhead")
 Cost = SubResource("Resource_dfjfp")
 
 [node name="Hydroponics" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(192, 96)
+position = Vector2(208, 96)
 NAME = "Hydroponics Pod"
 DESCRIPTION = "Every 7 seconds in a run grows an organic nearby,
 at the cost of 0.25 energy."
@@ -1808,7 +1869,7 @@ PARENT_UPGRADE = NodePath("../Kiln")
 Cost = SubResource("Resource_pcp64")
 
 [node name="ProdLine" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, 96)
+position = Vector2(336, 96)
 NAME = "Production Line"
 DESCRIPTION = "Every transformation can trigger other
 transformations."
@@ -1829,7 +1890,7 @@ PARENT_UPGRADE = NodePath("../Forge")
 Cost = SubResource("Resource_8de2h")
 
 [node name="Synthesizer" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(256, 96)
+position = Vector2(272, 96)
 NAME = "Synthesizer"
 DESCRIPTION = "Every other organic collected is converted into
 a synthetic."
