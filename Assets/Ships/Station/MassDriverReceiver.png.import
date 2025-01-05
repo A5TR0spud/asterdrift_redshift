@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx3on0s2nhc6a"
-path="res://.godot/imported/Bell.png-fb55a7db45b1f27d19e9a25e768bb7ff.ctex"
+uid="uid://dq86rb3g5ph65"
+path="res://.godot/imported/MassDriverReceiver.png-1494593fc796ba98081965ca64f5891b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Ships/Upgrades/Bell.png"
-dest_files=["res://.godot/imported/Bell.png-fb55a7db45b1f27d19e9a25e768bb7ff.ctex"]
+source_file="res://Assets/Ships/Station/MassDriverReceiver.png"
+dest_files=["res://.godot/imported/MassDriverReceiver.png-1494593fc796ba98081965ca64f5891b.ctex"]
 
 [params]
 

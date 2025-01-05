@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kv7174bd1s2"
-path="res://.godot/imported/TargetPriorityLast.png-597fcc3b0da0200b0376517de58c43c1.ctex"
+uid="uid://ckfhwuum7la0y"
+path="res://.godot/imported/BorealisStation.png-6f197862de73c4e49f3533b98a11cd49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/TargetPriorityLast.png"
-dest_files=["res://.godot/imported/TargetPriorityLast.png-597fcc3b0da0200b0376517de58c43c1.ctex"]
+source_file="res://Assets/Hangar/Upgrades/BorealisStation.png"
+dest_files=["res://.godot/imported/BorealisStation.png-6f197862de73c4e49f3533b98a11cd49.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl58ckfgv76ra"
-path="res://.godot/imported/TargetPriorityDiverging.png-d2c5209c4cda854e8f1fc6792a1f9d5c.ctex"
+uid="uid://bbx25kdj73olo"
+path="res://.godot/imported/MassDriverPackage.png-d634f84419bdcd0fae6b930c0fe8f3fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/TargetPriorityDiverging.png"
-dest_files=["res://.godot/imported/TargetPriorityDiverging.png-d2c5209c4cda854e8f1fc6792a1f9d5c.ctex"]
+source_file="res://Assets/Ships/Station/MassDriverPackage.png"
+dest_files=["res://.godot/imported/MassDriverPackage.png-d634f84419bdcd0fae6b930c0fe8f3fe.ctex"]
 
 [params]
 

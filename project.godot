@@ -120,6 +120,7 @@ drag={
 2d_physics/layer_1="Solid Collision"
 2d_physics/layer_2="Player Collision"
 2d_physics/layer_3="Resource Collision"
+2d_physics/layer_4="Station"
 
 [physics]
 

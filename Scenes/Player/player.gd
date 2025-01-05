@@ -184,12 +184,12 @@ func _physics_process(delta):
 			
 		
 		if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
-			_BonusMaxSpeedFromBoost += 64 * delta
+			_BonusMaxSpeedFromBoost += 128.0 * delta
 			if _BonusMaxSpeedFromBoost > 192:
 				_BonusMaxSpeedFromBoost = 192
 			apply_force(Vector2(128, 0).rotated(rotation))
 		elif _BonusMaxSpeedFromBoost > 0:
-			_BonusMaxSpeedFromBoost -= 64 * delta
+			_BonusMaxSpeedFromBoost -= 128.0 * delta
 			if _BonusMaxSpeedFromBoost < 0:
 				_BonusMaxSpeedFromBoost = 0
 

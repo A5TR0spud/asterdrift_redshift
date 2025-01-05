@@ -74,12 +74,12 @@ func _createAsteroid() -> void:
 	var pos : Vector2 = Vector2.ZERO
 	pos.x = randf_range(-5000, 5000)
 	pos.y = randf_range(-5000, 5000)
-	if pos.length() < 256:
-		pos = pos.normalized() * 256
-	instance.global_position = pos
-	
 	var size = min(randi_range(1, 12), randi_range(1, 12))
 	instance.SIZE = size
+	
+	if pos.length() < 256 + instance.Radius:
+		pos = pos.normalized() * (256 + instance.Radius)
+	instance.global_position = pos
 	
 	var x = randf() * randf() * randf_range(-64, 64)
 	var y = randf() * randf() * randf_range(-64, 64)

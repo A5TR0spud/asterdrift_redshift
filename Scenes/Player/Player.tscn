@@ -196,6 +196,7 @@ shader_parameter/threshold = 0.497
 rotation = -1.5708
 disable_mode = 2
 collision_layer = 2
+collision_mask = 3
 collision_priority = 2.0
 can_sleep = false
 continuous_cd = 2

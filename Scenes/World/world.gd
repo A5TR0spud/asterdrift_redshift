@@ -189,7 +189,7 @@ func _on_return_to_hangar_pressed():
 
 func _on_player_bounds_body_exited(body):
 	if body is PlayerClass:
-		for child: Entity in DecorationSpawner.get_children():
+		for child: Node2D in DecorationSpawner.get_children():
 			child.global_position = child.global_position - Player.global_position
 		_oldPos -= Player.global_position
 		Player.global_position = Vector2.ZERO

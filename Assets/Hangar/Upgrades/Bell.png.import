@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do7qk043ivffx"
-path="res://.godot/imported/TargetPriorityNear.png-17dae134a9d0d831d243ce1a6015baf7.ctex"
+uid="uid://cawgh12254555"
+path="res://.godot/imported/Bell.png-6b46369d1d0545dcbf63525dffb2cfc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/TargetPriorityNear.png"
-dest_files=["res://.godot/imported/TargetPriorityNear.png-17dae134a9d0d831d243ce1a6015baf7.ctex"]
+source_file="res://Assets/Hangar/Upgrades/Bell.png"
+dest_files=["res://.godot/imported/Bell.png-6b46369d1d0545dcbf63525dffb2cfc4.ctex"]
 
 [params]
 

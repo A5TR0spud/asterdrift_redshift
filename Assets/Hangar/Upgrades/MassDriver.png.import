@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vh3yce8pckgv"
-path="res://.godot/imported/TargetPriorityFar.png-30947da6b48e57332ca64d9700de7101.ctex"
+uid="uid://c7eg2xak1fh20"
+path="res://.godot/imported/MassDriver.png-6b7bfc71aa3dc82dfe71faabf8a15586.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/TargetPriorityFar.png"
-dest_files=["res://.godot/imported/TargetPriorityFar.png-30947da6b48e57332ca64d9700de7101.ctex"]
+source_file="res://Assets/Hangar/Upgrades/MassDriver.png"
+dest_files=["res://.godot/imported/MassDriver.png-6b7bfc71aa3dc82dfe71faabf8a15586.ctex"]
 
 [params]
 

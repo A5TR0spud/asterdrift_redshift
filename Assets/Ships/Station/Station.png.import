@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx3bvxtnceipi"
-path="res://.godot/imported/TargetPriorityFirst.png-948e73d7cbf1775c3d3b49de2038f861.ctex"
+uid="uid://bcedmvoa4i0lx"
+path="res://.godot/imported/Station.png-3d0c0e19297a1fdea566f37188afe778.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hangar/Upgrades/TargetPriorityFirst.png"
-dest_files=["res://.godot/imported/TargetPriorityFirst.png-948e73d7cbf1775c3d3b49de2038f861.ctex"]
+source_file="res://Assets/Ships/Station/Station.png"
+dest_files=["res://.godot/imported/Station.png-3d0c0e19297a1fdea566f37188afe778.ctex"]
 
 [params]
 

@@ -7,6 +7,7 @@ class_name Asteroid
 		return SIZE
 	set(value):
 		SIZE = clampi(value, 1, 12)
+		Radius = 8 + SIZE * 7
 		if is_node_ready():
 			_reload()
 

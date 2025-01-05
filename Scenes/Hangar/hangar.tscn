@@ -1,4 +1,4 @@
-[gd_scene load_steps=172 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=176 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -68,6 +68,7 @@
 [ext_resource type="Texture2D" uid="uid://c6ij8htsqiq6t" path="res://Assets/Hangar/Upgrades/BERTHA.png" id="48_h3qmq"]
 [ext_resource type="Texture2D" uid="uid://b5f6s2l1gbwj1" path="res://Assets/Hangar/Upgrades/SplitBay.png" id="49_05lkl"]
 [ext_resource type="Texture2D" uid="uid://cuj3o7e7acbec" path="res://Assets/Hangar/Upgrades/Hydroponics.png" id="49_ygbwp"]
+[ext_resource type="Texture2D" uid="uid://c7eg2xak1fh20" path="res://Assets/Hangar/Upgrades/MassDriver.png" id="50_emct2"]
 [ext_resource type="Texture2D" uid="uid://dij5wogx1t380" path="res://Assets/Hangar/Upgrades/Processor.png" id="52_8wr0w"]
 [ext_resource type="Texture2D" uid="uid://d2bgho5pxcpjj" path="res://Assets/Hangar/Upgrades/CursorOverride.png" id="53_3ch7m"]
 [ext_resource type="Texture2D" uid="uid://cc5r121ta6sp3" path="res://Assets/Hangar/Upgrades/Combustor.png" id="53_hxchu"]
@@ -90,6 +91,7 @@
 [ext_resource type="Texture2D" uid="uid://bh25gstmcr01g" path="res://Assets/Hangar/Upgrades/SwiftAssembler.png" id="76_1obe8"]
 [ext_resource type="Texture2D" uid="uid://cld13ua4o7qj1" path="res://Assets/Hangar/Upgrades/CoreForge.png" id="76_awfuo"]
 [ext_resource type="Texture2D" uid="uid://cdn0o53tq707s" path="res://Assets/Hangar/Upgrades/Press.png" id="77_x60do"]
+[ext_resource type="Texture2D" uid="uid://ckfhwuum7la0y" path="res://Assets/Hangar/Upgrades/BorealisStation.png" id="91_xsyma"]
 
 [sub_resource type="Resource" id="Resource_cv8oa"]
 resource_local_to_scene = true
@@ -434,6 +436,15 @@ Metals = 0
 Ceramics = 0
 Synthetics = 58
 Organics = 20
+Components = 0
+
+[sub_resource type="Resource" id="Resource_qlukr"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 0
+Ceramics = 0
+Synthetics = 64
+Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_cber5"]
@@ -813,6 +824,15 @@ Ceramics = 0
 Synthetics = 0
 Organics = 1
 Components = 0
+
+[sub_resource type="Resource" id="Resource_cv1xp"]
+resource_local_to_scene = true
+script = ExtResource("4_fiej8")
+Metals = 128
+Ceramics = 128
+Synthetics = 128
+Organics = 128
+Components = 4
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -1396,6 +1416,18 @@ SPRITE = ExtResource("49_05lkl")
 PARENT_UPGRADE = NodePath("../BiggerBay")
 Cost = SubResource("Resource_5sb37")
 
+[node name="MassDriver" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
+position = Vector2(384, -80)
+NAME = "Mass Driver"
+DESCRIPTION = "Whenever a resource reaches its cap,
+launches a package carrying the bay
+resources of that type to the station."
+INTERNAL_NAME = "MassDriver"
+SPRITE = ExtResource("50_emct2")
+PARENT_UPGRADE = NodePath("../SplitBay")
+REQUIRED_UPGRADES = [NodePath("../../BottomRight/Station")]
+Cost = SubResource("Resource_qlukr")
+
 [node name="BottomLeft" type="Node2D" parent="Camera2D/TechTree"]
 
 [node name="Laser" type="Node2D" parent="Camera2D/TechTree/BottomLeft"]
@@ -1917,6 +1949,16 @@ INTERNAL_NAME = "StatusMonitor"
 SPRITE = ExtResource("59_4b4q2")
 PRE_BOUGHT = true
 Cost = SubResource("Resource_qruf7")
+
+[node name="Station" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+position = Vector2(96, 96)
+NAME = "Borealis Station"
+DESCRIPTION = "Deploy a protective station at run start.
+Doesn't do a whole lot on its own."
+INTERNAL_NAME = "Borealis"
+SPRITE = ExtResource("91_xsyma")
+PARENT_UPGRADE = NodePath("../LookAhead")
+Cost = SubResource("Resource_cv1xp")
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/main menu" to="CanvasLayer/Control" method="_on_main_menu_pressed"]

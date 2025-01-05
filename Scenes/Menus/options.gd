@@ -46,10 +46,12 @@ static func AdaptScreen() -> Vector2i:
 	var i: int = 2
 	var fakeSize: Vector2 = newSize
 	while fakeSize.x > 1280:
+		@warning_ignore("integer_division")
 		fakeSize.x = newSize.x / i
 		i += 1
 	i = 2
 	while fakeSize.y > 720:
+		@warning_ignore("integer_division")
 		fakeSize.y = newSize.y / i
 		i += 1
 	newSize = fakeSize

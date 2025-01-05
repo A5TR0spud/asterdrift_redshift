@@ -30,6 +30,7 @@ static func GetMaxBayResourceCount() -> int:
 	r += UpgradesManager.Load("BiggerBay") * 20
 	r += UpgradesManager.Load("BERTHA") * 30
 	if UpgradesManager.LoadIsEnabled("SplitBay"):
+		@warning_ignore("integer_division")
 		r = maxi(r / 2, 5)
 	return r
 
