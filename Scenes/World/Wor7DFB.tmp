@@ -242,7 +242,7 @@ InitialAsteroids = 720
 InitialComets = 0
 
 [node name="Station" type="StaticBody2D" parent="DecorationSpawner"]
-z_index = -1024
+z_index = -4096
 z_as_relative = false
 collision_layer = 8
 collision_mask = 0
@@ -258,24 +258,11 @@ texture = ExtResource("3_ag1d4")
 script = ExtResource("4_7rpfa")
 
 [node name="MassDriver" type="Node2D" parent="DecorationSpawner/Station/StationSprite"]
-position = Vector2(-241, 1)
+position = Vector2(-250, 0)
 script = ExtResource("6_bm0fh")
 
 [node name="MassDriverSprite" type="Sprite2D" parent="DecorationSpawner/Station/StationSprite/MassDriver"]
 texture = ExtResource("6_0k340")
-
-[node name="MassDriverCooldown" type="Timer" parent="DecorationSpawner/Station/StationSprite/MassDriver"]
-wait_time = 0.5
-one_shot = true
-
-[node name="ListTransform" type="RemoteTransform2D" parent="DecorationSpawner/Station/StationSprite/MassDriver"]
-remote_path = NodePath("../List")
-update_rotation = false
-
-[node name="List" type="Node2D" parent="DecorationSpawner/Station/StationSprite/MassDriver"]
-top_level = true
-z_index = -10
-position = Vector2(-241, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_83k77")]
 z_index = 100
@@ -730,7 +717,6 @@ position = Vector2(-3.99998, -5.00001)
 shape = SubResource("RectangleShape2D_x62ss")
 debug_color = Color(0.311596, 0.621709, 3.85046e-07, 0)
 
-[connection signal="player_warp" from="." to="DecorationSpawner/Station/StationSprite/MassDriver" method="_on_world_player_warp"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/ReturnToHangar" to="." method="_on_return_to_hangar_pressed"]

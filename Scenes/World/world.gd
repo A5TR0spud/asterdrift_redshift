@@ -24,6 +24,8 @@ var PowerDrain : float = 1.0
 @onready var BayMetalBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/MetalCap
 @onready var BayOrganBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/OrganCap
 @onready var BayCeramBar := $CanvasLayer/Control/Resources/Inventory/Run/Caps/CeramCap
+@onready var StationInventory := $CanvasLayer/Control/Resources/Inventory/Station
+@onready var StationInventoryCounter := $CanvasLayer/Control/Resources/Inventory/Station/ResourceCounter
 
 var FarmedOrganics: int = 0
 var RTGEnergy: int = 0
@@ -41,12 +43,20 @@ func _ready():
 	_updateDisplay()
 	_oldPos = Player.global_position
 	ResourceInventory.visible = UpgradesManager.Load("ResourceMonitor") > 0
+	StationInventory.visible =_isStationInventoryVisible()
 	HangarInventory.Display = MaterialsManager.Mats
 	var coef: int = UpgradesManager.Load("SplitBay") * 3 + 1
 	BaySynthBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
 	BayMetalBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
 	BayOrganBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
 	BayCeramBar.max_value = RunHandler.GetMaxBayResourceCount() * coef
+
+func _isStationInventoryVisible() -> bool:
+	if !UpgradesManager.LoadIsEnabled("Borealis"):
+		return false
+	var b: bool = true
+	b = b && UpgradesManager.LoadIsEnabled("MassDriver")
+	return b
 
 func _getStartingEnergy() -> float:
 	var s: float = 30
@@ -89,9 +99,6 @@ func _physics_process(delta):
 		d *= 1.25
 		d *= d
 		PowerDrain *= d + (1.0 - d) * overclockDrain
-	
-	if UpgradesManager.Load("ResourceMonitor") > 0:
-		ResourceMonitor.Display = RunHandler.Mats
 	
 	if UpgradesManager.Load("RTG") > 0 && RTGEnergy < RunHandler.TimeSpent / 8.0 - 1:
 		RTGEnergy += 1
@@ -163,10 +170,16 @@ func _updateDisplay():
 	if !toDisplay.contains("."):
 		toDisplay += ".0"
 	TimeLabel.text = toDisplay
-	BayCeramBar.value = RunHandler.Mats.Ceramics
-	BayOrganBar.value = RunHandler.Mats.Organics + BayCeramBar.value
-	BayMetalBar.value = RunHandler.Mats.Metals + BayOrganBar.value
-	BaySynthBar.value = RunHandler.Mats.Synthetics + BayMetalBar.value
+	
+	if UpgradesManager.Load("ResourceMonitor") > 0:
+		ResourceMonitor.Display = RunHandler.BayMats
+	BayCeramBar.value = RunHandler.BayMats.Ceramics
+	BayOrganBar.value = RunHandler.BayMats.Organics + BayCeramBar.value
+	BayMetalBar.value = RunHandler.BayMats.Metals + BayOrganBar.value
+	BaySynthBar.value = RunHandler.BayMats.Synthetics + BayMetalBar.value
+	
+	if _isStationInventoryVisible():
+		StationInventoryCounter.Display = RunHandler.StationMats
 
 func _on_end_run_button_pressed():
 	StopRun()
@@ -187,11 +200,15 @@ func _on_return_to_hangar_pressed():
 	MaterialsManager.Save()
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")
 
+@warning_ignore("unused_signal")
+signal player_warp(amount: Vector2)
+
 func _on_player_bounds_body_exited(body):
 	if body is PlayerClass:
 		for child: Node2D in DecorationSpawner.get_children():
 			child.global_position = child.global_position - Player.global_position
 		_oldPos -= Player.global_position
+		emit_signal("player_warp", -Player.global_position)
 		Player.global_position = Vector2.ZERO
 		
 

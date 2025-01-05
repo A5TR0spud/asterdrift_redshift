@@ -64,7 +64,7 @@ func _onCollected(type: Materials.Mats, Sources: Array[Notification.Sources] = [
 		return
 	
 	if type == Materials.Mats.Components:
-		RunHandler.Mats.Components += 1
+		RunHandler.AddResource(Materials.Mats.Components)
 		NotificationsManager.SendPickupNotification(Materials.Mats.Components)
 		return
 	
@@ -83,7 +83,7 @@ func _onCollected(type: Materials.Mats, Sources: Array[Notification.Sources] = [
 func _tryRecycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:
 	if UpgradesManager.Load("Recycler") < 1:
 		return false
-	var target := _getLowestResourceFromMaterials(MaterialsManager.Mats, _getLowestResourceFromMaterials(RunHandler.Mats, Materials.Mats.Organics))
+	var target := _getLowestResourceFromMaterials(MaterialsManager.Mats, _getLowestResourceFromMaterials(RunHandler.BayMats, Materials.Mats.Organics))
 	
 	RecyclerCount += 1
 	if RecyclerCount % 4 == 0:
@@ -119,7 +119,7 @@ func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> 
 			NotificationsManager.SendTransformNotification(type, Materials.Mats.Components, Sources)
 			toReturn = true
 		else:
-			var target := _getLowestResourceFromMaterials(RunHandler.Mats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
+			var target := _getLowestResourceFromMaterials(RunHandler.BayMats, _getLowestResourceFromMaterials(MaterialsManager.Mats, Materials.Mats.Synthetics))
 			var upcycleCopy: Array[Notification.Sources] = [Notification.Sources.UPCYCLER]
 			if target == Materials.Mats.Metals:
 				_onMetalCollected(target, upcycleCopy)

@@ -1421,7 +1421,8 @@ position = Vector2(384, -80)
 NAME = "Mass Driver"
 DESCRIPTION = "Whenever a resource reaches its cap,
 launches a package carrying the bay
-resources of that type to the station."
+resources of that type to the station.
+Effectively provides unlimited storage."
 INTERNAL_NAME = "MassDriver"
 SPRITE = ExtResource("50_emct2")
 PARENT_UPGRADE = NodePath("../SplitBay")
@@ -1951,13 +1952,13 @@ PRE_BOUGHT = true
 Cost = SubResource("Resource_qruf7")
 
 [node name="Station" parent="Camera2D/TechTree/BottomRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(96, 96)
+position = Vector2(112, 96)
 NAME = "Borealis Station"
 DESCRIPTION = "Deploy a protective station at run start.
 Doesn't do a whole lot on its own."
 INTERNAL_NAME = "Borealis"
 SPRITE = ExtResource("91_xsyma")
-PARENT_UPGRADE = NodePath("../LookAhead")
+PARENT_UPGRADE = NodePath("../Farming/CoreAssembler")
 Cost = SubResource("Resource_cv1xp")
 
 [connection signal="pressed" from="CanvasLayer/Control/run" to="CanvasLayer/Control" method="_on_run_pressed"]
