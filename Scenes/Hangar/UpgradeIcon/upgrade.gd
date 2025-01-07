@@ -139,6 +139,7 @@ func _ready():
 		PARENT_UPGRADE.notify_children.connect(ChildIsNotified)
 	if PRE_BOUGHT && (!CYCLE || (CYCLE && CurrentLevel == 0)):
 		_try_buy()
+	
 
 func _updateTooltip():
 	if CYCLE:
