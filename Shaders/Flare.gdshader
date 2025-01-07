@@ -26,10 +26,10 @@ vec2 rotate(vec2 input, float angle) {
 	float y = input.y;
 	float cs = cos(angle);
 	float sn = sin(angle);
-	
+
 	input.x = cs * x - sn * y;
 	input.y = sn * x + cs * y;
-	
+
 	return input;
 }
 
@@ -66,9 +66,9 @@ void fragment() {
 		float a5 = rand(i - layers * 2) * 3.14159265;
 		a += a1 * flareFromRot(rotate(localCoord, speed * TIME * a2 + a3)) * (0.5 + sin(speed * TIME * a4 + a5) * 0.5);
 	}
-	
+
 	a = clamp(a, 0.0, 1.0);
-	
+
 	COLOR *= a * Color1 + (1.0 - a) * Color2;
 }
 

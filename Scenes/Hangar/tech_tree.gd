@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 @warning_ignore("unused_signal")
 signal reload_display
@@ -6,10 +7,21 @@ const UPGRADES_PER_THREAD: int = 5
 var _Threads: Array[Thread]
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	_Threads = []
 	_reloadChildren(0)
 	_onAllUpgradeChildren(self, _connect)
 	_onAllUpgradeChildren(self, _propo)
+
+var t: float = 0.0
+func _physics_process(delta):
+	if !Engine.is_editor_hint():
+		return
+	t += delta
+	if t > 0.2:
+		_onAllUpgradeChildren(self, _relVis)
+		t = 0.0
 
 func _connect(child: Upgrade) -> void:
 	child.upgrade_successfully_bought.connect(_reloadChildren)
