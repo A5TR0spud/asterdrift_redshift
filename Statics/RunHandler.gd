@@ -40,15 +40,7 @@ static func CanCollect(mat: Materials.Mats) -> bool:
 	if mat == Materials.Mats.Components:
 		return true
 	if UpgradesManager.Load("SplitBay") > 0:
-		if mat == Materials.Mats.Metals:
-			return BayMats.Metals < GetMaxBayResourceCount()
-		if mat == Materials.Mats.Ceramics:
-			return BayMats.Ceramics < GetMaxBayResourceCount()
-		if mat == Materials.Mats.Synthetics:
-			return BayMats.Synthetics < GetMaxBayResourceCount()
-		if mat == Materials.Mats.Organics:
-			return BayMats.Organics < GetMaxBayResourceCount()
-		return true
+		return BayMats.Get(mat) < GetMaxBayResourceCount()
 	return GetBayResourceCount() < GetMaxBayResourceCount()
 
 static func AddResource(mat: Materials.Mats, amount: int = 1) -> bool:
@@ -59,32 +51,14 @@ static func AddResource(mat: Materials.Mats, amount: int = 1) -> bool:
 	if !CanCollect(mat):
 		return false
 	
-	var massDriver: bool = UpgradesManager.LoadIsEnabled("MassDriver")
+	var massDriver: bool = UpgradesManager.LoadIsEnabled("MassDriver") && UpgradesManager.LoadIsEnabled("Borealis")
 	
-	if mat == Materials.Mats.Metals:
-		BayMats.Metals += 1
-		if massDriver && BayMats.Metals >= GetMaxBayResourceCount():
-			StationMats.Metals += BayMats.Metals
-			BayMats.Metals = 0
-			QueuedMassDriverPackages.Metals += 1
-	elif mat == Materials.Mats.Ceramics:
-		BayMats.Ceramics += 1
-		if massDriver && BayMats.Ceramics >= GetMaxBayResourceCount():
-			StationMats.Ceramics += BayMats.Ceramics
-			BayMats.Ceramics = 0
-			QueuedMassDriverPackages.Ceramics += 1
-	elif mat == Materials.Mats.Synthetics:
-		BayMats.Synthetics += 1
-		if massDriver && BayMats.Synthetics >= GetMaxBayResourceCount():
-			StationMats.Synthetics += BayMats.Synthetics
-			BayMats.Synthetics = 0
-			QueuedMassDriverPackages.Synthetics += 1
-	elif mat == Materials.Mats.Organics:
-		BayMats.Organics += 1
-		if massDriver && BayMats.Organics >= GetMaxBayResourceCount():
-			StationMats.Organics += BayMats.Organics
-			BayMats.Organics = 0
-			QueuedMassDriverPackages.Organics += 1
+	BayMats.Add(mat)
+	if massDriver && BayMats.Get(mat) >= GetMaxBayResourceCount():
+		StationMats.Add(mat, BayMats.Get(mat))
+		BayMats.Set(mat)
+		QueuedMassDriverPackages.Add(mat)
+
 	amount -= 1
 	if amount > 0:
 		AddResource(mat, amount)
@@ -92,11 +66,8 @@ static func AddResource(mat: Materials.Mats, amount: int = 1) -> bool:
 
 static func GetTotalResources() -> Materials:
 	var ma: Materials = Materials.new()
-	ma.Metals = BayMats.Metals + StationMats.Metals
-	ma.Synthetics = BayMats.Synthetics + StationMats.Synthetics
-	ma.Ceramics = BayMats.Ceramics + StationMats.Ceramics
-	ma.Organics = BayMats.Organics + StationMats.Organics
-	ma.Components = BayMats.Components + StationMats.Components
+	ma.SetTo(BayMats)
+	ma.AddBy(StationMats)
 	return ma
 
 static func StartRun() -> void:
@@ -111,25 +82,13 @@ static func StartRun() -> void:
 		BackupBattery = 0
 	if BayMats == null:
 		BayMats = Materials.new()
-	BayMats.Metals = 0
-	BayMats.Ceramics = 0
-	BayMats.Synthetics = 0
-	BayMats.Organics = 0
-	BayMats.Components = 0
+	BayMats.SetAll()
 	if StationMats == null:
 		StationMats = Materials.new()
-	StationMats.Metals = 0
-	StationMats.Ceramics = 0
-	StationMats.Synthetics = 0
-	StationMats.Organics = 0
-	StationMats.Components = 0
+	StationMats.SetAll()
 	if QueuedMassDriverPackages == null:
 		QueuedMassDriverPackages = Materials.new()
-	QueuedMassDriverPackages.Metals = 0
-	QueuedMassDriverPackages.Ceramics = 0
-	QueuedMassDriverPackages.Synthetics = 0
-	QueuedMassDriverPackages.Organics = 0
-	QueuedMassDriverPackages.Components = 0
+	QueuedMassDriverPackages.SetAll()
 	UpcyclerCount = DataManager.Load("UpcyclerCount", 0)
 
 static func EndRun() -> void:
@@ -139,12 +98,7 @@ static func EndRun() -> void:
 		var x = DataManager.Load("coreAssemblyTimeLeft", 300)
 		DataManager.Save("coreAssemblyTimeLeft", x - TimeSpent)
 	_is_running = false
-	var ma: Materials = GetTotalResources()
-	MaterialsManager.Mats.Metals += ma.Metals
-	MaterialsManager.Mats.Ceramics += ma.Ceramics
-	MaterialsManager.Mats.Synthetics += ma.Synthetics
-	MaterialsManager.Mats.Organics += ma.Organics
-	MaterialsManager.Mats.Components += ma.Components
+	MaterialsManager.Mats.AddBy(GetTotalResources())
 	MaterialsManager.Save()
 	DataManager.Save("UpcyclerCount", UpcyclerCount)
 

@@ -124,11 +124,7 @@ func _ready():
 	CurrentLevel = UpgradesManager.Load(INTERNAL_NAME, false)
 	if CurrentLevel > MAX_LEVEL:
 		MaterialsManager.Load()
-		MaterialsManager.Mats.Metals += Cost.Metals * (CurrentLevel - MAX_LEVEL)
-		MaterialsManager.Mats.Ceramics += Cost.Ceramics * (CurrentLevel - MAX_LEVEL)
-		MaterialsManager.Mats.Synthetics += Cost.Synthetics * (CurrentLevel - MAX_LEVEL)
-		MaterialsManager.Mats.Organics += Cost.Organics * (CurrentLevel - MAX_LEVEL)
-		MaterialsManager.Mats.Components += Cost.Components * (CurrentLevel - MAX_LEVEL)
+		MaterialsManager.Mats.AddBy(Cost, CurrentLevel - MAX_LEVEL)
 		CurrentLevel = MAX_LEVEL
 		UpgradesManager.Save(INTERNAL_NAME, CurrentLevel)
 		MaterialsManager.Save()
@@ -260,11 +256,7 @@ func _try_buy() -> void:
 	if !_can_buy():
 		return
 	if !PRE_BOUGHT:
-		MaterialsManager.Mats.Metals -= Cost.Metals
-		MaterialsManager.Mats.Ceramics -= Cost.Ceramics
-		MaterialsManager.Mats.Synthetics -= Cost.Synthetics
-		MaterialsManager.Mats.Organics -= Cost.Organics
-		MaterialsManager.Mats.Components -= Cost.Components
+		MaterialsManager.Mats.RemoveBy(Cost)
 	if PRE_BOUGHT && !CYCLE:
 		CurrentLevel = MAX_LEVEL
 	elif PRE_BOUGHT && CYCLE && CurrentLevel == 0:

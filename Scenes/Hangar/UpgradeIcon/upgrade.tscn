@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bb44a3o0sq4ge"]
+[gd_scene load_steps=34 format=3 uid="uid://bb44a3o0sq4ge"]
 
 [ext_resource type="Script" path="res://Scenes/Hangar/UpgradeIcon/upgrade.gd" id="1_le4ru"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="2_wk4es"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cva52tx1dsqss" path="res://Assets/Hangar/Upgrades/Meta/AvailableIcon.png" id="3_yu8kn"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_g1xj2"]
 [ext_resource type="Texture2D" uid="uid://b7jakho75cv5" path="res://Assets/Hangar/Upgrades/Meta/BackgroundFrame.png" id="5_hjdey"]
+[ext_resource type="Texture2D" uid="uid://ld75b02ahhpr" path="res://Assets/Hangar/Upgrades/Meta/BackgroundBackground.png" id="6_pm8uj"]
 [ext_resource type="Texture2D" uid="uid://t2dy8guaquev" path="res://Assets/Hangar/Upgrades/Meta/AvailableOverlay.png" id="8_biqq0"]
 [ext_resource type="Texture2D" uid="uid://c2yjrmcysqnsd" path="res://Assets/Hangar/Upgrades/Meta/Background.png" id="8_djbwo"]
 [ext_resource type="Script" path="res://Statics/Materials.gd" id="8_nu5sk"]
@@ -89,7 +90,6 @@ font = ExtResource("10_sd7c2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font = ExtResource("10_sd7c2")
-font_color = Color(1, 0.7, 0.7, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.109804, 0.227451, 0.294118, 1)
@@ -124,6 +124,10 @@ texture = ExtResource("8_djbwo")
 z_index = 1
 texture = ExtResource("5_hjdey")
 
+[node name="Sprite2D" type="Sprite2D" parent="Background/Sprite2D"]
+z_index = -2
+texture = ExtResource("6_pm8uj")
+
 [node name="MainIcon" type="Sprite2D" parent="."]
 modulate = Color(0.5, 0.5, 0.5, 1)
 texture = ExtResource("2_wk4es")
@@ -155,7 +159,7 @@ script = ExtResource("9_oe046")
 visible = false
 z_index = 1
 z_as_relative = false
-position = Vector2(0, 17)
+position = Vector2(0, 18)
 texture = ExtResource("8_wx1m0")
 
 [node name="LevelBar" type="Marker2D" parent="MainIcon"]
@@ -241,7 +245,7 @@ SHOW_TEXT = false
 [node name="ParentLine" type="Line2D" parent="."]
 visible = false
 show_behind_parent = true
-z_index = -5
+z_index = -10
 z_as_relative = false
 points = PackedVector2Array(0, 0, 64, 64)
 width = 6.0

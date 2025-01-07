@@ -16,25 +16,21 @@ var _start: Vector2
 var _end: Node2D
 
 func _reload() -> void:
+	var te: AtlasTexture = texture
 	if Type == Materials.Mats.Ceramics:
-		var te: AtlasTexture = texture
 		te.region.position = Vector2(0, 0)
 	elif Type == Materials.Mats.Organics:
-		var te: AtlasTexture = texture
 		te.region.position = Vector2(9, 0)
 	elif Type == Materials.Mats.Metals:
-		var te: AtlasTexture = texture
 		te.region.position = Vector2(0, 14)
 	elif Type == Materials.Mats.Synthetics:
-		var te: AtlasTexture = texture
 		te.region.position = Vector2(9, 14)
 	else:
-		var te: AtlasTexture = texture
 		te.region.position = Vector2(18, 0)
-	hide()
 	
 func _ready() -> void:
 	_reload()
+	hide()
 
 func OffsetBeginning(amount: Vector2) -> void:
 	_start += amount
