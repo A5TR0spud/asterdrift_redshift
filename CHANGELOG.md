@@ -10,7 +10,6 @@
 - Added Compartmentalization upgrade to Bigger Bay
 - Added Mass Driver upgrade to Compartmentalization
 - Added Borealis Station upgrade to Core Assembler
-- Tractor Needle is a child of Needle Laser again
 - Added flare shader to Apollo (replaces inner ring)
 - Reduced rotation speed of Apollo, and edges no longer fade
 - Power drain now ramps at 0.1/s beginning at 30 seconds
