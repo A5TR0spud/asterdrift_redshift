@@ -4,6 +4,7 @@
 - Notice: old userdata is still stored under old name
 	- If you would like to remove the old data, or transfer it to the new file:
 		- On Windows: C:\\Users\\\[USER\]\\AppData\\Roaming\\Godot\\app_userdata\\\[Astershift/Aurora Transit\]
+- Updated to Godot 4.4
 - Bay resources are now capped at 10
 - Added Bigger Bay upgrade to Inventory Monitor
 - Added BERTHA upgrade to Bigger Bay
@@ -33,9 +34,7 @@
 - Fixed a data storage system not properly defaulting, most notably fixing resolution on launch if not set in settings
 - Adjusted Adapt setting for resolution
 - Adjusted "IsAvailable" overlay of upgrades
-
-todo: pirates
-todo: comets
+- Scope creep is a hell of a drug. Stay sane, kids.
 
 ## indev Build 14
 
