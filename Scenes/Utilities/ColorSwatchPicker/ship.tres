@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ShipData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ShipData" load_steps=2 format=3 uid="uid://bnjegc13d15ns"]
 
-[ext_resource type="Script" path="res://Scenes/Garage/ShipData.gd" id="1_stmoa"]
+[ext_resource type="Script" uid="uid://cvbmmo3sl4573" path="res://Scenes/Garage/ShipData.gd" id="1_stmoa"]
 
 [resource]
 script = ExtResource("1_stmoa")

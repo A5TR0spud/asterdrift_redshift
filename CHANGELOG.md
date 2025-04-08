@@ -10,6 +10,9 @@
 - Added Compartmentalization upgrade to Bigger Bay
 - Added Mass Driver upgrade to Compartmentalization
 - Added Borealis Station upgrade to Core Assembler
+- Removed threading in Hangar
+- Further optimized Hangar:
+	- I no longer know how it works, but it seems to work
 - Added flare shader to Apollo (replaces inner ring)
 - Reduced rotation speed of Apollo, and edges no longer fade
 - Power drain now ramps at 0.1/s beginning at 30 seconds
@@ -24,6 +27,7 @@
 - Dynamo has been buffed back to total velocity
 - Artemis now goes through things in the way of its target, if that obstruction is far away enough (outside a 1px range)
 - Focus Fire now loses target if you manually fire and hit nothing
+- Removed pulsing yellow outline to energy meter value
 - Fixed no save data causing garage to show "selected" arrow on every color
 	- Not 100% sure fixed, and not 100% sure from a previous version
 - Fixed a data storage system not properly defaulting, most notably fixing resolution on launch if not set in settings

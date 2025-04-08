@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctsb0k11wggef"]
 
 [ext_resource type="Texture2D" uid="uid://bbx25kdj73olo" path="res://Assets/Ships/Station/MassDriverPackage.png" id="1_ts7nf"]
-[ext_resource type="Script" path="res://Scenes/Utilities/Station/driver_package.gd" id="2_7isqy"]
+[ext_resource type="Script" uid="uid://dmcl2agcmocgg" path="res://Scenes/Utilities/Station/driver_package.gd" id="2_7isqy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qcp12"]
 resource_local_to_scene = true

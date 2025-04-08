@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://d08pheagteker" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.tscn" id="1_af53s"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_ihjlj"]
-[ext_resource type="Script" path="res://Scenes/Garage/garage.gd" id="1_jna1t"]
+[ext_resource type="Script" uid="uid://chqwrm5fahdcw" path="res://Scenes/Garage/garage.gd" id="1_jna1t"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_ei8vl"]
-[ext_resource type="Script" path="res://Scenes/Garage/accent_type_selector.gd" id="3_kw7r4"]
-[ext_resource type="Script" path="res://Scenes/Garage/backdrop.gd" id="6_smmod"]
+[ext_resource type="Script" uid="uid://cesrv8lb0nfpb" path="res://Scenes/Garage/accent_type_selector.gd" id="3_kw7r4"]
+[ext_resource type="Script" uid="uid://4pju2k1b6jor" path="res://Scenes/Garage/backdrop.gd" id="6_smmod"]
 [ext_resource type="Texture2D" uid="uid://bbshh6i8k4xsk" path="res://Assets/Backdrops/GarageTile.png" id="6_t481h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0efh"]

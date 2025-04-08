@@ -71,4 +71,3 @@ void fragment() {
 
 	COLOR *= a * Color1 + (1.0 - a) * Color2;
 }
-

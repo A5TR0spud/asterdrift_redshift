@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3avnqvoq20e2"]
 
-[ext_resource type="Script" path="res://Scenes/Utilities/Notifications/transform_notification.gd" id="1_eibn8"]
+[ext_resource type="Script" uid="uid://c1j3i8iy861d4" path="res://Scenes/Utilities/Notifications/transform_notification.gd" id="1_eibn8"]
 [ext_resource type="Texture2D" uid="uid://vcteoyu2fivs" path="res://Assets/Hangar/Resources/LostMedia.png" id="2_8x73s"]
 [ext_resource type="Texture2D" uid="uid://c316vb8j088ik" path="res://Assets/Hangar/Resources/Arrow.png" id="3_o5874"]
 [ext_resource type="Texture2D" uid="uid://cuj3o7e7acbec" path="res://Assets/Hangar/Upgrades/Hydroponics.png" id="4_y02mc"]

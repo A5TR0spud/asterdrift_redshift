@@ -96,7 +96,7 @@ func _updateDisplay():
 	$Metals/Bool.custom_minimum_size.y = FONT_SIZE + 7
 	$Metals/Label.text = ""
 	if !BOOL_ICON:
-		$Metals/Label.text += String.num(Display.Metals)
+		$Metals/Label.text += String.num(Display.Metals, 0)
 	if SHOW_TEXT:
 		$Metals/Label.text += " Metallics" if Display.Metals != 1 else " Metallic"
 	
@@ -105,7 +105,7 @@ func _updateDisplay():
 	$Ceramics/Bool.custom_minimum_size.y = FONT_SIZE + 7
 	$Ceramics/Label.text = ""
 	if !BOOL_ICON:
-		$Ceramics/Label.text += String.num(Display.Ceramics)
+		$Ceramics/Label.text += String.num(Display.Ceramics, 0)
 	if SHOW_TEXT:
 		$Ceramics/Label.text += " Ceramics" if Display.Ceramics != 1 else " Ceramic"
 	
@@ -114,7 +114,7 @@ func _updateDisplay():
 	$Synthetic/Bool.custom_minimum_size.y = FONT_SIZE + 7
 	$Synthetic/Label.text = ""
 	if !BOOL_ICON:
-		$Synthetic/Label.text = String.num(Display.Synthetics)
+		$Synthetic/Label.text = String.num(Display.Synthetics, 0)
 	if SHOW_TEXT:
 		$Synthetic/Label.text += " Synthetics" if Display.Synthetics != 1 else " Synthetic"
 	
@@ -123,7 +123,7 @@ func _updateDisplay():
 	$Organics/Bool.custom_minimum_size.y = FONT_SIZE + 7
 	$Organics/Label.text = ""
 	if !BOOL_ICON:
-		$Organics/Label.text = String.num(Display.Organics)
+		$Organics/Label.text = String.num(Display.Organics, 0)
 	if SHOW_TEXT:
 		$Organics/Label.text += " Organics" if Display.Organics != 1 else " Organic"
 	
@@ -132,7 +132,7 @@ func _updateDisplay():
 	$Components/Bool.custom_minimum_size.y = FONT_SIZE + 7
 	$Components/Label.text = ""
 	if !BOOL_ICON:
-		$Components/Label.text = String.num(Display.Components)
+		$Components/Label.text = String.num(Display.Components, 0)
 	if SHOW_TEXT:
 		$Components/Label.text += " Cores" if Display.Components != 1 else " Core"
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://chf01luc0al34"]
 
-[ext_resource type="Script" path="res://Scenes/Player/radar_arrow.gd" id="1_0kkv0"]
+[ext_resource type="Script" uid="uid://ctkqcqlt25gu8" path="res://Scenes/Player/radar_arrow.gd" id="1_0kkv0"]
 [ext_resource type="Texture2D" uid="uid://dyes2nqcoarcw" path="res://Assets/Ships/Upgrades/RadarMetal.png" id="2_iurab"]
 
 [node name="RadarArrow" type="Control"]

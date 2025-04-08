@@ -91,18 +91,9 @@ func _tryRecycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> 
 			RecyclerCount -= 1
 			return false
 		Sources.append(Notification.Sources.RECYCLER)
-		var b: bool = false
-		if target == Materials.Mats.Metals:
-			b = RunHandler.AddResource(Materials.Mats.Metals)
-		elif target == Materials.Mats.Synthetics:
-			b = RunHandler.AddResource(Materials.Mats.Synthetics)
-		elif target == Materials.Mats.Ceramics:
-			b = RunHandler.AddResource(Materials.Mats.Ceramics)
-		elif target == Materials.Mats.Organics:
-			b = RunHandler.AddResource(Materials.Mats.Organics)
-		if b:
+		if RunHandler.AddResource(target):
 			NotificationsManager.SendTransformNotification(type, target, Sources)
-		return b
+			return true
 	return false
 
 func _tryUpcycle(type: Materials.Mats, Sources: Array[Notification.Sources]) -> bool:

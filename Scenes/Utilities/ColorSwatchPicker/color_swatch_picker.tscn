@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d08pheagteker"]
 
-[ext_resource type="Script" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.gd" id="1_dv17v"]
+[ext_resource type="Script" uid="uid://c3r82f3pk3o8m" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch_picker.gd" id="1_dv17v"]
 
 [node name="GridContainer" type="GridContainer"]
 offset_right = 40.0

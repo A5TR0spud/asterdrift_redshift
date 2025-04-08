@@ -11,13 +11,13 @@ void fragment() {
 	//if (abs(2.0f * UV.x - 1.0f) + UV.y > 1.0f) {
 		//discard;
 	//}
-	
+
 	float a = 1.0;
-	
+
 	a = 0.875 + 0.125 * sin(UV.y * DIST_COEFFICIENT - TIME_COEFFICIENT * TIME);
 	a *= sin(UV.x * 3.14159265);
 	a *= 1.2 - abs(2.0f * UV.x - 1.0f) - UV.y;
-	
+
 	a = clamp(a, 0, 1);
 	a = STEP_INFLUENCE * step(STEP, a) + (1.0 - STEP_INFLUENCE) * a;
 	if (a < 0.75 && a > 0.25) {

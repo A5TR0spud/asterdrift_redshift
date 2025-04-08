@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3r4w12j3w543"]
 
-[ext_resource type="Script" path="res://Scenes/Player/needle_laser.gd" id="1_dsf08"]
+[ext_resource type="Script" uid="uid://ba8e5ytpj6ajc" path="res://Scenes/Player/needle_laser.gd" id="1_dsf08"]
 [ext_resource type="Texture2D" uid="uid://13trc2cvbynb" path="res://Assets/Ships/Upgrades/LaserReticle.png" id="2_jcipm"]
-[ext_resource type="Shader" path="res://Shaders/Flare.gdshader" id="3_bh5u1"]
+[ext_resource type="Shader" uid="uid://cxiwm3v6xvwvr" path="res://Shaders/Flare.gdshader" id="3_bh5u1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkho5"]
 atlas = ExtResource("2_jcipm")

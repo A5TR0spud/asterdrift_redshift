@@ -8,7 +8,6 @@ const LOOK_AHEAD : int = 1
 const GRACE : int = 4
 
 @warning_ignore("unused_signal")
-
 signal upgrade_successfully_bought(level : int)
 signal notify_children(propagation : int)
 
@@ -132,6 +131,7 @@ func _ready():
 		queue_free()
 		return
 	ReloadVisible()
+	ReloadParentLine()
 	for requirement: Upgrade in REQUIRED_UPGRADES:
 		requirement.connect("upgrade_successfully_bought", self.ReloadVisible)
 	_updateTooltip()
@@ -151,7 +151,7 @@ func _updateTooltip():
 		LeveT.hide()
 	else:
 		LeveT.show()
-		LeveT.text = String.num(CurrentLevel) + "/" + String.num(MAX_LEVEL)
+		LeveT.text = String.num(CurrentLevel, 0) + "/" + String.num(MAX_LEVEL, 0)
 	CycleT.visible = CYCLE
 	CostT.Display = Cost
 	RequirementT.hide()
@@ -208,6 +208,15 @@ func ReloadVisible(_ignored: int = 0):
 	else:
 		CostT.visible = !CYCLE
 		ToggleT.hide()
+	MainIcon.modulate = Color(1, 1, 1, 1)
+	AvailableIcon.visible = _can_buy() && !CYCLE
+	if CurrentLevel == 0 && !(_can_buy() && !CYCLE):
+		MainIcon.modulate = Color(0.5, 0.5, 0.5, 1)
+	BoolIcon.visible = CurrentLevel == MAX_LEVEL && !CYCLE
+	_updateTooltip()
+	_updateLevelBar()
+
+func ReloadParentLine():
 	if PARENT_UPGRADE && SHOW_PARENT_LINE:
 		ParentLine.show()
 		var dir : Vector2 = PARENT_UPGRADE.global_position - global_position
@@ -219,24 +228,9 @@ func ReloadVisible(_ignored: int = 0):
 			ParentLine.self_modulate = Color(0.5, 0.5, 0.5, 1)
 	else:
 		ParentLine.hide()
-	if !PARENT_UPGRADE || CurrentLevel > 0:
-		emit_signal("notify_children", 0)
-	MainIcon.modulate = Color(1, 1, 1, 1)
-	BoolIcon.hide()
-	AvailableIcon.hide()
-	if _can_buy() && !CYCLE:
-		AvailableIcon.show()
-	elif CurrentLevel == 0:
-		MainIcon.modulate = Color(0.5, 0.5, 0.5, 1)
-	if CurrentLevel == MAX_LEVEL && !CYCLE:
-		BoolIcon.show()
-		LevelBar.hide()
-	else:
-		LevelBar.show()
-		_updateLevelBar()
-	_updateTooltip()
 
 func _updateLevelBar():
+	LevelBar.visible = (CurrentLevel != MAX_LEVEL || CYCLE) && IsParentBought()
 	if LevelBar.get_child_count() != MAX_LEVEL:
 		for child: Node2D in LevelBar.get_children():
 			child.queue_free()
@@ -250,6 +244,11 @@ func _updateLevelBar():
 			b.texture = LevelAccent if i == CurrentLevel - 1 else EmptyLevel
 		else:
 			b.texture = LevelAccent if i < CurrentLevel else EmptyLevel
+
+func IsParentBought() -> bool:
+	if PARENT_UPGRADE == null:
+		return true
+	return PARENT_UPGRADE.CurrentLevel > 0
 
 func _try_buy() -> void:
 	if !_can_buy():
@@ -286,7 +285,8 @@ func _can_buy() -> bool:
 			return false
 		if PARENT_UPGRADE.CurrentLevel == 0:
 			return false
-		ParentLine.default_color = Color(0.666, 0.777, 0.888, 1)
+		if UpgradesManager.Load(INTERNAL_NAME, false) == 0:
+			ParentLine.default_color = Color(0.666, 0.777, 0.888, 1)
 	if !REQUIRED_UPGRADES.is_empty():
 		for requirement: Upgrade in REQUIRED_UPGRADES:
 			if requirement.CurrentLevel < 1:

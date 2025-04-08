@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://decs2j1loms7o" path="res://Assets/Hangar/Resources/plus.png" id="1_1nawr"]
 [ext_resource type="Texture2D" uid="uid://vcteoyu2fivs" path="res://Assets/Hangar/Resources/LostMedia.png" id="1_dna3a"]
-[ext_resource type="Script" path="res://Scenes/Utilities/Notifications/pickup_notification.gd" id="1_ow7fi"]
+[ext_resource type="Script" uid="uid://bx52dmjfg4hjl" path="res://Scenes/Utilities/Notifications/pickup_notification.gd" id="1_ow7fi"]
 [ext_resource type="Texture2D" uid="uid://kv5qlp478v4p" path="res://Assets/Hangar/Upgrades/Upcycler.png" id="4_oexbe"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5uno"]

@@ -5,7 +5,6 @@ var PowerDrain : float = 1.0
 
 @onready var TimeBar = $CanvasLayer/Control/EnergyMeter
 @onready var TimeLabel = $CanvasLayer/Control/EnergyMeter/EnergyLabel
-@onready var Progressor = $CanvasLayer/Control/EnergyMeter/EnergyLabel/ClipMask/ProgressBar
 @onready var EndScreen = $CanvasLayer/Control/EndRunScreenControl
 @onready var Player = $Player
 @onready var KillButton = $CanvasLayer/Control/EndRunButton
@@ -187,7 +186,6 @@ func _on_end_run_button_pressed():
 func StopRun():
 	Player.CAN_MOVE = false
 	EndScreen.show()
-	Progressor.hide()
 	KillButton.hide()
 	StatPanel.run()
 	RunHandler.EndRun()

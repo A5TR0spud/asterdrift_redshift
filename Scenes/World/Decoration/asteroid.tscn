@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://ctcwf45fx53pw"]
 
-[ext_resource type="Script" path="res://Scenes/World/Decoration/asteroid.gd" id="1_4rkgv"]
-[ext_resource type="Shader" path="res://Shaders/Asteroid.gdshader" id="1_6cy2n"]
-[ext_resource type="Script" path="res://Statics/Materials.gd" id="2_pami1"]
+[ext_resource type="Script" uid="uid://cb582wt4k7j55" path="res://Scenes/World/Decoration/asteroid.gd" id="1_4rkgv"]
+[ext_resource type="Shader" uid="uid://ctui8t176gjau" path="res://Shaders/Asteroid.gdshader" id="1_6cy2n"]
+[ext_resource type="Script" uid="uid://dcs36b1pqptnh" path="res://Statics/Materials.gd" id="2_pami1"]
 [ext_resource type="Texture2D" uid="uid://cmx3d58fp5gv" path="res://Assets/Asteroids/Asteroid5.png" id="4_qbeo8"]
 
 [sub_resource type="Resource" id="Resource_5y6c3"]
@@ -21,7 +21,7 @@ shader_parameter/outline = true
 shader_parameter/inline = true
 
 [sub_resource type="Curve" id="Curve_cvq1m"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.11194, 100), 0.0, 0.0, 0, 0]
 point_count = 2
 

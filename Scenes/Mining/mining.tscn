@@ -1,9 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://cpohketjg5p2b"]
 
-[ext_resource type="Texture2D" uid="uid://bwb1w2ad57sel" path="res://Assets/Mines/Rig.png" id="1_k62e1"]
-[ext_resource type="Texture2D" uid="uid://inslfg2ijtrj" path="res://Assets/Mines/Factory.png" id="2_bt44s"]
-[ext_resource type="Texture2D" uid="uid://bt0cqliecao2n" path="res://Assets/Mines/Scrapper.png" id="3_id4ih"]
-[ext_resource type="Texture2D" uid="uid://sjc4cx7g5nd8" path="res://Assets/Mines/Salvage.png" id="4_xyc6g"]
+[sub_resource type="Resource" id="Resource_l8br3"]
+metadata/__load_path__ = "res://Assets/Mines/Rig.png"
+
+[sub_resource type="Resource" id="Resource_iyngx"]
+metadata/__load_path__ = "res://Assets/Mines/Factory.png"
+
+[sub_resource type="Resource" id="Resource_45xp4"]
+metadata/__load_path__ = "res://Assets/Mines/Scrapper.png"
+
+[sub_resource type="Resource" id="Resource_3n20j"]
+metadata/__load_path__ = "res://Assets/Mines/Salvage.png"
 
 [node name="Mine" type="Node2D"]
 
@@ -23,16 +30,16 @@ zoom = Vector2(5, 5)
 [node name="Rig" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(85, 0)
-texture = ExtResource("1_k62e1")
+texture = SubResource("Resource_l8br3")
 
 [node name="Factory" type="Sprite2D" parent="."]
-texture = ExtResource("2_bt44s")
+texture = SubResource("Resource_iyngx")
 
 [node name="Scrapper" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-85, 0)
-texture = ExtResource("3_id4ih")
+texture = SubResource("Resource_45xp4")
 
 [node name="Salvage" type="Sprite2D" parent="."]
 position = Vector2(-85, 0)
-texture = ExtResource("4_xyc6g")
+texture = SubResource("Resource_3n20j")

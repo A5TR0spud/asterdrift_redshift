@@ -1,15 +1,15 @@
 [gd_scene load_steps=176 format=3 uid="uid://cm7727ch8vbsr"]
 
-[ext_resource type="Script" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
-[ext_resource type="Script" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
+[ext_resource type="Script" uid="uid://b4hhr78baxh8e" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
+[ext_resource type="Script" uid="uid://yry1f825xbe4" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
 [ext_resource type="Texture2D" uid="uid://clodsahhwdpwl" path="res://Assets/Hangar/Upgrades/RotationSpeed0.png" id="2_4ahhh"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="2_hd0wi"]
-[ext_resource type="Script" path="res://Scenes/Hangar/tech_tree.gd" id="4_eifcx"]
-[ext_resource type="Script" path="res://Statics/Materials.gd" id="4_fiej8"]
-[ext_resource type="Script" path="res://Scenes/Hangar/draggable_camera.gd" id="4_j8p1n"]
+[ext_resource type="Script" uid="uid://wlnccpxw05jh" path="res://Scenes/Hangar/tech_tree.gd" id="4_eifcx"]
+[ext_resource type="Script" uid="uid://dcs36b1pqptnh" path="res://Statics/Materials.gd" id="4_fiej8"]
+[ext_resource type="Script" uid="uid://b1sf1u0bx3w3o" path="res://Scenes/Hangar/draggable_camera.gd" id="4_j8p1n"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="4_lt2yv"]
 [ext_resource type="PackedScene" uid="uid://bb44a3o0sq4ge" path="res://Scenes/Hangar/UpgradeIcon/upgrade.tscn" id="4_r883k"]
-[ext_resource type="Script" path="res://Scenes/Hangar/core_assembler.gd" id="5_k7a2t"]
+[ext_resource type="Script" uid="uid://cx3a6q832rbbw" path="res://Scenes/Hangar/core_assembler.gd" id="5_k7a2t"]
 [ext_resource type="Texture2D" uid="uid://bi6d4udy3pjya" path="res://Assets/Backdrops/BlueprintTile.png" id="5_s07eq"]
 [ext_resource type="Texture2D" uid="uid://ctu35osk4wl32" path="res://Assets/Hangar/Upgrades/RotationSpeed1.png" id="7_3ljve"]
 [ext_resource type="Texture2D" uid="uid://cxwkybickfaic" path="res://Assets/Hangar/Upgrades/Manipulator.png" id="8_7rt47"]
@@ -60,7 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://cksxwx0mei4cf" path="res://Assets/Hangar/Upgrades/StrongerCoil.png" id="37_lkxls"]
 [ext_resource type="Texture2D" uid="uid://wh0lqw7p3wct" path="res://Assets/Hangar/Upgrades/CoreAssembler.png" id="39_25wo3"]
 [ext_resource type="Texture2D" uid="uid://c8gyxp6tehn6d" path="res://Assets/Hangar/Upgrades/Artemis.png" id="41_f8evi"]
-[ext_resource type="Script" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
+[ext_resource type="Script" uid="uid://de26uchph5o7y" path="res://Scenes/Hangar/ui.gd" id="42_h2q48"]
 [ext_resource type="Texture2D" uid="uid://d4e1bkjul6amk" path="res://Assets/Hangar/Upgrades/Fuse.png" id="42_whiub"]
 [ext_resource type="Texture2D" uid="uid://cev52xxb50l2v" path="res://Assets/Hangar/Upgrades/ExtraLaser.png" id="43_hkvbo"]
 [ext_resource type="Texture2D" uid="uid://cley641x2bt1r" path="res://Assets/Hangar/Upgrades/ReverseCharger.png" id="43_qb64a"]
@@ -1407,7 +1407,7 @@ PARENT_UPGRADE = NodePath("../BiggerBay")
 Cost = SubResource("Resource_qbfjt")
 
 [node name="SplitBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(320, -80)
+position = Vector2(320, -24)
 NAME = "Compartmentalization"
 DESCRIPTION = "All resources can individually reach the cap.
 Halves the cap of resources."

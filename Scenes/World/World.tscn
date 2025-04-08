@@ -1,28 +1,28 @@
-[gd_scene load_steps=60 format=3 uid="uid://depkd23s70wtg"]
+[gd_scene load_steps=57 format=3 uid="uid://depkd23s70wtg"]
 
-[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1esw0"]
+[ext_resource type="Script" uid="uid://wkjoifimcgte" path="res://Scenes/World/world.gd" id="1_1esw0"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="1_83k77"]
-[ext_resource type="Script" path="res://Scenes/World/station.gd" id="3_a1u38"]
+[ext_resource type="Script" uid="uid://c3qrmf7mkxr0b" path="res://Scenes/World/station.gd" id="3_a1u38"]
 [ext_resource type="Texture2D" uid="uid://bcedmvoa4i0lx" path="res://Assets/Ships/Station/Station.png" id="3_ag1d4"]
-[ext_resource type="Script" path="res://Scenes/Player/camera.gd" id="3_jlwng"]
-[ext_resource type="Script" path="res://Scenes/World/station_sprite.gd" id="4_7rpfa"]
+[ext_resource type="Script" uid="uid://bgym7s1oqnvpp" path="res://Scenes/Player/camera.gd" id="3_jlwng"]
+[ext_resource type="Script" uid="uid://c1383u4vbm8jt" path="res://Scenes/World/station_sprite.gd" id="4_7rpfa"]
 [ext_resource type="PackedScene" uid="uid://dl5fg1ej0bimi" path="res://Scenes/Utilities/ResourceScore/resource_counter.tscn" id="5_op3xx"]
-[ext_resource type="Script" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
+[ext_resource type="Script" uid="uid://ct5ttifs6oo5p" path="res://Scenes/World/stats_panel.gd" id="5_ukl6o"]
 [ext_resource type="Texture2D" uid="uid://dq86rb3g5ph65" path="res://Assets/Ships/Station/MassDriverReceiver.png" id="6_0k340"]
-[ext_resource type="Script" path="res://Scenes/World/mass_driver.gd" id="6_bm0fh"]
-[ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="7_7w45e"]
-[ext_resource type="Script" path="res://Statics/Materials.gd" id="7_m8q4m"]
+[ext_resource type="Script" uid="uid://rq7kea2rgx0h" path="res://Scenes/World/mass_driver.gd" id="6_bm0fh"]
+[ext_resource type="Shader" uid="uid://vyohfjqd0qv0" path="res://Shaders/SweepRotateUV.gdshader" id="7_7w45e"]
+[ext_resource type="Script" uid="uid://dcs36b1pqptnh" path="res://Statics/Materials.gd" id="7_m8q4m"]
 [ext_resource type="Shader" uid="uid://chvdu88j36ex3" path="res://Shaders/StarryNight.tres" id="8_17e2r"]
 [ext_resource type="Texture2D" uid="uid://cp2k4ek6m36ar" path="res://Assets/UI/Status/SolarPowered.png" id="8_awsfj"]
-[ext_resource type="Script" path="res://Scenes/World/backup_battery.gd" id="8_fgev5"]
-[ext_resource type="Script" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
-[ext_resource type="Script" path="res://Scenes/World/energy_meter.gd" id="9_8ooxm"]
+[ext_resource type="Script" uid="uid://0gihkiovlqb8" path="res://Scenes/World/backup_battery.gd" id="8_fgev5"]
+[ext_resource type="Script" uid="uid://dea6xv3dsk1rn" path="res://Scenes/World/decoration_spawner.gd" id="8_fn0el"]
+[ext_resource type="Script" uid="uid://dob82ffjy8kly" path="res://Scenes/World/energy_meter.gd" id="9_8ooxm"]
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="9_ik24p"]
 [ext_resource type="Texture2D" uid="uid://ydg6vos31dk" path="res://Assets/UI/Status/ReverseCharge.png" id="9_r5t40"]
 [ext_resource type="Texture2D" uid="uid://dcyu8aj02jcf6" path="res://Assets/Hangar/Resources/Energy.png" id="10_k0f34"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_wix40"]
 [ext_resource type="Texture2D" uid="uid://cthbemr8dqafd" path="res://Assets/Hangar/Resources/Backup.png" id="12_bchvh"]
-[ext_resource type="Script" path="res://Scenes/World/notifactions_manager.gd" id="16_0jwnj"]
+[ext_resource type="Script" uid="uid://bmwsw4reyp0tv" path="res://Scenes/World/notifactions_manager.gd" id="16_0jwnj"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="18_daekn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5h2dj"]
@@ -31,8 +31,8 @@ radius = 256.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbiqx"]
 shader = ExtResource("8_17e2r")
 shader_parameter/SpeedScaling = Vector2(1, 1)
-shader_parameter/Color = Color(0.0117647, 0, 0.0862745, 1)
 shader_parameter/NoiseTexture = ExtResource("9_ik24p")
+shader_parameter/Color = Color(0.0117647, 0, 0.0862745, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_viq4l"]
 shader = ExtResource("7_7w45e")
@@ -84,26 +84,6 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_d6e1y"]
 font = ExtResource("18_daekn")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlh84"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 7
-corner_radius_top_right = 2
-corner_radius_bottom_right = 7
-corner_radius_bottom_left = 2
-corner_detail = 1
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
-anti_aliasing = false
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfbx8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lcpg"]
-bg_color = Color(1, 0.941176, 0.541176, 1)
-corner_detail = 1
-anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3vni"]
 
@@ -434,39 +414,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="ClipMask" type="Label" parent="CanvasLayer/Control/EnergyMeter/EnergyLabel"]
-clip_children = 1
-z_index = -1
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_tlh84")
-text = "
-"
-label_settings = SubResource("LabelSettings_d6e1y")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control/EnergyMeter/EnergyLabel/ClipMask"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_vfbx8")
-theme_override_styles/fill = SubResource("StyleBoxFlat_8lcpg")
-fill_mode = 1
-indeterminate = true
-editor_preview_indeterminate = true
-
 [node name="EnergyIcon" type="TextureRect" parent="CanvasLayer/Control/EnergyMeter/EnergyLabel"]
 layout_mode = 1
 anchors_preset = -1
@@ -608,8 +555,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/Control/Resources/Inventory/Hangar"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ddkxt")
-text = "Hangar
-"
+text = "Hangar"
 label_settings = SubResource("LabelSettings_e88ae")
 horizontal_alignment = 1
 vertical_alignment = 1

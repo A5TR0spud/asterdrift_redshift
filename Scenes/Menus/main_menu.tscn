@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://dloxvgj0o0aas"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/main_menu.gd" id="1_7n6q0"]
-[ext_resource type="Script" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
+[ext_resource type="Script" uid="uid://bccaiq1dlsuuv" path="res://Scenes/Menus/main_menu.gd" id="1_7n6q0"]
+[ext_resource type="Script" uid="uid://ip1aaltv72ff" path="res://Scenes/Menus/control.gd" id="1_mr2mu"]
 [ext_resource type="Texture2D" uid="uid://ccgxfu1vo0nw5" path="res://Assets/UI/Icons/Play.png" id="2_i8p1f"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="2_utqbt"]
 [ext_resource type="Texture2D" uid="uid://8on70d34ghqp" path="res://Assets/Title.png" id="3_adjsq"]
@@ -10,11 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://c1g8uqg6pp7qo" path="res://Assets/GodotIcon.png" id="6_1rrf4"]
 [ext_resource type="Shader" uid="uid://chvdu88j36ex3" path="res://Shaders/StarryNight.tres" id="7_3fpcd"]
 [ext_resource type="Texture2D" uid="uid://y6uvb10g740p" path="res://Assets/Backdrops/noiseTexture.png" id="8_no7lg"]
-[ext_resource type="Script" path="res://Scenes/Menus/background.gd" id="9_7xhjc"]
-[ext_resource type="Shader" path="res://Shaders/SweepRotateUV.gdshader" id="9_i2j4x"]
-[ext_resource type="Script" path="res://Scenes/Menus/version_label.gd" id="9_nks45"]
+[ext_resource type="Script" uid="uid://ccdyydm3iksvu" path="res://Scenes/Menus/background.gd" id="9_7xhjc"]
+[ext_resource type="Shader" uid="uid://vyohfjqd0qv0" path="res://Shaders/SweepRotateUV.gdshader" id="9_i2j4x"]
+[ext_resource type="Script" uid="uid://cg7olor80x38a" path="res://Scenes/Menus/version_label.gd" id="9_nks45"]
 [ext_resource type="Texture2D" uid="uid://dtf8hxfnu680n" path="res://Assets/Backdrops/StarTile.png" id="10_rbhsv"]
-[ext_resource type="Script" path="res://Scenes/Menus/velocityapplyer.gd" id="11_fn0l6"]
+[ext_resource type="Script" uid="uid://cg1wvqk3aoc2k" path="res://Scenes/Menus/velocityapplyer.gd" id="11_fn0l6"]
 [ext_resource type="PackedScene" uid="uid://dkounxxjgekmy" path="res://Scenes/Player/Player.tscn" id="11_ro5i2"]
 [ext_resource type="PackedScene" uid="uid://ctcwf45fx53pw" path="res://Scenes/World/Decoration/asteroid.tscn" id="12_eyusu"]
 
@@ -38,8 +38,8 @@ font = ExtResource("2_utqbt")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sokok"]
 shader = ExtResource("7_3fpcd")
 shader_parameter/SpeedScaling = Vector2(1, 1)
-shader_parameter/Color = Color(0.0117647, 0, 0.0862745, 1)
 shader_parameter/NoiseTexture = ExtResource("8_no7lg")
+shader_parameter/Color = Color(0.0117647, 0, 0.0862745, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1y8bl"]
 shader = ExtResource("9_i2j4x")

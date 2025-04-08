@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cujhuogujxuo5"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/options.gd" id="1_ysgo7"]
+[ext_resource type="Script" uid="uid://b3soj15t88pqq" path="res://Scenes/Menus/options.gd" id="1_ysgo7"]
 [ext_resource type="Theme" uid="uid://7a1a7ukee0i3" path="res://Scenes/Menus/thme.tres" id="2_dn6sj"]
 
 [node name="Options" type="Node2D"]
@@ -57,6 +57,7 @@ size_flags_horizontal = 10
 selected = 2
 item_count = 3
 popup/item_0/text = "960x540"
+popup/item_0/id = 0
 popup/item_1/text = "1024x576"
 popup/item_1/id = 1
 popup/item_2/text = "Adapt"

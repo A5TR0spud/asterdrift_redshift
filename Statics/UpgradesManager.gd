@@ -45,4 +45,4 @@ static func Load(internalName : String, careForEnabled: bool = true) -> int:
 	
 static func LoadIsEnabled(internalName : String) -> bool:
 	Load(internalName, false)
-	return _data.get(internalName + "_enabled", false)
+	return _data.get(internalName + "_enabled", false) && Load(internalName, false) > 0

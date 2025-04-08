@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ot2tse2xhc3t" path="res://Assets/UI/ColorSwatch/ColorSwatch.png" id="1_adf1b"]
 [ext_resource type="Texture2D" uid="uid://dolf2gse4af0f" path="res://Assets/UI/ColorSwatch/ColorSwatch_Alpha.png" id="3_mxv68"]
 [ext_resource type="Texture2D" uid="uid://c3k8m55agjq0s" path="res://Assets/UI/ColorSwatch/ColorSwatchSelected.png" id="4_280uf"]
-[ext_resource type="Script" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch.gd" id="6_2qcyh"]
+[ext_resource type="Script" uid="uid://sufmjvp7alt2" path="res://Scenes/Utilities/ColorSwatchPicker/color_swatch.gd" id="6_2qcyh"]
 
 [node name="TextureButton" type="TextureButton"]
 offset_right = 16.0

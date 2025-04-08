@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cb8aw6rcpeji2"]
 
-[ext_resource type="Script" path="res://Scenes/Pirates/scrapper_pirate.gd" id="1_hof76"]
+[ext_resource type="Script" uid="uid://bw2a1yhbpyl2q" path="res://Scenes/Pirates/scrapper_pirate.gd" id="1_hof76"]
 [ext_resource type="Texture2D" uid="uid://cs8f3awd320o1" path="res://Assets/Ships/Pirates/Scrapper.png" id="2_d4ip5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amyc5"]

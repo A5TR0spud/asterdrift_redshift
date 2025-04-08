@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://dl5fg1ej0bimi"]
 
-[ext_resource type="Script" path="res://Scenes/Utilities/ResourceScore/resource_counter.gd" id="1_eu6hn"]
+[ext_resource type="Script" uid="uid://cb4253glp5hh0" path="res://Scenes/Utilities/ResourceScore/resource_counter.gd" id="1_eu6hn"]
 [ext_resource type="Texture2D" uid="uid://dammmehqsgv04" path="res://Assets/Hangar/Resources/Metal.png" id="2_20p5i"]
-[ext_resource type="Script" path="res://Statics/Materials.gd" id="2_fmty3"]
+[ext_resource type="Script" uid="uid://dcs36b1pqptnh" path="res://Statics/Materials.gd" id="2_fmty3"]
 [ext_resource type="Texture2D" uid="uid://cfjprojna4c3j" path="res://Assets/Hangar/Resources/Ceramics.png" id="3_v12se"]
 [ext_resource type="Texture2D" uid="uid://b321u615h6m3g" path="res://Assets/Hangar/Resources/Synthetics.png" id="4_od0f1"]
-[ext_resource type="Script" path="res://Scenes/Utilities/ResourceScore/score.gd" id="4_pclhx"]
+[ext_resource type="Script" uid="uid://djo3qrnnr7pnw" path="res://Scenes/Utilities/ResourceScore/score.gd" id="4_pclhx"]
 [ext_resource type="Texture2D" uid="uid://6tvchvpt787c" path="res://Assets/Hangar/Upgrades/Meta/BooleanIconFalse.png" id="4_w001y"]
 [ext_resource type="FontFile" uid="uid://bj06oub24ay2o" path="res://Assets/Font/Aster.ttf" id="5_0m28d"]
 [ext_resource type="Texture2D" uid="uid://ull3cjkjlkth" path="res://Assets/Hangar/Resources/Organics.png" id="5_625v2"]
@@ -49,7 +49,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Components"]
 layout_mode = 2
-text = "0 Cores"
+text = "0.0 Cores"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Ceramics" type="HBoxContainer" parent="."]
@@ -71,7 +71,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Ceramics"]
 layout_mode = 2
-text = "0 Ceramics"
+text = "0.0 Ceramics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Organics" type="HBoxContainer" parent="."]
@@ -93,7 +93,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Organics"]
 layout_mode = 2
-text = "0 Organics"
+text = "0.0 Organics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Metals" type="HBoxContainer" parent="."]
@@ -116,7 +116,7 @@ expand_mode = 2
 [node name="Label" type="Label" parent="Metals"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "0 Metallics"
+text = "0.0 Metallics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Synthetic" type="HBoxContainer" parent="."]
@@ -138,5 +138,5 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Synthetic"]
 layout_mode = 2
-text = "0 Synthetics"
+text = "0.0 Synthetics"
 label_settings = SubResource("LabelSettings_vm8o0")
