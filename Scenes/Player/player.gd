@@ -97,7 +97,7 @@ func _physics_process(delta):
 		if Input.is_action_pressed("boost") && UpgradesManager.Load("Booster") > 0:
 			_inputDir.x = 1
 		
-		if !UpgradesManager.LoadIsEnabled("MovementMode"):
+		if UpgradesManager.LoadIsEnabled("RCSThrust") && !UpgradesManager.LoadIsEnabled("MovementMode"):
 			if _inputDir.length() > 0.5:
 				_inputDir = Vector2(1, 0)
 		

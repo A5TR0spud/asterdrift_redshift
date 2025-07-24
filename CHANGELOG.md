@@ -1,3 +1,7 @@
+## indev Build 16
+
+- Fixed forward thrust being applied when any movement key was pressed if the user does not have RCS
+
 ## indev Build 15 - Nameswap, Scaling Balance
 
 - Temp Name Change: Astershift -> Aurora Transit

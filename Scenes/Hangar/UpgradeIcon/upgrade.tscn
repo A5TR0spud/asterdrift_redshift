@@ -90,6 +90,7 @@ font = ExtResource("10_sd7c2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
 font = ExtResource("10_sd7c2")
+font_color = Color(1, 0.7, 0.7, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
 bg_color = Color(0.109804, 0.227451, 0.294118, 1)

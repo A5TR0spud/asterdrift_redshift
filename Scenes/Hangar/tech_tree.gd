@@ -47,7 +47,7 @@ func _reloadChildren(_ignored):
 func _reset(child: Upgrade):
 	child.CurrentLevel = 0
 	UpgradesManager.Save(child.INTERNAL_NAME, 0)
-	DataManager.Save("UpcyclerCount", 0)
+	child.SetEnabled(child.START_ENABLED)
 
 func _on_reset_pressed():
 	_onAllUpgradeChildren(self, _reset)
@@ -58,4 +58,5 @@ func _on_reset_pressed():
 	MaterialsManager.Mats.Organics = 0
 	MaterialsManager.Save()
 	DataManager.Save("coreAssemblyTimeLeft", CoreAssemblerClass.INITIAL_TIME_PER_CORE)
+	DataManager.Save("UpcyclerCount", 0)
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")

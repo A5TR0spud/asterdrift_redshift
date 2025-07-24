@@ -49,7 +49,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Components"]
 layout_mode = 2
-text = "0.0 Cores"
+text = "0 Cores"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Ceramics" type="HBoxContainer" parent="."]
@@ -71,7 +71,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Ceramics"]
 layout_mode = 2
-text = "0.0 Ceramics"
+text = "0 Ceramics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Organics" type="HBoxContainer" parent="."]
@@ -93,7 +93,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Organics"]
 layout_mode = 2
-text = "0.0 Organics"
+text = "0 Organics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Metals" type="HBoxContainer" parent="."]
@@ -116,7 +116,7 @@ expand_mode = 2
 [node name="Label" type="Label" parent="Metals"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "0.0 Metallics"
+text = "0 Metallics"
 label_settings = SubResource("LabelSettings_vm8o0")
 
 [node name="Synthetic" type="HBoxContainer" parent="."]
@@ -138,5 +138,5 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="Synthetic"]
 layout_mode = 2
-text = "0.0 Synthetics"
+text = "0 Synthetics"
 label_settings = SubResource("LabelSettings_vm8o0")
