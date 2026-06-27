@@ -275,7 +275,7 @@ func _handleStats():
 	if IS_IN_GARAGE || UpgradesManager.Load("Laser") < 1:
 		Laser.queue_free()
 	else:
-		var LaserCount: int = 0
+		var LaserCount: int = 1
 		var HasArtemis: bool = false
 		var HasApollo: bool = UpgradesManager.Load("Apollo") > 0
 		Laser.APOLLO = HasApollo

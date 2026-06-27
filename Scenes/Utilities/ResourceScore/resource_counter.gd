@@ -33,6 +33,14 @@ class_name ResourceCounter
 		SHOW_TEXT = value
 		if is_node_ready():
 			_updateDisplay()
+## If true, reddens text that can't be afforded by the Hangar inventory
+@export var REDDEN_THE_POOR : bool = false:
+	get:
+		return REDDEN_THE_POOR
+	set(value):
+		REDDEN_THE_POOR = value
+		if (!Engine.is_editor_hint() and is_node_ready()):
+			_updateDisplay()
 ## If true, flips from left-to-right to right-to-left
 @export var FLIPPED: bool = false:
 	get:
@@ -99,6 +107,10 @@ func _updateDisplay():
 		$Metals/Label.text += String.num(Display.Metals, 0)
 	if SHOW_TEXT:
 		$Metals/Label.text += " Metallics" if Display.Metals != 1 else " Metallic"
+	if !Engine.is_editor_hint() and REDDEN_THE_POOR and MaterialsManager.Mats.Metals < Display.Metals:
+		$Metals/Label.label_settings.font_color = Color(1, 0.7, 0.7, 1)
+	else:
+		$Metals/Label.label_settings.font_color = Color(1, 1, 1, 1)
 	
 	$Ceramics/Bool.visible = BOOL_ICON
 	$Ceramics/Bool.texture = ON_ICON if Display.Ceramics > 0 else OFF_ICON
@@ -108,6 +120,10 @@ func _updateDisplay():
 		$Ceramics/Label.text += String.num(Display.Ceramics, 0)
 	if SHOW_TEXT:
 		$Ceramics/Label.text += " Ceramics" if Display.Ceramics != 1 else " Ceramic"
+	if !Engine.is_editor_hint() and REDDEN_THE_POOR and MaterialsManager.Mats.Ceramics < Display.Ceramics:
+		$Ceramics/Label.label_settings.font_color = Color(1, 0.7, 0.7, 1)
+	else:
+		$Ceramics/Label.label_settings.font_color = Color(1, 1, 1, 1)
 	
 	$Synthetic/Bool.visible = BOOL_ICON
 	$Synthetic/Bool.texture = ON_ICON if Display.Synthetics > 0 else OFF_ICON
@@ -117,6 +133,10 @@ func _updateDisplay():
 		$Synthetic/Label.text = String.num(Display.Synthetics, 0)
 	if SHOW_TEXT:
 		$Synthetic/Label.text += " Synthetics" if Display.Synthetics != 1 else " Synthetic"
+	if !Engine.is_editor_hint() and REDDEN_THE_POOR and MaterialsManager.Mats.Synthetics < Display.Synthetics:
+		$Synthetic/Label.label_settings.font_color = Color(1, 0.7, 0.7, 1)
+	else:
+		$Synthetic/Label.label_settings.font_color = Color(1, 1, 1, 1)
 	
 	$Organics/Bool.visible = BOOL_ICON
 	$Organics/Bool.texture = ON_ICON if Display.Organics > 0 else OFF_ICON
@@ -126,6 +146,10 @@ func _updateDisplay():
 		$Organics/Label.text = String.num(Display.Organics, 0)
 	if SHOW_TEXT:
 		$Organics/Label.text += " Organics" if Display.Organics != 1 else " Organic"
+	if !Engine.is_editor_hint() and REDDEN_THE_POOR and MaterialsManager.Mats.Organics < Display.Organics:
+		$Organics/Label.label_settings.font_color = Color(1, 0.7, 0.7, 1)
+	else:
+		$Organics/Label.label_settings.font_color = Color(1, 1, 1, 1)
 	
 	$Components/Bool.visible = BOOL_ICON
 	$Components/Bool.texture = ON_ICON if Display.Components > 0 else OFF_ICON
@@ -135,6 +159,10 @@ func _updateDisplay():
 		$Components/Label.text = String.num(Display.Components, 0)
 	if SHOW_TEXT:
 		$Components/Label.text += " Cores" if Display.Components != 1 else " Core"
+	if !Engine.is_editor_hint() and REDDEN_THE_POOR and MaterialsManager.Mats.Components < Display.Components:
+		$Components/Label.label_settings.font_color = Color(1, 0.7, 0.7, 1)
+	else:
+		$Components/Label.label_settings.font_color = Color(1, 1, 1, 1)
 	
 	$Metals/Label.label_settings.font_size = FONT_SIZE
 	

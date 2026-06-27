@@ -135,7 +135,7 @@ func _reloadVisuals() -> void:
 
 func _laserifyColor(col: Color, on: bool) -> Color:
 	if ARTEMIS:
-		if UpgradesManager.Load("Apollo") > 0:
+		if APOLLO:
 			if on:
 				col = Color(1, 0.5, 1, 1)
 			if !on:
@@ -370,7 +370,8 @@ func _physics_process(delta) -> void:
 				child._laserFiring = false
 				if !child.is_node_ready():
 					continue
-				if Input.is_action_pressed("fire") && UpgradesManager.LoadIsEnabled("CursorOverride"):
+				var canClickToControlLaser: bool = !UpgradesManager.LoadIsEnabled("AutoPhoton") || UpgradesManager.LoadIsEnabled("CursorOverride")
+				if Input.is_action_pressed("fire") && canClickToControlLaser:
 					child._laserFiring = true
 					child.beingManuallyControlled = true
 					child.Target.global_position = get_global_mouse_position()

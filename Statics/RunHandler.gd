@@ -82,13 +82,13 @@ static func StartRun() -> void:
 		BackupBattery = 0
 	if BayMats == null:
 		BayMats = Materials.new()
-	BayMats.SetAll()
+	BayMats.SetAll(0, true)
 	if StationMats == null:
 		StationMats = Materials.new()
-	StationMats.SetAll()
+	StationMats.SetAll(0, true)
 	if QueuedMassDriverPackages == null:
 		QueuedMassDriverPackages = Materials.new()
-	QueuedMassDriverPackages.SetAll()
+	QueuedMassDriverPackages.SetAll(0, true)
 	UpcyclerCount = DataManager.Load("UpcyclerCount", 0)
 
 static func EndRun() -> void:

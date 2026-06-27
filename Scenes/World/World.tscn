@@ -518,6 +518,7 @@ columns = 5
 Display = SubResource("Resource_vegdo")
 SORT = true
 SHOW_TEXT = false
+REDDEN_THE_POOR = null
 
 [node name="NewRun" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
 layout_mode = 2
@@ -566,6 +567,7 @@ size_flags_horizontal = 8
 Display = SubResource("Resource_b8x27")
 ALWAYS_SHOW = true
 SHOW_TEXT = false
+REDDEN_THE_POOR = null
 FLIPPED = true
 
 [node name="Station" type="VBoxContainer" parent="CanvasLayer/Control/Resources/Inventory"]
@@ -585,6 +587,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 Display = SubResource("Resource_ahnf1")
 SHOW_TEXT = false
+REDDEN_THE_POOR = null
 FLIPPED = true
 
 [node name="Run" type="VBoxContainer" parent="CanvasLayer/Control/Resources/Inventory"]
@@ -645,6 +648,7 @@ size_flags_vertical = 0
 Display = SubResource("Resource_67px5")
 SORT = true
 SHOW_TEXT = false
+REDDEN_THE_POOR = null
 FLIPPED = true
 
 [node name="NotifactionsManager" type="VBoxContainer" parent="CanvasLayer/Control/Resources"]

@@ -136,19 +136,19 @@ Components = 1
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 5
-Ceramics = 20
+Ceramics = 10
 Synthetics = 0
-Organics = 10
+Organics = 5
 Components = 0
 
 [sub_resource type="Resource" id="Resource_xxs1w"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 22
-Ceramics = 48
+Metals = 20
+Ceramics = 44
 Synthetics = 0
 Organics = 0
-Components = 2
+Components = 1
 
 [sub_resource type="Resource" id="Resource_yy566"]
 resource_local_to_scene = true
@@ -163,7 +163,7 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 16
-Ceramics = 64
+Ceramics = 52
 Synthetics = 16
 Organics = 0
 Components = 1
@@ -172,7 +172,7 @@ Components = 1
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 24
-Ceramics = 48
+Ceramics = 42
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -180,17 +180,17 @@ Components = 0
 [sub_resource type="Resource" id="Resource_8h8fd"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
-Ceramics = 128
-Synthetics = 32
-Organics = 64
+Metals = 30
+Ceramics = 100
+Synthetics = 30
+Organics = 60
 Components = 3
 
 [sub_resource type="Resource" id="Resource_hbo26"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 24
-Ceramics = 38
+Ceramics = 32
 Synthetics = 24
 Organics = 0
 Components = 1
@@ -217,16 +217,16 @@ Components = 1
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 38
-Synthetics = 24
-Organics = 24
+Ceramics = 19
+Synthetics = 12
+Organics = 12
 Components = 1
 
 [sub_resource type="Resource" id="Resource_y8gh4"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 16
-Ceramics = 16
+Metals = 10
+Ceramics = 15
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -290,34 +290,34 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
-Synthetics = 3
-Organics = 3
+Synthetics = 2
+Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_iqxgi"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 2
+Metals = 0
 Ceramics = 0
 Synthetics = 2
-Organics = 4
+Organics = 1
 Components = 0
 
 [sub_resource type="Resource" id="Resource_bjsy7"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 4
+Metals = 1
 Ceramics = 0
-Synthetics = 4
+Synthetics = 2
 Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_w1q67"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 10
+Metals = 8
 Ceramics = 0
-Synthetics = 12
+Synthetics = 8
 Organics = 0
 Components = 0
 
@@ -326,7 +326,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 12
 Ceramics = 0
-Synthetics = 30
+Synthetics = 20
 Organics = 0
 Components = 1
 
@@ -335,7 +335,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 4
-Synthetics = 32
+Synthetics = 20
 Organics = 0
 Components = 1
 
@@ -343,8 +343,8 @@ Components = 1
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 4
-Synthetics = 9
+Ceramics = 2
+Synthetics = 8
 Organics = 0
 Components = 0
 
@@ -353,7 +353,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 8
 Ceramics = 0
-Synthetics = 20
+Synthetics = 10
 Organics = 0
 Components = 1
 
@@ -361,17 +361,17 @@ Components = 1
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 24
-Synthetics = 42
+Ceramics = 8
+Synthetics = 20
 Organics = 0
 Components = 0
 
 [sub_resource type="Resource" id="Resource_oudbb"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 12
+Metals = 10
 Ceramics = 0
-Synthetics = 24
+Synthetics = 20
 Organics = 0
 Components = 0
 
@@ -380,7 +380,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 12
 Ceramics = 0
-Synthetics = 58
+Synthetics = 40
 Organics = 0
 Components = 0
 
@@ -388,27 +388,27 @@ Components = 0
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
-Ceramics = 8
-Synthetics = 12
+Ceramics = 4
+Synthetics = 8
 Organics = 4
 Components = 0
 
 [sub_resource type="Resource" id="Resource_kk1ec"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 2
+Metals = 0
 Ceramics = 0
-Synthetics = 4
-Organics = 3
+Synthetics = 2
+Organics = 2
 Components = 0
 
 [sub_resource type="Resource" id="Resource_15g7d"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 2
-Ceramics = 2
-Synthetics = 4
-Organics = 4
+Ceramics = 0
+Synthetics = 2
+Organics = 2
 Components = 0
 
 [sub_resource type="Resource" id="Resource_1t1pc"]
@@ -423,9 +423,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_qbfjt"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 16
+Metals = 15
 Ceramics = 0
-Synthetics = 40
+Synthetics = 30
 Organics = 0
 Components = 0
 
@@ -434,18 +434,18 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
-Synthetics = 58
-Organics = 20
+Synthetics = 20
+Organics = 12
 Components = 0
 
 [sub_resource type="Resource" id="Resource_qlukr"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
-Synthetics = 64
-Organics = 0
-Components = 0
+Metals = 20
+Ceramics = 20
+Synthetics = 60
+Organics = 20
+Components = 1
 
 [sub_resource type="Resource" id="Resource_cber5"]
 resource_local_to_scene = true
@@ -468,8 +468,8 @@ Components = 0
 [sub_resource type="Resource" id="Resource_pmmu6"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 10
-Ceramics = 5
+Metals = 8
+Ceramics = 2
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -477,7 +477,7 @@ Components = 0
 [sub_resource type="Resource" id="Resource_7kw8l"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
+Metals = 14
 Ceramics = 8
 Synthetics = 8
 Organics = 0
@@ -486,17 +486,17 @@ Components = 1
 [sub_resource type="Resource" id="Resource_fiaa4"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 64
-Ceramics = 32
-Synthetics = 24
+Metals = 32
+Ceramics = 16
+Synthetics = 12
 Organics = 0
 Components = 2
 
 [sub_resource type="Resource" id="Resource_tyodo"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 30
-Ceramics = 12
+Metals = 20
+Ceramics = 10
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -504,17 +504,17 @@ Components = 0
 [sub_resource type="Resource" id="Resource_4ho7x"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 8
+Metals = 6
 Ceramics = 0
 Synthetics = 0
-Organics = 8
+Organics = 6
 Components = 0
 
 [sub_resource type="Resource" id="Resource_8c7rl"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 64
-Ceramics = 32
+Metals = 50
+Ceramics = 30
 Synthetics = 0
 Organics = 0
 Components = 2
@@ -522,8 +522,8 @@ Components = 2
 [sub_resource type="Resource" id="Resource_uuedo"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 48
-Ceramics = 64
+Metals = 30
+Ceramics = 50
 Synthetics = 0
 Organics = 0
 Components = 2
@@ -531,11 +531,11 @@ Components = 2
 [sub_resource type="Resource" id="Resource_q1x2r"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 128
+Metals = 64
 Ceramics = 0
 Synthetics = 0
 Organics = 0
-Components = 2
+Components = 1
 
 [sub_resource type="Resource" id="Resource_tp4ul"]
 resource_local_to_scene = true
@@ -576,7 +576,7 @@ Components = 0
 [sub_resource type="Resource" id="Resource_u04gs"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 32
+Metals = 24
 Ceramics = 0
 Synthetics = 8
 Organics = 0
@@ -614,7 +614,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 58
 Ceramics = 28
-Synthetics = 32
+Synthetics = 28
 Organics = 0
 Components = 1
 
@@ -630,8 +630,8 @@ Components = 0
 [sub_resource type="Resource" id="Resource_7f0nr"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 2
-Ceramics = 2
+Metals = 1
+Ceramics = 1
 Synthetics = 0
 Organics = 0
 Components = 0
@@ -639,9 +639,9 @@ Components = 0
 [sub_resource type="Resource" id="Resource_it780"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 4
+Metals = 2
 Ceramics = 0
-Synthetics = 4
+Synthetics = 2
 Organics = 0
 Components = 0
 
@@ -668,26 +668,26 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
-Synthetics = 3
-Organics = 3
+Synthetics = 1
+Organics = 2
 Components = 0
 
 [sub_resource type="Resource" id="Resource_dfjfp"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 2
-Ceramics = 4
-Synthetics = 4
-Organics = 6
+Ceramics = 2
+Synthetics = 2
+Organics = 4
 Components = 0
 
 [sub_resource type="Resource" id="Resource_ukqjc"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 2
-Ceramics = 0
+Metals = 0
+Ceramics = 1
 Synthetics = 0
-Organics = 8
+Organics = 4
 Components = 0
 
 [sub_resource type="Resource" id="Resource_l28ra"]
@@ -705,17 +705,17 @@ script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
 Synthetics = 8
-Organics = 16
+Organics = 2
 Components = 0
 
 [sub_resource type="Resource" id="Resource_k56g5"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 8
-Ceramics = 8
-Synthetics = 8
-Organics = 16
-Components = 0
+Metals = 6
+Ceramics = 6
+Synthetics = 6
+Organics = 12
+Components = 1
 
 [sub_resource type="Resource" id="Resource_4e528"]
 resource_local_to_scene = true
@@ -723,7 +723,7 @@ script = ExtResource("4_fiej8")
 Metals = 8
 Ceramics = 8
 Synthetics = 8
-Organics = 48
+Organics = 30
 Components = 1
 
 [sub_resource type="Resource" id="Resource_710cu"]
@@ -738,16 +738,16 @@ Components = 0
 [sub_resource type="Resource" id="Resource_ckjas"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 16
+Metals = 10
+Ceramics = 4
 Synthetics = 0
-Organics = 16
+Organics = 8
 Components = 0
 
 [sub_resource type="Resource" id="Resource_xd0i2"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 8
+Metals = 0
 Ceramics = 16
 Synthetics = 0
 Organics = 64
@@ -756,26 +756,26 @@ Components = 1
 [sub_resource type="Resource" id="Resource_gji7u"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 128
-Ceramics = 128
+Metals = 80
+Ceramics = 80
 Synthetics = 0
-Organics = 32
+Organics = 24
 Components = 3
 
 [sub_resource type="Resource" id="Resource_qa8vc"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 8
-Ceramics = 16
-Synthetics = 0
+Metals = 0
+Ceramics = 12
+Synthetics = 8
 Organics = 8
 Components = 0
 
 [sub_resource type="Resource" id="Resource_pcp64"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 16
-Ceramics = 8
+Metals = 4
+Ceramics = 10
 Synthetics = 0
 Organics = 8
 Components = 0
@@ -786,16 +786,16 @@ script = ExtResource("4_fiej8")
 Metals = 24
 Ceramics = 24
 Synthetics = 24
-Organics = 64
+Organics = 24
 Components = 1
 
 [sub_resource type="Resource" id="Resource_8de2h"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 64
+Metals = 32
 Ceramics = 0
 Synthetics = 0
-Organics = 64
+Organics = 32
 Components = 3
 
 [sub_resource type="Resource" id="Resource_v0aau"]
@@ -803,8 +803,8 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
-Synthetics = 16
-Organics = 2
+Synthetics = 2
+Organics = 8
 Components = 0
 
 [sub_resource type="Resource" id="Resource_8n286"]
@@ -812,7 +812,7 @@ resource_local_to_scene = true
 script = ExtResource("4_fiej8")
 Metals = 0
 Ceramics = 0
-Synthetics = 16
+Synthetics = 12
 Organics = 0
 Components = 1
 
@@ -828,11 +828,11 @@ Components = 0
 [sub_resource type="Resource" id="Resource_cv1xp"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 128
-Ceramics = 128
-Synthetics = 128
-Organics = 128
-Components = 4
+Metals = 100
+Ceramics = 100
+Synthetics = 100
+Organics = 100
+Components = 3
 
 [node name="Hangar" type="Node2D"]
 script = ExtResource("1_pl6hy")
@@ -1301,16 +1301,16 @@ SPRITE = ExtResource("26_weqmt")
 PARENT_UPGRADE = NodePath("../StasisBay")
 Cost = SubResource("Resource_lo3s5")
 
-[node name="MiningLaser" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
+[node name="MiningLaser" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(64, -160)
 NAME = "Precision Prospector"
 DESCRIPTION = "The needle laser can now bite off resources from asteroids.
 Time per resource varies with the target."
 INTERNAL_NAME = "MiningLaser"
 SPRITE = ExtResource("18_j10x7")
-PARENT_UPGRADE = NodePath("../RapidWinch")
+PARENT_UPGRADE = NodePath("../../BottomLeft/Laser/PhotonCannon")
 SHOW_PARENT_LINE = false
-REQUIRED_UPGRADES = [NodePath("../../BottomLeft/Laser/PhotonCannon")]
+HIDE_WITHOUT_PARENT = true
 Cost = SubResource("Resource_yighi")
 
 [node name="TractorNeedle" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]

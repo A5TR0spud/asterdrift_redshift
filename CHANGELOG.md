@@ -2,6 +2,14 @@
 
 - Fixed forward thrust being applied when any movement key was pressed if the user does not have RCS
 
+### June 2026 Return
+
+- Fixed Needle Laser being unusable until purchasing LiDAR Auto-Targetting
+- Made a crap ton of research in the Hangar cheaper
+- Resources you can't afford in Hangar upgrades are now red
+- Fixed bay cores not resetting when runs end
+- Redid a few upgrade sprites
+
 ## indev Build 15 - Nameswap, Scaling Balance
 
 - Temp Name Change: Astershift -> Aurora Transit
