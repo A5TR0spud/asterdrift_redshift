@@ -1,3 +1,23 @@
+## indev Build 17
+
+- Plasma Bubble now serves as a replacement for Electromagnet's repel, being a counterpart to Stasis and Tractor Bay
+	- Plasma Bubble has increased repulsion and scales with the mass of asteroids
+	- Range now matches 
+	- Cost has been adjusted
+- Mass Driver no longer cares about resource types
+	- Mass Driver now works every 20s instead of whenever the bay is filled
+	- Mass Driver now sends 25% of the bay's max instead of 30 flat
+	- Cost has been adjusted
+- Scrapper has been replaced with Mulcher
+	- Offshoots from Composter
+	- Converts Ceramics into Organics
+- Remade Plasma Bubble and Mass Driver icons
+- Fixed Inventory Audit being profoundly vague with transformations
+	- I foresee some edge cases where sequences which start and end on the same resource are shortened
+	- I do not care about those edge cases
+- Fixed bug causing Requirement text to appear white for the Mass Driver upgrade
+- Fixed Stasis Bay requiring max level of Electromagnet to be purchased (EM only has 1 level)
+
 ## indev Build 16
 
 - Fixed forward thrust being applied when any movement key was pressed if the user does not have RCS

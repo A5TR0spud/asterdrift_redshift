@@ -14,41 +14,11 @@ func _ready():
 	else:
 		show()
 
-func _physics_process(_delta):
-	if !Cooldown.is_stopped():
-		return
-	if RunHandler.QueuedMassDriverPackages.Metals > 0:
-		RunHandler.QueuedMassDriverPackages.Metals = 0
-		Cooldown.start()
+func _on_mass_driver_cooldown_timeout():
+	if RunHandler.SendMassDriverPackage():
 		var t: DriverCanister = PackagePrefab.instantiate()
-		t.Type = Materials.Mats.Metals
 		List.add_child(t)
 		t.Dispatch(PlayerClass.Instance.global_position, self)
-		return
-	if RunHandler.QueuedMassDriverPackages.Ceramics > 0:
-		RunHandler.QueuedMassDriverPackages.Ceramics = 0
-		Cooldown.start()
-		var t: DriverCanister = PackagePrefab.instantiate()
-		t.Type = Materials.Mats.Ceramics
-		List.add_child(t)
-		t.Dispatch(PlayerClass.Instance.global_position, self)
-		return
-	if RunHandler.QueuedMassDriverPackages.Organics > 0:
-		RunHandler.QueuedMassDriverPackages.Organics = 0
-		Cooldown.start()
-		var t: DriverCanister = PackagePrefab.instantiate()
-		t.Type = Materials.Mats.Organics
-		List.add_child(t)
-		t.Dispatch(PlayerClass.Instance.global_position, self)
-		return
-	if RunHandler.QueuedMassDriverPackages.Synthetics > 0:
-		RunHandler.QueuedMassDriverPackages.Synthetics = 0
-		Cooldown.start()
-		var t: DriverCanister = PackagePrefab.instantiate()
-		t.Type = Materials.Mats.Synthetics
-		List.add_child(t)
-		t.Dispatch(PlayerClass.Instance.global_position, self)
-		return
 
 func _on_world_player_warp(amount: Vector2) -> void:
 	for child: DriverCanister in List.get_children():

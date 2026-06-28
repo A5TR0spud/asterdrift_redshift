@@ -30,12 +30,10 @@ func _ready():
 			$StasisBay.show()
 		else:
 			$StasisBay.hide()
-		#if UpgradesManager.Load("TractorBay") > 0:
-		#	$TractorBay.show()
-		#else:
 		$TractorBay.hide()
+		$Tesla.hide()
 
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
 	if !Player.CAN_MOVE:
 		hide()
 		return
@@ -46,6 +44,7 @@ func _physics_process(_delta):
 	var closest: Entity = null
 	var cloDist: float = -000.000
 	$TractorBay.hide()
+	$Tesla.hide()
 	for bod in _trackedTargets:
 		if !is_instance_valid(bod):
 			_trackedTargets.erase(bod)
@@ -70,6 +69,17 @@ func _physics_process(_delta):
 				if UpgradesManager.Load("TractorBay") > 0:
 					bod.apply_force(-dir * FORCE_COEF * MAGNET_STRENGTH * 5 / (lenx * 0.5 + 0.5))
 					$TractorBay.show()
+					continue
+			
+			if bod.DangerousCollision || bod.isAsteroid || bod.isEnemy:
+				if UpgradesManager.Load("Tesla") > 0:
+					var strength1: float = (RANGE * MAGNET_STRENGTH) / (lenx ** 2)
+					var massIgnorance: float = 0.15
+					strength1 = 2.5 * strength1 * (1.0 - massIgnorance) + bod.mass * massIgnorance
+					bod.apply_force(dir * FORCE_COEF * strength1)
+					if (bod.hasHealth):
+						bod.Damage(bod.MaxHealth * 0.05 * delta)
+					$Tesla.show()
 					continue
 			
 			var test: float = ((bod.global_position + bod.linear_velocity) - (global_position + $"..".linear_velocity)).length()
@@ -116,6 +126,10 @@ func _reload():
 	$TractorBay.position.x = -RANGE
 	$TractorBay.scale.y = RANGE / 8.0
 	$TractorBay.position.y = -RANGE
+	$Tesla.scale.x = RANGE / 8.0
+	$Tesla.position.x = -RANGE
+	$Tesla.scale.y = RANGE / 8.0
+	$Tesla.position.y = -RANGE
 
 func _on_body_entered(body):
 	if body is Entity:

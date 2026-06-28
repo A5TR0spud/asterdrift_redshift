@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=172 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" uid="uid://b4hhr78baxh8e" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" uid="uid://yry1f825xbe4" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -36,7 +36,6 @@
 [ext_resource type="Texture2D" uid="uid://bkhf6dlxxhsdn" path="res://Assets/Hangar/Upgrades/Dish.png" id="21_5xmpu"]
 [ext_resource type="Texture2D" uid="uid://vpmx02itga3h" path="res://Assets/Hangar/Upgrades/Idle.png" id="21_wec62"]
 [ext_resource type="Texture2D" uid="uid://c088dm6cly5g6" path="res://Assets/Hangar/Upgrades/IonDrive.png" id="22_lnnfh"]
-[ext_resource type="Texture2D" uid="uid://5d7gm0qm5d8b" path="res://Assets/Hangar/Upgrades/ReflectiveHull.png" id="22_utiiq"]
 [ext_resource type="Texture2D" uid="uid://cqg3hip1oekg3" path="res://Assets/Hangar/Upgrades/AttractorNeedle.png" id="23_pbsqd"]
 [ext_resource type="Texture2D" uid="uid://ctjpa030elrj7" path="res://Assets/Hangar/Upgrades/InertialDrive.png" id="23_yvg6k"]
 [ext_resource type="Texture2D" uid="uid://dx5nf6ai6rmwn" path="res://Assets/Hangar/Upgrades/GimbalDrive.png" id="24_6huye"]
@@ -48,7 +47,6 @@
 [ext_resource type="Texture2D" uid="uid://cbnllmem4iocm" path="res://Assets/Hangar/Upgrades/TractorBay.png" id="26_weqmt"]
 [ext_resource type="Texture2D" uid="uid://c7rv3bfw1b6xv" path="res://Assets/Hangar/Upgrades/SpareBattery.png" id="28_2f4oq"]
 [ext_resource type="Texture2D" uid="uid://bu14fv7k0h6qb" path="res://Assets/Hangar/Upgrades/Calibration.png" id="28_eud44"]
-[ext_resource type="Texture2D" uid="uid://c2rhbmgm5rtbv" path="res://Assets/Hangar/Upgrades/Pulsar.png" id="28_snuh0"]
 [ext_resource type="Texture2D" uid="uid://cn74d11hdi4on" path="res://Assets/Hangar/Upgrades/RTG.png" id="29_y2n1i"]
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 [ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
@@ -441,10 +439,10 @@ Components = 0
 [sub_resource type="Resource" id="Resource_qlukr"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 20
-Ceramics = 20
-Synthetics = 60
-Organics = 20
+Metals = 8
+Ceramics = 8
+Synthetics = 40
+Organics = 8
 Components = 1
 
 [sub_resource type="Resource" id="Resource_cber5"]
@@ -621,11 +619,11 @@ Components = 1
 [sub_resource type="Resource" id="Resource_j08se"]
 resource_local_to_scene = true
 script = ExtResource("4_fiej8")
-Metals = 30
+Metals = 28
 Ceramics = 0
-Synthetics = 0
+Synthetics = 6
 Organics = 0
-Components = 0
+Components = 1
 
 [sub_resource type="Resource" id="Resource_7f0nr"]
 resource_local_to_scene = true
@@ -644,24 +642,6 @@ Ceramics = 0
 Synthetics = 2
 Organics = 0
 Components = 0
-
-[sub_resource type="Resource" id="Resource_pab5s"]
-resource_local_to_scene = true
-script = ExtResource("4_fiej8")
-Metals = 5
-Ceramics = 0
-Synthetics = 1
-Organics = 3
-Components = 0
-
-[sub_resource type="Resource" id="Resource_kyaou"]
-resource_local_to_scene = true
-script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 18
-Synthetics = 32
-Organics = 0
-Components = 1
 
 [sub_resource type="Resource" id="Resource_ewipx"]
 resource_local_to_scene = true
@@ -1286,7 +1266,6 @@ Halves the magnet's repulsion to resources."
 INTERNAL_NAME = "StasisBay"
 SPRITE = ExtResource("25_6kat8")
 PARENT_UPGRADE = NodePath("../Magnet")
-REQUIRE_MAX_PARENT = true
 Cost = SubResource("Resource_d7mx3")
 
 [node name="TractorBay" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
@@ -1410,7 +1389,8 @@ Cost = SubResource("Resource_qbfjt")
 position = Vector2(320, -24)
 NAME = "Compartmentalization"
 DESCRIPTION = "All resources can individually reach the cap.
-Halves the cap of resources."
+The cap is halved; total storage is
+effectively doubled."
 INTERNAL_NAME = "SplitBay"
 SPRITE = ExtResource("49_05lkl")
 PARENT_UPGRADE = NodePath("../BiggerBay")
@@ -1419,10 +1399,9 @@ Cost = SubResource("Resource_5sb37")
 [node name="MassDriver" parent="Camera2D/TechTree/TopRight" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(384, -80)
 NAME = "Mass Driver"
-DESCRIPTION = "Whenever a resource reaches its cap,
-launches a package carrying the bay
-resources of that type to the station.
-Effectively provides unlimited storage."
+DESCRIPTION = "Every 20 seconds, sends a package to
+the station containing up to a fourth of
+bay's storage."
 INTERNAL_NAME = "MassDriver"
 SPRITE = ExtResource("50_emct2")
 PARENT_UPGRADE = NodePath("../SplitBay")
@@ -1709,14 +1688,17 @@ SPRITE = ExtResource("43_qb64a")
 PARENT_UPGRADE = NodePath("../Fuse")
 Cost = SubResource("Resource_hk1ki")
 
-[node name="Tesla" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
+[node name="Tesla" parent="Camera2D/TechTree/BottomLeft/Shield" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(-480, 128)
 NAME = "Plasma Bubble"
-DESCRIPTION = "Zaps threats in a radius of 4u for 5% of
-their max health per second."
+DESCRIPTION = "Zaps and repulses threats for 5% of
+their maximum health every second.
+The Electromagnet can no longer repel."
 INTERNAL_NAME = "Tesla"
 SPRITE = ExtResource("60_tyfau")
 PARENT_UPGRADE = NodePath("../ChargedShield")
+SHOW_PARENT_LINE = false
+REQUIRED_UPGRADES = [NodePath("../../../TopRight/Magnet")]
 Cost = SubResource("Resource_j08se")
 
 [node name="AbrResistance" parent="Camera2D/TechTree/BottomLeft" instance=ExtResource("4_r883k")]
@@ -1735,29 +1717,6 @@ INTERNAL_NAME = "BluntRes"
 SPRITE = ExtResource("13_h35e1")
 PARENT_UPGRADE = NodePath("../AbrResistance")
 Cost = SubResource("Resource_it780")
-
-[node name="ReflectHull" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
-position = Vector2(-32, 224)
-NAME = "Retroreflective"
-DESCRIPTION = "+25% of oncoming laser damage is reflected."
-INTERNAL_NAME = "ReflectHull"
-SPRITE = ExtResource("22_utiiq")
-PARENT_UPGRADE = NodePath("../Laser/StrongLaser")
-MAX_LEVEL = 2
-HIDE = true
-Cost = SubResource("Resource_pab5s")
-
-[node name="Pulsar" parent="Camera2D/TechTree/BottomLeft" node_paths=PackedStringArray("PARENT_UPGRADE", "REQUIRED_UPGRADES") instance=ExtResource("4_r883k")]
-position = Vector2(-96, 288)
-NAME = "Pulsar"
-DESCRIPTION = "2 rotating cones in a 45 degree spread and 5 unit range selectively push away
-threats."
-INTERNAL_NAME = "Pulsar"
-SPRITE = ExtResource("28_snuh0")
-PARENT_UPGRADE = NodePath("../Laser/StrongLaser")
-REQUIRED_UPGRADES = [NodePath("../../TopRight/Magnet")]
-HIDE = true
-Cost = SubResource("Resource_kyaou")
 
 [node name="BottomRight" type="Node2D" parent="Camera2D/TechTree"]
 
@@ -1882,12 +1841,12 @@ Cost = SubResource("Resource_gji7u")
 
 [node name="Scrapper" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(224, 224)
-NAME = "Scrapper"
+NAME = "Mulcher"
 DESCRIPTION = "Every other ceramic collected is converted into
-a synthetic."
+an organic."
 INTERNAL_NAME = "Scrapper"
 SPRITE = ExtResource("72_qsqx7")
-PARENT_UPGRADE = NodePath("../Kiln")
+PARENT_UPGRADE = NodePath("../Composter")
 Cost = SubResource("Resource_qa8vc")
 
 [node name="Forge" parent="Camera2D/TechTree/BottomRight/Farming" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]

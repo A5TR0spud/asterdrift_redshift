@@ -3,7 +3,6 @@ class_name RunHandler
 
 static var BayMats: Materials
 static var StationMats: Materials
-static var QueuedMassDriverPackages: Materials
 static var _is_running : bool = false
 static var TimeLeft : float = 30.0
 static var TimeSpent: float = 0
@@ -36,6 +35,38 @@ static func GetMaxBayResourceCount() -> int:
 		r = maxi(r / 2, 5)
 	return r
 
+static func SendMassDriverPackage() -> bool:
+	if GetBayResourceCount() <= 0 and BayMats.Components <= 0:
+		return false
+	var massDriverCapacity: int = GetMaxBayResourceCount()
+	if UpgradesManager.Load("SplitBay") > 0:
+		massDriverCapacity *= 4
+	massDriverCapacity /= 4
+	StationMats.Components += BayMats.Components
+	BayMats.Components = 0
+	#if i really wanted to, i could make this without iteration and randomness
+	#but that's a lot more work for essentially the same result
+	while massDriverCapacity > 0:
+		if BayMats.Ceramics > 0 and randi() % 4 == 0:
+			StationMats.Ceramics += 1
+			BayMats.Ceramics -= 1
+			massDriverCapacity -= 1
+		if BayMats.Metals > 0 and randi() % 3 == 0:
+			StationMats.Metals += 1
+			BayMats.Metals -= 1
+			massDriverCapacity -= 1
+		if BayMats.Synthetics > 0 and randi() % 2 == 0:
+			StationMats.Synthetics += 1
+			BayMats.Synthetics -= 1
+			massDriverCapacity -= 1
+		if BayMats.Organics > 0:
+			StationMats.Organics += 1
+			BayMats.Organics -= 1
+			massDriverCapacity -= 1
+		if GetBayResourceCount() <= 0:
+			break
+	return true
+
 static func CanCollect(mat: Materials.Mats) -> bool:
 	if mat == Materials.Mats.Components:
 		return true
@@ -51,17 +82,10 @@ static func AddResource(mat: Materials.Mats, amount: int = 1) -> bool:
 	if !CanCollect(mat):
 		return false
 	
-	var massDriver: bool = UpgradesManager.LoadIsEnabled("MassDriver") && UpgradesManager.LoadIsEnabled("Borealis")
-	
-	BayMats.Add(mat)
-	if massDriver && BayMats.Get(mat) >= GetMaxBayResourceCount():
-		StationMats.Add(mat, BayMats.Get(mat))
-		BayMats.Set(mat)
-		QueuedMassDriverPackages.Add(mat)
-
-	amount -= 1
-	if amount > 0:
-		AddResource(mat, amount)
+	var space: int = GetMaxBayResourceCount() - BayMats.Get(mat)
+	var spaceToUse: int = mini(space, amount)
+	BayMats.Add(mat, spaceToUse)
+	amount -= spaceToUse
 	return true
 
 static func GetTotalResources() -> Materials:
@@ -86,9 +110,6 @@ static func StartRun() -> void:
 	if StationMats == null:
 		StationMats = Materials.new()
 	StationMats.SetAll(0, true)
-	if QueuedMassDriverPackages == null:
-		QueuedMassDriverPackages = Materials.new()
-	QueuedMassDriverPackages.SetAll(0, true)
 	UpcyclerCount = DataManager.Load("UpcyclerCount", 0)
 
 static func EndRun() -> void:

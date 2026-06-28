@@ -88,7 +88,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_54xy4")
 [sub_resource type="LabelSettings" id="LabelSettings_y1hpi"]
 font = ExtResource("10_sd7c2")
 
-[sub_resource type="LabelSettings" id="LabelSettings_uohsn"]
+[sub_resource type="LabelSettings" id="LabelSettings_33thf"]
 font = ExtResource("10_sd7c2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jsna"]
@@ -216,7 +216,7 @@ label_settings = SubResource("LabelSettings_y1hpi")
 visible = false
 layout_mode = 2
 text = "Requires:"
-label_settings = SubResource("LabelSettings_uohsn")
+label_settings = SubResource("LabelSettings_33thf")
 
 [node name="Bottom" type="PanelContainer" parent="TooltipContainer/Tooltip"]
 layout_mode = 2

@@ -169,7 +169,10 @@ func _onMetalCollected(type: Materials.Mats = Materials.Mats.Metals, Sources: Ar
 						NotificationsManager.SendTransformNotification(type, Materials.Mats.Ceramics, Sources)
 				return
 	if RunHandler.AddResource(Materials.Mats.Metals):
-		NotificationsManager.SendPickupNotification(Materials.Mats.Metals, Sources)
+		if type == Materials.Mats.Metals:
+			NotificationsManager.SendPickupNotification(Materials.Mats.Metals, Sources)
+		else:
+			NotificationsManager.SendTransformNotification(type, Materials.Mats.Metals, Sources)
 
 func _onCeramicCollected(type: Materials.Mats = Materials.Mats.Ceramics, Sources: Array[Notification.Sources] = []):
 	if UpgradesManager.Load("Scrapper") > 0 && !Sources.has(Notification.Sources.SCRAPPER):
@@ -177,10 +180,10 @@ func _onCeramicCollected(type: Materials.Mats = Materials.Mats.Ceramics, Sources
 		if ScrapperCount % 2 == 0:
 			Sources.append(Notification.Sources.SCRAPPER)
 			if UpgradesManager.Load("ProdLine") > 0:
-				_onSyntheticCollected(type, Sources)
+				_onOrganicCollected(type, Sources)
 			else:
-				if RunHandler.AddResource(Materials.Mats.Synthetics):
-					NotificationsManager.SendTransformNotification(type, Materials.Mats.Synthetics, Sources)
+				if RunHandler.AddResource(Materials.Mats.Organics):
+					NotificationsManager.SendTransformNotification(type, Materials.Mats.Organics, Sources)
 			return
 	if UpgradesManager.Load("Forge") > 0:
 		ForgeCount += 1
@@ -196,7 +199,10 @@ func _onCeramicCollected(type: Materials.Mats = Materials.Mats.Ceramics, Sources
 						NotificationsManager.SendTransformNotification(type, Materials.Mats.Metals, Sources)
 				return
 	if RunHandler.AddResource(Materials.Mats.Ceramics):
-		NotificationsManager.SendPickupNotification(Materials.Mats.Ceramics, Sources)
+		if type == Materials.Mats.Ceramics:
+			NotificationsManager.SendPickupNotification(Materials.Mats.Ceramics, Sources)
+		else:
+			NotificationsManager.SendTransformNotification(type, Materials.Mats.Ceramics, Sources)
 
 func _onSyntheticCollected(type: Materials.Mats = Materials.Mats.Synthetics, Sources: Array[Notification.Sources] = []):
 	if UpgradesManager.Load("Composter") > 0 && !Sources.has(Notification.Sources.COMPOSTER):
@@ -210,7 +216,10 @@ func _onSyntheticCollected(type: Materials.Mats = Materials.Mats.Synthetics, Sou
 					NotificationsManager.SendTransformNotification(type, Materials.Mats.Organics, Sources)
 			return
 	if RunHandler.AddResource(Materials.Mats.Synthetics):
-		NotificationsManager.SendPickupNotification(Materials.Mats.Synthetics, Sources)
+		if type == Materials.Mats.Synthetics:
+			NotificationsManager.SendPickupNotification(Materials.Mats.Synthetics, Sources)
+		else:
+			NotificationsManager.SendTransformNotification(type, Materials.Mats.Synthetics, Sources)
 
 func _onOrganicCollected(type: Materials.Mats = Materials.Mats.Organics, Sources: Array[Notification.Sources] = []):
 	#synthesizer
@@ -233,4 +242,7 @@ func _onOrganicCollected(type: Materials.Mats = Materials.Mats.Organics, Sources
 			NotificationsManager.SendTransformNotification(type, Materials.Mats.Energy, Sources)
 			return
 	if RunHandler.AddResource(Materials.Mats.Organics):
-		NotificationsManager.SendPickupNotification(Materials.Mats.Organics, Sources)
+		if type == Materials.Mats.Organics:
+			NotificationsManager.SendPickupNotification(Materials.Mats.Organics, Sources)
+		else:
+			NotificationsManager.SendTransformNotification(type, Materials.Mats.Organics, Sources)

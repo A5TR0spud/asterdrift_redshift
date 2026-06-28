@@ -245,8 +245,8 @@ script = ExtResource("6_bm0fh")
 texture = ExtResource("6_0k340")
 
 [node name="MassDriverCooldown" type="Timer" parent="DecorationSpawner/Station/StationSprite/MassDriver"]
-wait_time = 0.5
-one_shot = true
+wait_time = 20.0
+autostart = true
 
 [node name="ListTransform" type="RemoteTransform2D" parent="DecorationSpawner/Station/StationSprite/MassDriver"]
 remote_path = NodePath("../List")
@@ -518,7 +518,6 @@ columns = 5
 Display = SubResource("Resource_vegdo")
 SORT = true
 SHOW_TEXT = false
-REDDEN_THE_POOR = null
 
 [node name="NewRun" type="Button" parent="CanvasLayer/Control/EndRunScreenControl/VBoxContainer"]
 layout_mode = 2
@@ -567,7 +566,6 @@ size_flags_horizontal = 8
 Display = SubResource("Resource_b8x27")
 ALWAYS_SHOW = true
 SHOW_TEXT = false
-REDDEN_THE_POOR = null
 FLIPPED = true
 
 [node name="Station" type="VBoxContainer" parent="CanvasLayer/Control/Resources/Inventory"]
@@ -587,7 +585,6 @@ layout_mode = 2
 size_flags_horizontal = 8
 Display = SubResource("Resource_ahnf1")
 SHOW_TEXT = false
-REDDEN_THE_POOR = null
 FLIPPED = true
 
 [node name="Run" type="VBoxContainer" parent="CanvasLayer/Control/Resources/Inventory"]
@@ -648,7 +645,6 @@ size_flags_vertical = 0
 Display = SubResource("Resource_67px5")
 SORT = true
 SHOW_TEXT = false
-REDDEN_THE_POOR = null
 FLIPPED = true
 
 [node name="NotifactionsManager" type="VBoxContainer" parent="CanvasLayer/Control/Resources"]
@@ -681,6 +677,7 @@ shape = SubResource("RectangleShape2D_x62ss")
 debug_color = Color(0.311596, 0.621709, 3.85046e-07, 0)
 
 [connection signal="player_warp" from="." to="DecorationSpawner/Station/StationSprite/MassDriver" method="_on_world_player_warp"]
+[connection signal="timeout" from="DecorationSpawner/Station/StationSprite/MassDriver/MassDriverCooldown" to="DecorationSpawner/Station/StationSprite/MassDriver" method="_on_mass_driver_cooldown_timeout"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunButton" to="." method="_on_end_run_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/EndRunScreenControl/VBoxContainer/ReturnToHangar" to="." method="_on_return_to_hangar_pressed"]
