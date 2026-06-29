@@ -59,4 +59,5 @@ func _on_reset_pressed():
 	MaterialsManager.Save()
 	DataManager.Save("coreAssemblyTimeLeft", CoreAssemblerClass.INITIAL_TIME_PER_CORE)
 	DataManager.Save("UpcyclerCount", 0)
+	DataManager.Save("TrophyEnergyUnlocked", false)
 	get_tree().change_scene_to_file("res://Scenes/Hangar/hangar.tscn")

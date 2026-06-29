@@ -152,8 +152,14 @@ func _physics_process(delta):
 		if RunHandler.TimeLeft > _getMaxEnergy():
 			RunHandler.TimeLeft = _getMaxEnergy()
 		if RunHandler.TimeSpent > _getPowerDrainRampTime():
-			PowerDrain += 0.1 * (RunHandler.TimeSpent - _getPowerDrainRampTime())
-		RunHandler.TimeLeft -= delta * PowerDrain
+			var drainCoef: float = 0.1
+			if UpgradesManager.Load("TrophyEnergy") > 0:
+				drainCoef *= 0.25
+			PowerDrain += drainCoef * (RunHandler.TimeSpent - _getPowerDrainRampTime())
+		var timeDrainCoef: float = 1
+		if UpgradesManager.Load("TrophyEnergy") > 0:
+			timeDrainCoef *= 0.75
+		RunHandler.TimeLeft -= delta * PowerDrain * timeDrainCoef
 		RunHandler.TimeSpent += delta
 	else:
 		StopRun()

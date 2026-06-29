@@ -122,6 +122,8 @@ static func EndRun() -> void:
 	MaterialsManager.Mats.AddBy(GetTotalResources())
 	MaterialsManager.Save()
 	DataManager.Save("UpcyclerCount", UpcyclerCount)
+	if TimeSpent >= 90:
+		DataManager.Save("TrophyEnergyUnlocked", true)
 
 static func DamageBackup(damage: float) -> void:
 	var fuseLevel: int = UpgradesManager.Load("Fuse")

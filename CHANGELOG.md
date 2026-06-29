@@ -11,12 +11,22 @@
 - Scrapper has been replaced with Mulcher
 	- Offshoots from Composter
 	- Converts Ceramics into Organics
+- Added Solid State Cells upgrade to On-Board Battery
+	- Energy drain from time is 75% as strong (e.g. 30 energy would last 40 seconds instead of 30)
+	- Energy drain scaling is 25% as strong (+0.1 drain/s -> +0.025 drain/s)
+	- These effects compound
+	- This upgrade has a unique requirement
 - Remade Plasma Bubble and Mass Driver icons
 - Fixed Inventory Audit being profoundly vague with transformations
 	- I foresee some edge cases where sequences which start and end on the same resource are shortened
 	- I do not care about those edge cases
 - Fixed bug causing Requirement text to appear white for the Mass Driver upgrade
 - Fixed Stasis Bay requiring max level of Electromagnet to be purchased (EM only has 1 level)
+- I am aware of some issues stemming from load order in the Hangar. These are low priority because:
+	- The system is a complex mess and about 2 years old. It will take dissecting to fix
+	- So far, these have only presented as the following visual bugs:
+		- Some connection arrows are greyed out when they should be white
+		- Mass Driver's requirement text is present even when Borealis Station is purchased
 
 ## indev Build 16
 

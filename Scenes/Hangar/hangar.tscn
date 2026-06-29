@@ -1,4 +1,4 @@
-[gd_scene load_steps=172 format=3 uid="uid://cm7727ch8vbsr"]
+[gd_scene load_steps=173 format=3 uid="uid://cm7727ch8vbsr"]
 
 [ext_resource type="Script" uid="uid://b4hhr78baxh8e" path="res://Scenes/Hangar/hangar.gd" id="1_pl6hy"]
 [ext_resource type="Script" uid="uid://yry1f825xbe4" path="res://Scenes/Hangar/control.gd" id="1_xd6br"]
@@ -47,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://cbnllmem4iocm" path="res://Assets/Hangar/Upgrades/TractorBay.png" id="26_weqmt"]
 [ext_resource type="Texture2D" uid="uid://c7rv3bfw1b6xv" path="res://Assets/Hangar/Upgrades/SpareBattery.png" id="28_2f4oq"]
 [ext_resource type="Texture2D" uid="uid://bu14fv7k0h6qb" path="res://Assets/Hangar/Upgrades/Calibration.png" id="28_eud44"]
+[ext_resource type="Texture2D" uid="uid://cdrk6x4utgbsk" path="res://Assets/Hangar/Upgrades/TrophyEnergy.png" id="29_3wbvv"]
 [ext_resource type="Texture2D" uid="uid://cn74d11hdi4on" path="res://Assets/Hangar/Upgrades/RTG.png" id="29_y2n1i"]
 [ext_resource type="Texture2D" uid="uid://dapf642xwu2ux" path="res://Assets/Hangar/Upgrades/EnergyShield.png" id="32_8q8er"]
 [ext_resource type="Texture2D" uid="uid://jbivjs0ivs7a" path="res://Assets/Hangar/Upgrades/ShieldCharge.png" id="33_4v4tu"]
@@ -238,14 +239,14 @@ Synthetics = 0
 Organics = 0
 Components = 0
 
-[sub_resource type="Resource" id="Resource_sj3rv"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_3wbvv"]
 script = ExtResource("4_fiej8")
-Metals = 0
-Ceramics = 0
+Metals = 10
+Ceramics = 30
 Synthetics = 0
-Organics = 0
-Components = 0
+Organics = 10
+Components = 1
+metadata/_custom_type_script = "uid://dcs36b1pqptnh"
 
 [sub_resource type="Resource" id="Resource_gjcie"]
 resource_local_to_scene = true
@@ -1150,13 +1151,15 @@ Cost = SubResource("Resource_6e1p1")
 
 [node name="TrophyEnergy" parent="Camera2D/TechTree/TopLeft/Power" node_paths=PackedStringArray("PARENT_UPGRADE") instance=ExtResource("4_r883k")]
 position = Vector2(-128, -160)
-NAME = "Sodium-Ion"
-DESCRIPTION = "Halves energy drain from time.
-Requirement: Spend 90 seconds in a single run."
+NAME = "Solid State Cells"
+DESCRIPTION = "Quarters energy drain scaling.
+Energy drain from time is 25% slower.
+Requirement: Last 90 seconds in a single run."
 INTERNAL_NAME = "TrophyEnergy"
+SPRITE = ExtResource("29_3wbvv")
 PARENT_UPGRADE = NodePath("../ShipBattery")
-HIDE = true
-Cost = SubResource("Resource_sj3rv")
+REQUIRED_DATA = Array[String](["TrophyEnergyUnlocked"])
+Cost = SubResource("Resource_3wbvv")
 
 [node name="MovementMode" parent="Camera2D/TechTree/TopLeft" node_paths=PackedStringArray("PARENT_UPGRADE", "INVERSE_DEPENDENT_UPGRADES") instance=ExtResource("4_r883k")]
 position = Vector2(-112, -32)

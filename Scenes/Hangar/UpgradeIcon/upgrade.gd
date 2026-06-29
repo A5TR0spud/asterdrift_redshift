@@ -95,6 +95,8 @@ signal notify_children(propagation : int)
 @export var CYCLE_NAMES: Array[String] = []
 ## Setting descriptions for cycle.
 @export_multiline var CYCLE_DESCRIPTIONS: Array[String] = []
+## Any additional data that must be true for the upgrade to be purchaseable.
+@export var REQUIRED_DATA: Array[String] = []
 ## What it costs to buy this upgrade.
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Materials") var Cost: Materials:
 	get:
@@ -303,6 +305,10 @@ func _can_buy() -> bool:
 			return false
 		if MaterialsManager.Mats.Components < Cost.Components:
 			return false
+	if !REQUIRED_DATA.is_empty():
+		for req in REQUIRED_DATA:
+			if !DataManager.Load(req, false):
+				return false
 	if CYCLE:
 		return true
 	return CurrentLevel < MAX_LEVEL
@@ -355,8 +361,7 @@ func toggle() -> void:
 	#ReloadVisible()
 	#emit_signal("upgrade_successfully_bought", CurrentLevel if b else 0)
 
-@warning_ignore("unused_parameter")
-func _on_upgrade_successfully_bought(level):
+func _on_upgrade_successfully_bought(_level):
 	UpgradesManager.Save(INTERNAL_NAME, CurrentLevel, UpgradesManager.LoadIsEnabled(INTERNAL_NAME))
 	emit_signal("notify_children", 0)
 

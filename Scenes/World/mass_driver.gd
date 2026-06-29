@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var Cooldown := $MassDriverCooldown
+@onready var Cooldown : Timer = $MassDriverCooldown
 @onready var List := $List
 static var PackagePrefab := preload("res://Scenes/Utilities/Station/driver_package.tscn")
 
@@ -15,6 +15,9 @@ func _ready():
 		show()
 
 func _on_mass_driver_cooldown_timeout():
+	if !RunHandler.IsInRun():
+		Cooldown.stop()
+		return
 	if RunHandler.SendMassDriverPackage():
 		var t: DriverCanister = PackagePrefab.instantiate()
 		List.add_child(t)
